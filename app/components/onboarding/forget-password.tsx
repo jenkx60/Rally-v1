@@ -218,7 +218,7 @@ export default function ForgotPassword() {
   // CHECK EMAIL (Step 2)
   if (step === 'check-email') {
     return (
-      <div className="space-y-8 gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-5 md:px-0">
+      <div className="space-y-8 gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-2 md:px-0">
         <div className="flex flex-col gap-6 justify-center items-center">
             <Image 
                 src={mail}
@@ -245,7 +245,7 @@ export default function ForgotPassword() {
   // RESET PASSWORD FORM (Step 3)
   if (step === 'reset-form') {
     return (
-        <div className="space-y-8 gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-5 md:px-0">
+        <div className="space-y-8 gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-2 md:px-0">
             <div className="flex flex-col gap-6 justify-center items-center">
                 <Image 
                     src={rally}
@@ -254,7 +254,7 @@ export default function ForgotPassword() {
                     height={40}
                 />
                 <div className="space-y-1.5 text-center">
-                    <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] text-foreground font-bricolage">Change your password</h1>
+                    <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Change password</h1>
                     <p className="text-[#A3A3A3] font-medium text-[13px] md:text-sm leading-[150%] font-geist">Pick a password you&apos;ll remember</p>
                 </div>
             </div>
@@ -374,7 +374,7 @@ export default function ForgotPassword() {
 
   // REQUEST RESET (Step 1 - Existing)
   return (
-    <div className="space-y-8 gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-5 md:px-0">
+    <div className="space-y-8 gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-2 md:px-0">
         <div className="flex flex-col gap-6 justify-center items-center">
             <Image 
                 src={rally}
@@ -384,7 +384,7 @@ export default function ForgotPassword() {
             />
 
             <div className="space-y-1.5 text-center">
-                <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Forgot your password?</h1>
+                <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Forgot password?</h1>
                 <p className="text-[#A3A3A3] font-medium text-sm leading-[150%] font-geist">No worries, we’ll send you a reset link</p>
             </div>
         </div>
@@ -397,7 +397,7 @@ export default function ForgotPassword() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Enter your email"
+                    placeholder="you@email.com"
                     className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                         ${errors.email 

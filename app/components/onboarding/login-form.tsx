@@ -86,7 +86,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-5 md:px-0'>
+    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-2 md:px-0'>
         <div className="space-y-8">
             {/* Logo */}
             <div className="flex flex-col gap-6 justify-center items-center">
@@ -143,7 +143,7 @@ const LoginForm = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="Enter your email"
+                            placeholder="you@email.com"
                             className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                                 ${errors.email 

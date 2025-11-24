@@ -65,7 +65,7 @@ const steps: Step[] = [
         title: 'Welcome to Rally',
         description: 'Turn group chats into real plans',
         fields: [
-            { name: 'email', label: 'Email', type: 'email', placeholder: 'Enter your email' },
+            { name: 'email', label: 'Email', type: 'email', placeholder: 'you@email.com' },
         ],
     },
     {
@@ -84,7 +84,7 @@ const steps: Step[] = [
         ],
     },
     {
-        title: 'What should we call you?',
+        title: 'What do we call you?',
         description: 'This is how attendees will see your name',
         fields: [
             { name: 'name', label: 'Name', type: 'text', placeholder: 'e.g. divii' },
@@ -205,7 +205,7 @@ const SignUp = () => {
   const { title, description, fields } = steps[step]
 
   return (
-    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto min-h-[90dvh] md:min-h-0 px-5 md:px-0'>
+    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto min-h-[90dvh] md:min-h-0 px-2 md:px-0'>
         <div className="space-y-8">
             {/* Logo Section */}
             <div className="flex flex-col gap-6 justify-center items-center">
