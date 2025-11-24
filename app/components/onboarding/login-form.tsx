@@ -19,7 +19,8 @@ type LoginFormData = {
 type LoginErrorState = { [key: string]: string }
 
 const loginSchema = z.object({
-    email: z.string().email({ message: 'Please enter a valid email address' }),
+    email: z.string().email({ message: 'Please enter a valid email address' })
+    .nonempty({ message: 'Email is required' }),
     password: z.string().min(8, { message: 'Password is required' }), 
 })
 
@@ -85,7 +86,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-5 md:px-0'>
         <div className="space-y-8">
             {/* Logo */}
             <div className="flex flex-col gap-6 justify-center items-center">
@@ -98,8 +99,8 @@ const LoginForm = () => {
 
                 {/* Header */}
                 <div className="space-y-1 text-center">
-                    <h1 className="text-[32px] font-bold leading-[120%] text-foreground font-bricolage">Welcome back</h1>
-                    <p className="text-[#A3A3A3] font-medium text-sm leading-[150%] font-geist">Pick up where you left off</p>
+                    <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Welcome back</h1>
+                    <p className="text-[#A3A3A3] font-medium text-[13px] md:text-sm leading-[150%] font-geist">Pick up where you left off</p>
                 </div>
             </div>
 
@@ -135,15 +136,15 @@ const LoginForm = () => {
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Email */}
-                    <div className="space-y-2">
-                        <label className="block text-sm text-[#767676] font-medium font-geist">Email</label>
+                    <div className="space-y-1.5">
+                        <label className="block text-sm text-[#767676] font-medium font-geist leading-[150%]">Email</label>
                         <Input
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="Enter your email"
-                            className={`w-full px-4 py-3 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
+                            className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                                 ${errors.email 
                                     ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
@@ -152,16 +153,16 @@ const LoginForm = () => {
                             `}
                         />
                         {errors.email && (
-                            <p className="text-sm font-geist font-normal text-[#FF7C7C] mt-1 animate-in slide-in-from-top-1">
+                            <p className="text-sm font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
                                 {errors.email}
                             </p>
                         )}
                     </div>
 
                     {/* Password */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                            <label className="block text-sm text-[#767676] font-medium font-geist">Password</label>
+                            <label className="block text-sm text-[#767676] font-medium font-geist leading-[150%]">Password</label>
                         </div>
                         <div className='relative'>
                             <Input
@@ -169,8 +170,8 @@ const LoginForm = () => {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                placeholder="••••••••"
-                                className={`w-full px-4 py-3 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
+                                placeholder="Enter your password"
+                                className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
                                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                                     ${errors.password 
                                         ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
@@ -186,24 +187,28 @@ const LoginForm = () => {
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
                                 {showPassword ? (
-                                    <EyeClosed className="h-5 w-5" />
+                                    <EyeClosed className="h-[18px] w-[18px]" />
                                 ) : (
-                                    <Image src={eyeOpen} alt="Show password" width={20} height={20} />
+                                    <Image src={eyeOpen} alt="Show password" width={18} height={18} />
                                 )}
                             </button>
                         </div>
-                        {errors.password && (
-                            <p className="text-sm font-geist font-normal text-[#FF7C7C] mt-1 animate-in slide-in-from-top-1">
-                                {errors.password}
-                            </p>
-                        )}
-                        <div className='flex justify-end'>
-                            <Link
-                                href="/forgot-password"
-                                className="text-[14px] text-primary hover:underline mt-1 font-geist font-medium"
-                            >
-                                Forgot password?
-                            </Link>
+                        <div className='flex justify-between'>
+                            <div>
+                                {errors.password && (
+                                    <p className="text-sm font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
+                                        {errors.password}
+                                    </p>
+                                )}
+                            </div>
+                            <div>
+                                <Link
+                                    href="/forgot-password"
+                                    className="text-[14px] text-primary hover:underline mt-1 font-geist font-medium"
+                                >
+                                    Forgot password?
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
@@ -225,9 +230,6 @@ const LoginForm = () => {
                     Sign up
                 </Link>
             </p>
-        </div>
-        <div className='text-[#959595]'>
-            <p className='text-xs font-geist font-normal text-center'>By signing up, you agree to our <span className='underline'>terms</span> and <span className='underline'>privacy policy</span></p>
         </div>
     </div>
   )

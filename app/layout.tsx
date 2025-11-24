@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import localFont from 'next/font/local'
 import './globals.css'
+import { Toaster } from './components/ui/sonner'
 // ${bricolageGrotesque.variable}
 
 const _geist = Geist({ subsets: ["latin"], variable: '--font-geist' })
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body className={`${bricolageGrotesque.variable} ${_geist.variable} ${_geistMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />
+        <Toaster position='top-center'/>
       </body>
     </html>
   )
