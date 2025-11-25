@@ -25,17 +25,12 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/app/components/ui/sidebar";
-import { ChevronDown, HelpCircle, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { title } from "process";
 import { cn } from "@/lib/utils";
 import {CalendarDays, Settings} from "lucide-react"
 
 const navigation = [
-  // {
-  //   title: "Dashboard",
-  //   href: "/dashboard",
-  //   // icon: dashboardIcon,
-  // },
   {
     title: "Events",
     href: "/dashboard/events",
@@ -43,12 +38,12 @@ const navigation = [
   },
   {
     title: "Attendees ",
-    href: "/dashboard/attend",
+    href: "/dashboard/attendees",
     icon: attend,
   },
   {
     title: "Payouts",
-    href: "/dashboard/payout",
+    href: "/dashboard/payouts",
     icon: pay,
   },
 ];
@@ -108,6 +103,8 @@ export function AppSidebar() {
     setOpenDropdown(openDropdown === title ? null : title);
   };
 
+  const isActiveLink = (href: string) => pathname === href;
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className=" border-b border-[#E8E8E8] py-[11.5px] px-5">
@@ -131,78 +128,116 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigation.map((item) => (
-                <div
-                  key={item.title}
-                  className="mt-1"
-                  onClick={handleForceOpen}
-                >
-                    <SidebarMenuButton
-                      asChild
-                      isActive={pathname === item.href}
-                      onClick={() => {
-                        if (isPortrait) setOpenMobile(false);
-                      }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={handleNavClick}
-                        className="flex items-center gap-2 text-[#959595]"
+              {navigation.map((item) => {
+                const active = isActiveLink(item.href);
+                return (
+                  <div
+                    key={item.title}
+                    className="mt-1"
+                    onClick={handleForceOpen}
+                  >
+                      <SidebarMenuButton
+                        asChild
+                        isActive={active}
+                        onClick={() => {
+                          if (isPortrait) setOpenMobile(false);
+                        }}
+                        className={cn(
+                          "h-auto py-2 transition-all duration-200", 
+                          active 
+                            ? "bg-[#F8F6FD] border border-[#E1DEF5] text-[#6A59CE]" // Active State
+                            : "hover:text-[#6A59CE] border border-transparent" // Inactive State
+                        )}
                       >
-                        <Image
-                          src={item.icon}
-                          alt={item.title}
-                          width={15}
-                          height={15}
-                        />
-                        <span className="truncate group-data-[state=collapsed]:hidden">
-                          {item.title}
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                </div>
-              ))}
+                        <Link
+                          href={item.href}
+                          onClick={handleNavClick}
+                          className="flex items-center gap-2 text-[#959595]"
+                        >
+                          {/* <Image
+                            src={item.icon}
+                            alt={item.title}
+                            width={15}
+                            height={15}
+                          /> */}
+                          <div
+                            className="h-[15px] w-[15px] bg-current"
+                            style={{
+                              maskImage: `url(${item.icon.src})`,
+                              WebkitMaskImage: `url(${item.icon.src})`,
+                              maskSize: "contain",
+                              maskRepeat: "no-repeat",
+                              maskPosition: "center",
+                            }}
+                          />
+                          <span className="truncate group-data-[state=collapsed]:hidden font-geist font-medium text-[15px] leading-[150%] tracking-[-0.24px]">
+                            {item.title}
+                          </span>
+                        </Link>
+                      </SidebarMenuButton>
+                  </div>
+                )
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup className="mt-auto">
           <SidebarGroupContent>
             <SidebarMenu>
-              {bottomNavigation.map((item) => (
-                <div key={item.title} className="mt-1">
-                  <SidebarMenuItem>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={pathname === item.href}
-                      onClick={() => {
-                        if (isPortrait) setOpenMobile(false);
-                      }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={handleNavClick}
-                        className="flex items-center gap-2 text-[#959595]"
+              {bottomNavigation.map((item) => {
+                const active = isActiveLink(item.href);
+                return (
+                  <div key={item.title} className="mt-1">
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={pathname === item.href}
+                        onClick={() => {
+                          if (isPortrait) setOpenMobile(false);
+                        }}
+                        className={cn(
+                          "h-auto py-2 transition-all duration-200", 
+                          active 
+                            ? "bg-[#F8F6FD] border border-[#E1DEF5] text-[#6A59CE]" // Active State
+                            : "hover:text-[#6A59CE] border border-transparent" // Inactive State
+                        )}
                       >
-                        <Image
-                          src={item.icon}
-                          alt={item.title}
-                          width={15}
-                          height={15}
-                        />
-                        <span className="group-data-[state=collapsed]:hidden">
-                          {item.title}
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </div>
-              ))}
+                        <Link
+                          href={item.href}
+                          onClick={handleNavClick}
+                          className="flex items-center gap-2 text-[#959595]"
+                        >
+                          {/* <Image
+                            src={item.icon}
+                            alt={item.title}
+                            width={15}
+                            height={15}
+                          /> */}
+                          <div
+                            className="h-[15px] w-[15px] bg-current"
+                            style={{
+                              maskImage: `url(${item.icon.src})`,
+                              WebkitMaskImage: `url(${item.icon.src})`,
+                              maskSize: "contain",
+                              maskRepeat: "no-repeat",
+                              maskPosition: "center",
+                            }}
+                          />
+                          <span className="truncate group-data-[state=collapsed]:hidden font-geist font-medium text-[15px] leading-[150%] tracking-[-0.24px]">
+                            {item.title}
+                          </span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </div>
+                )
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       {/* <SidebarRail /> */}
-      <SidebarFooter  className=" border-t border-[#E8E8E8] py-[11.5px] px-5">
+      <SidebarFooter className=" border-t border-[#E8E8E8] py-[11.5px] px-5">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton

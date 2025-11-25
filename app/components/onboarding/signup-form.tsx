@@ -166,7 +166,7 @@ const SignUp = () => {
                     </div>
                     <span className="font-medium text-sm font-geist">Invalid OTP code</span>
                     <div className="hidden md:block w-0.5 h-6 bg-[#333333] ml-auto"></div>
-                    <button onClick={() => toast.dismiss(t)} className="ml-auto text-gray-400 hover:text-white cursor-pointer">
+                    <button onClick={() => toast.dismiss(t)} className="ml-auto text-white hover:text-white cursor-pointer">
                         <X className="w-4 h-4" />
                     </button>
                 </div>

@@ -12,14 +12,14 @@ import {
 
 const DynamicBreadcrumb = () => {
   const pathname = usePathname();
-  const paths = pathname.split("/").filter(Boolean); // Filter out any empty strings
+  const paths = pathname.split("/").filter((path) => path && path !== "dashboard");
 
   const currentPage =
     paths.length > 0
       ? paths[paths.length - 1]
         .replace(/-/g, " ")
         .replace(/^./, (c) => c.toUpperCase())
-      : "Dashboard";
+      : "";
 
   const isDashboardActive = pathname === "/dashboard";
 
@@ -28,7 +28,7 @@ const DynamicBreadcrumb = () => {
       <Breadcrumb className="hidden md:flex">
         <BreadcrumbList>
           {/* Breadcrumb for the Dashboard */}
-          <BreadcrumbItem>
+          {/* <BreadcrumbItem>
             {isDashboardActive ? (
               <BreadcrumbLink
                 href="/dashboard"
@@ -45,20 +45,21 @@ const DynamicBreadcrumb = () => {
               </BreadcrumbLink>
             )}
           </BreadcrumbItem>
-
+ */}
           {/* Loop over each path and generate breadcrumb items */}
-          {paths.slice(1).map((path, index) => {
-            const href = `${paths.slice(1, index + 2).join("/")}`;
+          {paths.map((path, index) => {
+            const href = `/dashboard/${paths.slice(1, index + 2).join("/")}`;
+            const isLast = index === paths.length - 1;
             // Capitalize the first letter of each breadcrumb
             const formattedPath = path
               .replace(/-/g, " ")
               .replace(/^./, (c) => c.toUpperCase());
             return (
               <React.Fragment key={path}>
-                <BreadcrumbSeparator />
+                {/* <BreadcrumbSeparator /> */}
                 <BreadcrumbItem>
-                  {index === paths.length - 2 ? (
-                    <BreadcrumbPage className="font-semibold text-black text-[0.9vw] portrait:text-[2.1vw] portrait:sm:text-[2vw]">
+                  {isLast ? (
+                    <BreadcrumbPage className="font-geist font-medium text-black text-sm leading-[150%] tracking-[-0.1px] portrait:text-[2.1vw] portrait:sm:text-[2vw]">
                       {formattedPath}
                     </BreadcrumbPage>
                   ) : (

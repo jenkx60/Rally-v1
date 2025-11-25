@@ -65,7 +65,6 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-screen w-full">
-      {/* <PendingFeatureGuardProvider> */}
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>
@@ -77,7 +76,6 @@ export default function DashboardLayout({
               className={`flex portrait:w-screen h-16 shrink-0 items-center justify-between border-b px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
             >
               <div className="flex items-center gap-2 px-2">
-                {/* <SidebarTrigger className="-ml-1" /> */}
                 <Separator orientation="vertical" className="mr-2 h-4" />
                 <DynamicBreadcrumb />
               </div>
@@ -98,7 +96,6 @@ export default function DashboardLayout({
             </div>
           </SidebarInset>
         </SidebarProvider>
-      {/* </PendingFeatureGuardProvider> */}
     </div>
   );
 }
