@@ -13,5 +13,5 @@ export default function EventsLayout({
   // useEffect(() => {
   //   router.push("/dashboard/banking");
   // }, []);
-  return <div className="max-h-screen max-w-screen">{children}</div>;
+  return <div className="max-w-screen">{children}</div>;
 }

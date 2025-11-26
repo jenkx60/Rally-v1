@@ -64,7 +64,7 @@ const DynamicBreadcrumb = () => {
                   ) : (
                     <BreadcrumbLink
                       href={href}
-                      className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px] portrait:text-[2.1vw] portrait:sm:text-[2vw] text-gray-400 hover:text-black transition-colors"
+                      className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px] portrait:text-[2.1vw] portrait:sm:text-[2vw] text-[#959595] hover:text-black transition-colors"
                     >
                       {formattedPath}
                     </BreadcrumbLink>

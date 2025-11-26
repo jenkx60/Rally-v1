@@ -160,7 +160,7 @@ const SignUp = () => {
             
             // Custom Toast Notification per screenshot
             toast.custom((t) => (
-                <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 min-w-[193px] max-w-[345px] ml-0 md:ml-14 border border-[#333]">
+                <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center justify-center gap-3 w-full md:min-w-[193px] md:max-w-[345px] ml-0 md:ml-14 border border-[#333]">
                     <div className="bg-[#EF4444] rounded-full p-0.5 shrink-0">
                         <X className="w-3 h-3 text-black" strokeWidth={3} />
                     </div>
@@ -316,7 +316,7 @@ const SignUp = () => {
                                                 onChange={handleChange}
                                                 placeholder={field.placeholder}
                                                 // Added pr-10 to prevent text from going under the eye icon
-                                                className={`w-full px-3.5 py-2.5 ${isPasswordField ? 'pr-10' : ''} text-[15px] rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:text-[15px] transition-all
+                                                className={`w-full px-3.5 py-2.5 ${isPasswordField ? 'pr-10' : ''} text-[15px] rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:text-[15px] placeholder:font-medium text-[#333333] font-medium transition-all
                                                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                                                     ${hasError 
                                                         ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
@@ -397,10 +397,11 @@ const SignUp = () => {
                 </p>
             )}
         </div>
-
-        <div className='text-[#959595] mt-auto md:mt-0'>
-            <p className='text-xs font-geist font-normal text-center'>By signing up, you agree to our <span className='underline'>terms</span> and <span className='underline'>privacy policy</span></p>
-        </div>
+            {step === 0 && (
+                <div className='text-[#959595] mt-auto md:mt-0'>
+                    <p className='text-xs font-geist font-normal text-center'>By continuing, you agree to our <span className='underline'>terms</span> and <span className='underline'>privacy policy</span></p>
+                </div>
+            )}
     </div>
   )
 }

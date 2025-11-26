@@ -139,7 +139,6 @@ export function AppSidebar() {
                 return (
                   <div
                     key={item.title}
-                    className="mt-1"
                     onClick={handleForceOpen}
                   >
                       <SidebarMenuButton
@@ -152,7 +151,7 @@ export function AppSidebar() {
                           "h-auto py-2 transition-all duration-200", 
                           active 
                             ? "bg-[#F8F6FD] border border-[#E1DEF5] text-[#6A59CE]" // Active State
-                            : "hover:text-[#6A59CE] border border-transparent" // Inactive State
+                            : "hover:text-[#6A59CE] hover:bg-[#FAFAFA] border border-transparent" // Inactive State
                         )}
                       >
                         <Link
@@ -207,7 +206,7 @@ export function AppSidebar() {
                           "h-auto py-2 transition-all duration-200", 
                           active 
                             ? "bg-[#F8F6FD] border border-[#E1DEF5] text-[#6A59CE]" // Active State
-                            : "hover:text-[#6A59CE] border border-transparent" // Inactive State
+                            : "hover:text-[#6A59CE] hover:bg-[#FAFAFA] border border-transparent" // Inactive State
                         )}
                       >
                         <Link
@@ -252,24 +251,25 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               size='lg'
-              onClick={() => toggleDropdown("user")}
-              className="flex justify-between data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-transparent w-full"
+              variant='plain'
+              // onClick={() => toggleDropdown("user")}
+              className="flex justify-between w-full p-0"
             >
               {/* Avatar Container */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 ">
                 <Image
                   src={avatar}
                   alt="User Avatar"
                   width={35}
                   height={35}
-                  className="flex aspect-square size-11 items-center justify-center rounded-lg text-white border-[0.8px] border-[#FA9874]"
+                  className="flex aspect-square size-8 pt-1 items-center justify-center rounded-md text-white border-[0.8px] border-[#FA9874] bg-[#F8F6FD]"
                 />
                 <span className="font-geist font-medium text-sm text-[#1A1A1A] leading-[150%] tracking-[-0.1px]">{user.name}</span>
               </div>
 
               {/* Three dots icon */}
-              <div className="hover:bg-[#F5F5F5] rounded-[6px] p-1 group-data-[state=collapsed]:hidden cursor-pointer">
-                <MoreHorizontal className="ml-auto size-4 text-[#959595]" />
+              <div className="hover:bg-[#FAFAFA] flex items-center justify-center rounded-[6px] size-6 group-data-[state=collapsed]:hidden cursor-pointer">
+                <MoreHorizontal className="size-4 text-[#959595]" />
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
