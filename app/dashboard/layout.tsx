@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { AppSidebar } from "@/app/components/dashboard/app-sidebar";
 import { Separator } from "@/app/components/ui/separator";
@@ -11,7 +10,7 @@ import {
 import DynamicBreadcrumb from "@/app/components/dashboard/dynamic-breadcrumb";
 import { useRouter } from "next/navigation";
 // import QuickAction from "@/components/dashboard/quick-action";
-// import Notification from "@/components/dashboard/notifications/notification";
+// import Notification from "@/app/dashboard/";
 // import { useOnboardingStore } from "@/store/use-onboarding-store";
 import Head from "next/head";
 // import axionsInstance from "@/lib/axios";
@@ -64,7 +63,7 @@ export default function DashboardLayout({
 //   }
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex h-screen w-full bg-white">
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>
@@ -73,7 +72,7 @@ export default function DashboardLayout({
           <SidebarInset>
             {/* Header with conditional fixed positioning */}
             <header
-              className={`flex portrait:w-screen h-16 shrink-0 items-center justify-between border-b px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
+              className={`flex portrait:w-screen h-16 items-center justify-between border-b border-[#E8E8E8] px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
             >
               <div className="flex items-center gap-2 px-2">
                 <Separator orientation="vertical" className="mr-2 h-4" />
@@ -87,7 +86,7 @@ export default function DashboardLayout({
 
             {/* Content area with conditional padding to account for fixed header */}
             <div
-              className={`flex portrait:w-screen flex-1 flex-col gap-4 portrait:px-4 px-6 portrait:sm:px-4 pt-2 portrait:sm:pt-4 bg-[#FCFCFC] overflow-y-auto`}
+              className={`flex portrait:w-screen flex-1 flex-col gap-4 portrait:px-4 px-6 portrait:sm:px-4 pt-2 portrait:sm:pt-4 bg-white overflow-y-auto`}
             >
               {/* {!currentUser?.hasPasscode && (
                 <PasscodeSet open={open} onOpenChange={setOpen} />

@@ -44,11 +44,10 @@ const DynamicBreadcrumb = () => {
                 Dashboard
               </BreadcrumbLink>
             )}
-          </BreadcrumbItem>
- */}
+          </BreadcrumbItem>*/}
           {/* Loop over each path and generate breadcrumb items */}
           {paths.map((path, index) => {
-            const href = `/dashboard/${paths.slice(1, index + 2).join("/")}`;
+            const href = `/dashboard/${paths.slice(0, index + 1).join("/")}`;
             const isLast = index === paths.length - 1;
             // Capitalize the first letter of each breadcrumb
             const formattedPath = path
@@ -56,7 +55,7 @@ const DynamicBreadcrumb = () => {
               .replace(/^./, (c) => c.toUpperCase());
             return (
               <React.Fragment key={path}>
-                {/* <BreadcrumbSeparator /> */}
+                {index > 0 && <BreadcrumbSeparator />}
                 <BreadcrumbItem>
                   {isLast ? (
                     <BreadcrumbPage className="font-geist font-medium text-black text-sm leading-[150%] tracking-[-0.1px] portrait:text-[2.1vw] portrait:sm:text-[2vw]">
@@ -65,7 +64,7 @@ const DynamicBreadcrumb = () => {
                   ) : (
                     <BreadcrumbLink
                       href={href}
-                      className="font-bold text-[0.9vw] portrait:text-[2.1vw] portrait:sm:text-[2vw]"
+                      className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px] portrait:text-[2.1vw] portrait:sm:text-[2vw] text-gray-400 hover:text-black transition-colors"
                     >
                       {formattedPath}
                     </BreadcrumbLink>

@@ -3,11 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import rally from '@/public/Logo.svg';
-import attend from '@/public/Sidebar/attend.svg';
-import pay from '@/public/Sidebar/pay.svg';
-import calendar from '@/public/Sidebar/calendar.svg';
-import help from '@/public/help.svg';
-import setting from '@/public/setting.svg';
+import attend from '@/public/Sidebar/group_3_line.svg';
+import pay from '@/public/Sidebar/bank_line.svg';
+import calendar from '@/public/Sidebar/calendar_2_line.svg';
+import help from '@/public/Sidebar/question_line.svg';
+import setting from '@/public/Sidebar/settings_3_line.svg';
 import avatar from '@/public/Sidebar/avatar.svg';
 import { usePathname } from "next/navigation";
 // import { useOnboardingStore } from "@/store/use-onboarding-store";
@@ -103,28 +103,34 @@ export function AppSidebar() {
     setOpenDropdown(openDropdown === title ? null : title);
   };
 
-  const isActiveLink = (href: string) => pathname === href;
+  const isActiveLink = (href: string) => {
+    if (href === "/dashboard/events") {
+      return pathname.startsWith(href);
+    }
+    return pathname === href;
+  } 
+    
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className=" border-b border-[#E8E8E8] py-[11.5px] px-5">
+      <SidebarHeader className="bg-white border-b border-[#E8E8E8] py-[15.5px] px-5">
         <Image
           src={rally}
           alt="Logo"
-          width={40}
-          height={40}
+          width={32}
+          height={32}
           className="group-data-[state=collapsed]:hidden"
         />
 
         <Image
           src={rally}
           alt="Logo"
-          width={40}
-          height={40}
+          width={32}
+          height={32}
           className="hidden group-data-[state=collapsed]:block"
         />
       </SidebarHeader>
-      <SidebarContent className="pt-4 pb-3 px-2">
+      <SidebarContent className="pt-4 pb-3 px-2 bg-white">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -160,19 +166,21 @@ export function AppSidebar() {
                             width={15}
                             height={15}
                           /> */}
-                          <div
-                            className="h-[15px] w-[15px] bg-current"
-                            style={{
-                              maskImage: `url(${item.icon.src})`,
-                              WebkitMaskImage: `url(${item.icon.src})`,
-                              maskSize: "contain",
-                              maskRepeat: "no-repeat",
-                              maskPosition: "center",
-                            }}
-                          />
-                          <span className="truncate group-data-[state=collapsed]:hidden font-geist font-medium text-[15px] leading-[150%] tracking-[-0.24px]">
-                            {item.title}
-                          </span>
+                          <div className="flex gap-2">
+                            <div
+                              className="h-5 w-5 bg-current"
+                              style={{
+                                maskImage: `url(${item.icon.src})`,
+                                WebkitMaskImage: `url(${item.icon.src})`,
+                                maskSize: "contain",
+                                maskRepeat: "no-repeat",
+                                maskPosition: "center",
+                              }}
+                            />
+                            <span className="truncate group-data-[state=collapsed]:hidden font-geist font-medium text-[15px] leading-[150%] tracking-[-0.24px]">
+                              {item.title}
+                            </span>
+                          </div>
                         </Link>
                       </SidebarMenuButton>
                   </div>
@@ -213,19 +221,21 @@ export function AppSidebar() {
                             width={15}
                             height={15}
                           /> */}
-                          <div
-                            className="h-[15px] w-[15px] bg-current"
-                            style={{
-                              maskImage: `url(${item.icon.src})`,
-                              WebkitMaskImage: `url(${item.icon.src})`,
-                              maskSize: "contain",
-                              maskRepeat: "no-repeat",
-                              maskPosition: "center",
-                            }}
-                          />
-                          <span className="truncate group-data-[state=collapsed]:hidden font-geist font-medium text-[15px] leading-[150%] tracking-[-0.24px]">
-                            {item.title}
-                          </span>
+                          <div className="flex gap-2">
+                            <div
+                              className="h-5 w-5 bg-current"
+                              style={{
+                                maskImage: `url(${item.icon.src})`,
+                                WebkitMaskImage: `url(${item.icon.src})`,
+                                maskSize: "contain",
+                                maskRepeat: "no-repeat",
+                                maskPosition: "center",
+                              }}
+                            />
+                            <span className="truncate group-data-[state=collapsed]:hidden font-geist font-medium text-[15px] leading-[150%] tracking-[-0.24px]">
+                              {item.title}
+                            </span>
+                          </div>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -237,34 +247,30 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       {/* <SidebarRail /> */}
-      <SidebarFooter className=" border-t border-[#E8E8E8] py-[11.5px] px-5">
+      <SidebarFooter className="bg-white border-t border-[#E8E8E8] py-[11.5px] px-5">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               size='lg'
               onClick={() => toggleDropdown("user")}
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="flex justify-between data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-transparent w-full"
             >
               {/* Avatar Container */}
-              <div className="flex aspect-square size-11 items-center justify-center rounded-lg text-white border-[0.8px] border-[#FA9874]">
+              <div className="flex items-center gap-2">
                 <Image
                   src={avatar}
                   alt="User Avatar"
                   width={35}
                   height={35}
-                  className="rounded-lg" 
+                  className="flex aspect-square size-11 items-center justify-center rounded-lg text-white border-[0.8px] border-[#FA9874]"
                 />
-              </div>
-
-              {/* User Details */}
-              <div className="grid flex-1 text-left text-sm leading-tight group-data-[state=collapsed]:hidden">
-                <span className="truncate font-semibold">{user.name}</span>
-                {/* Optional: Add email below name if desired */}
-                {/* <span className="truncate text-xs">{user.email}</span> */}
+                <span className="font-geist font-medium text-sm text-[#1A1A1A] leading-[150%] tracking-[-0.1px]">{user.name}</span>
               </div>
 
               {/* Three dots icon */}
-              <MoreHorizontal className="ml-auto size-4 text-[#959595] group-data-[state=collapsed]:hidden" />
+              <div className="hover:bg-[#F5F5F5] rounded-[6px] p-1 group-data-[state=collapsed]:hidden cursor-pointer">
+                <MoreHorizontal className="ml-auto size-4 text-[#959595]" />
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

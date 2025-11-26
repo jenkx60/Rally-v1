@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react'
-import localFont from 'next/font/local'
-import './globals.css'
-import { Toaster } from './components/ui/sonner'
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
+import localFont from 'next/font/local';
+import './globals.css';
+import { Toaster } from './components/ui/sonner';
 // ${bricolageGrotesque.variable}
 
 const _geist = Geist({ subsets: ["latin"], variable: '--font-geist' })
