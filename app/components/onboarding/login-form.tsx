@@ -1,5 +1,4 @@
 'use client'
-
 import Link from 'next/link'
 import { useState } from 'react'
 import { useAuthStore } from '@/lib/auth-store'
@@ -8,22 +7,23 @@ import rally from '@/public/Logo.svg'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { z } from 'zod'
-import { Eye, EyeClosed, Loader2 } from 'lucide-react'
+import { Eye, EyeClosed, Loader2, X } from 'lucide-react'
 import eyeOpen from '@/public/eye-open.svg'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 type LoginFormData = {
     email: string
     password: string
 }
 
-type LoginErrorState = { [key: string]: string }
+// type LoginErrorState = { [key: string]: string }
 
-const loginSchema = z.object({
-    email: z.string().email({ message: 'Please enter a valid email address' })
-    .nonempty({ message: 'Email is required' }),
-    password: z.string().min(8, { message: 'Password is required' }), 
-})
+// const loginSchema = z.object({
+//     email: z.string().email({ message: 'Please enter a valid email address' })
+//     .nonempty({ message: 'Email is required' }),
+//     password: z.string().min(8, { message: 'Password is required' }), 
+// })
 
 const LoginForm = () => {
     const router = useRouter();
@@ -34,46 +34,60 @@ const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [errors, setErrors] = useState<LoginErrorState>({})
+//   const [errors, setErrors] = useState<LoginErrorState>({})
   const { setError: setAuthError, setUser } = useAuthStore()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    
-    if (errors[name]) {
-        setErrors(prev => {
-            const newErrors = { ...prev }
-            delete newErrors[name]
-            return newErrors
-        })
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }))    
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const result = loginSchema.safeParse(formData)
+    // const result = loginSchema.safeParse(formData)
 
-    if (!result.success) {
-        const newErrors: LoginErrorState = {}
-        result.error.issues.forEach((issue) => {
-            const fieldName = issue.path[0] as string
-            newErrors[fieldName] = issue.message
-        })
+    // if (!result.success) {
+    //     const newErrors: LoginErrorState = {}
+    //     result.error.issues.forEach((issue) => {
+    //         const fieldName = issue.path[0] as string
+    //         newErrors[fieldName] = issue.message
+    //     })
         
-        setErrors(newErrors)
-        setIsSubmitting(false)
-        return
-    }
+    //     setErrors(newErrors)
+    //     setIsSubmitting(false)
+    //     return
+    // }
 
     // Clears errors if validation passes
-    setErrors({})
+    // setErrors({})
 
     try {
       // Simulate login
       await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      const hardCodedEmail = 'user@rally.com'
+      const hardCodedPassword = 'password123'
+
+      if (formData. email !== hardCodedEmail || formData.password !== hardCodedPassword) {
+        setIsSubmitting(false)
+
+        toast.custom((t) => (
+            <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center justify-center gap-3 w-full min-w-[193px] max-w-[345px] ml-0 md:ml-8 border border-[#333]">
+                <div className="bg-[#EF4444] rounded-full p-0.5 shrink-0">
+                    <X className="w-3 h-3 text-black" strokeWidth={3} />
+                </div>
+                <span className="font-medium text-sm font-geist">Invalid login credentials</span>
+                <div className="hidden md:block w-0.5 h-6 bg-[#333333] ml-auto"></div>
+                <button onClick={() => toast.dismiss(t)} className="ml-auto text-white hover:text-white cursor-pointer">
+                    <X className="w-4 h-4" />
+                </button>
+            </div>
+        ))
+        return
+      }
+
       setUser({
         id: '1',
         email: formData.email,
@@ -81,11 +95,12 @@ const LoginForm = () => {
       })
     } catch (err) {
       // for API errors
-      setErrors({ form: 'Invalid email or password' })
+    //   setErrors({ form: 'Invalid email or password' })
       setAuthError('Login failed')
     } finally {
       setIsSubmitting(false)
     }
+    router.push('/dashboard');
   }
 
   const handleGoogleLogin = async () => {
@@ -161,11 +176,11 @@ const LoginForm = () => {
                 </div>
 
                 {/* General API Error */}
-                {errors.form && (
+                {/* {errors.form && (
                     <div className="p-3 rounded-lg bg-[#FF7C7C]/10 text-[#FF7C7C] text-sm">
                         {errors.form}
                     </div>
-                )}
+                )} */}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -178,19 +193,19 @@ const LoginForm = () => {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="you@email.com"
-                            className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
-                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
-                                ${errors.email 
-                                    ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
-                                    : 'border-[#E8E8E8] focus-visible:ring-primary'
-                                }
-                            `}
+                            className='w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+                                // ${errors.email 
+                                //     ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
+                                //     : 'border-[#E8E8E8] focus-visible:ring-primary'
+                                // }
+                            
                         />
-                        {errors.email && (
+                        {/* {errors.email && (
                             <p className="text-sm font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
                                 {errors.email}
                             </p>
-                        )}
+                        )} */}
                     </div>
 
                     {/* Password */}
@@ -205,13 +220,13 @@ const LoginForm = () => {
                                 value={formData.password}
                                 onChange={handleChange}
                                 placeholder="Enter password"
-                                className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
-                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
-                                    ${errors.password 
-                                        ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
-                                        : 'border-[#E8E8E8] focus-visible:ring-primary'
-                                    }
-                                `}
+                                className='w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+                                //     ${errors.password 
+                                //         ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
+                                //         : 'border-[#E8E8E8] focus-visible:ring-primary'
+                                //     }
+                                // `}
                             />
 
                             <button
@@ -227,15 +242,15 @@ const LoginForm = () => {
                                 )}
                             </button>
                         </div>
-                        <div className='flex justify-between'>
-                            <div>
+                        {/* <div> */}
+                            {/* <div>
                                 {errors.password && (
                                     <p className="text-sm font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
                                         {errors.password}
                                     </p>
                                 )}
-                            </div>
-                            <div>
+                            </div> */}
+                            <div className='flex justify-end'>
                                 <Link
                                     href="/forgot-password"
                                     className="text-[14px] text-primary hover:underline mt-1 font-geist font-medium"
@@ -243,7 +258,7 @@ const LoginForm = () => {
                                     Forgot password?
                                 </Link>
                             </div>
-                        </div>
+                        {/* </div> */}
                     </div>
 
                     {/* Submit Button */}

@@ -10,7 +10,7 @@ import {
 import DynamicBreadcrumb from "@/app/components/dashboard/dynamic-breadcrumb";
 import { useRouter } from "next/navigation";
 // import QuickAction from "@/components/dashboard/quick-action";
-// import Notification from "@/app/dashboard/";
+import Notification from "@/app/components/notifications/notification";
 // import { useOnboardingStore } from "@/store/use-onboarding-store";
 import Head from "next/head";
 // import axionsInstance from "@/lib/axios";
@@ -79,7 +79,7 @@ export default function DashboardLayout({
                 <DynamicBreadcrumb />
               </div>
               <div className="flex items-center gap-2 sm:gap-4">
-                {/* <Notification /> */}
+                <Notification />
                 {/* <QuickAction /> */}
               </div>
             </header>

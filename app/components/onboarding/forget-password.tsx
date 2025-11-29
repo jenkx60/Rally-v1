@@ -270,7 +270,7 @@ export default function ForgotPassword() {
                             value={formData.password}
                             onChange={handleChange}
                             placeholder="Enter new password"
-                            className={`w-full px-3.5 py-2.5 pr-10 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
+                            className={`w-full px-3.5 py-2.5 pr-10 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                                 ${errors.password 
                                     ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
@@ -306,7 +306,7 @@ export default function ForgotPassword() {
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             placeholder="Confirm new password"
-                            className={`w-full px-3.5 py-2.5 pr-10 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
+                            className={`w-full px-3.5 py-2.5 pr-10 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                                 ${errors.confirmPassword 
                                     ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
@@ -398,7 +398,7 @@ export default function ForgotPassword() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@email.com"
-                    className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist transition-all
+                    className={`w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
                         ${errors.email 
                             ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
