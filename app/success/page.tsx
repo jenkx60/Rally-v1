@@ -158,7 +158,7 @@ const SuccessContent = () => {
             </div>
 
             <Link 
-                href="/dashboard" 
+                href="/dashboard/events" 
                 className="flex items-center gap-2 text-[#6A59CE] font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px] hover:underline"
             >
                 Go to dashboard <ArrowRight className="h-4 w-4 animate-out" />

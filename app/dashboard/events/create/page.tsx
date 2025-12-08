@@ -40,6 +40,50 @@ import RichTextControls from "@/app/components/dashboard/events/richText-control
 import { format } from "date-fns";
 import { Popover, PopoverContent, PopoverTrigger } from "@/app/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/app/components/ui/calendar";
+import image1 from '@/public/Sidebar/cal-ill.svg';
+import image2 from '@/public/Sidebar/link-up.svg';
+import image3 from '@/public/Sidebar/sunday-ill.svg';
+import image4 from '@/public/Sidebar/sip-ill.svg';
+
+// --- Mock Data matching the image ---
+const MOCK_EVENTS = [
+    {
+        id: "saints-popup",
+        title: "Saints pop-up",
+        dateRange: "Today • 6:00 PM - 11:00 PM",
+        location: "Shore mall, Osapa",
+        attendees: 5,
+        status: 'Live' as const,
+        imageSrc: image1,
+    },
+    {
+        id: "the-link-up",
+        title: "The link up",
+        dateRange: "Fri, Nov 21 • 5:30 PM - 10:30 PM",
+        location: "The Garden, Ikoyi",
+        attendees: 9,
+        status: 'Upcoming' as const,
+        imageSrc: image2,
+    },
+    {
+        id: "sunday-brunch",
+        title: "Sunday brunch club",
+        dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
+        location: "Lekki phase 1, Lekki",
+        attendees: 6,
+        status: 'Upcoming' as const,
+        imageSrc: image3,
+    },
+    {
+        id: "sip-yap",
+        title: "Sip & yap",
+        dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
+        location: "Lekki phase 1, Lekki",
+        attendees: 0,
+        status: 'Past' as const,
+        imageSrc: image4,
+    },
+];
 
 // --- Types & Mock Data ---
 
@@ -124,7 +168,6 @@ const LocationTypeSelector: React.FC<LocationTypeSelectorProps> = ({ value, onCh
 const CreateEventPage = () => {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false); // Track if event is created successfully
-  
   const [descriptionLength, setDescriptionLength] = useState(0);
   const [ticketDescLength, setTicketDescLength] = useState(0);
   const [eventImageURL, setEventImageURL] = useState<string | StaticImageData>(people);
