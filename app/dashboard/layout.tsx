@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AppSidebar } from "@/app/components/dashboard/app-sidebar";
+import { AppSidebar } from "@/app/components/dashboard/events/app-sidebar";
 import { Separator } from "@/app/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/app/components/ui/sidebar";
-import DynamicBreadcrumb from "@/app/components/dashboard/dynamic-breadcrumb";
+import DynamicBreadcrumb from "@/app/components/dashboard/events/dynamic-breadcrumb";
 import { useRouter } from "next/navigation";
 // import QuickAction from "@/components/dashboard/quick-action";
 import Notification from "@/app/components/notifications/notification";

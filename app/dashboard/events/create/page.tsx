@@ -2,9 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import illustration from "@/public/Sidebar/cal-ill.svg";
 import tag from "@/public/Sidebar/tag.svg";
 import bank from "@/public/Sidebar/bank_card_fill.svg";
+import party from "@/public/Sidebar/party_popper.svg"; // Assuming you have this or similar for the success screen icon
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
@@ -23,13 +26,20 @@ import {
   Ticket,
   Pencil,
   Trash2,
-  Plus
+  Plus,
+  Share2,
+  ArrowRight,
+  Copy,
+  LayoutDashboard
 } from "lucide-react";
 import camera from "@/public/Sidebar/camera_2.svg";
 import people from "@/public/Sidebar/people-happy.svg";
 import { cn } from "@/lib/utils";
-import StepIndicator from "@/app/components/dashboard/step-indicator"; 
-import RichTextControls from "@/app/components/dashboard/richText-controls";
+import StepIndicator from "@/app/components/dashboard/events/step-indicator"; 
+import RichTextControls from "@/app/components/dashboard/events/richText-controls";
+import { format } from "date-fns";
+import { Popover, PopoverContent, PopoverTrigger } from "@/app/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/app/components/ui/calendar";
 
 // --- Types & Mock Data ---
 
@@ -41,8 +51,21 @@ const CATEGORIES = [
   "Sports & Fitness",
 ];
 
+const generateTimeOptions = () => {
+    const times = [];
+    for (let i = 0; i < 24; i++) {
+        const hour = i % 12 || 12;
+        const ampm = i < 12 ? "AM" : "PM";
+        times.push(`${hour}:00 ${ampm}`);
+        times.push(`${hour}:30 ${ampm}`);
+    }
+    return times;
+};
+
+const TIME_OPTIONS = generateTimeOptions();
+
 interface TicketData {
-  id: string; // unique id for list management
+  id: string; 
   type: 'Free' | 'Paid';
   name: string;
   price: string;
@@ -51,11 +74,10 @@ interface TicketData {
 }
 
 interface FormData {
-  // Step 1 Data
   title: string;
   category: string;
   description: string;
-  date: string;
+  date: Date | undefined;
   startTime: string;
   endTime: string;
   locationType: 'Physical' | 'Virtual';
@@ -79,9 +101,9 @@ const LocationTypeSelector: React.FC<LocationTypeSelectorProps> = ({ value, onCh
                     type="button"
                     onClick={() => onChange(type as 'Physical' | 'Virtual')}
                     className={cn(
-                        "flex items-center gap-2 rounded-md border px-3 py-1.5 font-geist text-sm leading-6 font-medium transition-colors",
+                        "flex items-center gap-2 rounded-md px-3 py-1.5 font-geist text-sm leading-6 font-medium transition-colors cursor-pointer",
                         isSelected
-                            ? "border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
+                            ? "border border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
                             : "border-[#E8E8E8] bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
                     )}
                 >
@@ -101,18 +123,21 @@ const LocationTypeSelector: React.FC<LocationTypeSelectorProps> = ({ value, onCh
 
 const CreateEventPage = () => {
   const [step, setStep] = useState(1);
+  const [isSuccess, setIsSuccess] = useState(false); // Track if event is created successfully
+  
   const [descriptionLength, setDescriptionLength] = useState(0);
   const [ticketDescLength, setTicketDescLength] = useState(0);
   const [eventImageURL, setEventImageURL] = useState<string | StaticImageData>(people);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const descriptionTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const router = useRouter();
 
   // Form Data for Step 1
   const [formData, setFormData] = useState<FormData>({
     title: "",
     category: "",
     description: "",
-    date: "",
+    date: undefined,
     startTime: "",
     endTime: "",
     locationType: 'Physical',
@@ -120,9 +145,9 @@ const CreateEventPage = () => {
   });
 
   // State for Ticket Management (Step 2)
-  const [tickets, setTickets] = useState<TicketData[]>([]); // List of saved tickets
-  const [isTicketFormOpen, setIsTicketFormOpen] = useState(true); // Control visibility of the form
-  const [editingTicketId, setEditingTicketId] = useState<string | null>(null); // Track if we are editing
+  const [tickets, setTickets] = useState<TicketData[]>([]);
+  const [isTicketFormOpen, setIsTicketFormOpen] = useState(true);
+  const [editingTicketId, setEditingTicketId] = useState<string | null>(null);
 
   // State for the CURRENT ticket being edited/created
   const [currentTicket, setCurrentTicket] = useState<TicketData>({
@@ -133,6 +158,32 @@ const CreateEventPage = () => {
     spots: "",
     description: ""
   });
+
+  const isAiActive = !!formData.title && !!formData.category
+
+  // --- Validation Logic ---
+
+  // Check if Step 1 is valid
+  const isStep1Valid = () => {
+    return (
+        formData.title.trim() !== "" &&
+        formData.category !== "" &&
+        // formData.date !== "" &&
+        formData.date !== undefined &&
+        formData.startTime !== "" &&
+        formData.endTime !== "" &&
+        formData.location.trim() !== ""
+    );
+  };
+
+  // Check if current Ticket form is valid
+  const isTicketFormValid = () => {
+    const basicValid = currentTicket.name.trim() !== "";
+    if (currentTicket.type === 'Paid') {
+        return basicValid && currentTicket.price.trim() !== "" && Number(currentTicket.price) > 0;
+    }
+    return basicValid;
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -154,7 +205,15 @@ const CreateEventPage = () => {
     if (name === 'description') setDescriptionLength(value.length);
   };
 
-  // Handler for Ticket Form inputs
+  const handleDateSelect = (date: Date | undefined) => {
+    setFormData((prev) => ({ ...prev, date: date}));
+  };
+
+  const handleTimeChange = (field: "startTime" | "endTime", value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  }
+
+
   const handleTicketChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setCurrentTicket((prev) => ({ ...prev, [name]: value }));
@@ -165,15 +224,16 @@ const CreateEventPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handler for Ticket Type/Spots Selects
   const handleTicketSelectChange = (name: keyof TicketData, value: string) => {
     setCurrentTicket((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    setStep(2);
-    window.scrollTo(0, 0);
+    if (isStep1Valid()) {
+        setStep(2);
+        window.scrollTo(0, 0);
+    }
   };
 
   const handleBack = () => {
@@ -186,19 +246,16 @@ const CreateEventPage = () => {
   // --- Ticket Management Functions ---
 
   const handleSaveTicket = () => {
-    if (!currentTicket.name) return; // Basic validation
+    if (!isTicketFormValid()) return;
 
     if (editingTicketId) {
-        // Update existing ticket
         setTickets(prev => prev.map(t => t.id === editingTicketId ? { ...currentTicket, id: editingTicketId } : t));
         setEditingTicketId(null);
     } else {
-        // Create new ticket
         const newTicket = { ...currentTicket, id: Math.random().toString(36).substr(2, 9) };
         setTickets(prev => [...prev, newTicket]);
     }
 
-    // Reset Form and View
     setCurrentTicket({
         id: "",
         type: 'Paid',
@@ -208,7 +265,7 @@ const CreateEventPage = () => {
         description: ""
     });
     setTicketDescLength(0);
-    setIsTicketFormOpen(false); // Close form after saving (matches Screenshot 2 behavior)
+    setIsTicketFormOpen(false);
   };
 
   const handleEditTicket = (ticket: TicketData) => {
@@ -219,7 +276,12 @@ const CreateEventPage = () => {
   };
 
   const handleDeleteTicket = (id: string) => {
-    setTickets(prev => prev.filter(t => t.id !== id));
+    const updatedTickets = tickets.filter(t => t.id !== id);
+    setTickets(updatedTickets);
+    // If we delete all tickets, re-open the form
+    if (updatedTickets.length === 0) {
+        setIsTicketFormOpen(true);
+    }
   };
 
   const handleAddAnotherTicket = () => {
@@ -236,24 +298,40 @@ const CreateEventPage = () => {
   };
 
   const handleFinalSubmit = () => {
+    if (tickets.length === 0) return;
+
+    const params = new URLSearchParams();
+    params.set("title", formData.title);
+    if (formData.date) {
+        params.set("date", format(formData.date, "EEEE, MMMM d"));
+    }
+    params.set("startTime", formData.startTime);
+    params.set("endTime", formData.endTime);
+    params.set("location", formData.location);
+
     const finalPayload = {
         ...formData,
         tickets: tickets
     };
     console.log("Final Submission:", finalPayload);
-    // Add logic to submit to backend
+
+    router.push(`/success?${params.toString()}`)
+    // Show Success Screen
+    setIsSuccess(true);
+    window.scrollTo(0, 0);
   };
+
 
   // --- Render Step 1: Create Event ---
   const renderStep1 = () => (
-    <form onSubmit={handleNext} className="flex flex-col gap-8 animate-in fade-in slide-in-from-right-4 duration-300">
-        <div className="h-[200px] w-[350px] rounded-xl bg-[#F8F6FD] flex items-center justify-center relative">
+    <form onSubmit={handleNext} className="flex flex-col gap-8 pt-8 animate-in fade-in slide-in-from-right-4 duration-300">
+        <div className="h-[200px] w-[350px] rounded-[12px] bg-[#F8F6FD] flex items-center justify-center relative">
             <Image 
                 src={eventImageURL} 
                 alt="Event Image" 
                 layout="fill"
                 objectFit="cover"
-                className={cn("transition-opacity", typeof eventImageURL === 'string' ? "opacity-100" : "opacity-100")}
+                className={cn("transition-opacity rounded-[12px]", typeof eventImageURL === 'string' ? "opacity-100" : "opacity-100")}
             />
 
             <input
@@ -280,7 +358,7 @@ const CreateEventPage = () => {
                     name="title" 
                     value={formData.title} 
                     onChange={handleChange} 
-                    placeholder="e.g. Divine's games night" 
+                    placeholder="e.g. Divii's games night" 
                     className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" 
                 />
             </div>
@@ -299,11 +377,17 @@ const CreateEventPage = () => {
 
             <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
-                    <label className="font-geist text-[13px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Add a description <span className="text-[#A3A3A3] font-geist font-normal">(Optional)</span></label>
-                    <Button variant="ghost" type="button" className="flex items-center gap-1 p-0 h-auto font-geist text-sm font-medium text-[#6A59CE] hover:bg-transparent">
+                    <label className="font-geist text-[14px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Add a description <span className="text-[#A3A3A3] font-geist font-normal">(Optional)</span></label>
+                    <button 
+                        type="button" 
+                        disabled={!isAiActive} 
+                        className={cn("flex items-center gap-1 p-0 h-auto font-geist text-sm font-medium text-[#6A59CE] hover:bg-transparent cursor-pointer",
+                            isAiActive ? "text-[#6A59CE] hover:text-[#5a4cb0]" : "text-[#A3A3A3] cursor-not-allowed"
+                        )}
+                    >
                         <Wand className="h-4 w-4" /> 
-                        <span className="font-geist font-normal text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
-                    </Button>
+                        <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
+                    </button>
                 </div>
                 <div className=" rounded-lg border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]/50">
                     <RichTextControls textareaRef={descriptionTextareaRef} />
@@ -313,7 +397,7 @@ const CreateEventPage = () => {
                         onChange={handleChange} 
                         maxLength={300} 
                         placeholder="What should attendees know?" 
-                        className="min-h-40 resize-none rounded-t-none border-none p-4 focus-visible:ring-0 font-geist text-base text-black" />
+                        className="min-h-40 resize-none rounded-t-none border-none p-4 focus-visible:ring-0 font-geist text-[14px] text-black placeholder:text-[#BFBFBF] leading-[150%] tracking-[-0.2px] shadow-none" />
                 </div>
                 <div className="font-geist text-xs text-[#A3A3A3] flex justify-end">{descriptionLength}/300</div>
             </div>
@@ -324,7 +408,7 @@ const CreateEventPage = () => {
             <div className="grid grid-cols-1 gap-2 md:grid-cols-4">
                 <div className="grid col-span-1 md:col-span-2 gap-1.5">
                     <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Date</label>
-                    <div className="relative">
+                    {/* <div className="relative">
                         <Input 
                             name="date" 
                             value={formData.date} 
@@ -333,46 +417,72 @@ const CreateEventPage = () => {
                             className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none"  
                         />
                         <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
-                    </div>
+                    </div> */}
+
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                                variant={"outline"}
+                                className={cn("relative flex justify-start px-3.5 py-2.5 rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none",
+                                    !formData.date && "text-[#000000]"
+                                )}
+                            >
+                                {formData.date ? format(formData.date, "PPP") : <span className="text-[#BFBFBF]">mm/dd/yyyy</span>}
+                                <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="center">
+                            <CalendarComponent
+                                mode="single"
+                                selected={formData.date}
+                                onSelect={handleDateSelect}
+                                initialFocus 
+                            />
+                        </PopoverContent>
+                    </Popover>
                 </div>
                 <div className="grid col-span-1 md:col-span-1 gap-1.5">
                     <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Start time</label>
-                    <div className="relative">
-                        <Input 
-                            name="startTime" 
-                            value={formData.startTime} 
-                            onChange={handleChange} 
-                            placeholder="10:00 AM" 
-                            className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none"  
-                        />
-                        <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
-                    </div>
+                    <Select value={formData.startTime} onValueChange={(value) => handleSelectChange("startTime", value)}>
+                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none">
+                            <SelectValue placeholder="10:00 AM" />
+                            {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
+                        </SelectTrigger>
+                        <SelectContent>
+                            {TIME_OPTIONS.map(time => <SelectItem key={time} value={time}>{time}</SelectItem>)}
+                        </SelectContent>
+                    </Select>
                 </div>
                 <div className="grid col-span-1 md:col-span-1 gap-1.5">
                     <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">End time</label>
-                    <div className="relative">
-                        <Input 
-                            name="endTime" 
-                            value={formData.endTime} 
-                            onChange={handleChange} 
-                            placeholder="11:00 AM" 
-                            className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none"  
-                        />
-                        <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
-                    </div>
+                    <Select value={formData.endTime} onValueChange={(value) => handleSelectChange("endTime", value)}>
+                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none">
+                            <SelectValue placeholder="10:00 PM" />
+                            {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
+                        </SelectTrigger>
+                        <SelectContent>
+                            {TIME_OPTIONS.map(time => <SelectItem key={time} value={time}>{time}</SelectItem>)}
+                        </SelectContent>
+                    </Select>
                 </div>
-                <p className="font-geist text-sm font-medium text-[#A3A3A3]">Time shown in GMT +1 (Lagos)</p>
+                <p className="font-geist text-xs font-medium text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Time shown in GMT +1 (Lagos)</p>
             </div>
             <div className="flex flex-col gap-3">
                 <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Location</label>
                 <LocationTypeSelector value={formData.locationType} onChange={(type) => handleSelectChange('locationType', type)} />
-                <Input name="location" value={formData.location} onChange={handleChange} placeholder={formData.locationType === 'Physical' ? "Enter location" : "Enter virtual meeting link"} className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" />
+                <Input name="location" value={formData.location} onChange={handleChange} placeholder={formData.locationType === 'Physical' ? "Enter location" : "Paste meeting link (Zoom, Google meet, etc.)"} className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" />
             </div>
         </section>
         
         <footer className="flex w-full items-center justify-between gap-3 pt-6 mt-8">
-            <button type="button" className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#F8F6FD] border border-[#E8E8E8]">Cancel</button>
-            <button type="submit" className="rounded-lg px-6 py-4 bg-[#6A59CE] font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white hover:bg-[#5a4cb0] disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595]">Next</button>
+            <button type="button" className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#FAFAFA] border border-[#E8E8E8]">Cancel</button>
+            <button 
+                type="submit" 
+                disabled={!isStep1Valid()}
+                className="rounded-lg px-6 py-4 bg-[#6A59CE] font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white hover:bg-[#5a4cb0] disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
+            >
+                Next
+            </button>
         </footer>
     </form>
   );
@@ -390,9 +500,9 @@ const CreateEventPage = () => {
                         type="button"
                         onClick={() => handleTicketSelectChange('type', 'Free')}
                         className={cn(
-                            "flex items-center gap-2 rounded-md border px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all",
+                            "flex items-center gap-2 rounded-md px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all cursor-pointer",
                             currentTicket.type === 'Free'
-                                ? "border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
+                                ? "border border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
                                 : "bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
                         )}
                     >
@@ -403,9 +513,9 @@ const CreateEventPage = () => {
                         type="button"
                         onClick={() => handleTicketSelectChange('type', 'Paid')}
                         className={cn(
-                            "flex items-center gap-2 rounded-md border px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all",
+                            "flex items-center gap-2 rounded-md px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all cursor-pointer",
                             currentTicket.type === 'Paid'
-                                ? "border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
+                                ? "border border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
                                 : " bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
                         )}
                     >
@@ -532,8 +642,9 @@ const CreateEventPage = () => {
                 <div className="flex justify-end">
                     <button 
                         onClick={handleSaveTicket}
-                        type="button" // Important: type button to prevent form submit
-                        className="rounded-lg px-[18px] py-3 bg-[#F8F8F8] hover:bg-[#efefef] font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595]"
+                        type="button" 
+                        disabled={!isTicketFormValid()}
+                        className="rounded-lg px-[18px] py-3 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
                     >
                         Save ticket
                     </button>
@@ -551,8 +662,9 @@ const CreateEventPage = () => {
             </button>
             <button 
                 onClick={handleFinalSubmit}
-                type="button" // Handle manual submission logic
-                className="rounded-lg px-6 py-4 bg-[#6A59CE] font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white hover:bg-[#5a4cb0] disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595]"
+                type="button" 
+                disabled={tickets.length === 0}
+                className="rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
             >
                 Let&apos;s rally!
             </button>
@@ -563,48 +675,50 @@ const CreateEventPage = () => {
   return (
     <main className="min-h-screen bg-white p-6 md:p-10 px-[220px]">
       <div className="mx-auto w-full max-w-4xl">
-        {/* Header Section */}
-        <div className="flex flex-col gap-6">
-            {/* Step 1 Header Layout */}
-            {step === 1 && (
-                <div className="flex items-start justify-between">
-                    <div className="flex flex-col gap-4 w-full">
-                        <Image src={illustration} alt="Cal Ill" width={60} height={60} />
-                        <div className="space-y-1.5 flex justify-between">
-                            <div className="">
-                                <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
-                                    Create your event
-                                </h2>
-                                <p className="font-geist text-sm font-medium text-[#A3A3A3]">
-                                    Let&apos;s start with the basics
-                                </p>
+        {/* Header Section (Only if not success screen) */}
+        {!isSuccess && (
+            <div className="flex flex-col gap-6">
+                {/* Step 1 Header Layout */}
+                {step === 1 && (
+                    <div className="flex items-start justify-between">
+                        <div className="flex flex-col gap-4 w-full">
+                            <Image src={illustration} alt="Cal Ill" width={60} height={60} />
+                            <div className="space-y-1.5 flex justify-between">
+                                <div className="space-y-1">
+                                    <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
+                                        Create your event
+                                    </h2>
+                                    <p className="font-geist text-sm font-medium text-[#A3A3A3]">
+                                        Let&apos;s start with the basics
+                                    </p>
+                                </div>
+                                <StepIndicator currentStep={step} />
                             </div>
-                            <StepIndicator currentStep={step} />
                         </div>
                     </div>
-                </div>
-            )}
-            
-            {/* Step 2 Header Layout */}
-             {step === 2 && (
-                <div className="flex items-start justify-between">
-                    <div className="flex flex-col gap-4 w-full">
-                        <Image src={tag} alt="Tag Ill" width={60} height={60} />
-                        <div className="space-y-1.5 flex justify-between">
-                            <div className="">
-                                <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
-                                    Set up tickets
-                                </h2>
-                                <p className="font-geist text-sm font-medium text-[#A3A3A3]">
-                                    You&apos;re this close to going live
-                                </p>
+                )}
+                
+                {/* Step 2 Header Layout */}
+                {step === 2 && (
+                    <div className="flex items-start justify-between">
+                        <div className="flex flex-col gap-4 w-full">
+                            <Image src={tag} alt="Tag Ill" width={60} height={60} />
+                            <div className="space-y-1.5 flex justify-between">
+                                <div className="space-y-1">
+                                    <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
+                                        Set up tickets
+                                    </h2>
+                                    <p className="font-geist text-sm font-medium text-[#A3A3A3]">
+                                        You&apos;re this close to going live
+                                    </p>
+                                </div>
+                                <StepIndicator currentStep={step} />
                             </div>
-                            <StepIndicator currentStep={step} />
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
+        )}
 
         {/* Dynamic Form Content */}
         <div className="mt-6">

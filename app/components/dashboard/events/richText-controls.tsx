@@ -5,7 +5,7 @@ import underline from '@/public/Sidebar/underline_line.svg';
 import alignLeft from '@/public/Sidebar/align_left_line.svg';
 import alignCenter from '@/public/Sidebar/align_center_line.svg';
 import link from '@/public/Sidebar/link_line.svg';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import Image from 'next/image';
 
 interface RichTextControlsProps {

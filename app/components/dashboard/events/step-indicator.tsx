@@ -8,8 +8,8 @@ interface StepIndicatorProps {
 
 const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep, totalSteps = 2 }) => {
   return (
-    <div className="flex flex-col gap-2 w-full max-w-[200px]">
-      <span className="font-bricolage text-lg font-medium text-[#0F0F0F]">
+    <div className="flex flex-col gap-2 w-full max-w-[150px]">
+      <span className="font-geist text-[14px] font-medium text-[#333333] leading-[150%] tracking-[-0.1px]">
         Step {currentStep} of {totalSteps}
       </span>
       <div className="flex items-center gap-2">
