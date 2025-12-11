@@ -1,51 +1,4 @@
-// 'use client';
-// import Image from 'next/image'
-// import plus from '@/public/Sidebar/add_line.svg'
-// import newEvent from '@/public/new-event.svg'
-// import React from 'react'
-// import { Button } from '@/app/components/ui/button'
-// import { Plus } from 'lucide-react'
-// import { useRouter } from 'next/navigation'
-
-// const EventsPage = () => {
-//   const router = useRouter();
-//   return (
-//     <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
-//       <div>
-//         <Image 
-//           src={newEvent}
-//           alt="New Event Image"
-//           width={80}
-//           height={80}
-//         />
-//       </div>
-//       <div className='flex flex-col gap-1 items-center text-center'>
-//         <h1 className='font-bricolage font-semibold text-[20px] leading-[130%] tracking-[-0.7px] text-center'>No events yet</h1>
-//         <p className='font-geist font-medium text-[14px] leading-[150%] tracking-[-0.1px] text-[#A3A3A3]'>Let&apos;s create your first event!</p>
-//       </div>
-//       <div>
-//         <Button
-//           onClick={() => router.push('/dashboard/events/create')}
-//         >
-//           <Image 
-//             src={plus}
-//             alt="Plus Icon"
-//             width={18}
-//             height={18}
-//             className='pb-0.5'
-//           />
-//           {/* <Plus className='w-[50px] h-[50px]' /> */}
-//           <span className='font-geist font-semibold text-[15px] leading-[150%] tracking-[-0.2px]'>Create event</span>
-//         </Button>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default EventsPage
-
 "use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,11 +6,7 @@ import { useRouter } from "next/navigation";
 import { ListFilter } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { cn } from "@/lib/utils";
-
-// Import your custom components
-import { EventCard } from "@/app/components/dashboard/events/eventCard"; // Adjust path if needed
-
-// Import images
+import { EventCard } from "@/app/components/dashboard/events/eventCard";
 import plus from "@/public/Sidebar/add_line.svg";
 import newEvent from "@/public/new-event.svg";
 import image1 from "@/public/Sidebar/people-happy.svg";
@@ -66,7 +15,6 @@ import image3 from "@/public/Sidebar/sunday-ill.svg";
 import image4 from "@/public/Sidebar/sip-ill.svg";
 
 // --- MOCK DATA ---
-// Toggle commenting out items here to test both views
 const MOCK_EVENTS = [
     {
         id: "saints-popup",
@@ -186,10 +134,10 @@ const EventsPage = () => {
                         key={tab}
                         onClick={() => setFilter(tab)}
                         className={cn(
-                            "font-geist text-[15px] font-medium px-3.5 py-2 rounded-md leading-6  transition-colors",
+                            "font-geist text-[15px] font-medium px-3.5 py-2 rounded-md leading-6  transition-colors cursor-pointer",
                             filter === tab 
                                 ? "text-white bg-[#6A59CE]" 
-                                : "text-[#959595] bg-[#F7F7F7] hover:text-[#333333]"
+                                : "text-[#959595] bg-[#F7F7F7] hover:text-[#959595]"
                         )}
                     >
                         {tab}

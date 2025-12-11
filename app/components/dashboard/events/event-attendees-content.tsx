@@ -1,13 +1,3 @@
-// import React from 'react'
-
-// const Attendees = () => {
-//   return (
-//     <div>Attendees Page</div>
-//   )
-// }
-
-// export default Attendees
-'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Search, UserPlus } from 'lucide-react';
@@ -21,14 +11,14 @@ import avatard from '@/public/Sidebar/avatar.svg';
 import avatarkill from '@/public/Sidebar/avatar-kill.svg';
 import avatarman from '@/public/Sidebar/avatar-man.svg';
 import avatarglass from '@/public/Sidebar/avatar-glass.svg';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 
 // Mock Attendee Data
 const mockAttendees = [
-    { id: 1, name: "Divii", email: "divii@example.com", ticketType: "Regular", price: "Free", joined: "Jan 8, 2025", avatar: avatard, eventName: "Saints pop-up" },
-    { id: 2, name: "Jessica Smith", email: "jessica@example.com", ticketType: "VIP", price: "₦15,000", joined: "Jan 4, 2025", avatar: avatarkill, eventName: "Games night" },
-    { id: 3, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 2, 2025", avatar: avatarglass, eventName: "Taco tuesdayy" },
-    { id: 4, name: "Jenkx", email: "jenkx@example.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 3, 2025", avatar: avatarman, eventName: "Sip & yap." },
+    { id: 1, name: "Divii", email: "divii@example.com", ticketType: "Regular", price: "Free", joined: "Jan 8, 2025", avatar: avatard },
+    { id: 2, name: "Jessica Smith", email: "jessica@example.com", ticketType: "VIP", price: "₦15,000", joined: "Jan 4, 2025", avatar: avatarkill },
+    { id: 3, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 2, 2025", avatar: avatarglass },
+    { id: 4, name: "Jenkx", email: "jenkx@example.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 3, 2025", avatar: avatarman },
 ];
 
 const EmptyAttendeesState: React.FC = () => (
@@ -51,7 +41,8 @@ const EmptyAttendeesState: React.FC = () => (
 );
 
 
-const AttendeesPage = () => {
+const EventAttendeesContent = () => {
+    // For prototype, toggle between empty and active state
     const [hasAttendees, setHasAttendees] = useState(true); 
 
     if (!hasAttendees) {
@@ -59,31 +50,19 @@ const AttendeesPage = () => {
     }
 
     return (
-        <div className="bg-white p-10 space-y-4">
-            <h2 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
+        <div className="bg-white space-y-4">
+            <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A]">Attendees list</h2>
+            
             {/* Search and Filter Row */}
             <div className="grid grid-cols-12 gap-3">
-                <div className="relative grow col-span-6">
+                <div className="relative grow col-span-9">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#A3A3A3]" />
                     <Input 
                         placeholder="Search by name and email" 
                         className="font-geist text-sm border-[#E8E8E8] focus:border-[#6A59CE] py-[11px] px-3.5 placeholder:pl-5 rounded-lg" 
                     />
                 </div>
-                <div className='col-span-2'>
-                    <Select>
-                        <SelectTrigger>
-                            <SelectValue placeholder='All events'/>
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectItem value='regular'>Regular</SelectItem>
-                                <SelectItem value='vip'>VIP</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </div>
-                <div className='col-span-2'>
+                <div className='col-span-3'>
                     <Select>
                         <SelectTrigger>
                             <SelectValue placeholder='All types' />
@@ -96,13 +75,6 @@ const AttendeesPage = () => {
                         </SelectContent>
                     </Select>
                 </div>
-                <div className='col-span-2'>
-                    <button
-                      className='border border-[#E8E8E8] rounded-lg py-2.5 px-3.5 text-[#333333] font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]'
-                    >
-                      Download CSV
-                    </button>
-                </div>
             </div>
 
             {/* Attendees Table */}
@@ -110,7 +82,6 @@ const AttendeesPage = () => {
                 <TableHeader>
                     <TableRow className='bg-[#F7F7F7] hover:bg-[#F7F7F7] text-[#A3A3A3] font-geist'>
                         <TableHead className="w-[40%]">Attendee</TableHead>
-                        <TableHead className="w-[30%]">Event</TableHead>
                         <TableHead className="w-[30%]">Ticket type</TableHead>
                         <TableHead className="w-[15%]">Price</TableHead>
                         <TableHead className="w-[15%]">Joined on</TableHead>
@@ -138,13 +109,6 @@ const AttendeesPage = () => {
                                 <span className={cn(
                                     "text-sm ",
                                 )}>
-                                    {attendee.eventName}
-                                </span>
-                            </TableCell>
-                            <TableCell>
-                                <span className={cn(
-                                    "text-sm ",
-                                )}>
                                     {attendee.ticketType}
                                 </span>
                             </TableCell>
@@ -164,4 +128,4 @@ const AttendeesPage = () => {
     );
 }
 
-export default AttendeesPage;
+export default EventAttendeesContent;
