@@ -13,5 +13,5 @@ export default function AttendeesLayout({
   // useEffect(() => {
   //   router.push("/dashboard/banking");
   // }, []);
-  return <div className="">{children}</div>;
+  return <div className="max-w-screen">{children}</div>;
 }

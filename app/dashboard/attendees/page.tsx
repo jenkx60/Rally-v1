@@ -32,11 +32,11 @@ const mockAttendees = [
 ];
 
 const EmptyAttendeesState: React.FC = () => (
-    <div className="flex flex-col items-center justify-center py-12 px-[100px] mt-12 bg-white text-center space-y-4">
+    <div className="flex flex-col items-center justify-center py-12 px-[100px] bg-white text-center space-y-4">
         <Image src={bird} alt="No attendees" width={80} height={80} />
         <div className='space-y-1'>
-            <h1 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">No RSVPs yet</h1>
-            <p className="font-geist font-medium text-[15px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Time to spread the word</p>
+            <h1 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">No attendees yet</h1>
+            <p className="font-geist font-medium text-[15px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">They&apos;ll show up here</p>
         </div>
         <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-[#5a4cb0] font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
             <Image
@@ -55,7 +55,11 @@ const AttendeesPage = () => {
     const [hasAttendees, setHasAttendees] = useState(true); 
 
     if (!hasAttendees) {
-        return <EmptyAttendeesState />;
+        return (
+          <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
+            <EmptyAttendeesState />
+          </div>
+        )
     }
 
     return (

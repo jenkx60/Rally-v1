@@ -13,6 +13,19 @@ import image1 from "@/public/Sidebar/people-happy.svg";
 import image2 from "@/public/Sidebar/link-up.svg";
 import image3 from "@/public/Sidebar/sunday-ill.svg";
 import image4 from "@/public/Sidebar/sip-ill.svg";
+import EventsFilterPopover from "@/app/components/dashboard/events/event-filter-popover";
+
+type FilterState = {
+  date: 'All' | 'Today' | 'This week' | 'This month';
+  locationType: 'All' | 'Physical' | 'Virtual';
+  freeEventsOnly: boolean;
+};
+
+const initialFilterState: FilterState = {
+  date: 'All',
+  locationType: 'All',
+  freeEventsOnly: false,
+};
 
 // --- MOCK DATA ---
 const MOCK_EVENTS = [
@@ -57,6 +70,11 @@ const MOCK_EVENTS = [
 const EventsPage = () => {
   const router = useRouter();
   const [filter, setFilter] = useState("All");
+  const [currentModalFilters, setCurrentModalFilters] = useState<FilterState>(initialFilterState);
+
+  const handlePopFilter = (filters : FilterState) => {
+    setCurrentModalFilters(filters)
+  };
 
   // Filter logic for the dashboard view
   const filteredEvents = MOCK_EVENTS.filter((event) =>
@@ -144,9 +162,11 @@ const EventsPage = () => {
                     </button>
                 ))}
             </div>
-            <Button variant="outline" className="h-9 w-9 p-0 border-none hover:bg-[#F9F9F9]">
-                <ListFilter className="h-[21px] w-[21px] text-[#1A1A1A]" />
-            </Button>
+            <EventsFilterPopover onApplyFilters={handlePopFilter}>
+              <Button variant="outline" className="h-9 w-9 p-0 border-none hover:bg-[#F9F9F9]">
+                  <ListFilter className="h-[21px] w-[21px] text-[#1A1A1A]" />
+              </Button>
+            </EventsFilterPopover>
         </div>
       </div>
 
