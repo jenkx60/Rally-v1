@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// const Attendees = () => {
-//   return (
-//     <div>Attendees Page</div>
-//   )
-// }
-
-// export default Attendees
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';

@@ -9,6 +9,8 @@ import calendar from '@/public/Sidebar/calendar_2_line.svg';
 import help from '@/public/Sidebar/question_line.svg';
 import setting from '@/public/Sidebar/settings_3_line.svg';
 import avatar from '@/public/Sidebar/avatar.svg';
+import profile from '@/public/Sidebar/profile.svg';
+import logout from '@/public/Sidebar/logout.svg';
 import { usePathname } from "next/navigation";
 // import { useOnboardingStore } from "@/store/use-onboarding-store";
 import { useEffect, useState, useCallback } from "react";
@@ -25,10 +27,11 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/app/components/ui/sidebar";
-import { MoreHorizontal } from "lucide-react";
+import { DoorOpen, MoreHorizontal, User2 } from "lucide-react";
 import { title } from "process";
 import { cn } from "@/lib/utils";
 import {CalendarDays, Settings} from "lucide-react"
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 
 const navigation = [
   {
@@ -109,6 +112,8 @@ export function AppSidebar() {
     }
     return pathname === href;
   } 
+
+  const profileEmail = "divinemere6@gmail.com"
     
 
   return (
@@ -268,9 +273,37 @@ export function AppSidebar() {
               </div>
 
               {/* Three dots icon */}
-              <div className="hover:bg-[#FAFAFA] flex items-center justify-center rounded-[6px] size-6 group-data-[state=collapsed]:hidden cursor-pointer">
-                <MoreHorizontal className="size-4 text-[#959595]" />
-              </div>
+              <Popover>
+                <PopoverTrigger asChild className="hover:bg-[#FAFAFA] flex items-center justify-center rounded-[6px] size-6 group-data-[state=collapsed]:hidden cursor-pointer">
+                    <MoreHorizontal className="size-4 text-[#959595]" />
+                </PopoverTrigger>
+                <PopoverContent align="start" className="bg-white rounded-[12px] border border-[#0000000D] p-3 gap-2 shadow shadow-[#0000000D] w-[238px]">
+                    <div className="p-2">
+                      <p className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">{profileEmail}</p>
+                    </div>
+                    <hr />
+                    <div className="flex flex-col gap-1">
+                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">
+                        View profile
+                        <Image
+                          src={profile}
+                          alt="Profile"
+                          width={20}
+                          height={20} 
+                        />
+                      </button>
+                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px]">
+                        Log out
+                        <Image
+                          src={logout}
+                          alt="Logout"
+                          width={20}
+                          height={20} 
+                        />
+                      </button>
+                    </div>
+                </PopoverContent>
+              </Popover>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
