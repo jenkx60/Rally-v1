@@ -327,26 +327,25 @@ const MangeEvent = () => {
     }
   return (
     <div className="p-6">
-            
-            {/* Back Link */}
-            <Link href="/dashboard/events" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
-                <ArrowLeft className="w-4 h-4" />
-                Back to events
-            </Link>
+        {/* Back Link */}
+        <Link href="/dashboard/events" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
+            <ArrowLeft className="w-4 h-4" />
+            Back to events
+        </Link>
 
-            {/* Title */}
-            <h1 className="font-bricolage text-[32px] font-bold leading-[120%] tracking-[-0.8px] text-[#1A1A1A] mb-8">
-                {eventTitle}
-            </h1>
+        {/* Title */}
+        <h1 className="font-bricolage text-[32px] font-bold leading-[120%] tracking-[-0.8px] text-[#1A1A1A] mb-8">
+            {eventTitle}
+        </h1>
 
-            {/* Tabs */}
-            <EventTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        {/* Tabs */}
+        <EventTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-            {/* Tab Content */}
-            <main>
-                {renderContent()}
-            </main>
-        </div>
+        {/* Tab Content */}
+        <main>
+            {renderContent()}
+        </main>
+    </div>
   )
 }
 

@@ -4,15 +4,12 @@ import Image from 'next/image';
 import { ArrowLeft, Calendar, Edit2, LinkIcon, MapPin, Share2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/app/components/ui/button';
-
-// --- Placeholder/Mock Imports ---
-// Replace these with your actual component paths
 import { Badge } from '@/app/components/ui/badge'; 
 import sharePlane from '@/public/Sidebar/paper-plane.svg'; 
 import revenueIcon from '@/public/Sidebar/revenue-icon.svg'; 
 import spotsIcon from '@/public/Sidebar/coupon_fill.svg'; 
 import rsvpsIcon from '@/public/Sidebar/group_3_fill.svg'; 
-import illustrationUser from '@/public/Sidebar/avatar.svg'; // Placeholder for activity user
+import illustrationUser from '@/public/Sidebar/avatar.svg';
 
 // --- Mock Data Structure ---
 interface EventData {
@@ -45,7 +42,7 @@ const mockEventData: EventData = {
     spotLimit: 50,
     revenue: 240000,
     revenueChange: 40,
-    attendees: Array(8).fill(0).map((_, i) => ({ id: i, avatar: illustrationUser.src })), // 8 mock attendees
+    attendees: Array(8).fill(0).map((_, i) => ({ id: i, avatar: illustrationUser.src })),
     recentActivity: [
         { id: 1, text: "3 new attendees joined", time: "Just now", type: 'join' },
         { id: 2, text: "Divil confirmed attendance", time: "5 mins ago", type: 'confirm' },

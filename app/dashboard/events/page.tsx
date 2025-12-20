@@ -187,3 +187,5 @@ const EventsPage = () => {
 };
 
 export default EventsPage;
+
+// use this template when you are home
