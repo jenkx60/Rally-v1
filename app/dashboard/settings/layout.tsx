@@ -13,5 +13,5 @@ export default function SettingsLayout({
   // useEffect(() => {
   //   router.push("/dashboard/banking");
   // }, []);
-  return <div className="w-full min-h-screen min-w-screen">{children}</div>;
+  return <div className="max-w-screen">{children}</div>;
 }
