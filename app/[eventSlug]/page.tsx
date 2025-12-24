@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
 // Placeholder for the event image (use the same one from the success page for consistency)
 import eventCoverPlaceholder from "@/public/Sidebar/people-happy.svg"; 
 // Placeholder for the hosted-by avatar
-import hostAvatarPlaceholder from "@/public/Sidebar/host_avatar.png"; 
+import hostAvatarPlaceholder from "@/public/Sidebar/avatar.svg"; 
 // Placeholder for the small attendee avatars (if available, otherwise use a default avatar)
-import attendeeAvatar from "@/public/Sidebar/attendee_avatar.png"; 
+import attendeeAvatar from "@/public/Sidebar/avatar.svg"; 
 
 // --- Dummy Data/Placeholders ---
 const DUMMY_EVENT_DATA = {
