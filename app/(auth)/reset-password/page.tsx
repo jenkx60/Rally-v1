@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 export default function ResetPassword() {
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
+  // const searchParams = useSearchParams()
+  // const token = searchParams.get('token')
 
   const [formData, setFormData] = useState({
     password: '',
@@ -26,10 +26,10 @@ export default function ResetPassword() {
     e.preventDefault()
     setError('')
 
-    if (!token) {
-      setError('Invalid reset link')
-      return
-    }
+    // if (!token) {
+    //   setError('Invalid reset link')
+    //   return
+    // }
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match')
