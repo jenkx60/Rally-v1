@@ -1,8 +1,8 @@
 'use client'
-
-import Link from 'next/link'
-import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import React from 'react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function ResetPassword() {
   const searchParams = useSearchParams()
