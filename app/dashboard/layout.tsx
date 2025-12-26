@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import Notification from "@/app/components/notifications/notification";
 // import { useOnboardingStore } from "@/store/use-onboarding-store";
 import Head from "next/head";
+import { Menu } from "lucide-react";
 // import axionsInstance from "@/lib/axios";
 // import PasscodeSet from "@/components/businessOnboarding/passcode-set";
 // import { PendingFeatureGuardProvider } from "@/components/pending-feature-guard";
@@ -78,9 +79,10 @@ export default function DashboardLayout({
                 <Separator orientation="vertical" className="mr-2 h-4" />
                 <DynamicBreadcrumb />
               </div>
-              <div className="flex items-center gap-2 sm:gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <Notification />
                 {/* <QuickAction /> */}
+                <SidebarTrigger className="md:hidden text-[#1A1A1A] hover:bg-transparent" />
               </div>
             </header>
 

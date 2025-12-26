@@ -11,7 +11,7 @@ import setting from '@/public/Sidebar/settings_3_line.svg';
 import avatar from '@/public/Sidebar/avatar.svg';
 import profile from '@/public/Sidebar/profile.svg';
 import logout from '@/public/Sidebar/logout.svg';
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 // import { useOnboardingStore } from "@/store/use-onboarding-store";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -52,6 +52,8 @@ const navigation = [
 ];
 
 export function AppSidebar() {
+  const router = useRouter();
+
 //   const { currentBusiness } = useOnboardingStore();
   const user = {
     name: "Divine Mere",
@@ -66,6 +68,15 @@ export function AppSidebar() {
       setOpen(true); // only expand if collapsed
     }
   };
+
+  const handleViewProfile = () => {
+    router.push("/dashboard/profile")
+  }
+
+  const handleLogout = () => {
+    router.push("/")
+  }
+
   // Portrait detection
   const [isPortrait, setIsPortrait] = useState(false);
 
@@ -283,7 +294,7 @@ export function AppSidebar() {
                     </div>
                     <hr />
                     <div className="flex flex-col gap-1">
-                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">
+                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]" onClick={handleViewProfile}>
                         View profile
                         <Image
                           src={profile}
@@ -292,7 +303,7 @@ export function AppSidebar() {
                           height={20} 
                         />
                       </button>
-                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px]">
+                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px]" onClick={handleLogout}>
                         Log out
                         <Image
                           src={logout}

@@ -21,7 +21,7 @@ const SettingsPage = () => {
   const getTabLabel = (tab: string) => tab.charAt(0).toUpperCase() + tab.slice(1);
 
   return (
-    <div className="flex flex-col w-full max-w-[800px] mx-auto p-6 md:p-8 space-y-8">
+    <div className="flex flex-col w-full max-w-[800px] mx-auto p-0 md:py-10 md:p-12 space-y-8">
       {/* Page Header */}
       <div className="space-y-1">
         <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
@@ -41,10 +41,10 @@ const SettingsPage = () => {
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "px-4 py-2 rounded-lg font-geist font-medium text-[14px] transition-all",
+              "py-2 px-3.5 rounded-lg font-geist text-[15px] font-medium leading-6 tracking-normal transition-colors cursor-pointer",
               activeTab === tab
-                ? "bg-[#6A59CE] text-white shadow-sm"
-                : "bg-[#F5F5F5] text-[#767676] hover:bg-[#E8E8E8]"
+                ? "bg-[#6A59CE] text-white"
+                : "bg-[#F7F7F7] text-[#767676] hover:bg-[#EAEAEA]"
             )}
           >
             {getTabLabel(tab)}

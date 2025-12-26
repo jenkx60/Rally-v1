@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/app/components/ui/accordion'
-import { Mail } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react'
 import React from 'react'
 
 const faqs = [
@@ -37,33 +37,35 @@ const faqs = [
 
 const HelpPage = () => {
   return (
-    <div className="flex flex-col items-center w-full max-w-[800px] mx-auto p-6 md:p-12 space-y-10">
+    <div className="flex flex-col items-center w-full max-w-[730px] mx-auto px-0 py-10 md:p-12 space-y-10 md:space-y-12">
       
       {/* Header Section */}
-      <div className="text-center space-y-2">
-        <h1 className="font-bricolage text-[36px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
+      <div className="text-center space-y-1.5">
+        <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
           How can we help?
         </h1>
-        <p className="font-geist font-medium text-[16px] text-[#A3A3A3]">
+        <p className="font-geist font-medium text-[13px] md:text-[14px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">
           We&apos;re here to help you rally your people
         </p>
       </div>
 
       {/* Talk to Us Card */}
-      <div className="w-full bg-white border border-[#F5F5F5] rounded-[20px] p-6 flex items-start gap-4 shadow-sm">
-        <div className="shrink-0 w-12 h-12 rounded-xl bg-[#F3F0FF] flex items-center justify-center">
+      <div className="w-full border border-[#0000000D] rounded-lg p-5 md:p-6 flex items-start gap-6 shadow-xs shadow-[#1A1A1A0D]">
+        <div className="shrink-0 w-12 h-12 rounded-lg bg-[#F0EEFA] flex items-center justify-center">
           <Mail className="w-6 h-6 text-[#6A59CE]" />
         </div>
         <div className="space-y-1">
-          <h3 className="font-geist font-bold text-[#1A1A1A] text-[16px]">Talk to us</h3>
-          <p className="font-geist text-[#767676] text-[14px]">
-            We usually reply within 24 hours (weekdays)
-          </p>
+          <div className='space-y-1 leading-[150%]'>
+            <h3 className="font-geist font-medium text-[#333333] text-[15px] tracking-[-0.2px]">Talk to us</h3>
+            <p className="font-geist font-normal text-[#959595] text-[12px] md:text-[14px] tracking-[-0.1px]">
+              We usually reply within 24 hours (weekdays)
+            </p>
+          </div>
           <a 
             href="mailto:support@rally.com" 
-            className="inline-flex items-center text-[#6A59CE] font-semibold text-[14px] hover:underline"
+            className="inline-flex items-center text-[#6A59CE] font-medium text-[14px] leading-[135%] tracking-[-0.2px] hover:underline"
           >
-            support@rally.com <span className="ml-1">→</span>
+            support@rally.com <span className="ml-1 pt-0.5"><ArrowRight className='w-4 h-4' /></span>
           </a>
         </div>
       </div>
@@ -74,12 +76,12 @@ const HelpPage = () => {
           <AccordionItem 
             key={faq.id} 
             value={faq.id}
-            className="border border-[#E5E5E5] rounded-xl px-6 bg-white overflow-hidden transition-all data-[state=open]:border-[#6A59CE]"
+            className="border border-[#0000000D] rounded-2xl px-6 bg-white overflow-hidden transition-all shadow-xs shadow-[#1A1A1A0D]"
           >
-            <AccordionTrigger className="hover:no-underline py-5 font-geist font-bold text-[16px] text-[#1A1A1A] text-left">
+            <AccordionTrigger className="hover:no-underline py-5 font-geist font-medium text-[15px] text-[#333333] text-left leading-[150%] tracking-[-0.2px]">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className="font-geist text-[15px] text-[#767676] leading-[160%] pb-5">
+            <AccordionContent className="font-geist font-normal text-[14px] text-[#767676] leading-[150%] tracking-[-0.1px] w-[288px] md:w-[558px]">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>
