@@ -3,13 +3,6 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Bell } from 'lucide-react';
-
-// We will define these components in the same file for simplicity, 
-// or you can split them into app/components/dashboard/settings/... 
-// based on your preference. For this response, I will include them here 
-// to ensure you have the full working code in one copy-pasteable block 
-// but logically separated.
-
 import AccountTab from '@/app/components/dashboard/settings/account-tab';
 import PaymentTab from '@/app/components/dashboard/settings/payment-tab';
 import PreferencesTab from '@/app/components/dashboard/settings/preferences-tab';

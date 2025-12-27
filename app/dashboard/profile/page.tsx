@@ -42,8 +42,8 @@ export default function ProfilePage() {
             <Image
               src={avatar} 
               alt="Divine Mere"
-              fill
-              className="object-cover"
+              width={75}
+              className="object-cover absolute top-7 right-5"
             />
           </div>
         </div>
