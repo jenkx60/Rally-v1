@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Switch } from '@/app/components/ui/switch';
 
-// Simple Switch Component if you don't have shadcn installed yet
 const SimpleSwitch = ({ checked, onCheckedChange }: { checked: boolean; onCheckedChange: (c: boolean) => void }) => (
     <button 
         onClick={() => onCheckedChange(!checked)}
@@ -28,63 +27,61 @@ const PreferencesTab = () => {
 
   return (
     <div className="space-y-8">
-        
         {/* Activity Section */}
-        <div className="space-y-4">
-             <h3 className="font-geist text-sm font-medium text-[#525252]">Activity</h3>
-             <div className="border border-[#E5E5E5] rounded-xl bg-white divide-y divide-[#F5F5F5]">
-                
-                <div className="p-4 flex items-center justify-between">
-                    <div>
-                        <p className="font-geist font-medium text-[#1A1A1A]">Event updates</p>
-                        <p className="font-geist text-sm text-[#767676]">New attendees, event changes</p>
+        <div className="space-y-2">
+             <h3 className="font-geist text-sm md:text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Activity</h3>
+             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#1A1A1A0D] p-5 md:p-6 space-y-5">
+                <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                        <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Event updates</p>
+                        <p className="font-geist font-normal text-[13px] text-[#959595] leading-[150%] tracking-[-0.1px]">New attendees, event changes</p>
                     </div>
-                    <SimpleSwitch checked={preferences.eventUpdates} onCheckedChange={() => toggle('eventUpdates')} />
+                    <Switch checked={preferences.eventUpdates} onCheckedChange={() => toggle('eventUpdates')} />
                 </div>
 
-                <div className="p-4 flex items-center justify-between">
-                    <div>
-                        <p className="font-geist font-medium text-[#1A1A1A]">Ticket sales</p>
-                        <p className="font-geist text-sm text-[#767676]">Real-time notifications</p>
+                <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                        <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Ticket sales</p>
+                        <p className="font-geist font-normal text-[13px] text-[#959595] leading-[150%] tracking-[-0.1px]">Real-time notifications</p>
                     </div>
-                    <SimpleSwitch checked={preferences.ticketSales} onCheckedChange={() => toggle('ticketSales')} />
+                    <Switch checked={preferences.ticketSales} onCheckedChange={() => toggle('ticketSales')} />
                 </div>
              </div>
         </div>
 
         {/* Financial Section */}
-        <div className="space-y-4">
-             <h3 className="font-geist text-sm font-medium text-[#525252]">Financial</h3>
-             <div className="border border-[#E5E5E5] rounded-xl bg-white">
-                <div className="p-4 flex items-center justify-between">
-                    <div>
-                        <p className="font-geist font-medium text-[#1A1A1A]">Payout received</p>
-                        <p className="font-geist text-sm text-[#767676]">Get notified when a payout lands</p>
+        <div className="space-y-2">
+             <h3 className="font-geist text-sm md:text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Financial</h3>
+             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#1A1A1A0D] p-5 md:p-6 space-y-5">
+                <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                        <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Payout received</p>
+                        <p className="font-geist font-normal text-[13px] text-[#959595] leading-[150%] tracking-[-0.1px]">Get notified when a payout lands</p>
                     </div>
-                    <SimpleSwitch checked={preferences.payoutReceived} onCheckedChange={() => toggle('payoutReceived')} />
+                    <Switch checked={preferences.payoutReceived} onCheckedChange={() => toggle('payoutReceived')} />
                 </div>
              </div>
         </div>
 
         {/* News & Updates Section */}
-        <div className="space-y-4">
-             <h3 className="font-geist text-sm font-medium text-[#525252]">News & updates</h3>
-             <div className="border border-[#E5E5E5] rounded-xl bg-white divide-y divide-[#F5F5F5]">
+        <div className="space-y-2">
+             <h3 className="font-geist text-sm md:text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">News & updates</h3>
+             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#1A1A1A0D] p-5 md:p-6 space-y-5">
                 
-                <div className="p-4 flex items-center justify-between">
-                    <div>
-                        <p className="font-geist font-medium text-[#1A1A1A]">Weekly summary</p>
-                        <p className="font-geist text-sm text-[#767676]">Get a recap every Sunday</p>
+                <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                        <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Weekly summary</p>
+                        <p className="font-geist font-normal text-[13px] text-[#959595] leading-[150%] tracking-[-0.1px]">Get a recap every Sunday</p>
                     </div>
-                    <SimpleSwitch checked={preferences.weeklySummary} onCheckedChange={() => toggle('weeklySummary')} />
+                    <Switch checked={preferences.weeklySummary} onCheckedChange={() => toggle('weeklySummary')} />
                 </div>
 
-                <div className="p-4 flex items-center justify-between">
-                    <div>
-                        <p className="font-geist font-medium text-[#1A1A1A]">Feature launches</p>
-                        <p className="font-geist text-sm text-[#767676]">Stay in the loop when we drop new stuff</p>
+                <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                        <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Feature launches</p>
+                        <p className="font-geist font-normal text-[13px] text-[#959595] leading-[150%] tracking-[-0.1px]">Stay in the loop when we drop new stuff</p>
                     </div>
-                    <SimpleSwitch checked={preferences.featureLaunches} onCheckedChange={() => toggle('featureLaunches')} />
+                    <Switch checked={preferences.featureLaunches} onCheckedChange={() => toggle('featureLaunches')} />
                 </div>
              </div>
         </div>
