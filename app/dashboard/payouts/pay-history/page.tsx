@@ -1,8 +1,4 @@
 'use client';
-
-import PayoutAllContent from '@/app/components/dashboard/payout/payout-all-content';
-import PayoutPaidContent from '@/app/components/dashboard/payout/payout-paid-content';
-import PayoutPendingContent from '@/app/components/dashboard/payout/payout-pending-content';
 import { cn } from '@/lib/utils';
 import { ArrowLeft } from 'lucide-react';
 import image1 from "@/public/Sidebar/people-happy.svg";
@@ -49,7 +45,7 @@ const mockPayouts = [
     ticketSold: 24, 
     amount: '₦140,000', 
     status: 'Pending' as const, 
-    image: image4 
+    image: image3 
   },
   { 
     id: 5, 
@@ -67,7 +63,7 @@ const mockPayouts = [
     ticketSold: 24, 
     amount: '₦140,000', 
     status: 'Pending' as const, 
-    image: image4 
+    image: image3 
   },
   { 
     id: 7, 
@@ -76,7 +72,7 @@ const mockPayouts = [
     ticketSold: 24, 
     amount: '₦140,000', 
     status: 'Paid' as const, 
-    image: image4 
+    image: image1 
   },
   { 
     id: 8, 
@@ -85,7 +81,7 @@ const mockPayouts = [
     ticketSold: 24, 
     amount: '₦140,000', 
     status: 'Paid' as const, 
-    image: image4 
+    image: image2 
   },
   { 
     id: 9, 
@@ -103,7 +99,7 @@ const mockPayouts = [
     ticketSold: 24, 
     amount: '₦140,000', 
     status: 'Paid' as const, 
-    image: image4 
+    image: image3 
   },
   { 
     id: 11, 
@@ -112,7 +108,7 @@ const mockPayouts = [
     ticketSold: 24, 
     amount: '₦140,000', 
     status: 'Pending' as const, 
-    image: image4 
+    image: image1 
   },
   { 
     id: 12, 
@@ -172,37 +168,23 @@ const PayHistoryPage = () => {
 
     const filteredOptions: ('All' | 'Paid' | 'Pending')[] = ['All', 'Paid', 'Pending'];
 
-    // const payoutStatus = 'Paid'
-
-    // const renderContent = () => {
-    //     switch (activeTab) {
-    //         case 'All':
-    //             return <PayoutAllContent />;
-    //         case 'Paid':
-    //             return <PayoutPaidContent />;
-    //         case 'Pending':
-    //             return <PayoutPendingContent />;
-    //         default:
-    //             return null;
-    //     }
-    // }
   return (
-    <div className="p-6">
+    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5">
         <div>
             {/* Back Link */}
-            <Link href="/dashboard/payout" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
+            <Link href="/dashboard/payouts" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
                 <ArrowLeft className="w-4 h-4" />
                 Back to payouts
             </Link>
 
             {/* Title */}
-            <h1 className="font-bricolage text-[32px] font-bold leading-[120%] tracking-[-0.8px] text-[#1A1A1A] mb-8">
+            <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
                 Payout history
             </h1>
         </div>
 
         {/* Filters Tabs */}
-        <div className="flex space-x-2.5 pb-8">
+        <div className="flex space-x-2.5">
             {filteredOptions.map((option) => (
                 <button
                     key={option}
@@ -224,10 +206,10 @@ const PayHistoryPage = () => {
             {displayedPayouts.map((payout) => (
                 <div 
                     key={payout.id} 
-                    className="bg-white p-4 rounded-xl border border-[#F5F5F5] shadow-sm flex items-start gap-4 hover:border-[#E8E8E8] transition-colors"
+                    className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#1A1A1A0D] transition-colors"
                 >
                     {/* Event Image / Thumbnail */}
-                    <div className="h-12 w-12 rounded-lg bg-gray-100 shrink-0 overflow-hidden relative">
+                    <div className="h-12 w-12 rounded-[6px] bg-gray-100 shrink-0 overflow-hidden relative">
                         <Image src={payout.image} alt={payout.eventName} fill className="object-cover" />
                         <div className={`w-full h-full ${payout.id === 1 ? 'bg-orange-100' : payout.id === 2 ? 'bg-blue-100' : 'bg-purple-100'}`}></div>
                     </div>
@@ -235,7 +217,7 @@ const PayHistoryPage = () => {
                     {/* Details */}
                     <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start mb-1">
-                            <h3 className="font-medium text-[#1A1A1A] text-[15px] truncate">{payout.eventName}</h3>
+                            <h3 className="font-geist font-medium text-[#333333] text-[15px] truncate">{payout.eventName}</h3>
                             <span className={cn(
                                 "text-[12px] font-semibold px-2 py-0.5 rounded-full",
                                 payout.status === 'Paid' 
@@ -245,7 +227,7 @@ const PayHistoryPage = () => {
                                 {payout.status}
                             </span>
                         </div>
-                        <p className="text-[13px] text-[#767676] font-geist mb-1">{payout.date} • {payout.ticketSold} tickets</p>
+                        <p className="text-sm text-[#959595] font-geist font-normal mb-1">{payout.date} • {payout.ticketSold} tickets</p>
                         <p className="text-[15px] font-semibold text-[#1A1A1A] font-bricolage">{payout.amount}</p>
                      </div>
                 </div>
@@ -256,7 +238,7 @@ const PayHistoryPage = () => {
         {hasMore && (
             <div className="flex justify-center pt-4">
                 <button 
-                    className="px-6 py-2.5 border border-[#E8E8E8] rounded-lg font-geist font-medium text-[15px] text-[#1A1A1A] hover:bg-gray-50 transition-colors" 
+                    className="px-6 py-2.5 border border-[#E8E8E8] rounded-lg font-geist font-medium text-[15px] text-[#1A1A1A] hover:bg-gray-50 transition-colors cursor-pointer" 
                     onClick={handleLoadMore}
                 >
                     Load more
@@ -269,10 +251,3 @@ const PayHistoryPage = () => {
 }
 
 export default PayHistoryPage
-{/*Tabs
-<HistoryTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-Tab Content
-<main>
-    {renderContent()}
-</main> */}
