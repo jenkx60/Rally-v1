@@ -118,7 +118,7 @@ const EventsPage = () => {
 
   // 2. If events DO exist, show the "Dashboard View" (Second code snippet)
   return (
-    <div className="flex flex-col gap-6 p-6 md:p-8 w-full">
+    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
       {/* Header and "Create event" Button */}
       <div className="flex justify-between items-center">
         <div className="space-y-1.5">

@@ -216,13 +216,13 @@ const EditPayoutForm: React.FC<EditPayoutFormProps> = ({
             type="text"
             value={accountName}
             onChange={(e) => setAccountName(e.target.value)}
-            className="h-[46px] rounded-lg border-[#E5E5E5] bg-white text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+            className="h-[46px] rounded-lg border-[#E5E5E5] bg-[#FAFAFA] text-[#BFBFBF] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
           />
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2 w-full md:w-[300px] md:ml-auto">
+      <div className="flex gap-2 w-full md:w-[250px] md:ml-auto">
         <button
           onClick={onClose}
           className="w-full md:flex-1 px-5 py-4 rounded-lg border border-[#E5E5E5] font-geist font-medium text-[#959595] text-[15px] hover:bg-[#F9F9F9] cursor-pointer"
