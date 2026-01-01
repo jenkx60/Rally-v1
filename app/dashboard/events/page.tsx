@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ListFilter } from "lucide-react";
+import { ListFilter, Plus } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { cn } from "@/lib/utils";
 import { EventCard } from "@/app/components/dashboard/events/eventCard";
@@ -118,14 +118,14 @@ const EventsPage = () => {
 
   // 2. If events DO exist, show the "Dashboard View" (Second code snippet)
   return (
-    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
+    <div className="relative flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
       {/* Header and "Create event" Button */}
       <div className="flex justify-between items-center">
         <div className="space-y-1.5">
           <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">My events</h1>
           <p className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px] text-[#A3A3A3]">Stay on top of your events, all in one place</p>
         </div>
-        <Link href="/dashboard/events/create" passHref>
+        <Link href="/dashboard/events/create" passHref className="hidden md:block">
           <Button className="bg-[#6A59CE] hover:bg-primary/90 px-6 py-2">
             <Image
               src={plus}
@@ -182,6 +182,13 @@ const EventsPage = () => {
           No events found for the &apos;{filter}&apos; filter.
         </div>
       )}
+
+      {/* Moblie Floating action button */}
+      <Link href="/dashboard/events/create" passHref className="md:hidden fixed bottom-6 right-6 z-50">
+        <div className="bg-[#6A59CE] w-14 h-14 rounded-2xl flex items-center justify-center shadow-[0px_8px_16px_rgba(106,89,206,0.25)] active:scale-95 transition-transform">
+          <Plus className="text-white w-7 h-7" strokeWidth={2.5} />
+        </div>
+      </Link>
     </div>
   );
 };
