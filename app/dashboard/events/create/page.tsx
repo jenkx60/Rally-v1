@@ -367,8 +367,8 @@ const CreateEventPage = () => {
 
   // --- Render Step 1: Create Event ---
   const renderStep1 = () => (
-    <form onSubmit={handleNext} className="flex flex-col gap-8 pt-8 animate-in fade-in slide-in-from-right-4 duration-300">
-        <div className="h-[200px] w-[350px] rounded-[12px] bg-[#F8F6FD] flex items-center justify-center relative">
+    <form onSubmit={handleNext} className="flex flex-col gap-8 pt-4 md:pt-8 animate-in fade-in slide-in-from-right-4 duration-300">
+        <div className="h-[200px] w-full md:w-[350px] rounded-[12px] bg-[#F8F6FD] flex items-center justify-center relative overflow-hidden">
             <Image 
                 src={eventImageURL} 
                 alt="Event Image" 
@@ -446,7 +446,7 @@ const CreateEventPage = () => {
             </div>
         </section>
 
-        <section className="flex flex-col gap-6 pt-6">
+        <section className="flex flex-col gap-6 pt-2 md:pt-6">
             <h3 className="font-bricolage text-[20px] font-semibold leading-[130%] tracking-[-0.7px] text-[#1A1A1A]">When and where?</h3>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-4">
                 <div className="grid col-span-1 md:col-span-2 gap-1.5">
@@ -532,7 +532,7 @@ const CreateEventPage = () => {
 
   // --- Render Step 2: Set up tickets ---
   const renderStep2 = () => (
-    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-right-4 duration-300">
+    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-right-4 duration-300 pt-4 md:pt-0">
         
         {/* Is this free or paid? (Only show if form is open or it's the first time) */}
         {isTicketFormOpen && (
@@ -543,7 +543,7 @@ const CreateEventPage = () => {
                         type="button"
                         onClick={() => handleTicketSelectChange('type', 'Free')}
                         className={cn(
-                            "flex items-center gap-2 rounded-md px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all cursor-pointer",
+                            "flex-1 md:flex-none justify-center md:justify-start flex items-center gap-2 rounded-md px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all cursor-pointer",
                             currentTicket.type === 'Free'
                                 ? "border border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
                                 : "bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
@@ -556,7 +556,7 @@ const CreateEventPage = () => {
                         type="button"
                         onClick={() => handleTicketSelectChange('type', 'Paid')}
                         className={cn(
-                            "flex items-center gap-2 rounded-md px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all cursor-pointer",
+                            "flex-1 md:flex-none justify-center md:justify-start flex items-center gap-2 rounded-md px-3.5 py-2.5 font-geist text-[15px] leading-[150%] tracking-[-0.2px] font-medium transition-all cursor-pointer",
                             currentTicket.type === 'Paid'
                                 ? "border border-[#6A59CE] bg-[#F8F6FD] text-[#6A59CE]"
                                 : " bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
@@ -604,7 +604,7 @@ const CreateEventPage = () => {
             </div>
         )}
 
-        {/* 3. Add Another Ticket Button (Shown when list exists and form is closed) */}
+        {/* 3. Another Ticket Button (Shown when list exists and form is closed) */}
         {!isTicketFormOpen && tickets.length > 0 && (
             <button 
                 onClick={handleAddAnotherTicket}
@@ -617,7 +617,7 @@ const CreateEventPage = () => {
 
         {/* 4. Ticket Form Card (Shown if creating new, editing, or no tickets exist) */}
         {(isTicketFormOpen || tickets.length === 0) && (
-            <div className="rounded-xl border border-[#E8E8E8] p-8 bg-white shadow-xs space-y-6">
+            <div className="rounded-xl border border-[#E8E8E8] p-4 md:p-8 bg-white shadow-xs space-y-6">
                 <div className="flex items-center justify-between">
                     <h3 className="font-bricolage text-[20px] font-semibold text-[#1a1a1a] leading-[130%] tracking-[-0.7px]">
                         Ticket details {tickets.length > 0 ? `(${tickets.length + 1})` : ''}
@@ -687,7 +687,7 @@ const CreateEventPage = () => {
                         onClick={handleSaveTicket}
                         type="button" 
                         disabled={!isTicketFormValid()}
-                        className="rounded-lg px-[18px] py-3 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
+                        className="w-full md:w-auto rounded-lg px-[18px] py-3 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
                     >
                         Save ticket
                     </button>
@@ -699,7 +699,7 @@ const CreateEventPage = () => {
             <button 
                 type="button" 
                 onClick={handleBack}
-                className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#F8F6FD] border border-[#E8E8E8]"
+                className="flex-1 rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#F8F6FD] border border-[#E8E8E8]"
             >
                 Back
             </button>
@@ -707,7 +707,7 @@ const CreateEventPage = () => {
                 onClick={handleFinalSubmit}
                 type="button" 
                 disabled={tickets.length === 0}
-                className="rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
+                className="flex-1 rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
             >
                 Let&apos;s rally!
             </button>
@@ -716,7 +716,7 @@ const CreateEventPage = () => {
   );
 
   return (
-    <main className="min-h-screen bg-white p-6 md:p-10 px-[220px]">
+    <main className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5">
       <div className="mx-auto w-full max-w-4xl">
         {/* Header Section (Only if not success screen) */}
         {!isSuccess && (
@@ -726,7 +726,7 @@ const CreateEventPage = () => {
                     <div className="flex items-start justify-between">
                         <div className="flex flex-col gap-4 w-full">
                             <Image src={illustration} alt="Cal Ill" width={60} height={60} />
-                            <div className="space-y-1.5 flex justify-between">
+                            <div className="space-y-1.5 flex flex-col md:flex-row justify-between gap-4 md:gap-0">
                                 <div className="space-y-1">
                                     <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
                                         Create your event
@@ -746,7 +746,7 @@ const CreateEventPage = () => {
                     <div className="flex items-start justify-between">
                         <div className="flex flex-col gap-4 w-full">
                             <Image src={tag} alt="Tag Ill" width={60} height={60} />
-                            <div className="space-y-1.5 flex justify-between">
+                            <div className="space-y-1.5 flex flex-col md:flex-row justify-between gap-4 md:gap-0">
                                 <div className="space-y-1">
                                     <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
                                         Set up tickets

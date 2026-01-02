@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -76,6 +76,14 @@ const EventsPage = () => {
     setCurrentModalFilters(filters)
   };
 
+  const activeFilterCount = useMemo(() => {
+    let count = 0; 
+    if (currentModalFilters.date !== 'All') count++;
+    if (currentModalFilters.locationType !== 'All') count++;
+    if (currentModalFilters.freeEventsOnly) count++;
+    return count;
+  }, [currentModalFilters])
+
   // Filter logic for the dashboard view
   const filteredEvents = MOCK_EVENTS.filter((event) =>
     filter === "All" ? true : event.status === filter
@@ -86,7 +94,7 @@ const EventsPage = () => {
   // 1. If NO events exist, show the "Empty State" (First code snippet)
   if (MOCK_EVENTS.length === 0) {
     return (
-      <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">
+      <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center bg-red-300">
         <div>
           <Image src={newEvent} alt="New Event Image" width={80} height={80} />
         </div>
@@ -163,9 +171,13 @@ const EventsPage = () => {
                 ))}
             </div>
             <EventsFilterPopover onApplyFilters={handlePopFilter}>
-              <Button variant="outline" className="h-9 w-9 p-0 border-none hover:bg-[#F9F9F9]">
-                  <ListFilter className="h-[21px] w-[21px] text-[#1A1A1A]" />
-              </Button>
+              <button className="flex items-center gap-2 py-1 font-geist font-medium text-[15px] cursor-pointer">
+                  <ListFilter className="h-4 w-4 text-[#1A1A1A]" />
+                  <span className="text-[#1A1A1A]">Filter</span>
+                  {activeFilterCount > 0 && (
+                    <span className="text-[#6A59CE]">({activeFilterCount})</span>
+                  )}
+              </button>
             </EventsFilterPopover>
         </div>
       </div>
