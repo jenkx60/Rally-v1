@@ -75,13 +75,12 @@ export default function DashboardLayout({
             <header
               className={`flex portrait:w-screen h-16 items-center justify-between border-b border-[#E8E8E8] px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
             >
-              <div className="flex items-center gap-2 px-2">
+              <div className="flex items-center md:gap-2 md:px-2">
                 <Separator orientation="vertical" className="mr-2 h-4" />
                 <DynamicBreadcrumb />
               </div>
-              <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-5 md:gap-4">
                 <Notification />
-                {/* <QuickAction /> */}
                 <SidebarTrigger className="md:hidden text-[#1A1A1A] hover:bg-transparent" />
               </div>
             </header>

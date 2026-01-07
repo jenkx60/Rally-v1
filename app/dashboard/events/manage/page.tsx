@@ -294,10 +294,10 @@ const EventTabs: React.FC<{ activeTab: string, setActiveTab: (tab: string) => vo
                     key={tabName}
                     onClick={() => setActiveTab(tabName)}
                     className={cn(
-                        "py-2 px-3.5 rounded-lg font-geist text-[15px] font-medium leading-6 tracking-normal transition-colors cursor-pointer",
+                        "font-geist text-[15px] font-medium px-3.5 py-2 rounded-md leading-6 transition-colors cursor-pointer",
                         activeTab === tabName
-                            ? "bg-[#6A59CE] text-white"
-                            : "bg-[#F7F7F7] text-[#767676] hover:bg-[#EAEAEA]"
+                            ? "text-white bg-[#6A59CE]" 
+                            : "text-[#959595] bg-[#F7F7F7] hover:text-[#959595]"
                     )}
                 >
                     {tabName}
@@ -326,7 +326,7 @@ const MangeEvent = () => {
         }
     }
   return (
-    <div className="p-6">
+    <div className="flex flex-col p-0 pb-10 pt-5 md:p-5">
         {/* Back Link */}
         <Link href="/dashboard/events" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
             <ArrowLeft className="w-4 h-4" />

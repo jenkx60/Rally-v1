@@ -5,8 +5,6 @@ import { Calendar, Edit3, Ellipsis, Forward, MapPin } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { cn } from "@/lib/utils";
 import illustrations from "@/public/Sidebar/avatar.svg";
-
-// Placeholder for attendee avatars (ensure you have these paths or update them)
 import attendeeAvatar from "@/public/Sidebar/attendee_avatar.png"; 
 import { useRouter } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
@@ -14,7 +12,7 @@ import ShareEventDialog from "./share-event-dialog";
 
 // Define the shape of the data the card expects
 interface EventCardProps {
-    id: string; // Used for the manage link
+    id: string;
     title: string;
     dateRange: string;
     location: string;
@@ -104,7 +102,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 
     return (
         <>
-            <div className="bg-white hover:bg-[#F7F7F7] border border-[#0000000D] rounded-xl overflow-hidden shadow-xs shadow-[#1A1A1A0D] flex flex-col cursor-pointer">
+            <div className="bg-white border border-[#0000000D] rounded-xl overflow-hidden shadow-xs shadow-[#1A1A1A0D] flex flex-col cursor-pointer">
                 {/* Event Image and Status Tag */}
                 <div className="relative w-full h-40">
                     <Image 
@@ -119,13 +117,14 @@ export const EventCard: React.FC<EventCardProps> = ({
                 <div className="p-4 flex flex-col gap-4">
                     <div className="flex justify-between">
                         <h1 className="font-bricolage text-lg font-bold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">{title}</h1>
-                        <span className={cn(
-                            "text-xs font-semibold px-2 py-0.5 rounded-full",
-                            statusColor
-                        )}>
-                            {/* <span className="ml-1">{status}</span> */}
-                            {status}
-                        </span>
+                        {status === 'Live' && (
+                            <span className={cn(
+                                "text-xs font-semibold px-2 py-0.5 rounded-full",
+                                statusColor
+                            )}>
+                                Live
+                            </span>
+                        )}
                     </div>
                     
                     <div className="space-y-2 text-sm text-[#767676] font-geist font-normal leading-[150%] tracking-[-0.2px]">

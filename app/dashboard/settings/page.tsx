@@ -34,10 +34,10 @@ const SettingsPage = () => {
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={cn(
-              "py-2 px-3.5 rounded-lg font-geist text-[15px] font-medium leading-6 tracking-normal transition-colors cursor-pointer",
+              "font-geist text-[15px] font-medium px-3.5 py-2 rounded-md leading-6 transition-colors cursor-pointer",
               activeTab === tab
-                ? "bg-[#6A59CE] text-white"
-                : "bg-[#F7F7F7] text-[#767676] hover:bg-[#EAEAEA]"
+                ? "text-white bg-[#6A59CE]" 
+                : "text-[#959595] bg-[#F7F7F7] hover:text-[#959595]"
             )}
           >
             {getTabLabel(tab)}

@@ -9,6 +9,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/app/components/ui/breadcrumb";
+import rally from "@/public/Logo.svg";
+import Link from "next/link";
+import Image from "next/image";
 
 const DynamicBreadcrumb = () => {
   const pathname = usePathname();
@@ -75,8 +78,15 @@ const DynamicBreadcrumb = () => {
           })}
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex md:hidden font-bold text-lg py-2 px-1">
-        {currentPage}
+      <div className="flex md:hidden">
+        <Link href="/dashboard">
+          <Image 
+            src={rally}
+            alt="Rally Logo"
+            width={40}
+            height={40}
+          />
+        </Link>
       </div>
     </>
   );

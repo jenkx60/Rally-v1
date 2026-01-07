@@ -54,7 +54,7 @@ const EventAttendeesContent = () => {
             <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A]">Attendees list</h2>
             
             {/* Search and Filter Row */}
-            <div className="grid grid-cols-12 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
                 <div className="relative grow col-span-9">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#A3A3A3]" />
                     <Input 

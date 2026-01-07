@@ -24,7 +24,7 @@ const SuccessContent = () => {
 
     // Determine the public path based on the mock link
     const EVENT_SLUG = "yup2ibi6g6"; 
-    const EVENT_PAGE_PATH = `/events/${EVENT_SLUG}`; // Example: /events/yup2ibi6g6
+    const EVENT_PAGE_PATH = `/event/${EVENT_SLUG}`; // Example: /events/yup2ibi6g6
 
     // Retrieve data passed via URL
     const title = searchParams.get("title") || "Event Name";

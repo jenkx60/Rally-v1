@@ -10,7 +10,7 @@ export interface NotificationItem {
   title: string
   timestamp: string
   image?: string | StaticImageData
-  // read: boolean | undefined
+  read: boolean | undefined
 }
 
 export interface GroupedNotifications {
