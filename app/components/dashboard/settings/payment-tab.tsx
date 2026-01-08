@@ -26,22 +26,22 @@ const PaymentTab = () => {
                     <Image src={payout} alt='Payout Illustration' width={80} height={80} />
                  </div>
                  <div className="text-center space-y-1">
-                    <h3 className="font-bricolage text-[18px] md:text-[20px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No payout account yet</h3>
+                    <h3 className="font-bricolage text-[18px] md:text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No payout account yet</h3>
                     <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Add your bank account to get paid</p>
                  </div>
                  <button 
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 bg-[#6A59CE] hover:bg-[#5a4cb0] text-white font-geist font-medium px-5 py-2.5 rounded-lg transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
                 >
-                    <Plus size={18} />
-                    <span>Add account</span>
+                    <Plus className='w-5 h-5' />
+                    <span className='font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]'>Add account</span>
                  </button>
             </div>
         ) : (
             // ACTIVE STATE
             <div className="border border-[#0000000D] rounded-2xl p-5 md:p-6 space-y-6 bg-white shadow shadow-[#1A1A1A0D]">
                 <div className="flex justify-between items-center">
-                    <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">Payout accounts</h2>
+                    <h2 className="font-bricolage text-[18px] font-semibold text-[#333333] leading-[130%] tracking-[-0.5px]">Payout account</h2>
                     <button 
                         onClick={() => setIsModalOpen(true)}
                         className="text-[#6A59CE] text-sm md:text-[15px] font-semibold leading-[135%] tracking-[-0.2px] hover:underline"

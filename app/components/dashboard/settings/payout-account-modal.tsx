@@ -73,16 +73,16 @@ const PayoutAccountForm = ({
         </div>
 
       {/* Actions: Full width stack on mobile, Right aligned 50% width split on desktop */}
-      <div className="flex gap-2 w-full md:w-[300px] md:ml-auto">
+      <div className="flex gap-2 w-full md:w-[250px] md:ml-auto">
         <button
           onClick={onClose}
-          className="w-full md:flex-1 px-5 py-4 rounded-lg border border-[#E5E5E5] font-geist font-medium text-[#959595] text-[15px] hover:bg-[#F9F9F9] cursor-pointer"
+          className="w-full md:flex-1 px-5 py-4 rounded-lg border border-[#E5E5E5] font-geist font-semibold text-[#959595] text-[15px] hover:bg-[#F9F9F9] cursor-pointer"
         >
           Cancel
         </button>
         <button
           onClick={onSave}
-          className="w-full px-5 py-4 rounded-lg bg-[#F5F5F5] font-geist font-medium text-[#A3A3A3] hover:bg-[#6A59CE] text-[15px] hover:text-white transition-colors cursor-pointer"
+          className="w-full px-5 py-4 rounded-lg bg-[#F5F5F5] font-geist font-semibold text-[#A3A3A3] text-[15px]  transition-colors cursor-pointer"
         >
           {isEditing ? 'Save changes' : 'Add account'}
         </button>

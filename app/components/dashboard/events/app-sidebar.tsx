@@ -288,13 +288,13 @@ export function AppSidebar() {
                 <PopoverTrigger asChild className="hover:bg-[#FAFAFA] flex items-center justify-center rounded-[6px] size-6 group-data-[state=collapsed]:hidden cursor-pointer">
                     <MoreHorizontal className="size-4 text-[#959595]" />
                 </PopoverTrigger>
-                <PopoverContent align="start" className="bg-white rounded-[12px] border border-[#0000000D] p-3 space-y-1 shadow shadow-[#0000000D] w-[238px]">
-                    <div className="px-2">
+                <PopoverContent align="start" className="bg-white rounded-[12px] border border-[#0000000D] p-1.5 space-y-1 shadow shadow-[#0000000D] w-[238px]">
+                    <div className="px-2 py-1.5">
                       <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">{profileEmail}</p>
                     </div>
                     <hr className="border-[0.5px] border-[#0000000D]"/>
                     <div className="flex flex-col gap-1">
-                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] hover:text-[#333333]" onClick={handleViewProfile}>
+                      <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] hover:text-[#333333]" onClick={handleViewProfile}>
                         View profile
                         <Image
                           src={profile}
@@ -303,7 +303,7 @@ export function AppSidebar() {
                           height={20} 
                         />
                       </button>
-                      <button className="flex justify-between rounded-lg py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5]" onClick={handleLogout}>
+                      <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5]" onClick={handleLogout}>
                         Log out
                         <Image
                           src={logout}

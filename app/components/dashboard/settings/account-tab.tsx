@@ -67,7 +67,7 @@ const AccountTab = () => {
           {/* Social Links */}
           <div className="flex flex-col gap-1.5">
               <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Social links</label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-geist">
                   <div className="flex h-11 rounded-lg border border-[#DFDFDF] overflow-hidden">
                       <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">instagram.com/</span>
                       <Input 
