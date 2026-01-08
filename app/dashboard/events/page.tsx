@@ -94,7 +94,7 @@ const EventsPage = () => {
   // 1. If NO events exist, show the "Empty State" (First code snippet)
   if (MOCK_EVENTS.length === 0) {
     return (
-      <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center bg-red-300">
+      <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">
         <div>
           <Image src={newEvent} alt="New Event Image" width={80} height={80} />
         </div>
@@ -150,9 +150,7 @@ const EventsPage = () => {
       </div>
 
       {/* Sub-header, Tabs, and Filter */}
-      <div className="flex flex-col gap-4">
-        {/* You can add your subheader text here if needed from the previous designs */}
-        
+      <div className="flex flex-col gap-4">        
         <div className="flex justify-between items-center pb-4">
             <div className="flex gap-2">
                 {['All', 'Upcoming', 'Past'].map(tab => (
@@ -206,5 +204,3 @@ const EventsPage = () => {
 };
 
 export default EventsPage;
-
-// use this template when you are home

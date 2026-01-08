@@ -139,7 +139,7 @@ import { NotificationItem } from "./notification-item";
 import { notifications } from "../notifications/data/notifications";
 import { useIsMobile } from "@/hooks/use-mobile";
 import bellIcon from "@/public/Sidebar/bell_ringing_line.svg";
-import emptyBell from "@/public/Sidebar/bell_ringing_line.svg";
+import emptyBell from "@/public/Sidebar/Alert-Alarm-Bell--Streamline-Freehand.svg";
 import type { 
   GroupedNotifications, 
   NotificationItem as NotificationItemType 
@@ -207,8 +207,8 @@ export default function Notification() {
       <ScrollArea className={isMobile ? "max-h-[70vh]" : "max-h-[450px]"}>
         {totalCount === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 px-10 text-center space-y-4">
-            <div className="bg-[#F7F7F7] p-4 rounded-full">
-               <Image src={emptyBell} alt="Empty" width={48} height={48} className="opacity-40" />
+            <div className="p-4 rounded-full">
+               <Image src={emptyBell} alt="Empty" width={64} height={64} />
             </div>
             <div className="space-y-1">
               <h3 className="font-bricolage text-lg font-bold text-[#1A1A1A]">You&apos;re all caught up</h3>

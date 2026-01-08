@@ -1,10 +1,12 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
-export default function DashboardPage() {
+const DashboardPage = () => {
+  const router = useRouter()
 
   return (
-    redirect('/dashboard/events')
+    router.push('/dashboard/events')
   );
 }
+export default DashboardPage;

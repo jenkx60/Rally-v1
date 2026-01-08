@@ -64,7 +64,7 @@ export default function DashboardLayout({
 //   }
 
   return (
-    <div className="flex h-screen w-full bg-white">
+    <div className="flex w-full bg-white">
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>

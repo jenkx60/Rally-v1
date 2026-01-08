@@ -87,7 +87,7 @@ const PayoutPage = () => {
     payFilter === 'All' ? true : event.status === payFilter
   );
 
-  if (mockPayouts.length === 0) {
+  if (mockPayouts.length !== 0) {
     return (
     <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
       <EmptyPayoutState />
