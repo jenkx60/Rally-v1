@@ -24,7 +24,7 @@ const AccountTab = () => {
       
       {/* My Profile Section */}
       <section className="space-y-6">
-        <h2 className="font-bricolage text-[18px] md:text-[18px] font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.5px]">My profile</h2>
+        <h2 className="font-bricolage text-[18px] md:text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.5px]">My profile</h2>
         
         {/* Avatar Upload */}
         <div className="relative w-[100px] h-[100px] rounded-[28px] border-2 border-[#FA9874]">
@@ -88,7 +88,7 @@ const AccountTab = () => {
           </div>
 
           <div className="flex justify-end pt-2">
-              <button className="bg-[#6A59CE] hover:bg-[#5F4EC0] text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer">
+              <button className="bg-[#6A59CE]  hover:bg-primary/90 text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer">
                   Save changes
               </button>
           </div>
@@ -134,12 +134,12 @@ const AccountTab = () => {
                     <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Confirm new password</label>
                     <div className="relative">
                         <Input 
-                            type={currentPassword ? "text" : "password"}
+                            type={confirmPassword ? "text" : "password"}
                             placeholder="Confirm new password"
                             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
                         />
-                         <button onClick={() => setCurrentPassword(!currentPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
-                            {currentPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} />}
+                         <button onClick={() => setConfirmPassword(!confirmPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
+                            {confirmPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} />}
                         </button>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ const AccountTab = () => {
         </div>
 
          <div className="flex justify-end pt-2">
-              <button className="bg-[#6A59CE] hover:bg-[#5F4EC0] text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer">
+              <button className="bg-[#6A59CE]  hover:bg-primary/90 text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer">
                 Update password
             </button>
         </div>
@@ -159,7 +159,7 @@ const AccountTab = () => {
       <section className="space-y-4 mb-6 md:mb-0">
          <div className="p-6 border border-[#0000000D] rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow shadow-[#1A1A1A0D]">
             <div className="space-y-1.5">
-                <h3 className="font-bricolage font-bold text-[18px] text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">Delete account</h3>
+                <h3 className="font-bricolage font-semibold text-[18px] text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">Delete account</h3>
                 <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">This action is permanent and can&apos;t be undone</p>
             </div>
             <button 

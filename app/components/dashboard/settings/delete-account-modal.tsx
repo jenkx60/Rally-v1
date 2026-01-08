@@ -32,7 +32,7 @@ const DeleteAccountForm = ({
   handleDelete: () => void; 
 }) => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Support Link */}
       <div className="bg-[#F8F6FD] p-3 rounded-lg flex justify-center text-center gap-2 border border-[#E1DEF5] leading-[150%] tracking-[-0.1px]">
         <Mail className='w-5 h-5 text-[#6A59CE]' />
@@ -42,7 +42,7 @@ const DeleteAccountForm = ({
       </div>
 
       {/* Form Fields */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#484848] leading-[150%] tracking-[-0.1px]">
             Why are you leaving? <span className="text-[#AAAAAA] font-normal">(Optional)</span>
@@ -77,7 +77,7 @@ const DeleteAccountForm = ({
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2 w-full md:w-[300px] md:ml-auto">
+      <div className="flex gap-2 w-full md:w-[250px] md:ml-auto">
         <button
           onClick={onClose}
           className="w-full md:flex-1 px-5 py-4 rounded-lg border border-[#E8E8E8] font-geist font-medium text-[#959595] text-[15px] hover:bg-[#F9F9F9] cursor-pointer"
@@ -86,7 +86,7 @@ const DeleteAccountForm = ({
         </button>
         <button
           onClick={handleDelete}
-          className="w-full px-5 py-4 rounded-lg bg-[#F5F5F5] font-geist font-medium text-[#A3A3A3] text-[15px] hover:bg-[#EF4444] hover:text-white transition-colors cursor-pointer"
+          className="w-full px-5 py-4 rounded-lg bg-[#F5F5F5] font-geist font-medium text-[#A3A3A3] text-[15px] transition-colors cursor-pointer"
         >
           Delete account
         </button>
@@ -110,7 +110,7 @@ const CustomHeader = ({ onClose }: { onClose: () => void }) => (
             {/* </div> */}
         </div>
         <div className="space-y-1">
-            <h2 className="font-bricolage text-xl md:text-[22px] font-bold text-[#1A1A1A] leading-[120%] tracking-[0.5px]">Sure you want to leave?</h2>
+            <h2 className="font-bricolage text-xl md:text-[22px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-0.5px]">Sure you want to leave?</h2>
             <p className="font-geist font-medium text-[13px] md:text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">You&apos;ll permanently lose all events, attendee data, and pending payouts</p>
         </div>
     </div>
@@ -155,7 +155,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent 
-        className="max-w-[600px] p-5 rounded-2xl gap-0 block [&>button]:hidden" 
+        className="max-w-[600px] h-screen p-5 rounded-2xl gap-0 block [&>button]:hidden" 
       >
          {/* Accessibility Hidden Title */}
          <VisuallyHidden.Root>
