@@ -24,11 +24,11 @@ const AccountTab = () => {
       
       {/* My Profile Section */}
       <section className="space-y-6">
-        <h2 className="font-bricolage text-[18px] md:text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">My profile</h2>
+        <h2 className="font-bricolage text-[18px] md:text-[18px] font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.5px]">My profile</h2>
         
         {/* Avatar Upload */}
         <div className="relative w-[100px] h-[100px] rounded-[28px] border-2 border-[#FA9874]">
-          <div className="relative w-24 h-24 md:w-24 md:h-24 rounded-[28px] overflow-hidden bg-gray-100">
+          <div className="relative w-24 h-24 md:w-24 md:h-24 rounded-[28px] overflow-hidden bg-[#F8F6FD]">
             <Image
               src={avatar} 
               alt="Divine Mere"
@@ -36,8 +36,8 @@ const AccountTab = () => {
               className="object-cover absolute top-3 right-2.5"
             />
           </div>
-          <div className="absolute -bottom-2 -right-2 bg-white p-1.5 rounded-lg border border-[#E5E5E5] shadow-sm text-[#6A59CE]">
-            <Camera className="w-5 h-5" />
+          <div className="absolute -bottom-2 -right-2 bg-[#F8F6FD] p-1 rounded-md border-2 border-white text-[#6A59CE]">
+            <Camera className="w-4 h-4" />
           </div>
         </div>
 

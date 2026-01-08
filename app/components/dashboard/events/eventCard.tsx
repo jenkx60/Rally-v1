@@ -163,18 +163,18 @@ export const EventCard: React.FC<EventCardProps> = ({
                                     <Ellipsis className="w-6 h-6 text-[#1A1A1A]"/>
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent align="start">
+                            <PopoverContent align="start" className="border border-[#0000000D] shadow shadow-[#0000000D]">
                                 <div className="flex flex-col gap-2 bg-white font-geist font-medium text-sm leading-[150%]">
                                     <div onClick={handleEditClick} className="flex justify-between items-center hover:bg-[#F5F5F5] px-2 py-1.5 rounded-[6px] cursor-pointer">
                                         <span>Edit</span>
-                                        <Edit3 className="w-3 h-3 text-[#A3A3A3]" />
+                                        <Edit3 className="w-3 h-3 text-[#333333]" />
                                     </div>
                                     <ShareEventDialog
                                         eventLink={MOCK_EVENT_LINK}
                                         trigger={
                                             <div className="flex justify-between items-center hover:bg-[#F5F5F5] px-2 py-1.5 rounded-[6px] cursor-pointer">
                                                 <span>Share</span>
-                                                <Forward className="w-4 h-4 text-[#A3A3A3]" />
+                                                <Forward className="w-4 h-4 text-[#333333]" />
                                             </div>
                                         }
                                     />

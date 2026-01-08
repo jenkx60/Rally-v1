@@ -38,7 +38,6 @@ const faqs = [
 const HelpPage = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-[730px] mx-auto px-0 py-10 md:p-12 space-y-10 md:space-y-12">
-      
       {/* Header Section */}
       <div className="text-center space-y-1.5">
         <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
@@ -50,12 +49,13 @@ const HelpPage = () => {
       </div>
 
       {/* Talk to Us Card */}
-      <div className="w-full border border-[#0000000D] rounded-lg p-5 md:p-6 flex items-start gap-6 shadow-xs shadow-[#1A1A1A0D]">
+      {/* Check shadow */}
+      <div className="w-full border border-[#0000000D] rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow-xs shadow-[#1A1A1A0D]"> 
         <div className="shrink-0 w-12 h-12 rounded-lg bg-[#F0EEFA] flex items-center justify-center">
           <Mail className="w-6 h-6 text-[#6A59CE]" />
         </div>
         <div className="space-y-1">
-          <div className='space-y-1 leading-[150%]'>
+          <div className='space-y-0.5 leading-[150%]'>
             <h3 className="font-geist font-medium text-[#333333] text-[15px] tracking-[-0.2px]">Talk to us</h3>
             <p className="font-geist font-normal text-[#959595] text-[12px] md:text-[14px] tracking-[-0.1px]">
               We usually reply within 24 hours (weekdays)
@@ -78,7 +78,7 @@ const HelpPage = () => {
             value={faq.id}
             className="border border-[#0000000D] rounded-2xl px-6 bg-white overflow-hidden transition-all shadow-xs shadow-[#1A1A1A0D]"
           >
-            <AccordionTrigger className="hover:no-underline py-5 font-geist font-medium text-[15px] text-[#333333] text-left leading-[150%] tracking-[-0.2px]">
+            <AccordionTrigger className="hover:no-underline py-5 font-geist font-medium text-[15px] text-[#333333] text-left leading-[150%] tracking-[-0.2px] cursor-pointer">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="font-geist font-normal text-[14px] text-[#767676] leading-[150%] tracking-[-0.1px] w-[288px] md:w-[558px]">

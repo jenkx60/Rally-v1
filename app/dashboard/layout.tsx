@@ -87,7 +87,7 @@ export default function DashboardLayout({
 
             {/* Content area with conditional padding to account for fixed header */}
             <div
-              className={`flex portrait:w-screen flex-1 flex-col gap-4 portrait:px-4 px-6 portrait:sm:px-4 pt-2 portrait:sm:pt-4 bg-white overflow-y-auto`}
+              className={`flex portrait:w-screen flex-1 flex-col gap-4 portrait:px-4 px-6 portrait:sm:px-4 pt-2 portrait:sm:pt-4 bg-white`}
             >
               {/* {!currentUser?.hasPasscode && (
                 <PasscodeSet open={open} onOpenChange={setOpen} />

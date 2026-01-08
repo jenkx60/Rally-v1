@@ -38,26 +38,26 @@ export default function ProfilePage() {
       <div className="flex flex-col items-center text-center space-y-4 mb-12">
         {/* Avatar Ring */}
         <div className="relative rounded-[28px] border-2 border-[#FA9874]">
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] overflow-hidden bg-gray-100">
+          <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-[28px] overflow-hidden bg-[#F8F6FD]">
             <Image
               src={avatar} 
               alt="Divine Mere"
               width={75}
-              className="object-cover absolute top-7 right-5"
+              className="object-cover absolute top-5 right-2.5 md:top-7 md:right-4"
             />
           </div>
         </div>
 
         {/* User Info */}
         <div className="space-y-1">
-          <h1 className="font-geist text-xl font-semibold text-[#333333] leading-[130%] tracking-[-0.4px]">
+          <h1 className="font-geist text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.4px]">
             Divine Mere
           </h1>
-          <p className="font-geist text-sm text-[#959595] font-medium leading-[150%] tracking-[-0.1px]">5 events hosted</p>
+          <p className="font-geist text-sm text-[#959595] font-normal leading-[150%] tracking-[-0.1px]">5 events hosted</p>
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-4 text-[#1A1A1A]">
+        <div className="flex items-center gap-2.5 text-[#1A1A1A]">
           <Link href="#" className="hover:opacity-70 transition-opacity">
             <Image
                 src={x}
@@ -79,7 +79,7 @@ export default function ProfilePage() {
 
       {/* --- PAST EVENTS SECTION --- */}
       <div className="w-full space-y-4">
-        <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A] self-start leading-[130%] tracking-[-0.7px]">
+        <h2 className="font-bricolage text-lg font-semibold text-[#333333] self-start leading-[130%] tracking-[-0.5px]">
           Past events
         </h2>
 
