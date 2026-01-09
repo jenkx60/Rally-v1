@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -71,6 +71,25 @@ const EventsPage = () => {
   const router = useRouter();
   const [filter, setFilter] = useState("All");
   const [currentModalFilters, setCurrentModalFilters] = useState<FilterState>(initialFilterState);
+  const [events, setEvents] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+        try {
+            const res = await fetch('/api/events');
+            if (res.ok) {
+                const data = await res.json();
+                setEvents(data.events);
+            }
+        } catch (error) {
+            console.error('Failed to fetch events', error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+    fetchEvents();
+  }, []);
 
   const handlePopFilter = (filters : FilterState) => {
     setCurrentModalFilters(filters)
@@ -85,14 +104,19 @@ const EventsPage = () => {
   }, [currentModalFilters])
 
   // Filter logic for the dashboard view
-  const filteredEvents = MOCK_EVENTS.filter((event) =>
+  const filteredEvents = events.filter((event) =>
     filter === "All" ? true : event.status === filter
   );
+
+  if (isLoading) {
+      return <div className="flex h-full items-center justify-center p-10"><h1 className="text-xl font-medium text-gray-400">Loading events...</h1></div>
+  }
+
 
   // --- CONDITIONAL RENDER LOGIC ---
   
   // 1. If NO events exist, show the "Empty State" (First code snippet)
-  if (MOCK_EVENTS.length === 0) {
+  if (events.length === 0) {
     return (
       <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">
         <div>
