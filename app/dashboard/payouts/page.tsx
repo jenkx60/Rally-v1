@@ -65,7 +65,7 @@ const EmptyPayoutState: React.FC = () => (
           className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
         >
           <Plus className='w-5 h-5' />
-          <span className='font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]'>Create event</span>
+          <span className='font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]'>Create eventssss</span>
         </button>
     </div>
 )
