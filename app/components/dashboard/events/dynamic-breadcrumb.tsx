@@ -28,7 +28,7 @@ const DynamicBreadcrumb = () => {
 
   return (
     <>
-      <Breadcrumb className="hidden md:flex z-50">
+      <Breadcrumb className="hidden md:flex z-50 fixed">
         <BreadcrumbList>
           {/* Breadcrumb for the Dashboard */}
           {/* <BreadcrumbItem>
@@ -78,7 +78,7 @@ const DynamicBreadcrumb = () => {
           })}
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex md:hidden">
+      <div className="flex md:hidden fixed">
         <Link href="/dashboard">
           <Image 
             src={rally}

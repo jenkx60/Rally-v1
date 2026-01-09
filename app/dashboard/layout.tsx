@@ -18,21 +18,23 @@ import { Menu } from "lucide-react";
 // import PasscodeSet from "@/components/businessOnboarding/passcode-set";
 // import { PendingFeatureGuardProvider } from "@/components/pending-feature-guard";
 
+// import { useAuthStore } from "@/lib/auth-store";
+
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  // const { checkAuth, user, isLoading } = useAuthStore();
 //   const { currentUser } = useOnboardingStore();
   const [open, setOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
-//   useEffect(() => {
-//     if (!currentUser) {
-//       router.push("/login");
-//     }
-//   }, [currentUser]);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, [checkAuth]);
+
 
 //   useEffect(() => {
 //     const checkToken = async () => {
@@ -73,7 +75,7 @@ export default function DashboardLayout({
           <SidebarInset>
             {/* Header with conditional fixed positioning */}
             <header
-              className={`flex portrait:w-screen h-16 items-center justify-between border-b border-[#E8E8E8] px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
+              className={`sticky top-0 z-10 bg-white flex portrait:w-screen h-16 items-center justify-between border-b border-[#E8E8E8] px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
             >
               <div className="flex items-center md:gap-2 md:px-2">
                 <Separator orientation="vertical" className="mr-2 h-4" />

@@ -55,15 +55,17 @@ const mockPayouts = [
 ];
 
 const EmptyPayoutState: React.FC = () => (
-  <div className="flex flex-col items-center justify-center py-12 px-[100px] bg-white text-center space-y-4">
+  <div className="flex flex-col items-center justify-center py-12 bg-white text-center space-y-4">
         <Image src={payout} alt="No attendees" width={80} height={80} />
         <div className='space-y-1'>
-            <h1 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">No earnings yet</h1>
-            <p className="font-geist font-medium text-[15px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Host a paid event to start earning</p>
+            <h1 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No earnings yet</h1>
+            <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Host a paid event to start earning</p>
         </div>
-        <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-[#5a4cb0] font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
-            <Plus className='w-[18px] h-[18px]' />
-            <span>Create event</span>
+         <button 
+          className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
+        >
+          <Plus className='w-5 h-5' />
+          <span className='font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]'>Create event</span>
         </button>
     </div>
 )

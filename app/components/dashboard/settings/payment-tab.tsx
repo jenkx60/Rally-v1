@@ -26,7 +26,7 @@ const PaymentTab = () => {
                     <Image src={payout} alt='Payout Illustration' width={80} height={80} />
                  </div>
                  <div className="text-center space-y-1">
-                    <h3 className="font-bricolage text-[18px] md:text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No payout account yet</h3>
+                    <h3 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No payout account yet</h3>
                     <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Add your bank account to get paid</p>
                  </div>
                  <button 
