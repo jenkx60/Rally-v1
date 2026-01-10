@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { AlertTriangle, Mail, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -15,8 +15,9 @@ import {
   DrawerDescription,
   DrawerTitle,
 } from '@/app/components/ui/drawer';
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden"; // To satisfy accessibility requirements without altering your UI
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden"; // This is to satisfy accessibility requirements without altering your UI
 import { Input } from '../../ui/input';
+import { cn } from '@/lib/utils';
 
 interface DeleteAccountModalProps {
   isOpen: boolean;
@@ -30,7 +31,11 @@ const DeleteAccountForm = ({
 }: { 
   onClose: () => void; 
   handleDelete: () => void; 
-}) => {
+})=> {
+  const [email, setEmail] = useState("");
+  const [confirmText, setConfirmText] = useState("");
+
+  const isFormVaild = email.length > 0 && confirmText.toLowerCase() === "delete my account";
   return (
     <div className="space-y-8">
       {/* Support Link */}
@@ -42,7 +47,7 @@ const DeleteAccountForm = ({
       </div>
 
       {/* Form Fields */}
-      <div className="space-y-5">
+      <div className="space-y-5 md:max-h-[230px] md:p-0.5 overflow-y-auto">
         <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#484848] leading-[150%] tracking-[-0.1px]">
             Why are you leaving? <span className="text-[#AAAAAA] font-normal">(Optional)</span>
@@ -59,6 +64,8 @@ const DeleteAccountForm = ({
           </label>
           <Input
             type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email address"
             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
           />
@@ -70,6 +77,8 @@ const DeleteAccountForm = ({
           </label>
           <Input
             type="text"
+            value={confirmText}
+            onChange={(e) => setConfirmText(e.target.value)}
             placeholder="Type here..."
             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
           />
@@ -86,7 +95,13 @@ const DeleteAccountForm = ({
         </button>
         <button
           onClick={handleDelete}
-          className="w-full px-5 py-4 rounded-lg bg-[#F5F5F5] font-geist font-medium text-[#A3A3A3] text-[15px] transition-colors cursor-pointer"
+          disabled={!isFormVaild}
+          className={cn(
+            "w-full px-5 py-4 rounded-lg font-geist font-medium text-[15px] transition-colors",
+            isFormVaild 
+              ? "bg-[#EF4444] text-white hover:bg-[#DC2626] cursor-pointer"
+              : "bg-[#F5F5F5] text-[#A3A3A3] cursor-not-allowed"
+          )}
         >
           Delete account
         </button>

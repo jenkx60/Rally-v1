@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { email } from 'zod';
 import DeleteAccountModal from './delete-account-modal';
 import { Camera, Eye, EyeClosed, EyeOff } from 'lucide-react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import avatar from "@/public/Sidebar/avatar.svg";
 import eyeOpen from "@/public/eye-open.svg";
+import camera from "@/public/Sidebar/camera_2.svg";
 import { Input } from '../../ui/input';
 
 const AccountTab = () => {
@@ -12,12 +13,27 @@ const AccountTab = () => {
     const [newPassword, setNewPassword] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [avatarImageURL, setAvatarImageURL] = useState<string | StaticImageData>(avatar);
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const [formData, setFormData] = useState({
         fullName: "Divine Mere",
         email: "divinemere6@gmail.com",
         instagram: "instagram.com",
         twitter: "x.com",
     });
+
+    const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        setAvatarImageURL(URL.createObjectURL(file));
+      }
+    };
+
+    const handleAvatarUploadClick = () => {
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+    };
 
   return (
     <div className="flex flex-col gap-12">
@@ -30,19 +46,34 @@ const AccountTab = () => {
         <div className="relative w-[100px] h-[100px] rounded-[28px] border-2 border-[#FA9874]">
           <div className="relative w-24 h-24 md:w-24 md:h-24 rounded-[28px] overflow-hidden bg-[#F8F6FD]">
             <Image
-              src={avatar} 
-              alt="Divine Mere"
-              width={75}
+              src={avatarImageURL} 
+              alt="Default Avatar"
+              // width={75}
+              layout='fill'
+              objectFit='cover'
               className="object-cover absolute top-3 right-2.5"
             />
+
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleAvatarUpload}
+              className="hidden"
+            />
           </div>
-          <div className="absolute -bottom-2 -right-2 bg-[#F8F6FD] p-1 rounded-md border-2 border-white text-[#6A59CE]">
-            <Camera className="w-4 h-4" />
-          </div>
+
+          <button 
+            type='button'
+            onClick={handleAvatarUploadClick}
+            className="absolute -bottom-2 -right-2 bg-[#F8F6FD] p-1 rounded-md border-2 border-white text-[#6A59CE] cursor-pointer"
+          >
+            <Image src={camera} alt="upload" width={16} height={16} />
+          </button>
         </div>
 
+        {/* Inputs Grid */}
         <div className='flex flex-col gap-6'>
-          {/* Inputs Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Full name</label>
@@ -175,7 +206,6 @@ const AccountTab = () => {
         isOpen={deleteModalOpen} 
         onClose={() => setDeleteModalOpen(false)} 
       />
-
     </div>
   )
 }

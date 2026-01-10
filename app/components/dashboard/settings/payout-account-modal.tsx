@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile'; 
 import {
@@ -18,6 +18,7 @@ import {
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { Input } from '../../ui/input';
+import { cn } from '@/lib/utils';
 
 interface PayoutAccountModalProps {
   isOpen: boolean;
@@ -36,20 +37,31 @@ const PayoutAccountForm = ({
   onSave: () => void; 
   isEditing: boolean; 
 }) => {
+  const [bank, setBank] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const isFormVaild = bank.length > 0 && accountNumber.length >= 10;
+
   return (
     <div className="space-y-6">
        <div className="space-y-4">
             <div className="flex flex-col gap-1.5">
                 <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Bank name</label>
-                <Select>
+                <Select onValueChange={setBank}>
                     <SelectTrigger>
                         <SelectValue placeholder="Select bank" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectItem value="zenith bank">Zenith Bank</SelectItem>
-                            <SelectItem value='gtbank'>GTBank</SelectItem>
-                            <SelectItem value='access bank'>Access Bank</SelectItem>
+                            <SelectItem value="Zenith Bank">Zenith Bank</SelectItem>
+                            <SelectItem value="GTBank">GTBank</SelectItem>
+                            <SelectItem value="Access Bank">Access Bank</SelectItem>
+                            <SelectItem value="UBA">UBA</SelectItem>
+                            <SelectItem value="OPAY">OPAY</SelectItem>
+                            <SelectItem value="Kuda">Kuda Microfinance Bank</SelectItem>
+                            <SelectItem value="9PSB">9 Payment Service Bank</SelectItem>
+                            <SelectItem value="monniepoint">Monniepoint</SelectItem>
+                            <SelectItem value="paystack">Paystack Titan</SelectItem>
+                            <SelectItem value="firstbank">First Bank</SelectItem>
                         </SelectGroup>
                     </SelectContent>
                 </Select>
@@ -59,6 +71,8 @@ const PayoutAccountForm = ({
                 <Input
                     type="text" 
                     placeholder="0123456789" 
+                    value={accountNumber}
+                    onChange={(e) => setAccountNumber(e.target.value)}
                     className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
                 />
             </div>
@@ -66,8 +80,9 @@ const PayoutAccountForm = ({
                 <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Account name</label>
                 <Input 
                     type="text" 
-                    placeholder="Account Name" 
-                    className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+                    placeholder="Divine Mere" 
+                    disabled
+                    className="text-[#333333] text-[15px] bg-[#FAFAFA] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
                 />
             </div>
         </div>
@@ -82,7 +97,13 @@ const PayoutAccountForm = ({
         </button>
         <button
           onClick={onSave}
-          className="w-full px-5 py-4 rounded-lg bg-[#F5F5F5] font-geist font-semibold text-[#A3A3A3] text-[15px]  transition-colors cursor-pointer"
+          disabled={!isFormVaild}
+          className={cn(
+            "w-full px-5 py-4 rounded-lg font-geist font-semibold text-[15px] transition-colors",
+            isFormVaild
+                ? "bg-[#6A59CE] text-white hover:bg-primary/90 cursor-pointer"
+                : "bg-[#F5F5F5] text-[#A3A3A3] cursor-not-allowed"
+          )}
         >
           {isEditing ? 'Save changes' : 'Add account'}
         </button>

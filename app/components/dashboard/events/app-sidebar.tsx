@@ -62,6 +62,7 @@ export function AppSidebar() {
   };
 
   const { state, setOpen, setOpenMobile } = useSidebar();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleForceOpen = () => {
     if (state === "collapsed") {
@@ -70,10 +71,12 @@ export function AppSidebar() {
   };
 
   const handleViewProfile = () => {
+    setIsProfileOpen(false);
     router.push("/dashboard/profile")
   }
 
   const handleLogout = () => {
+    setIsProfileOpen(false);
     router.push("/")
   }
 
@@ -284,7 +287,7 @@ export function AppSidebar() {
               </div>
 
               {/* Three dots icon */}
-              <Popover>
+              <Popover open={isProfileOpen} onOpenChange={setIsProfileOpen}>
                 <PopoverTrigger asChild className="hover:bg-[#FAFAFA] flex items-center justify-center rounded-[6px] size-6 group-data-[state=collapsed]:hidden cursor-pointer">
                     <MoreHorizontal className="size-4 text-[#959595]" />
                 </PopoverTrigger>
