@@ -1,7 +1,7 @@
 'use client';
 import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
-import { Search, UserPlus } from 'lucide-react';
+import { Plus, Search, UserPlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/app/components/ui/button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/app/components/ui/table'; 
@@ -35,17 +35,12 @@ const EmptyAttendeesState: React.FC = () => (
     <div className="flex flex-col items-center justify-center py-12 px-[100px] bg-white text-center space-y-4">
         <Image src={bird} alt="No attendees" width={80} height={80} />
         <div className='space-y-1'>
-            <h1 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">No attendees yet</h1>
-            <p className="font-geist font-medium text-[15px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">They&apos;ll show up here</p>
+            <h1 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No attendees yet</h1>
+            <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">They&apos;ll show up here</p>
         </div>
-        <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-[#5a4cb0] font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
-            <Image
-                src={forward}
-                alt='share'
-                width={18}
-                height={18} 
-            />
-            <span>Share event</span>
+        <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
+            <Plus className='w-5 h-5' />
+            <span className="font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]">Share event</span>
         </button>
     </div>
 );
