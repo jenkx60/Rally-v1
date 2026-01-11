@@ -104,7 +104,7 @@ const EventsPage = () => {
   }, [currentModalFilters])
 
   // Filter logic for the dashboard view
-  const filteredEvents = events.filter((event) =>
+  const filteredEvents = MOCK_EVENTS.filter((event) =>
     filter === "All" ? true : event.status === filter
   );
 
@@ -116,7 +116,8 @@ const EventsPage = () => {
   // --- CONDITIONAL RENDER LOGIC ---
   
   // 1. If NO events exist, show the "Empty State" (First code snippet)
-  if (events.length === 0) {
+  if (MOCK_EVENTS.length === 0) {
+    
     return (
       <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">
         <div>
@@ -200,7 +201,7 @@ const EventsPage = () => {
             <EventsFilterPopover onApplyFilters={handlePopFilter}>
               <button className="flex items-center gap-2 py-1 font-geist font-medium text-[15px] cursor-pointer">
                   <ListFilter className="h-4 w-4 text-[#1A1A1A]" />
-                  <span className="text-[#1A1A1A]">Filter</span>
+                  {/* <span className="text-[#1A1A1A]">Filter</span> */}
                   {activeFilterCount > 0 && (
                     <span className="text-[#6A59CE]">({activeFilterCount})</span>
                   )}

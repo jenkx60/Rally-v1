@@ -73,7 +73,7 @@ const AccountTab = () => {
         </div>
 
         {/* Inputs Grid */}
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-col gap-4'>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Full name</label>

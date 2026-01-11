@@ -147,10 +147,10 @@ import { Input } from '../../ui/input';
 interface EditPayoutAccountProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirmAdd: (details: { bankName: string; accountNumber: number; accountName: string; }) => void;
+  onConfirmAdd: (details: { bankName: string; accountNumber: string; accountName: string; }) => void;
   children?: React.ReactNode;
   initialBankName: string;
-  initialAccountNumber: number;
+  initialAccountNumber: string;
   initialAccountName: string;
 }
 
@@ -160,8 +160,8 @@ interface EditPayoutFormProps {
   handleSave: () => void;
   bankName: string;
   setBankName: (value: string) => void;
-  accountNumber: number | '';
-  setAccountNumber: (value: number | '') => void;
+  accountNumber: string;
+  setAccountNumber: (value: string) => void;
   accountName: string;
   setAccountName: (value: string) => void;
 }
@@ -207,10 +207,10 @@ const EditPayoutForm: React.FC<EditPayoutFormProps> = ({
         <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Account number</label>
           <Input
-            type="number"
+            type="text"
             value={accountNumber}
-            onChange={(e) => setAccountNumber(e.target.valueAsNumber || '')}
-            placeholder="0000000000"
+            onChange={(e) => setAccountNumber(e.target.value)}
+            placeholder="0123456789"
             className="h-[46px] rounded-lg border-[#E5E5E5] bg-white text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] placeholder:text-[#A3A3A3]"
           />
         </div>
@@ -276,12 +276,12 @@ const EditPayoutModal: React.FC<EditPayoutAccountProps> = ({
   
   // State Management
   const [bankName, setBankName] = useState(initialBankName);
-  const [accountNumber, setAccountNumber] = useState<number | ''>(initialAccountNumber);
+  const [accountNumber, setAccountNumber] = useState<string>(initialAccountNumber);
   const [accountName, setAccountName] = useState(initialAccountName);
 
   const handleSave = () => {
     // Ensure we pass a valid number back, defaulting to 0 if empty
-    const finalAccountNumber = accountNumber === '' ? 0 : accountNumber;
+    const finalAccountNumber = accountNumber === '' ? '' : accountNumber;
     onConfirmAdd({
       bankName,
       accountName,

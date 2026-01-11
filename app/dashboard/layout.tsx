@@ -75,13 +75,13 @@ export default function DashboardLayout({
           <SidebarInset>
             {/* Header with conditional fixed positioning */}
             <header
-              className={`sticky top-0 z-10 bg-white flex portrait:w-screen h-16 items-center justify-between border-b border-[#E8E8E8] px-2 sm:px-4 transition-all duration-800 ease-in-out group-has-[data-collapsible=icon]/sidebar-wrapper:h-12`}
+              className={`fixed top-0 z-10 flex h-16 w-full md:w-[calc(100vw-256px)] shrink-0 items-center justify-between gap-2 border-b border-[#E8E8E8] bg-white px-4`}
             >
               <div className="flex items-center md:gap-2 md:px-2">
                 <Separator orientation="vertical" className="mr-2 h-4" />
                 <DynamicBreadcrumb />
               </div>
-              <div className="flex items-center gap-5 md:gap-4">
+              <div className="flex items-center gap-5 md:gap-4 pr-0 md:pr-2">
                 <Notification />
                 <SidebarTrigger className="md:hidden text-[#1A1A1A] hover:bg-transparent" />
               </div>
@@ -89,7 +89,7 @@ export default function DashboardLayout({
 
             {/* Content area with conditional padding to account for fixed header */}
             <div
-              className={`flex portrait:w-screen flex-1 flex-col gap-4 portrait:px-4 px-6 portrait:sm:px-4 pt-2 portrait:sm:pt-4 bg-white`}
+              className={`flex flex-1 flex-col gap-4 px-4 pt-20 bg-white`}
             >
               {/* {!currentUser?.hasPasscode && (
                 <PasscodeSet open={open} onOpenChange={setOpen} />

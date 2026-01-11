@@ -64,21 +64,28 @@ const LoginForm = () => {
     // setErrors({})
 
     try {
-      // Simulate login
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // API Login
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: formData.email,
+            password: formData.password
+        })
+      })
 
-      const hardCodedEmail = 'user@rally.com'
-      const hardCodedPassword = 'password123'
+      const data = await res.json()
 
-      if (formData. email !== hardCodedEmail || formData.password !== hardCodedPassword) {
-        setIsSubmitting(false)
-
+      if (!res.ok) {
+        // Handle specific error from API
         toast.custom((t) => (
             <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center justify-center gap-3 w-full min-w-[193px] max-w-[345px] ml-0 md:ml-8 border border-[#333]">
                 <div className="bg-[#EF4444] rounded-full p-0.5 shrink-0">
                     <X className="w-3 h-3 text-black" strokeWidth={3} />
                 </div>
-                <span className="font-medium text-sm font-geist">Invalid login credentials</span>
+                <span className="font-medium text-sm font-geist">{data.error || 'Invalid login credentials'}</span>
                 <div className="hidden md:block w-0.5 h-6 bg-[#333333] ml-auto"></div>
                 <button onClick={() => toast.dismiss(t)} className="ml-auto text-white hover:text-white cursor-pointer">
                     <X className="w-4 h-4" />
@@ -88,19 +95,14 @@ const LoginForm = () => {
         return
       }
 
-      setUser({
-        id: '1',
-        email: formData.email,
-        name: 'User',
-      })
+      setUser(data.user)
+      router.push('/dashboard');
+
     } catch (err) {
-      // for API errors
-    //   setErrors({ form: 'Invalid email or password' })
       setAuthError('Login failed')
     } finally {
       setIsSubmitting(false)
     }
-    router.push('/dashboard');
   }
 
   const handleGoogleLogin = async () => {

@@ -191,16 +191,28 @@ const SignUp = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true)
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      setUser({
-        id: '1',
-        email: formData.email,
-        name: formData.name,
+      // API call to signup
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password
+        })
       })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to create account')
+      }
+
+      setUser(data.user)
       router.push('/dashboard');
-    } catch (err) {
-      setErrors({ form: 'Failed to create account. Please try again.' })
-      setAuthError('Failed to create account')
+    } catch (err: any) {
+      setErrors({ form: err.message || 'Failed to create account. Please try again.' })
+      setAuthError(err.message || 'Failed to create account')
     } finally {
       setIsSubmitting(false)
     }
@@ -226,8 +238,8 @@ const SignUp = () => {
   const { title, description, fields } = steps[step]
 
   return (
-    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto min-h-[90dvh] md:min-h-0 px-2 md:px-0'>
-        <div className="space-y-8">
+    <div className='flex flex-col gap-6 md:gap-8 w-full max-w-[400px] mx-auto px-2 md:px-0'>
+        <div className="space-y-8 pb-36 md:pb-0">
             {/* Logo Section */}
             <div className="flex flex-col gap-6 justify-center items-center">
                 {step !== 1 && (

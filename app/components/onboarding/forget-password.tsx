@@ -119,6 +119,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { ArrowLeft, Eye, EyeOff, CheckCircle2, EyeClosed } from 'lucide-react'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 
 // Schema for the new password step
 const resetPasswordSchema = z.object({
@@ -138,6 +139,7 @@ type Step = 'request' | 'check-email' | 'reset-form' | 'success'
 type ErrorState = { [key: string]: string }
 
 export default function ForgotPassword() {
+  const router = useRouter()
   const [step, setStep] = useState<Step>('request')
   const [formData, setFormData] = useState({
     email: '',
@@ -334,7 +336,7 @@ export default function ForgotPassword() {
                 </Button>
             </form>
 
-            <button onClick={() => setStep('request')} className="w-full text-[#959595] font-medium hover:underline text-center flex items-center justify-center">
+            <button onClick={() => router.push("/login")} className="w-full text-[#959595] font-medium hover:underline text-center flex items-center justify-center">
                 <ArrowLeft className="inline-block mr-2 size-4 justify-center" />
                 <span className='font-semibold text-[15px] font-geist leading-[135%]'>Back to login</span>
             </button>

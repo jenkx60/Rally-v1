@@ -81,7 +81,7 @@ const HelpPage = () => {
             <AccordionTrigger className="hover:no-underline py-5 font-geist font-medium text-[15px] text-[#333333] text-left leading-[150%] tracking-[-0.2px] cursor-pointer">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className="font-geist font-normal text-[14px] text-[#767676] leading-[150%] tracking-[-0.1px] w-[288px] md:w-[558px]">
+            <AccordionContent className="font-geist font-normal text-[14px] text-[#767676] leading-[150%] tracking-[-0.1px] w-full">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>

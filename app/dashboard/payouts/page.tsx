@@ -76,7 +76,7 @@ const PayoutPage = () => {
   const [hasPayout, setHasPayout] = useState(true);
   const [bankDetails, setBankDetails] = useState({
     bankName: "Zenith Bank",
-    accountNumber: 1234,
+    accountNumber: "1234",
     accountName: "Divine Mere",
   });
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -89,7 +89,7 @@ const PayoutPage = () => {
     payFilter === 'All' ? true : event.status === payFilter
   );
 
-  if (mockPayouts.length !== 0) {
+  if (mockPayouts.length === 0) {
     return (
     <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
       <EmptyPayoutState />
@@ -115,8 +115,8 @@ const PayoutPage = () => {
                     <div className="bg-white p-6 rounded-2xl border border-[#0000000D] flex flex-col gap-8 justify-between md:h-[187px]">
                         <Image src={earnings} alt='Earning Ill' width={48} height={48} />
                         <div className='flex flex-col gap-1'>
-                            <p className="font-geist text-sm text-[#767676]">From 3 events</p>
-                            <h2 className="font-bricolage text-[28px] font-bold text-[#1A1A1A] tracking-[-1px]">₦240,000</h2>
+                            <p className="font-geist text-sm text-[#A3A3A3]">From 3 events</p>
+                            <h2 className="font-bricolage text-[24px] font-bold text-[#1A1A1A] tracking-[-0.5px] leading-[120%]">₦240,000</h2>
                         </div>
                     </div>
                 </div>

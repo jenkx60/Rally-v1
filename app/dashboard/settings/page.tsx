@@ -21,9 +21,9 @@ const SettingsPage = () => {
           <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
             Settings
           </h1>
-          <p className="font-geist text-[15px] text-[#A3A3A3]">
+          <p className="font-geist font-medium text-[15px] text-[#A3A3A3]">
             {activeTab === 'account' && "Keep your account and payments in sync"}
-            {activeTab === 'payment' && "Manage your account, payments, and preferences all in one place"}
+            {activeTab === 'payment' && "Keep your account and payments in sync"}
             {activeTab === 'preferences' && "Keep your account and payments in sync"}
           </p>
         </div>
