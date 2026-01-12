@@ -18,6 +18,7 @@ import {
 } from '../ui/input-otp'
 import { XCircle, X, EyeClosed, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import CustomToast from '../ui/custom-toast'
  
 type FormData = {
     name: string
@@ -163,16 +164,11 @@ const SignUp = () => {
             
             // Custom Toast Notification per screenshot
             toast.custom((t) => (
-                <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center justify-center gap-3 w-full md:min-w-[193px] md:max-w-[345px] ml-0 md:ml-14 border border-[#333]">
-                    <div className="bg-[#EF4444] rounded-full p-0.5 shrink-0">
-                        <X className="w-3 h-3 text-black" strokeWidth={3} />
-                    </div>
-                    <span className="font-medium text-sm font-geist">Invalid OTP code</span>
-                    <div className="hidden md:block w-0.5 h-6 bg-[#333333] ml-auto"></div>
-                    <button onClick={() => toast.dismiss(t)} className="ml-auto text-white hover:text-white cursor-pointer">
-                        <X className="w-4 h-4" />
-                    </button>
-                </div>
+               <CustomToast 
+                    message="Invalid OTP code" 
+                    variant="error"
+                    onDismiss={() => toast.dismiss(t)}
+               />
             ))
             return
         }

@@ -7,6 +7,8 @@ import avatar from "@/public/Sidebar/avatar.svg";
 import eyeOpen from "@/public/eye-open.svg";
 import camera from "@/public/Sidebar/camera_2.svg";
 import { Input } from '../../ui/input';
+import { toast } from 'sonner';
+import CustomToast from '../../ui/custom-toast';
 
 const AccountTab = () => {
     const [currentPassword, setCurrentPassword] = useState(false);
@@ -21,6 +23,11 @@ const AccountTab = () => {
         instagram: "instagram.com",
         twitter: "x.com",
     });
+    const [passwordValues, setPasswordValues] = useState({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+    });
 
     const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
@@ -34,6 +41,36 @@ const AccountTab = () => {
         fileInputRef.current.click();
       }
     };
+
+    const handleSaveProfile = () => {
+      if (!formData.fullName || !formData.instagram || !formData.twitter) {
+        return;
+      }
+
+      toast.custom((t) => (
+        <CustomToast 
+          message="Profile updated"
+          variant='success'
+          onDismiss={() => toast.dismiss(t)}
+        />
+      ));
+    }
+
+    const handlePasswordUpdate = () => {
+      if (passwordValues.currentPassword && passwordValues.newPassword && passwordValues.confirmPassword) {
+        if (passwordValues.newPassword !== passwordValues.confirmPassword) {
+          return;
+        }
+      }
+      
+      toast.custom((t) => (
+        <CustomToast 
+          message="Password updated"
+          variant='success'
+          onDismiss={() => toast.dismiss(t)}
+        />
+      ));
+    }
 
   return (
     <div className="flex flex-col gap-12">
@@ -119,7 +156,10 @@ const AccountTab = () => {
           </div>
 
           <div className="flex justify-end pt-2">
-              <button className="bg-[#6A59CE]  hover:bg-primary/90 text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer">
+              <button 
+                onClick={handleSaveProfile}
+                className="bg-[#6A59CE]  hover:bg-primary/90 text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer"
+              >
                   Save changes
               </button>
           </div>
@@ -178,7 +218,10 @@ const AccountTab = () => {
         </div>
 
          <div className="flex justify-end pt-2">
-              <button className="bg-[#6A59CE]  hover:bg-primary/90 text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer">
+              <button 
+                onClick={handlePasswordUpdate}
+                className="bg-[#6A59CE]  hover:bg-primary/90 text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer"
+              >
                 Update password
             </button>
         </div>

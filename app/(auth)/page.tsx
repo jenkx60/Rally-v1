@@ -89,7 +89,7 @@ export default function AuthLanding() {
         <button
           type="submit"
           disabled={isSubmitting || !email}
-          className="w-full py-3 px-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full py-3 px-4 rounded-md bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isSubmitting ? 'Continuing...' : 'Continue'}
         </button>

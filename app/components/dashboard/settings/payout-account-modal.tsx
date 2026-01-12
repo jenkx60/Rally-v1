@@ -19,6 +19,8 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { Input } from '../../ui/input';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
+import CustomToast from '../../ui/custom-toast';
 
 interface PayoutAccountModalProps {
   isOpen: boolean;
@@ -39,7 +41,20 @@ const PayoutAccountForm = ({
 }) => {
   const [bank, setBank] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
-  const isFormVaild = bank.length > 0 && accountNumber.length >= 10;
+  const isFormVaild = bank.length > 0 && accountNumber.length >= 10 ? "Divine Mere" : "";
+
+  const handleSaveClick = () => {
+    if (isFormVaild) {
+      toast.custom((t) => (
+        <CustomToast 
+          message={isEditing ? 'Payout account updated' : 'Payout account added'}
+          variant='success'
+          onDismiss={() => toast.dismiss(t)}
+        />
+      ));
+    }
+    onSave();
+  }
 
   return (
     <div className="space-y-6">
@@ -79,10 +94,11 @@ const PayoutAccountForm = ({
             <div className="flex flex-col gap-1.5">
                 <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Account name</label>
                 <Input 
-                    type="text" 
-                    placeholder="Divine Mere" 
-                    disabled
-                    className="text-[#333333] text-[15px] bg-[#FAFAFA] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+                  type="text" 
+                  value={accountNumber.length >= 10 ? "Divine Mere" : ""}
+                  placeholder="Divine Mere" 
+                  disabled
+                  className="text-[#333333] text-[15px] bg-[#FAFAFA] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
                 />
             </div>
         </div>
@@ -96,7 +112,7 @@ const PayoutAccountForm = ({
           Cancel
         </button>
         <button
-          onClick={onSave}
+          onClick={handleSaveClick}
           disabled={!isFormVaild}
           className={cn(
             "w-full px-5 py-4 rounded-lg font-geist font-semibold text-[15px] transition-colors",
