@@ -54,8 +54,8 @@ const HelpPage = () => {
         <div className="shrink-0 w-12 h-12 rounded-lg bg-[#F0EEFA] flex items-center justify-center">
           <Mail className="w-6 h-6 text-[#6A59CE]" />
         </div>
-        <div className="space-y-1">
-          <div className='space-y-0.5 leading-[150%]'>
+        <div className="space-y-0.5">
+          <div className='space-y-0 leading-[150%]'>
             <h3 className="font-geist font-medium text-[#333333] text-[15px] tracking-[-0.2px]">Talk to us</h3>
             <p className="font-geist font-normal text-[#959595] text-[12px] md:text-[14px] tracking-[-0.1px]">
               We usually reply within 24 hours (weekdays)

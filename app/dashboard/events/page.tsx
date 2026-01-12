@@ -160,7 +160,7 @@ const EventsPage = () => {
       {/* Header and "Create event" Button */}
       <div className="flex justify-between items-center">
         <div className="space-y-1.5">
-          <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">My events</h1>
+          <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">My events</h1>
           <p className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px] text-[#A3A3A3]">Stay on top of your events, all in one place</p>
         </div>
         <Link href="/dashboard/events/create" passHref className="hidden md:block">

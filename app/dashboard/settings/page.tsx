@@ -18,7 +18,7 @@ const SettingsPage = () => {
       <div className='space-y-8'>
         {/* Page Header */}
         <div className="space-y-1">
-          <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
+          <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
             Settings
           </h1>
           <p className="font-geist font-medium text-[15px] text-[#A3A3A3]">

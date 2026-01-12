@@ -83,8 +83,8 @@ const DynamicBreadcrumb = () => {
           <Image 
             src={rally}
             alt="Rally Logo"
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             className="fixed top-3 left-3.5"
           />
         </Link>

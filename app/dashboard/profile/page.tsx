@@ -53,7 +53,7 @@ export default function ProfilePage() {
           <h1 className="font-geist text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.4px]">
             Divine Mere
           </h1>
-          <p className="font-geist text-sm text-[#959595] font-normal leading-[150%] tracking-[-0.1px]">5 events hosted</p>
+          <p className="font-geist text-sm text-[#959595] font-normal leading-[150%] tracking-[-0.1px]">2 events hosted</p>
         </div>
 
         {/* Social Links */}
