@@ -99,7 +99,7 @@ const PayoutPage = () => {
 
   return (
   <>
-    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
+    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
             {/* Page Header */}
             <div className="space-y-1">
                 <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Payouts</h1>

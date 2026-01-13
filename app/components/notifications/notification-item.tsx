@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
 import type { NotificationItem } from "../notifications/types/notification";
-import { CheckIcon, FileIcon, PackageIcon, TruckIcon, UserIcon } from "./icons";
+import { CheckIcon, FileIcon, PackageIcon, CoinIcon, UserIcon } from "./icons";
 import Image from "next/image";
 
 const iconMap = {
   check: CheckIcon,
   file: FileIcon,
   package: PackageIcon,
-  truck: TruckIcon,
+  coin: CoinIcon,
   user: UserIcon,
 };
 
@@ -29,11 +29,11 @@ export function NotificationItem({
   const Icon = iconMap[icon];
 
   return (
-    <div className="flex items-start gap-4 rounded-lg py-6 px-2 hover:bg-muted">
+    <div className="flex items-start gap-4 rounded-lg py-6 px-2">
       <div className={cn("rounded-full p-2", colorMap[type])}>
         <Icon className="h-5 w-5" />
       </div>
-      <div className="flex flex-1 flex-col gap-1 font-geist">
+      <div className="flex flex-1 flex-col gap-1 font-geist cursor-pointer">
         <p className="text-sm font-medium leading-[150%] tracking-[-0.1px]">{title}</p>
         <p className="text-xs text-[#A3A3A3] font-normal">{timestamp}</p>
       </div>

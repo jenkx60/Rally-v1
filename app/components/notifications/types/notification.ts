@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image"
 
 export type NotificationType = "success" | "warning" | "info" | "pending"
-export type IconType = "check" | "file" | "package" | "truck" | "user"
+export type IconType = "check" | "file" | "package" | "coin" | "user"
 
 export interface NotificationItem {
   id: string

@@ -14,14 +14,14 @@ const SettingsPage = () => {
   const getTabLabel = (tab: string) => tab.charAt(0).toUpperCase() + tab.slice(1);
 
   return (
-    <div className="flex flex-col w-full max-w-[800px] mx-auto p-0 md:py-10 md:p-12 space-y-12">
+    <div className="flex flex-col w-full max-w-[800px] mx-auto p-0 pb-10 pt-5 md:p-5 space-y-12">
       <div className='space-y-8'>
         {/* Page Header */}
         <div className="space-y-1">
           <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
             Settings
           </h1>
-          <p className="font-geist font-medium text-[15px] text-[#A3A3A3]">
+          <p className="font-geist font-medium text-sm text-[#A3A3A3]">
             {activeTab === 'account' && "Keep your account and payments in sync"}
             {activeTab === 'payment' && "Keep your account and payments in sync"}
             {activeTab === 'preferences' && "Keep your account and payments in sync"}

@@ -272,52 +272,57 @@ export function AppSidebar() {
               size='lg'
               variant='plain'
               // onClick={() => toggleDropdown("user")}
-              className="flex justify-between w-full p-0"
+              className="w-full p-0"
+              asChild
             >
-              {/* Avatar Container */}
-              <div className="flex items-center gap-2 ">
-                <Image
-                  src={avatar}
-                  alt="User Avatar"
-                  width={35}
-                  height={35}
-                  className="flex aspect-square size-8 pt-1 items-center justify-center rounded-md text-white border-[0.8px] border-[#FA9874] bg-[#F8F6FD]"
-                />
-                <span className="font-geist font-medium text-sm text-[#1A1A1A] leading-[150%] tracking-[-0.1px]">{user.name}</span>
-              </div>
+              <div className="flex justify-between w-full">
+                {/* Avatar Container */}
+                <div className="flex items-center gap-2 ">
+                  <Image
+                    src={avatar}
+                    alt="User Avatar"
+                    width={35}
+                    height={35}
+                    className="flex aspect-square size-8 pt-1 items-center justify-center rounded-md text-white border-[0.8px] border-[#FA9874] bg-[#F8F6FD]"
+                  />
+                  <span className="font-geist font-medium text-sm text-[#1A1A1A] leading-[150%] tracking-[-0.1px]">{user.name}</span>
+                </div>
 
-              {/* Three dots icon */}
-              <Popover open={isProfileOpen} onOpenChange={setIsProfileOpen}>
-                <PopoverTrigger asChild className="hover:bg-[#FAFAFA] flex items-center justify-center rounded-[6px] size-6 group-data-[state=collapsed]:hidden cursor-pointer">
-                    <MoreHorizontal className="size-4 text-[#959595]" />
-                </PopoverTrigger>
-                <PopoverContent align="start" className="bg-white rounded-[12px] border border-[#0000000D] p-1.5 space-y-1 shadow shadow-[#0000000D] w-[238px]">
-                    <div className="px-2 py-1.5">
-                      <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">{profileEmail}</p>
-                    </div>
-                    <hr className="border-[0.5px] border-[#0000000D]"/>
-                    <div className="flex flex-col gap-1">
-                      <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] hover:text-[#333333]" onClick={handleViewProfile}>
-                        View profile
-                        <Image
-                          src={profile}
-                          alt="Profile"
-                          width={20}
-                          height={20} 
-                        />
-                      </button>
-                      <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5]" onClick={handleLogout}>
-                        Log out
-                        <Image
-                          src={logout}
-                          alt="Logout"
-                          width={20}
-                          height={20} 
-                        />
-                      </button>
-                    </div>
-                </PopoverContent>
-              </Popover>
+                {/* Three dots icon */}
+                <Popover open={isProfileOpen} onOpenChange={setIsProfileOpen}>
+                  <div className="p-1 hover:bg-[#FAFAFA] rounded-md">
+                    <PopoverTrigger asChild className="group-data-[state=collapsed]:hidden cursor-pointer">
+                        <MoreHorizontal width="20px" height="20px" className=" text-[#959595]" />
+                    </PopoverTrigger>
+                  </div>
+                  <PopoverContent align="start" className="bg-white rounded-[12px] border border-[#0000000D] p-1.5 space-y-1 shadow shadow-[#0000000D] w-[238px]">
+                      <div className="px-2 py-1.5">
+                        <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">{profileEmail}</p>
+                      </div>
+                      <hr className="border-[0.5px] border-[#0000000D]"/>
+                      <div className="flex flex-col gap-1">
+                        <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] hover:text-[#333333]" onClick={handleViewProfile}>
+                          View profile
+                          <Image
+                            src={profile}
+                            alt="Profile"
+                            width={20}
+                            height={20} 
+                          />
+                        </button>
+                        <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5]" onClick={handleLogout}>
+                          Log out
+                          <Image
+                            src={logout}
+                            alt="Logout"
+                            width={20}
+                            height={20} 
+                          />
+                        </button>
+                      </div>
+                  </PopoverContent>
+                </Popover>
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

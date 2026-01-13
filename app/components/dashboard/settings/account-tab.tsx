@@ -29,6 +29,11 @@ const AccountTab = () => {
         newPassword: "",
         confirmPassword: "",
     });
+    const [errors, setErrors] = useState<{
+      currentPassword?: string;
+      newPassword?: string;
+      confirmPassword?: string;
+    }>({});
 
     const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
@@ -57,13 +62,88 @@ const AccountTab = () => {
       ));
     }
 
+    // const handlePasswordUpdate = () => {
+    //   if (!passwordValues.currentPassword || !passwordValues.newPassword || !passwordValues.confirmPassword) {
+    //     toast.custom((t) => (
+    //       <CustomToast 
+    //         message="All password fields are required"
+    //         variant='error'
+    //         onDismiss={() => toast.dismiss(t)}
+    //       />
+    //     ));
+    //     return;
+    //   }
+
+    //   if (passwordValues.currentPassword === passwordValues.newPassword) {
+    //     toast.custom((t) => (
+    //       <CustomToast 
+    //         message="New password cannot be the same as current password"
+    //         variant='error'
+    //         onDismiss={() => toast.dismiss(t)}
+    //       />
+    //     ));
+    //     return;
+    //   }
+
+    //   if (passwordValues.newPassword !== passwordValues.confirmPassword) {
+    //     toast.custom((t) => (
+    //       <CustomToast 
+    //         message="New password and confirm password do not match"
+    //         variant='error'
+    //         onDismiss={() => toast.dismiss(t)}
+    //       />
+    //     ));
+    //     return;
+    //   }
+
+    //   // if (passwordValues.currentPassword && passwordValues.newPassword && passwordValues.confirmPassword) {
+    //   //   if (passwordValues.newPassword !== passwordValues.confirmPassword) {
+    //   //     return;
+    //   //   }
+    //   // }
+      
+    //   toast.custom((t) => (
+    //     <CustomToast 
+    //       message="Password updated"
+    //       variant='success'
+    //       onDismiss={() => toast.dismiss(t)}
+    //     />
+    //   ));
+
+    //   setPasswordValues({
+    //     currentPassword: "",
+    //     newPassword: "",
+    //     confirmPassword: "",
+    //   });
+    // }
+
     const handlePasswordUpdate = () => {
-      if (passwordValues.currentPassword && passwordValues.newPassword && passwordValues.confirmPassword) {
-        if (passwordValues.newPassword !== passwordValues.confirmPassword) {
-          return;
-        }
+      const newErrors: typeof errors = {};
+
+      if (!passwordValues.currentPassword) {
+        newErrors.currentPassword = "Required";
+      }
+      if (!passwordValues.newPassword) {
+        newErrors.newPassword = "Required";
+      }
+      if (!passwordValues.confirmPassword) {
+        newErrors.confirmPassword = "Required";
+      }
+
+      if (passwordValues.currentPassword && passwordValues.newPassword && passwordValues.currentPassword === passwordValues.newPassword) {
+        newErrors.newPassword = "New password cannot be the same as current password";
+      }
+
+      if (passwordValues.newPassword && passwordValues.confirmPassword && passwordValues.newPassword !== passwordValues.confirmPassword) {
+        newErrors.confirmPassword = "Passwords do not match";
+      }
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
       }
       
+      // Success
       toast.custom((t) => (
         <CustomToast 
           message="Password updated"
@@ -71,6 +151,13 @@ const AccountTab = () => {
           onDismiss={() => toast.dismiss(t)}
         />
       ));
+
+      setPasswordValues({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+      setErrors({});
     }
 
   return (
@@ -178,43 +265,106 @@ const AccountTab = () => {
              <div className="flex flex-col gap-1.5">
                 <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Current password</label>
                 <div className="relative">
-                    <Input 
+                    {/* <Input 
                         type={currentPassword ? "text" : "password"}
+                        value={passwordValues.currentPassword}
+                        onChange={(e) => setPasswordValues({ ...passwordValues, currentPassword: e.target.value })}
                         placeholder="Enter current password"
                         className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+                    /> */}
+                    <Input 
+                        type={currentPassword ? "text" : "password"}
+                        value={passwordValues.currentPassword}
+                        onChange={(e) => {
+                            setPasswordValues({...passwordValues, currentPassword: e.target.value});
+                            if (errors.currentPassword) setErrors({...errors, currentPassword: ""});
+                        }}
+                        placeholder="Enter current password"
+                        className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] ${
+                            errors.currentPassword 
+                                ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
+                                : ''
+                        }`}
                     />
                     <button onClick={() => setCurrentPassword(!currentPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
                         {currentPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} />}
                     </button>
                 </div>
+                {errors.currentPassword && (
+                    <p className="text-xs font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
+                        {errors.currentPassword}
+                    </p>
+                )}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-1.5">
                     <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">New password</label>
                     <div className="relative">
-                        <Input 
+                        {/* <Input 
                             type={newPassword ? "text" : "password"}
+                            value={passwordValues.newPassword}
+                            onChange={(e) => setPasswordValues({ ...passwordValues, newPassword: e.target.value })}
                             placeholder="Enter new password"
                             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+                        /> */}
+                        <Input 
+                            type={newPassword ? "text" : "password"}
+                            value={passwordValues.newPassword}
+                            onChange={(e) => {
+                                setPasswordValues({...passwordValues, newPassword: e.target.value});
+                                if (errors.newPassword) setErrors({...errors, newPassword: ""});
+                            }}
+                            placeholder="Enter new password"
+                            className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] ${
+                                errors.newPassword 
+                                    ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
+                                    : ''
+                            }`}
                         />
                          <button onClick={() => setNewPassword(!newPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
                             {newPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='New password' width={18} height={18} />}
                         </button>
                     </div>
+                    {errors.newPassword && (
+                        <p className="text-xs font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
+                            {errors.newPassword}
+                        </p>
+                    )}
                 </div>
                 <div className="flex flex-col gap-1.5">
                     <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Confirm new password</label>
                     <div className="relative">
-                        <Input 
+                        {/* <Input 
                             type={confirmPassword ? "text" : "password"}
+                            value={passwordValues.confirmPassword}
+                            onChange={(e) => setPasswordValues({ ...passwordValues, confirmPassword: e.target.value })}
                             placeholder="Confirm new password"
                             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+                        /> */}
+                        <Input 
+                            type={confirmPassword ? "text" : "password"}
+                            value={passwordValues.confirmPassword}
+                            onChange={(e) => {
+                                setPasswordValues({...passwordValues, confirmPassword: e.target.value});
+                                if (errors.confirmPassword) setErrors({...errors, confirmPassword: ""});
+                            }}
+                            placeholder="Confirm new password"
+                            className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] ${
+                                errors.confirmPassword 
+                                    ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
+                                    : ''
+                            }`}
                         />
                          <button onClick={() => setConfirmPassword(!confirmPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
                             {confirmPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} />}
                         </button>
                     </div>
+                    {errors.confirmPassword && (
+                        <p className="text-xs font-geist font-normal text-[#F04438] mt-1 animate-in slide-in-from-top-1">
+                            {errors.confirmPassword}
+                        </p>
+                    )}
                 </div>
             </div>
         </div>

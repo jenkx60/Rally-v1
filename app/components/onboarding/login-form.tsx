@@ -17,14 +17,6 @@ type LoginFormData = {
     password: string
 }
 
-// type LoginErrorState = { [key: string]: string }
-
-// const loginSchema = z.object({
-//     email: z.string().email({ message: 'Please enter a valid email address' })
-//     .nonempty({ message: 'Email is required' }),
-//     password: z.string().min(8, { message: 'Password is required' }), 
-// })
-
 const LoginForm = () => {
     const router = useRouter();
   const [formData, setFormData] = useState<LoginFormData>({

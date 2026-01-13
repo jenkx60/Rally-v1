@@ -90,125 +90,131 @@ const AttendeesPage = () => {
     }
 
     return (
-        <div className="bg-white flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5">
-            <h2 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
-            {/* Search and Filter Row */}
-            <div className="flex flex-col md:flex-row gap-3 justify-between">
-                <div className="relative md:w-[518px]">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#A3A3A3]" />
-                    <Input 
-                        value={searchQuery}
-                        onChange={(e) => {
-                            setSearchQuery(e.target.value)
-                            setVisibleCount(4)
-                        }}
-                        placeholder="Search by name and email" 
-                        className="font-geist text-sm border-[#E8E8E8] focus:border-[#6A59CE] py-[11px] px-3.5 placeholder:pl-5 rounded-lg" 
-                    />
-                </div>
-                <div className='flex gap-3 md:w-[300px]'>
-                    <div className='flex-1'>
-                        <Select 
-                            value={eventFilter} 
-                            onValueChange={(val) => {
-                                setEventFilter(val)
-                                setVisibleCount(4)
-                            }}
-                        >
-                            <SelectTrigger className='w-full'>
-                                <SelectValue placeholder='All events' className='placeholder:text-[#333333]'>
-                                    {eventFilter === 'all' ? 'All events' : (eventFilter.length > 15 ? `${eventFilter.slice(0, 15)}...` : eventFilter)}
-                                </SelectValue>
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value='all'>All events</SelectItem>
-                                    {uniqueEvents.map((event) => (
-                                        <SelectItem key={event} value={event} className='truncate'>{event}</SelectItem>
-                                    ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div className='flex-1'>
-                        <Select
-                            value={ticketFilter}
-                            onValueChange={(val) => {
-                                setTicketFilter(val)
-                                setVisibleCount(4)
-                            }}
-                        >
-                            <SelectTrigger className='w-full'>
-                                <SelectValue placeholder='All types' />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value='all'>All types</SelectItem>
-                                    {uniqueTicketTypes.map((type) => (
-                                        <SelectItem key={type} value={type}>{type}</SelectItem>
-                                    ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                </div>
+        <div className="bg-white flex flex-col gap-12 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
+            <div className='space-y-0.5'>
+                <h2 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
+                <p className="font-geist font-medium text-[15px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Guest list for all your events in one place</p>
             </div>
 
-            {/* Attendees Table */}
-            <Table>
-                <TableHeader>
-                    <TableRow className='bg-[#F7F7F7] hover:bg-[#F7F7F7] text-[#A3A3A3] font-geist'>
-                        <TableHead className="w-[40%]">Attendee</TableHead>
-                        <TableHead className="w-[30%]">Event</TableHead>
-                        <TableHead className="w-[30%]">Ticket type</TableHead>
-                        <TableHead className="w-[15%]">Price</TableHead>
-                        <TableHead className="w-[15%]">Joined on</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {displayedAttendees.map((attendee) => (
-                        <TableRow key={attendee.id} className='text-[#1A1A1A] font-medium font-geist text-sm'>
-                            <TableCell className="font-medium">
-                                <div className="flex items-center gap-3">
-                                    <Image
-                                        src={attendee.avatar}
-                                        alt={attendee.name}
-                                        width={32}
-                                        height={32} 
-                                        className='h-8 w-8 rounded-full border'
-                                    />
-                                    <div className='flex flex-col gap-0.5 font-geist text-sm leading-[100%]'>
-                                        <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>
-                                        <p className='font-normal text-[#959595]'>{attendee.email}</p>
-                                    </div>
-                                </div>
-                            </TableCell>
-                            <TableCell>
-                                <span className={cn(
-                                    "text-sm ",
-                                )}>
-                                    {attendee.eventName}
-                                </span>
-                            </TableCell>
-                            <TableCell>
-                                <span className={cn(
-                                    "text-sm ",
-                                )}>
-                                    {attendee.ticketType}
-                                </span>
-                            </TableCell>
-                            <TableCell>
-                                <span className={cn(
-                                    "text-sm",
-                                )}>
-                                    {attendee.price}
-                                </span>
-                            </TableCell>
-                            <TableCell className="">{attendee.joined}</TableCell>
+            <div className='space-y-6'>
+                {/* Search and Filter Row */}
+                <div className="flex flex-col md:flex-row gap-3 justify-between">
+                    <div className="relative md:w-[518px]">
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#A3A3A3]" />
+                        <Input 
+                            value={searchQuery}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value)
+                                setVisibleCount(4)
+                            }}
+                            placeholder="Search by name and email" 
+                            className="font-geist text-sm border-[#E8E8E8]  h-11 pl-10 pr-3.5 rounded-lg" 
+                        />
+                    </div>
+                    <div className='flex gap-3 md:w-[300px]'>
+                        <div className='flex-1'>
+                            <Select 
+                                value={eventFilter} 
+                                onValueChange={(val) => {
+                                    setEventFilter(val)
+                                    setVisibleCount(4)
+                                }}
+                            >
+                                <SelectTrigger className='w-full h-11 px-3.5 rounded-lg border-[#E8E8E8] text-[#333333] font-geist'>
+                                    <SelectValue placeholder='All events' className='placeholder:text-[#333333]'>
+                                        {eventFilter === 'all' ? 'All events' : (eventFilter.length > 9 ? `${eventFilter.slice(0, 9)}...` : eventFilter)}
+                                    </SelectValue>
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value='all'>All events</SelectItem>
+                                        {uniqueEvents.map((event) => (
+                                            <SelectItem key={event} value={event} className='truncate'>{event}</SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className='flex-1'>
+                            <Select
+                                value={ticketFilter}
+                                onValueChange={(val) => {
+                                    setTicketFilter(val)
+                                    setVisibleCount(4)
+                                }}
+                            >
+                                <SelectTrigger className='w-full h-11 px-3.5 rounded-lg border-[#E8E8E8] text-[#333333] font-geist'>
+                                    <SelectValue placeholder='All types' />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value='all'>All types</SelectItem>
+                                        {uniqueTicketTypes.map((type) => (
+                                            <SelectItem key={type} value={type}>{type}</SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Attendees Table */}
+                <Table>
+                    <TableHeader>
+                        <TableRow className='bg-[#F7F7F7] hover:bg-[#F7F7F7] text-[#A3A3A3] font-geist'>
+                            <TableHead className="w-[40%]">Attendee</TableHead>
+                            <TableHead className="w-[30%]">Event</TableHead>
+                            <TableHead className="w-[30%]">Ticket type</TableHead>
+                            <TableHead className="w-[15%]">Price</TableHead>
+                            <TableHead className="w-[15%]">Joined on</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {displayedAttendees.map((attendee) => (
+                            <TableRow key={attendee.id} className='text-[#1A1A1A] font-medium font-geist text-sm'>
+                                <TableCell className="font-medium">
+                                    <div className="flex items-center gap-3">
+                                        <Image
+                                            src={attendee.avatar}
+                                            alt={attendee.name}
+                                            width={32}
+                                            height={32} 
+                                            className='h-8 w-8 rounded-full border'
+                                        />
+                                        <div className='flex flex-col gap-0.5 font-geist text-sm leading-[100%]'>
+                                            <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>
+                                            <p className='font-normal text-[#959595]'>{attendee.email}</p>
+                                        </div>
+                                    </div>
+                                </TableCell>
+                                <TableCell>
+                                    <span className={cn(
+                                        "text-sm ",
+                                    )}>
+                                        {attendee.eventName}
+                                    </span>
+                                </TableCell>
+                                <TableCell>
+                                    <span className={cn(
+                                        "text-sm ",
+                                    )}>
+                                        {attendee.ticketType}
+                                    </span>
+                                </TableCell>
+                                <TableCell>
+                                    <span className={cn(
+                                        "text-sm",
+                                    )}>
+                                        {attendee.price}
+                                    </span>
+                                </TableCell>
+                                <TableCell className="">{attendee.joined}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
 
             {/* Load More Button */}
             {hasMore && (

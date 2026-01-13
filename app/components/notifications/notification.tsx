@@ -140,10 +140,7 @@ import { notifications } from "../notifications/data/notifications";
 import { useIsMobile } from "@/hooks/use-mobile";
 import bellIcon from "@/public/Sidebar/bell_ringing_line.svg";
 import emptyBell from "@/public/Sidebar/Alert-Alarm-Bell--Streamline-Freehand.svg";
-import type { 
-  GroupedNotifications, 
-  NotificationItem as NotificationItemType 
-} from "../notifications/types/notification";
+import type { GroupedNotifications, NotificationItem as NotificationItemType } from "../notifications/types/notification";
 import { Dialog } from "../ui/dialog";
 
 export default function Notification() {
@@ -177,15 +174,16 @@ export default function Notification() {
               </DrawerTitle>
               <div className="flex items-center gap-3">
                 {totalCount > 0 && (
-                  <button className="text-[#6A59CE] hover:opacity-80 transition-opacity">
-                    <CheckCheck className="w-5 h-5" />
+                  <button className="text-[#6A59CE] hover:opacity-80 transition-opacity hidden md:block">
+                    {/* <CheckCheck className="w-5 h-5" /> */}
+                    <X className="w-5 h-5" />
                   </button>
                 )}
-                {isMobile && (
+                {/* {isMobile && (
                   <DrawerClose className="text-[#A3A3A3]">
                     <X className="w-5 h-5" />
                   </DrawerClose>
-                )}
+                )} */}
               </div>
             </div>
         </DrawerHeader>
@@ -249,7 +247,7 @@ export default function Notification() {
   ) : (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="relative cursor-pointer hover:opacity-80 transition-opacity">
+        <div className="relative cursor-pointer transition-opacity">
           <Image src={bellIcon} alt="Bell" className="w-6 h-6" />
           {unreadCount > 0 && (
             <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#D81858] text-[10px] text-white font-bold">
