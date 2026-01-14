@@ -72,9 +72,9 @@ const PayoutAccountForm = ({
                             <SelectItem value="Access Bank">Access Bank</SelectItem>
                             <SelectItem value="UBA">UBA</SelectItem>
                             <SelectItem value="OPAY">OPAY</SelectItem>
-                            <SelectItem value="Kuda">Kuda Microfinance Bank</SelectItem>
+                            <SelectItem value="Kuda">Kuda Mfb</SelectItem>
                             <SelectItem value="9PSB">9 Payment Service Bank</SelectItem>
-                            <SelectItem value="monniepoint">Monniepoint</SelectItem>
+                            <SelectItem value="moniepoint">Moniepoint Mfb</SelectItem>
                             <SelectItem value="paystack">Paystack Titan</SelectItem>
                             <SelectItem value="firstbank">First Bank</SelectItem>
                         </SelectGroup>

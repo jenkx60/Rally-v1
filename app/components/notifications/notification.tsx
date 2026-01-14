@@ -241,7 +241,9 @@ export default function Notification() {
         </div>
       </DrawerTrigger>
       <DrawerContent className="bg-white border-none rounded-t-3xl">
-        {Content}
+        <DrawerTitle>
+          {Content}
+        </DrawerTitle>
       </DrawerContent>
     </Drawer>
   ) : (
