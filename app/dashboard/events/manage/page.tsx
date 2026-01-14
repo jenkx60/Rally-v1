@@ -288,7 +288,7 @@ const EventTabs: React.FC<{ activeTab: string, setActiveTab: (tab: string) => vo
     const tabs = ['Overview', 'Attendees', 'Settings'];
 
     return (
-        <div className="flex space-x-2.5 pb-8">
+        <div className="flex space-x-2.5 pb-12">
             {tabs.map((tabName) => (
                 <button
                     key={tabName}

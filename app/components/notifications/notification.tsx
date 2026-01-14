@@ -174,7 +174,7 @@ export default function Notification() {
               </DrawerTitle>
               <div className="flex items-center gap-3">
                 {totalCount > 0 && (
-                  <button className="text-[#6A59CE] hover:opacity-80 transition-opacity hidden md:block">
+                  <button className="text-black hover:opacity-80 transition-opacity hidden md:block">
                     {/* <CheckCheck className="w-5 h-5" /> */}
                     <X className="w-5 h-5" />
                   </button>

@@ -51,7 +51,7 @@ const EventAttendeesContent = () => {
 
     return (
         <div className="bg-white space-y-4">
-            <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A]">Attendees list</h2>
+            <h2 className="font-bricolage text-xl font-semibold leading-[130%] tracking-[-0.5px] text-[#1A1A1A]">Attendees list</h2>
             
             {/* Search and Filter Row */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
