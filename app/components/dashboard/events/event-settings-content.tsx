@@ -175,22 +175,22 @@ const EventSettingsContent: React.FC = () => {
                 id={id} 
                 checked={settings[id]}
                 onCheckedChange={(checked) => handleToggle(id, checked)}
-                className='data-[state=checked]:bg-[#6A59CE] ml-4 mt-1' // Adjusted margin/alignment
+                className='data-[state=checked]:bg-[#6A59CE] ml-4 mt-1'
             />
         </div>
     );
 
     return (
         <>
-            <div className=" bg-white rounded-xl space-y-10">
+            <div className=" bg-white flex flex-col justify-between gap-22">
                 
                 {/* Notifications and RSVP Options - Main Content Area */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
                     {/* 1. Notifications Column */}
                     <div className="space-y-4">
                         <h2 className="font-geist text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.2px]">Notifications</h2>
-                        <div className="space-y-2 border border-[#0000000D] rounded-2xl p-6 shadow shadow-[#1A1A1A0D]">
+                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] p-6 shadow shadow-[#1A1A1A0D]">
                             <SettingToggle
                                 id="notifyNewRSVP"
                                 label="Notify me of new RSVPs"
@@ -207,7 +207,7 @@ const EventSettingsContent: React.FC = () => {
                     {/* 2. RSVP Options Column */}
                     <div className="space-y-4">
                         <h2 className="font-geist text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.2px]">RSVP options</h2>
-                        <div className="space-y-2 border border-[#0000000D] rounded-2xl p-6 shadow shadow-[#1A1A1A0D]">
+                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] p-6 shadow shadow-[#1A1A1A0D]">
                             <SettingToggle
                                 id="requireGuestApproval"
                                 label="Require guest approval"
@@ -224,7 +224,7 @@ const EventSettingsContent: React.FC = () => {
                 
 
                 {/* Delete Event Section */}
-                <div className="space-y-6 border border-[#0000000D] rounded-2xl p-6 shadow shadow-[#1A1A1A0D]">
+                {/* <div className="space-y-6 border border-[#0000000D] rounded-2xl p-6 shadow shadow-[#1A1A1A0D]">
                     <div className='space-y-1.5'>
                         <h2 className="font-bricolage text-[20px] font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">Delete event</h2>
                         <p className="font-geist text-sm text-[#A3A3A3]">This action is permanent and can’t be undone</p>
@@ -235,6 +235,18 @@ const EventSettingsContent: React.FC = () => {
                         >
                             Delete event
                         </button>
+                </div> */}
+                <div className="p-6 border border-[#0000000D] rounded-[16px] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow shadow-[#1A1A1A0D]">
+                    <div className="space-y-1.5">
+                        <h3 className="font-bricolage font-semibold text-[18px] text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">Delete event</h3>
+                        <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">This action is permanent and can&apos;t be undone</p>
+                    </div>
+                    <button 
+                        onClick={() => setIsModalOpen(true)}
+                        className="bg-[#EF4444] hover:bg-[#DC2626] text-white text-sm font-geist font-medium py-3 px-[18px] rounded-lg transition-colors leading-[135%] tracking-[-0.2px] cursor-pointer"
+                    >
+                        Delete event
+                    </button>
                 </div>
             </div>
 

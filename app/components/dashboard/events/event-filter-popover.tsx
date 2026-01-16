@@ -234,7 +234,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
                                 <RadioGroupItem 
                                     value={dateOption} 
                                     id={`date-${dateOption.toLowerCase().replace(' ', '-')}`} 
-                                    className="text-[#6A59CE] data-[state=checked]:border-[#6A59CE] border-2"
+                                    className="text-[#6A59CE] data-[state=checked]:border-[#6A59CE] border shadow-none"
                                 />
                                 <Label htmlFor={`date-${dateOption.toLowerCase().replace(' ', '-')}`} className="font-geist text-base font-normal text-[#1A1A1A]">
                                     {dateOption}

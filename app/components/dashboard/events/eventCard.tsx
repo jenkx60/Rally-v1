@@ -79,7 +79,7 @@ export const EventCard: React.FC<EventCardProps> = ({
     // const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     // Determine status badge color
     const statusColor = status === 'Live' 
-        ? 'bg-[#E3FFF5] text-[#00A36A]' 
+        ? 'bg-[#E3FFF5] text-[#00A36A] animate-pulse' 
         : 'bg-[#F2F4F7] text-[#525252]';
         
     // Path to manage the event (e.g., /dashboard/events/[id]/manage)
@@ -119,10 +119,10 @@ export const EventCard: React.FC<EventCardProps> = ({
                         <h1 className="font-bricolage text-lg font-bold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">{title}</h1>
                         {status === 'Live' && (
                             <span className={cn(
-                                "text-xs font-semibold px-2 py-0.5 rounded-full",
+                                "text-xs font-semibold pr-2 pl-1.5 py-0.5 rounded-full",
                                 statusColor
                             )}>
-                                Live
+                                <span className="mr-0.5 text-[12px]">•</span>Live
                             </span>
                         )}
                     </div>

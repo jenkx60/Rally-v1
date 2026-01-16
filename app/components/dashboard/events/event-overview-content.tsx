@@ -358,9 +358,11 @@ interface MetricCardProps {
     subtitle: React.ReactNode;
     icon: StaticImageData;
     iconBgColor: string;
+    // metricType: 'rsvps' | 'spots' | 'revenue';
+    metricTextColor: string;
 }
 
-const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle, icon, iconBgColor }) => (
+const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle, icon, iconBgColor, metricTextColor }) => (
     <div className="flex flex-col gap-6 md:gap-8 p-5 md:p-6 border border-[#0000000D] rounded-xl bg-white">
         <div className={cn("flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg", iconBgColor)}>
             <Image src={icon} alt={`${title} Icon`} width={24} height={24} className="w-5 h-5 md:w-6 md:h-6" />
@@ -369,7 +371,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle, icon, i
             <h3 className="font-geist text-sm font-normal text-[#A3A3A3]">{title}</h3>
             <div className='flex items-center gap-2 flex-wrap'>
                 <h1 className="font-bricolage text-2xl md:text-[28px] font-bold leading-[120%] tracking-[-0.6px] text-[#1A1A1A]">{value}</h1>
-                <span className="border border-[#0000000D] rounded-[8px] px-2 py-0.5 font-geist text-xs font-medium text-[#00A36A] whitespace-nowrap">
+                <span className={cn("border border-[#0000000D] rounded-[8px] px-2 py-0.5 font-geist text-xs font-medium text-[#00A36A] whitespace-nowrap", metricTextColor)}>
                     {subtitle}
                 </span>
             </div>
@@ -477,6 +479,7 @@ const EventOverviewContent = () => {
                             subtitle={`↑ +${event.rsvpsToday} today`}
                             icon={rsvpsIcon}
                             iconBgColor="bg-[#FFEFE3]"
+                            metricTextColor="text-[#00A36A]"
                         />
                         <MetricCard
                             title="Spots left"
@@ -484,6 +487,7 @@ const EventOverviewContent = () => {
                             subtitle={`${event.spotsFilled}/${event.spotLimit} filled`}
                             icon={spotsIcon}
                             iconBgColor="bg-[#F0F5FF]"
+                            metricTextColor="text-[#A3A3A3]"
                         />
                         <MetricCard
                             title="Revenue"
@@ -491,6 +495,7 @@ const EventOverviewContent = () => {
                             subtitle={`↑ ${event.revenueChange}%`}
                             icon={revenueIcon}
                             iconBgColor="bg-[#E3FFF5]"
+                            metricTextColor="text-[#00A36A]"
                         />
                     </div>
 

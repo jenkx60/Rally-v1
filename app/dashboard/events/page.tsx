@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ListFilter, Plus } from "lucide-react";
+import { ListFilter, Loader2, Plus } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { cn } from "@/lib/utils";
 import { EventCard } from "@/app/components/dashboard/events/eventCard";
@@ -109,7 +109,9 @@ const EventsPage = () => {
   );
 
   if (isLoading) {
-      return <div className="flex h-full items-center justify-center p-10"><h1 className="text-xl font-medium text-gray-400">Loading events...</h1></div>
+      return <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center p-10">
+          <Loader2 className="w-10 h-10 animate-spin text-[#6A59CE]" />
+      </div>
   }
 
 

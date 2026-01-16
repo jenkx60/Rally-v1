@@ -222,7 +222,7 @@ const SignUp = () => {
     // Simulate successful authentication/redirection
     setUser({
       id: 'google-1',
-      email: 'google@user.com', // Placeholder
+      email: 'google@user.com',
       name: 'Google User',
     });
 
@@ -294,7 +294,7 @@ const SignUp = () => {
                 {/* General API Error */}
                 {errors.form && (
                     <div className="p-3 rounded-lg bg-[#FF7C7C]/10 text-[#FF7C7C] text-sm">
-                        {errors.form}
+                        {errors.form === "User already exists" ? (<span>User already exists.{' '} <Link href="/login" className='text-[#FF7C7C] hover:text-[#6A59CE] hover:underline font-medium'>Log in</Link></span>) : "Something went wrong"}
                     </div>
                 )}
 
