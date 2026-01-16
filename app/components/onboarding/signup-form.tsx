@@ -19,6 +19,7 @@ import {
 import { XCircle, X, EyeClosed, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import CustomToast from '../ui/custom-toast'
+import { supabase } from '@/lib/supabase-client'
  
 type FormData = {
     name: string
@@ -184,35 +185,72 @@ const SignUp = () => {
     }
   }
 
-  const handleSubmit = async () => {
+//   const handleSubmit = async () => {
+//     setIsSubmitting(true)
+//     try {
+//       // API call to signup
+//       const res = await fetch('/api/auth/signup', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//             name: formData.name,
+//             email: formData.email,
+//             password: formData.password
+//         })
+//       })
+
+//       const data = await res.json()
+
+//       if (!res.ok) {
+//         throw new Error(data.error || 'Failed to create account')
+//       }
+
+//       setUser(data.user)
+//       router.push('/dashboard');
+//     } catch (err: any) {
+//       setErrors({ form: err.message || 'Failed to create account. Please try again.' })
+//       setAuthError(err.message || 'Failed to create account')
+//     } finally {
+//       setIsSubmitting(false)
+//     }
+//   }
+
+const handleSubmit = async () => {
     setIsSubmitting(true)
     try {
-      // API call to signup
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            name: formData.name,
+        // supabase sigin up
+        const { data, error } = await supabase.auth.signUp({
             email: formData.email,
-            password: formData.password
+            password: formData.password,
+            options: {
+                data: {
+                    full_name: formData.name,
+                }
+            }
         })
-      })
 
-      const data = await res.json()
+        if (error) {
+            if (error.message.includes("Email already registered") || error.message.includes("User already exists")) {
+                throw new Error("User already exists")
+            } 
+            throw new Error(error.message)
+        }
 
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to create account')
-      }
-
-      setUser(data.user)
-      router.push('/dashboard');
+        if (data.user) {
+            setUser({
+                id: data.user.id,
+                email: data.user.email!,
+                name: data.user.user_metadata.full_name || formData.name,
+            })
+            router.push("/dashboard")
+        }
     } catch (err: any) {
-      setErrors({ form: err.message || 'Failed to create account. Please try again.' })
-      setAuthError(err.message || 'Failed to create account')
+        setErrors({ form: err.message || 'Failed to create account. Please try again.' })
+        setAuthError(err.message || 'Failed to create account')
     } finally {
-      setIsSubmitting(false)
+        setIsSubmitting(false)
     }
-  }
+}
 
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
@@ -294,7 +332,7 @@ const SignUp = () => {
                 {/* General API Error */}
                 {errors.form && (
                     <div className="p-3 rounded-lg bg-[#FF7C7C]/10 text-[#FF7C7C] text-sm">
-                        {errors.form === "User already exists" ? (<span>User already exists.{' '} <Link href="/login" className='text-[#FF7C7C] hover:text-[#6A59CE] hover:underline font-medium'>Log in</Link></span>) : "Something went wrong"}
+                        {errors.form === "User already exists" ? (<span>User already exists.{' '} <Link href="/login" className='text-[#FF7C7C] hover:text-[#6A59CE] hover:underline font-medium'>Log in</Link></span>) : errors.form}
                     </div>
                 )}
 
