@@ -210,7 +210,7 @@ const PayHistoryPage = () => {
                 >
                     {/* Event Image / Thumbnail */}
                     <div className="h-12 w-12 rounded-[6px] bg-gray-100 shrink-0 overflow-hidden relative">
-                        <Image src={payout.image} alt={payout.eventName} fill className="object-cover" />
+                        <Image src={payout.image} alt={payout.eventName} fill className="object-cover" priority={true} />
                         <div className={`w-full h-full ${payout.id === 1 ? 'bg-orange-100' : payout.id === 2 ? 'bg-blue-100' : 'bg-purple-100'}`}></div>
                     </div>
         

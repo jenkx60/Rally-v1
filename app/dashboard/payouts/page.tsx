@@ -56,7 +56,7 @@ const mockPayouts = [
 
 const EmptyPayoutState: React.FC = () => (
   <div className="flex flex-col items-center justify-center py-12 bg-white text-center space-y-4">
-        <Image src={payout} alt="No attendees" width={80} height={80} />
+        <Image src={payout} alt="No attendees" width={80} height={80} priority={true} />
         <div className='space-y-1'>
             <h1 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No earnings yet</h1>
             <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Host a paid event to start earning</p>
@@ -113,7 +113,7 @@ const PayoutPage = () => {
                 <div className='flex flex-col gap-2'>
                     <h2 className='font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]'>Total earnings</h2>
                     <div className="bg-white p-6 rounded-2xl border border-[#0000000D] flex flex-col gap-8 justify-between md:h-[187px]">
-                        <Image src={earnings} alt='Earning Ill' width={48} height={48} />
+                        <Image src={earnings} alt='Earning Ill' width={48} height={48} priority={true} />
                         <div className='flex flex-col gap-1'>
                             <p className="font-geist text-sm text-[#A3A3A3]">From 3 events</p>
                             <h2 className="font-bricolage text-[24px] font-bold text-[#1A1A1A] tracking-[-0.5px] leading-[120%]">₦240,000</h2>
@@ -126,7 +126,7 @@ const PayoutPage = () => {
                     <h2 className='font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]'>Payout account</h2>
                     <div className="bg-white p-6 rounded-2xl border border-[#0000000D] flex flex-col gap-8 justify-between md:h-[187px]">
                         <div className="flex justify-between items-center">
-                            <Image src={bankHouse} alt='Earning Ill' width={48} height={48} />
+                            <Image src={bankHouse} alt='Earning Ill' width={48} height={48} priority={true} />
                             <button onClick={() => setEditModalOpen(true)} className="text-[#6A59CE] text-sm font-semibold hover:text-[#5a4cb0] transition-colors cursor-pointer">
                                 Update
                             </button>
@@ -157,7 +157,7 @@ const PayoutPage = () => {
                         >
                             {/* Event Image / Thumbnail */}
                             <div className="h-12 w-12 rounded-[6px] bg-gray-100 shrink-0 overflow-hidden relative">
-                                <Image src={payout.image} alt={payout.eventName} fill className="object-cover" />
+                                <Image src={payout.image} alt={payout.eventName} fill className="object-cover" priority={true} />
                                 <div className={`w-full h-full ${payout.id === 1 ? 'bg-orange-100' : payout.id === 2 ? 'bg-blue-100' : 'bg-purple-100'}`}></div>
                             </div>
 

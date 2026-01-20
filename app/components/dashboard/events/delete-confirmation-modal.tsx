@@ -240,7 +240,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
         <div className="space-y-5">
             <div className="flex items-start gap-4">
                 <div className="w-full flex justify-between">
-                    <Image src={alert} alt='Alert Triangle' width={40} height={40} />
+                    <Image src={alert} alt='Alert Triangle' width={40} height={40} priority={true} />
                     {!isMobile && (
                         <button 
                             onClick={onClose}

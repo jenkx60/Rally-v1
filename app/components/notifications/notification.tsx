@@ -206,7 +206,7 @@ export default function Notification() {
         {totalCount === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 px-10 text-center space-y-4">
             <div className="p-4 rounded-full">
-               <Image src={emptyBell} alt="Empty" width={64} height={64} />
+               <Image src={emptyBell} alt="Empty" width={64} height={64} priority={true} />
             </div>
             <div className="space-y-1">
               <h3 className="font-bricolage text-lg font-bold text-[#1A1A1A]">You&apos;re all caught up</h3>
@@ -232,7 +232,7 @@ export default function Notification() {
     <Drawer>
       <DrawerTrigger asChild>
         <div className="relative cursor-pointer">
-          <Image src={bellIcon} alt="Bell" className="w-6 h-6" />
+          <Image src={bellIcon} alt="Bell" className="w-6 h-6" priority={true} />
           {unreadCount > 0 && (
             <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#D81858] text-[10px] text-white font-bold">
               {unreadCount}
@@ -250,7 +250,7 @@ export default function Notification() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="relative cursor-pointer transition-opacity">
-          <Image src={bellIcon} alt="Bell" className="w-6 h-6" />
+          <Image src={bellIcon} alt="Bell" className="w-6 h-6" priority={true} />
           {unreadCount > 0 && (
             <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#D81858] text-[10px] text-white font-bold">
               {unreadCount}

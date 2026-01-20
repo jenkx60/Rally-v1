@@ -44,6 +44,7 @@ const AttendeeStack: React.FC<{ count: number }> = ({ count }) => {
                 width={20} 
                 height={20} 
                 className="rounded-full object-cover"
+                priority={true}
             />
         </div>
     );

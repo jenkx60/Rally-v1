@@ -33,7 +33,7 @@ const mockAttendees = [
 
 const EmptyAttendeesState: React.FC = () => (
     <div className="flex flex-col items-center justify-center py-12 px-[100px] bg-white text-center space-y-4">
-        <Image src={bird} alt="No attendees" width={80} height={80} />
+        <Image src={bird} alt="No attendees" width={80} height={80} priority={true} />
         <div className='space-y-1'>
             <h1 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No attendees yet</h1>
             <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">They&apos;ll show up here</p>
@@ -181,6 +181,7 @@ const AttendeesPage = () => {
                                             width={32}
                                             height={32} 
                                             className='h-8 w-8 rounded-full border'
+                                            priority={true}
                                         />
                                         <div className='flex flex-col font-geist text-sm leading-[150%]'>
                                             <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>

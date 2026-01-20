@@ -36,6 +36,7 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                 alt="Logo"
                 width={32}
                 height={32}
+                priority={true}
               />
           </Link>
 
@@ -84,7 +85,7 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                   <div className="flex items-center gap-2">
                     <div className="h-7 w-7 rounded-full bg-[#F0EEFA] overflow-hidden relative">
                       {/* Host Avatar */}
-                      <Image src={avatar1} alt="Divii" layout="fill" objectFit="cover" /> 
+                      <Image src={avatar1} alt="Divii" layout="fill" objectFit="cover" priority={true} /> 
                     </div>
                     <span className="text-[15px] text-[#A3A3A3] font-geist font-medium leading-[150%] tracking-[-0.2px]">
                       Hosted by <span className="text-[#333333]">Divii</span>
@@ -93,8 +94,8 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                   
                   {/* Socials */}
                   <div className="flex items-center gap-1.5 text-[#A3A3A3]">
-                    <button className="hover:text-[#1A1A1A] transition-colors"><Image src={x} alt="Twitter" width={28} height={28} className="cursor-pointer" /></button>
-                    <button className="hover:text-[#1A1A1A] transition-colors"><Image src={insta} alt="Instagram" width={28} height={28} className="cursor-pointer" /></button>
+                    <button className="hover:text-[#1A1A1A] transition-colors"><Image src={x} alt="Twitter" width={28} height={28} className="cursor-pointer" priority={true} /></button>
+                    <button className="hover:text-[#1A1A1A] transition-colors"><Image src={insta} alt="Instagram" width={28} height={28} className="cursor-pointer" priority={true} /></button>
                   </div>
                 </div>
               </div>
@@ -158,6 +159,7 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                         width={32}
                         height={32}
                         className="group-data-[state=collapsed]:hidden"
+                        priority={true}
                       />
                   </Link>
                   <div className="flex gap-2 text-[13px] text-[#959595] font-medium">
@@ -169,9 +171,9 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                   </div>
             </div>
             <div className="flex gap-4 text-[#A3A3A3]">
-                  <Image src={x} alt="Twitter" width={28} height={28} className="cursor-pointer"/>
-                  <Image src={insta} alt="Instagram" width={28} height={28} className="cursor-pointer" />
-                  <Image src={face} alt="Facebook" width={28} height={28} className="cursor-pointer" />
+                  <Image src={x} alt="Twitter" width={28} height={28} className="cursor-pointer" priority={true}/>
+                  <Image src={insta} alt="Instagram" width={28} height={28} className="cursor-pointer" priority={true}/>
+                  <Image src={face} alt="Facebook" width={28} height={28} className="cursor-pointer" priority={true}/>
             </div>
         </footer>
       </div>    

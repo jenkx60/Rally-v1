@@ -96,39 +96,39 @@ const RichTextControls: React.FC<RichTextControlsProps> = ({ textareaRef }) => {
             type='button'
             onClick={() => applyFormat('bold')}
         >
-            <Image src={bold} alt='bold' width={20} height={20} />
+            <Image src={bold} alt='bold' width={20} height={20} priority={true} />
         </button>
         <button
             type='button'
             onClick={() => applyFormat('italic')}
         >
-            <Image src={italic} alt='bold' width={20} height={20} />
+            <Image src={italic} alt='bold' width={20} height={20} priority={true} />
         </button>
         <button
             type='button'
             onClick={() => applyFormat('underline')}
         >
-            <Image src={underline} alt='bold' width={20} height={20} />
+            <Image src={underline} alt='bold' width={20} height={20} priority={true} />
         </button>
         <div className="h-5 w-0.5 bg-[#E8E8E8] mx-1" />
         <button
             type='button'
             onClick={() => applyFormat('alignLeft')}
         >
-            <Image src={alignLeft} alt='bold' width={20} height={20} />
+            <Image src={alignLeft} alt='bold' width={20} height={20} priority={true} />
         </button>
         <button
             type='button'
             onClick={() => applyFormat('alignCenter')}
         >
-            <Image src={alignCenter} alt='bold' width={20} height={20} />
+            <Image src={alignCenter} alt='bold' width={20} height={20} priority={true} />
         </button>
         <div className="h-5 w-0.5 bg-[#E8E8E8] mx-1" />
         <button
             type='button'
             onClick={() => applyFormat('link')}
         >
-            <Image src={link} alt='bold' width={20} height={20} />
+            <Image src={link} alt='bold' width={20} height={20} priority={true} />
         </button>
     </div>
   )

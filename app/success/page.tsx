@@ -53,6 +53,7 @@ const SuccessContent = () => {
                     alt="Globe Ill"
                     width={60}
                     height={60}
+                    priority={true}
                 /> 
                 <div className="flex flex-col gap-2">
                     <h1 className="text-[40px] font-bricolage font-bold text-[#1A1A1A] leading-[110%] tracking-[-1px] text-center">
@@ -73,6 +74,7 @@ const SuccessContent = () => {
                         alt="Event Cover" 
                         layout="fill"
                         objectFit="cover"
+                        priority={true}
                     />
                 </div>
 
@@ -127,6 +129,7 @@ const SuccessContent = () => {
                                             alt="Forward Logo"
                                             width={20}
                                             height={20} 
+                                            priority={true}
                                         />
                                         Share event
                                     </Button>
@@ -157,6 +160,7 @@ const SuccessContent = () => {
                                     width={20}
                                     height={20} 
                                     className="text-[#FA9874]"
+                                    priority={true}
                                 />
                             </div>
                             <div className="flex flex-col gap-0.5">

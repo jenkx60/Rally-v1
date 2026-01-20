@@ -177,6 +177,7 @@ const AccountTab = () => {
               layout='fill'
               objectFit='cover'
               className="object-cover absolute top-3 right-2.5"
+              priority={true}
             />
 
             <input
@@ -287,7 +288,7 @@ const AccountTab = () => {
                         }`}
                     />
                     <button onClick={() => setCurrentPassword(!currentPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
-                        {currentPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} />}
+                        {currentPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} priority={true} />}
                     </button>
                 </div>
                 {errors.currentPassword && (
@@ -323,7 +324,7 @@ const AccountTab = () => {
                             }`}
                         />
                          <button onClick={() => setNewPassword(!newPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
-                            {newPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='New password' width={18} height={18} />}
+                            {newPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='New password' width={18} height={18} priority={true} />}
                         </button>
                     </div>
                     {errors.newPassword && (
@@ -357,7 +358,7 @@ const AccountTab = () => {
                             }`}
                         />
                          <button onClick={() => setConfirmPassword(!confirmPassword)} className="absolute right-3 top-3.5 text-[#A3A3A3] hover:text-[#767676] cursor-pointer">
-                            {confirmPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} />}
+                            {confirmPassword ? <EyeClosed size={18} /> : <Image src={eyeOpen} alt='Show password' width={18} height={18} priority={true} />}
                         </button>
                     </div>
                     {errors.confirmPassword && (

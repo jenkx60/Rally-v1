@@ -370,7 +370,7 @@ interface MetricCardProps {
 const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle, icon, iconBgColor, metricTextColor }) => (
     <div className="flex flex-col gap-6 md:gap-8 p-5 md:p-6 border border-[#0000000D] rounded-xl bg-white">
         <div className={cn("flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg", iconBgColor)}>
-            <Image src={icon} alt={`${title} Icon`} width={24} height={24} className="w-5 h-5 md:w-6 md:h-6" />
+            <Image src={icon} alt={`${title} Icon`} width={24} height={24} className="w-5 h-5 md:w-6 md:h-6" priority={true} />
         </div>
         <div className='flex flex-col gap-0.5'>
             <h3 className="font-geist text-sm font-normal text-[#A3A3A3]">{title}</h3>
@@ -414,7 +414,7 @@ const ActivityItem: React.FC<ActivityItemProps> = ({ text, time, type }) => {
         <div className="flex gap-3 md:gap-4 font-geist py-2 px-1">
             <div className={cn("rounded-lg shrink-0", iconClass)}>
                 {imageSrc && (
-                    <Image src={imageSrc} alt={type} width={32} height={32} className="w-8 h-8" />
+                    <Image src={imageSrc} alt={type} width={32} height={32} className="w-8 h-8" priority={true} />
                 )}
             </div>
             <div className="flex flex-wrap items-center text-sm md:text-[15px] font-normal leading-[150%] tracking-[-0.2px]">
@@ -448,6 +448,7 @@ const AttendeesStack: React.FC<{ count: number; attendees: EventData['attendees'
                             width={40} 
                             height={40} 
                             className="object-cover"
+                            priority={true}
                         />
                     </div>
                 ))}
@@ -543,7 +544,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                                         eventTitle={event.title}
                                         trigger={
                                             <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
-                                                <Image src={shareQuick} alt='Share Quick' width={32} height={32} />
+                                                <Image src={shareQuick} alt='Share Quick' width={32} height={32} priority={true} />
                                                 <span className="font-geist text-[15px] font-normal text-[#333333">Share event</span>
                                             </div>
                                         }
@@ -551,7 +552,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                                     
                                     {/* Edit Event */}
                                     <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
-                                        <Image src={editQuick} alt='Edit Quick' width={32} height={32} />
+                                        <Image src={editQuick} alt='Edit Quick' width={32} height={32} priority={true} />
                                         <span className="font-geist text-[15px] font-normal text-[#333333">Edit event</span>
                                     </div>
                                 </div>

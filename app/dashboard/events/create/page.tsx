@@ -799,7 +799,7 @@ import Link from "next/link";
 import illustration from "@/public/Sidebar/cal-ill.svg";
 import tag from "@/public/Sidebar/tag.svg";
 import bank from "@/public/Sidebar/bank_card_fill.svg";
-import party from "@/public/Sidebar/party_popper.svg"; // Assuming you have this or similar for the success screen icon
+import party from "@/public/Sidebar/party_popper.svg";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
@@ -1167,6 +1167,7 @@ const CreateEventPage = () => {
                 layout="fill"
                 objectFit="cover"
                 className={cn("transition-opacity rounded-[12px]", typeof eventImageURL === 'string' ? "opacity-100" : "opacity-100")}
+                priority={true}
             />
 
             <input
@@ -1182,7 +1183,7 @@ const CreateEventPage = () => {
                 onClick={handleUploadClick} 
                 className="absolute right-4 bottom-4 border-2 border-white flex h-8 w-8 items-center justify-center bg-[#F8F6FD] rounded-md shadow-md cursor-pointer hover:bg-gray-50 transition-colors z-10"
             >
-                <Image src={camera} alt="upload" width={20} height={20} />
+                <Image src={camera} alt="upload" width={20} height={20} priority={true} />
             </button>
         </div>
 
@@ -1353,7 +1354,7 @@ const CreateEventPage = () => {
                                 : " bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
                         )}
                     >
-                        <Image src={bank} alt="Bank fill" width={16} height={16} />
+                        <Image src={bank} alt="Bank fill" width={16} height={16} priority={true} />
                         Paid
                     </button>
                 </div>
@@ -1516,7 +1517,7 @@ const CreateEventPage = () => {
                 {step === 1 && (
                     <div className="flex items-start justify-between">
                         <div className="flex flex-col gap-4 w-full">
-                            <Image src={illustration} alt="Cal Ill" width={60} height={60} />
+                            <Image src={illustration} alt="Cal Ill" width={60} height={60} priority={true} />
                             <div className="space-y-1.5 flex flex-col md:flex-row justify-between gap-4 md:gap-0">
                                 <div className="space-y-1">
                                     <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">
@@ -1536,7 +1537,7 @@ const CreateEventPage = () => {
                 {step === 2 && (
                     <div className="flex items-start justify-between">
                         <div className="flex flex-col gap-4 w-full">
-                            <Image src={tag} alt="Tag Ill" width={60} height={60} />
+                            <Image src={tag} alt="Tag Ill" width={60} height={60} priority={true}/>
                             <div className="space-y-1.5 flex flex-col md:flex-row justify-between gap-4 md:gap-0">
                                 <div className="space-y-1">
                                     <h2 className="font-bricolage text-[26px] font-semibold leading-tight tracking-[-0.9px] text-black">

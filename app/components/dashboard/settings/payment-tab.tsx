@@ -23,7 +23,7 @@ const PaymentTab = () => {
             // EMPTY STATE
             <div className="flex flex-col items-center justify-center py-28 bg-white gap-4">
                  <div className="w-16 h-16 bg-[#F9F9F9] rounded-2xl flex items-center justify-center mb-2">
-                    <Image src={payout} alt='Payout Illustration' width={80} height={80} />
+                    <Image src={payout} alt='Payout Illustration' width={80} height={80} priority={true} />
                  </div>
                  <div className="text-center space-y-1">
                     <h3 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No payout account yet</h3>
@@ -51,7 +51,7 @@ const PaymentTab = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <div className="flex justify-start">
-                        <Image src={payoutill} alt='Payout Illustration' width={40} height={40} />
+                        <Image src={payoutill} alt='Payout Illustration' width={40} height={40} priority={true} />
                     </div>
                     
                     <div className="grid grid-cols-1 gap-4 leading-[150%] tracking-[-0.1px]">
@@ -74,7 +74,7 @@ const PaymentTab = () => {
 
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2">
                     <span className="font-geist text-xs md:text-[13px] text-[#959595] leading-[150%] tracking-[-0.1px]">Payouts arrive here 2-3 business days after each event via</span>
-                    <Image src={paystack} alt='paystake logo' width={60} height={10.6} />
+                    <Image src={paystack} alt='paystake logo' width={60} height={10.6} priority={true} />
                 </div>
             </div>
         )}

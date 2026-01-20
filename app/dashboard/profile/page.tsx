@@ -44,6 +44,7 @@ export default function ProfilePage() {
               alt="Divine Mere"
               width={75}
               className="object-cover absolute top-5 right-2.5 md:top-7 md:right-4"
+              priority={true}
             />
           </div>
         </div>
@@ -64,6 +65,7 @@ export default function ProfilePage() {
                 alt="X (twitter)"
                 width={16}
                 height={16}
+                priority={true}
             />
           </Link>
           <a href="#" className="hover:opacity-70 transition-opacity">
@@ -72,6 +74,7 @@ export default function ProfilePage() {
                 alt="Instagram"
                 width={16}
                 height={16}
+                priority={true}
             />
           </a>
         </div>
@@ -95,7 +98,7 @@ export default function ProfilePage() {
                 <div className="absolute inset-0 bg-[#FFD5B8]/30 flex items-center justify-center text-xs text-gray-400">
                   Img
                 </div>
-                <Image src={event.image} alt={event.title} fill  className="object-cover" />
+                <Image src={event.image} alt={event.title} fill  className="object-cover" priority={true} />
               </div>
 
               {/* Event Details */}

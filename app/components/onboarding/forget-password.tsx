@@ -227,6 +227,7 @@ export default function ForgotPassword() {
                 alt="Mail Icon"
                 width={60}
                 height={60}
+                priority={true}
             />
 
             <div className="space-y-1.5 text-center">
@@ -254,6 +255,7 @@ export default function ForgotPassword() {
                     alt="Rally Logo"
                     width={40}
                     height={40}
+                    priority={true}
                 />
                 <div className="space-y-1.5 text-center">
                     <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Change password</h1>
@@ -285,7 +287,7 @@ export default function ForgotPassword() {
                             onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-[#BFBFBF] hover:text-[#767676] transition-colors focus:outline-none cursor-pointer"
                         >
-                            {showPassword ? <EyeClosed className="h-[18px] w-[18px]" /> : <Image src={eyeOpen} alt="Show password" width={18} height={18} />}
+                            {showPassword ? <EyeClosed className="h-[18px] w-[18px]" /> : <Image src={eyeOpen} alt="Show password" width={18} height={18} priority={true} />}
                         </button>
                     </div>
                     {errors.password && (
@@ -321,7 +323,7 @@ export default function ForgotPassword() {
                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-[#BFBFBF] hover:text-[#767676] transition-colors focus:outline-none cursor-pointer"
                         >
-                            {showConfirmPassword ? <EyeClosed className="h-[18px] w-[18px]" /> : <Image src={eyeOpen} alt="Show password" width={18} height={18} />}
+                            {showConfirmPassword ? <EyeClosed className="h-[18px] w-[18px]" /> : <Image src={eyeOpen} alt="Show password" width={18} height={18} priority={true} />}
                         </button>
                     </div>
                     {errors.confirmPassword && (
@@ -357,6 +359,7 @@ export default function ForgotPassword() {
                     alt="Password Changed Icon"
                     width={60}
                     height={60}
+                    priority={true}
                 />
 
                 <div className="space-y-1.5 text-center">
@@ -383,6 +386,7 @@ export default function ForgotPassword() {
                 alt="Rally Logo"
                 width={40}
                 height={40}
+                priority={true}
             />
 
             <div className="space-y-1.5 text-center">

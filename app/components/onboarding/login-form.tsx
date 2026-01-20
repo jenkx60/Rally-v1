@@ -167,6 +167,7 @@ const LoginForm = () => {
                     alt="Rally Logo"
                     width={40}
                     height={40}
+                    priority={true}
                 />
 
                 {/* Header */}
@@ -275,7 +276,7 @@ const LoginForm = () => {
                                 {showPassword ? (
                                     <EyeClosed className="h-[18px] w-[18px]" />
                                 ) : (
-                                    <Image src={eyeOpen} alt="Show password" width={18} height={18} />
+                                    <Image src={eyeOpen} alt="Show password" width={18} height={18} priority={true} />
                                 )}
                             </button>
                         </div>

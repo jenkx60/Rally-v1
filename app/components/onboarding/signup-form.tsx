@@ -277,10 +277,10 @@ const handleSubmit = async () => {
             {/* Logo Section */}
             <div className="flex flex-col gap-6 justify-center items-center">
                 {step !== 1 && (
-                    <Image src={rally} alt="Rally Logo" width={40} height={40} />
+                    <Image src={rally} alt="Rally Logo" width={40} height={40} priority={true} />
                 )}
                 {step === 1 && (
-                    <Image src={rally} alt="Rally Logo" width={40} height={40} />
+                    <Image src={rally} alt="Rally Logo" width={40} height={40} priority={true} />
                 )}
 
                 <div className="space-y-1 text-center">
@@ -419,7 +419,7 @@ const handleSubmit = async () => {
                                                     {isVisible ? (
                                                         <EyeClosed className="w-[18px] h-[18px]" />
                                                     ) : (
-                                                        <Image src={eyeOpen} alt="Show password" width={18} height={18} />
+                                                        <Image src={eyeOpen} alt="Show password" width={18} height={18} priority={true} />
                                                     )}
                                                 </button>
                                             )}

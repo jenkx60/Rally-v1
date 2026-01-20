@@ -49,6 +49,7 @@ const AttendeeStack: React.FC<{ count: number }> = ({ count }) => {
                 width={20} 
                 height={20} 
                 className="rounded-full"
+                priority={true}
             />
         </div>
     );
@@ -104,13 +105,14 @@ const EventPage = () => {
                                     alt={DUMMY_EVENT_DATA.title} 
                                     layout="fill"
                                     objectFit="cover"
+                                    priority={true}
                                 />
                             </div>
 
                             {/* Hosted by block (at the bottom of the image area) */}
                             <div className="flex items-center gap-3">
                                 <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200">
-                                    <Image src={DUMMY_EVENT_DATA.hostAvatar} alt="Host Avatar" width={32} height={32} className="object-cover" />
+                                    <Image src={DUMMY_EVENT_DATA.hostAvatar} alt="Host Avatar" width={32} height={32} className="object-cover" priority={true} />
                                 </div>
                                 <span className="text-sm font-medium text-[#707070]">
                                     Hosted by <span className="font-semibold text-[#333333]">Saints\_gesos\_dilii.pop</span>
@@ -133,7 +135,7 @@ const EventPage = () => {
                                     </button>
                                     {/* Mock Image/Share Button (Placeholder for the image icon) */}
                                     <button className="p-1 hover:text-[#525252]">
-                                        <Image src={eventCoverPlaceholder} alt="Share" width={20} height={20} className="opacity-0" /> {/* Invisible placeholder for space */}
+                                        <Image src={eventCoverPlaceholder} alt="Share" width={20} height={20} className="opacity-0" priority={true} /> {/* Invisible placeholder for space */}
                                     </button>
                                 </div>
                             </div>
@@ -194,8 +196,8 @@ const EventPage = () => {
                     <div className="flex gap-4">
                         {/* Mock Social Links */}
                         <X className="h-4 w-4" /> 
-                        <Image src={eventCoverPlaceholder} alt="Instagram" width={16} height={16} className="opacity-0" />
-                        <Image src={eventCoverPlaceholder} alt="Facebook" width={16} height={16} className="opacity-0" />
+                        <Image src={eventCoverPlaceholder} alt="Instagram" width={16} height={16} className="opacity-0" priority={true} />
+                        <Image src={eventCoverPlaceholder} alt="Facebook" width={16} height={16} className="opacity-0" priority={true} />
                     </div>
                 </div>
             </footer>

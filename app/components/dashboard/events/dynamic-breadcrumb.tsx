@@ -86,6 +86,7 @@ const DynamicBreadcrumb = () => {
             width={32}
             height={32}
             className="fixed top-3 left-3.5"
+            priority={true}
           />
         </Link>
       </div>

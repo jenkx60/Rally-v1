@@ -245,6 +245,7 @@ const EventsPage = () => {
               width={18}
               height={18}
               className="pb-0.5"
+              priority={true}
             />
             <span className="font-geist font-semibold text-[15px] leading-[150%] tracking-[-0.2px]">
               Create event

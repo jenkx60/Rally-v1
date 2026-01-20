@@ -139,6 +139,7 @@ export function AppSidebar() {
           width={32}
           height={32}
           className="group-data-[state=collapsed]:hidden"
+          priority={true}
         />
 
         <Image
@@ -147,6 +148,7 @@ export function AppSidebar() {
           width={32}
           height={32}
           className="hidden group-data-[state=collapsed]:block"
+          priority={true}
         />
       </SidebarHeader>
       <SidebarContent className="pt-4 pb-3 px-2 bg-white border-r border-white">
@@ -284,6 +286,7 @@ export function AppSidebar() {
                     width={35}
                     height={35}
                     className="flex aspect-square size-8 pt-1 items-center justify-center rounded-md text-white border-[0.8px] border-[#FA9874] bg-[#F8F6FD]"
+                    priority={true}
                   />
                   <span className="font-geist font-medium text-sm text-[#1A1A1A] leading-[150%] tracking-[-0.1px]">{user.name}</span>
                 </div>
@@ -308,6 +311,7 @@ export function AppSidebar() {
                             alt="Profile"
                             width={20}
                             height={20} 
+                            priority={true}
                           />
                         </button>
                         <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5]" onClick={handleLogout}>
@@ -317,6 +321,7 @@ export function AppSidebar() {
                             alt="Logout"
                             width={20}
                             height={20} 
+                            priority={true}
                           />
                         </button>
                       </div>

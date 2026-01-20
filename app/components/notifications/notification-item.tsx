@@ -132,6 +132,7 @@ export function NotificationItem({
             width={40} 
             height={40} 
             className="object-contain"
+            priority={true}
           />
         </div>
       )}
@@ -154,6 +155,7 @@ export function NotificationItem({
                 width={40} 
                 height={32} 
                 className="rounded-lg object-cover h-8 w-10 border border-[#F0F0F0]" 
+                priority={true}
               />
             </div>
           )}
