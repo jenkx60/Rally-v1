@@ -153,7 +153,7 @@ const PayoutPage = () => {
                     {mockPayouts.map((payout) => (
                         <div 
                             key={payout.id} 
-                            className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#1A1A1A0D] transition-colors"
+                            className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#E8E8E81A] transition-colors"
                         >
                             {/* Event Image / Thumbnail */}
                             <div className="h-12 w-12 rounded-[6px] bg-gray-100 shrink-0 overflow-hidden relative">
