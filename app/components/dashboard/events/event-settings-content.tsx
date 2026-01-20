@@ -190,7 +190,7 @@ const EventSettingsContent: React.FC = () => {
                     {/* 1. Notifications Column */}
                     <div className="space-y-4">
                         <h2 className="font-geist text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.2px]">Notifications</h2>
-                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] p-6 shadow shadow-[#1A1A1A0D]">
+                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] px-6 py-2 shadow shadow-[#1A1A1A0D]">
                             <SettingToggle
                                 id="notifyNewRSVP"
                                 label="Notify me of new RSVPs"
@@ -207,7 +207,7 @@ const EventSettingsContent: React.FC = () => {
                     {/* 2. RSVP Options Column */}
                     <div className="space-y-4">
                         <h2 className="font-geist text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.2px]">RSVP options</h2>
-                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] p-6 shadow shadow-[#1A1A1A0D]">
+                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] px-6 py-2 shadow shadow-[#1A1A1A0D]">
                             <SettingToggle
                                 id="requireGuestApproval"
                                 label="Require guest approval"

@@ -15,10 +15,10 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 
 // Mock Attendee Data
 const mockAttendees = [
-    { id: 1, name: "Divii", email: "divii@example.com", ticketType: "Regular", price: "Free", joined: "Jan 8, 2025", avatar: avatard },
-    { id: 2, name: "Jessica Smith", email: "jessica@example.com", ticketType: "VIP", price: "₦15,000", joined: "Jan 4, 2025", avatar: avatarkill },
-    { id: 3, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 2, 2025", avatar: avatarglass },
-    { id: 4, name: "Jenkx", email: "jenkx@example.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 3, 2025", avatar: avatarman },
+    { id: 1, name: "Divii", email: "divii@example.com", ticketType: "Regular", price: "Free", joined: "Jan 8, 2026", avatar: avatard },
+    { id: 2, name: "Uchy", email: "u.kimberly@rocketmail.com", ticketType: "VIP", price: "₦15,000", joined: "Jan 4, 2026", avatar: avatarkill },
+    { id: 3, name: "Nneoms", email: "n.annette@rocketmail.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 2, 2026", avatar: avatarglass },
+    { id: 4, name: "Nkem", email: "realsaints@gmail.com", ticketType: "VIP", price: "₦25,000", joined: "Jan 3, 2026", avatar: avatarman },
 ];
 
 const EmptyAttendeesState: React.FC = () => (
@@ -54,26 +54,35 @@ const EventAttendeesContent = () => {
             <h2 className="font-bricolage text-xl font-semibold leading-[130%] tracking-[-0.5px] text-[#1A1A1A]">Attendees list</h2>
             
             {/* Search and Filter Row */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-                <div className="relative grow col-span-9">
+            <div className="flex flex-col md:flex-row gap-3 justify-between">
+                {/* <div className="relative grow col-span-9">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#A3A3A3]" />
                     <Input 
                         placeholder="Search by name and email" 
                         className="font-geist text-sm border-[#E8E8E8] focus:border-[#6A59CE] py-[11px] px-3.5 placeholder:pl-5 rounded-lg" 
                     />
+                </div> */}
+                <div className="relative md:w-[80%]">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#A3A3A3]" />
+                    <Input 
+                        placeholder="Search by name and email" 
+                        className="font-geist text-sm border-[#E8E8E8]  h-11 pl-10 pr-3.5 rounded-lg" 
+                    />
                 </div>
-                <div className='col-span-3'>
-                    <Select>
-                        <SelectTrigger>
-                            <SelectValue placeholder='All types' />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectItem value='regular'>Regular</SelectItem>
-                                <SelectItem value='vip'>VIP</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
+                <div className='flex gap-3 w-full md:w-[20%]'>
+                    <div className='flex-1'>
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue placeholder='All types' />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectItem value='regular'>Regular</SelectItem>
+                                    <SelectItem value='vip'>VIP</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
             </div>
 
@@ -99,7 +108,7 @@ const EventAttendeesContent = () => {
                                         height={32} 
                                         className='h-8 w-8 rounded-full border'
                                     />
-                                    <div className='flex flex-col gap-0.5 font-geist text-sm leading-[100%]'>
+                                    <div className='flex flex-col font-geist text-sm leading-[150%]'>
                                         <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>
                                         <p className='font-normal text-[#959595]'>{attendee.email}</p>
                                     </div>

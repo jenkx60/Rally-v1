@@ -257,7 +257,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
                                 <RadioGroupItem 
                                     value={typeOption} 
                                     id={`loc-${typeOption.toLowerCase()}`} 
-                                    className="text-[#6A59CE] data-[state=checked]:border-[#6A59CE] border-2"
+                                    className="text-[#6A59CE] data-[state=checked]:border-[#6A59CE] border shadow-none"
                                 />
                                 <Label htmlFor={`loc-${typeOption.toLowerCase()}`} className="font-geist text-base font-normal text-[#1A1A1A]">
                                     {typeOption}
@@ -307,12 +307,12 @@ const FilterForm: React.FC<FilterFormProps> = ({
 // --- Shared Header Component ---
 const CustomHeader = ({ onClose }: { onClose: () => void }) => (
   <div className="flex justify-between items-center mb-6">
-    <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">
+    <h2 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.5px]">
         Filters
     </h2>
     <button 
       onClick={onClose} 
-      className="hidden md:block text-[#A3A3A3] hover:text-[#1A1A1A] focus:outline-none"
+      className="hidden md:block text-[#A3A3A3] hover:text-[#1A1A1A] focus:outline-none cursor-pointer"
     >
       <X size={20} />
     </button>

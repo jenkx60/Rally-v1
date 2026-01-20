@@ -371,7 +371,7 @@ const ShareEventDialog: React.FC<ShareEventDialogProps> = ({ eventLink, trigger,
             {/* Header */}
             <div className="flex flex-col gap-7">
                 <div className="flex justify-start w-full">
-                    <Image src={sharePlane} alt='Share Ill' width={30} height={30} />
+                    <Image src={sharePlane} alt='Share Ill' width={48} height={48} />
                 </div>
                 <div className='space-y-1'>
                     <Title className="font-bricolage text-[22px] font-bold leading-[120%] tracking-[-0.5px] text-[#1A1A1A] text-left">

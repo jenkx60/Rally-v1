@@ -91,7 +91,7 @@ const AttendeesPage = () => {
 
     return (
         <div className="bg-white flex flex-col gap-12 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
-            <div className='space-y-0.5'>
+            <div>
                 <h2 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
                 <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Guest list for all your events in one place</p>
             </div>
@@ -182,9 +182,9 @@ const AttendeesPage = () => {
                                             height={32} 
                                             className='h-8 w-8 rounded-full border'
                                         />
-                                        <div className='flex flex-col gap-0.5 font-geist text-sm leading-[100%]'>
+                                        <div className='flex flex-col font-geist text-sm leading-[150%]'>
                                             <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>
-                                            <p className='font-normal text-[#959595]'>{attendee.email}</p>
+                                            <p className='font-normal text-[#A3A3A3]'>{attendee.email}</p>
                                         </div>
                                     </div>
                                 </TableCell>

@@ -18,7 +18,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep, totalSteps =
         
         {/* Step 2 Bar - Dot if inactive (step 1), Bar if active (step 2) */}
         {currentStep === 1 ? (
-          <div className="h-1.5 w-1.5 rounded-full bg-[#EF957D] opacity-50 transition-all duration-300" />
+          <div className="h-1.5 w-23 rounded-full bg-[#EF957D] opacity-50 transition-all duration-300" />
         ) : (
           <div className="h-1.5 w-24 rounded-full bg-[#EF957D] transition-all duration-300 animate-in slide-in-from-left-2" />
         )}

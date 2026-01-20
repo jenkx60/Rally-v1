@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -18,6 +18,13 @@ import ShareEventDialog from "../components/dashboard/events/share-event-dialog"
 // Inner component to handle Search Params logic
 const SuccessContent = () => {
     const searchParams = useSearchParams();
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(MOCK_EVENT_LINK);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+    };
 
     // mock event link
     const MOCK_EVENT_LINK = "https://rally.com/yup2ibi6g6";
@@ -89,37 +96,50 @@ const SuccessContent = () => {
                     <div className="space-y-2">
                         <p className="text-[14px] text-[#767676] font-geist font-medium leading-[150%] tracking-[-0.1px]">Event link</p>
                         <div className="flex items-center justify-between bg-[#FDFDFD] border border-[#FAFAFA] rounded-xl px-4 py-3.5">
-                            <span className="font-geist font-medium text-[14px] text-[#A3A3A3] leading-[100%] tracking-[-0.1px] truncate">
+                            <span className="font-geist font-medium text-[14px] text-[#A3A3A3] leading-[100%] tracking-[-0.1px] truncate max-w-[150px] md:max-w-none">
                                 https://rally.com/yup2ibi6g6
                             </span>
-                            <button className="flex items-center gap-1.5 text-[#6A59CE] hover:text-[#5a4cb0] text-sm font-medium font-geist leading-[100%] tracking-[-0.2px] transition-colors cursor-pointer">
-                                <LinkIcon className="h-4 w-4" />
-                                <span className="">Copy link</span>
+                            <button 
+                                onClick={handleCopy}
+                                className="flex items-center gap-1.5 text-[#6A59CE] hover:text-[#5a4cb0] text-sm font-medium font-geist leading-[100%] tracking-[-0.2px] transition-colors cursor-pointer"
+                            >
+                                {isCopied ? (
+                                    <span>Link copied!</span>
+                                ) : (
+                                    <>
+                                        {/* Link Icon */}
+                                        <LinkIcon className="h-4 w-4" />
+                                        <span className="">Copy link</span>
+                                    </>
+                                )}
                             </button>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        <ShareEventDialog
-                            eventLink={MOCK_EVENT_LINK}
-                            trigger={
-                                <Button className="bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-semibold text-[15px] px-6 py-4 leading-[135%] tracking-[-0.2px]">
-                                    <Image
-                                        src={forward}
-                                        alt="Forward Logo"
-                                        width={20}
-                                        height={20} 
-                                    />
-                                    Share event
-                                </Button>
-                            }
-                        />
-
-                            <Button variant="outline" className="font-geist font-semibold hover:bg-[#F9F9F9] px-6 py-4 leading-[135%] tracking-[-0.2px]">
+                    <div className="flex flex-col md:flex-row w-full gap-4">
+                        <div className="w-full md:w-[50%]">
+                            <ShareEventDialog
+                                eventLink={MOCK_EVENT_LINK}
+                                trigger={
+                                    <Button className="bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-semibold text-[15px] px-6 py-4 leading-[135%] tracking-[-0.2px] w-full">
+                                        <Image
+                                            src={forward}
+                                            alt="Forward Logo"
+                                            width={20}
+                                            height={20} 
+                                        />
+                                        Share event
+                                    </Button>
+                                }
+                            />
+                        </div>
+                        <div className="w-full md:w-[50%]">
+                            <Button variant="outline" className="font-geist font-semibold hover:bg-[#F9F9F9] px-6 py-4 leading-[135%] tracking-[-0.2px] w-full">
                                 <Link href={EVENT_PAGE_PATH} passHref>
                                     View event page
                                 </Link>
                             </Button>
+                        </div>
                     </div>
                 </div>
             </div>

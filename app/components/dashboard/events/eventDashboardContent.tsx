@@ -34,7 +34,7 @@ const MOCK_EVENTS = [
     },
     {
         id: "sunday-brunch",
-        title: "Sunday brunch club",
+        title: "Potluck & chill",
         dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
         location: "Lekki phase 1, Lekki",
         attendees: 6,

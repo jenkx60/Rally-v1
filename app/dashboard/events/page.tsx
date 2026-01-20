@@ -14,6 +14,7 @@ import image2 from "@/public/Sidebar/link-up.svg";
 import image3 from "@/public/Sidebar/sunday-ill.svg";
 import image4 from "@/public/Sidebar/sip-ill.svg";
 import EventsFilterPopover from "@/app/components/dashboard/events/event-filter-popover";
+import { Skeleton } from "@/app/components/ui/skeleton";
 
 type FilterState = {
   date: 'All' | 'Today' | 'This week' | 'This month';
@@ -49,7 +50,7 @@ const MOCK_EVENTS = [
     },
     {
         id: "sunday-brunch",
-        title: "Sunday brunch club",
+        title: "Potluck & chill",
         dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
         location: "Lekki phase 1, Lekki",
         attendees: 6,
@@ -108,10 +109,80 @@ const EventsPage = () => {
     filter === "All" ? true : event.status === filter
   );
 
-  if (isLoading) {
-      return <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center p-10">
-          <Loader2 className="w-10 h-10 animate-spin text-[#6A59CE]" />
+  // if (isLoading) {
+  //     return <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center p-10">
+  //         <Loader2 className="w-10 h-10 animate-spin text-[#6A59CE]" />
+  //     </div>
+  // }
+    if (isLoading) {
+    return (
+      <div className="relative flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
+        {/* Header Skeleton */}
+        <div className="flex justify-between items-center">
+            <div className="space-y-1.5">
+                <Skeleton className="h-8 w-48 bg-[#F5F5F5]" />
+                <Skeleton className="h-4 w-72 bg-[#F5F5F5]" />
+            </div>
+            <Skeleton className="hidden md:block h-[52px] w-[165px] rounded-lg bg-[#F5F5F5]" />
+        </div>
+
+        {/* Filters Skeleton */}
+        <div className="flex flex-col gap-4">
+            <div className="flex justify-between items-center pb-4">
+                <div className="flex gap-2">
+                    <Skeleton className="h-[40px] w-16 rounded-md bg-[#F5F5F5]" />
+                    <Skeleton className="h-[40px] w-24 rounded-md bg-[#F5F5F5]" />
+                    <Skeleton className="h-[40px] w-16 rounded-md bg-[#F5F5F5]" />
+                </div>
+                <Skeleton className="h-6 w-16 bg-[#F5F5F5]" />
+            </div>
+        </div>
+
+        {/* Events Grid Skeleton */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="bg-white border border-[#0000000D] rounded-xl overflow-hidden shadow-xs shadow-[#1A1A1A0D] flex flex-col">
+                    {/* Image Skeleton */}
+                    <Skeleton className="h-40 w-full bg-[#F5F5F5]" />
+                    
+                    {/* Content */}
+                    <div className="p-4 flex flex-col gap-4">
+                        <div className="flex justify-between items-center">
+                            <Skeleton className="h-6 w-3/4 bg-[#F5F5F5]" />
+                            <Skeleton className="h-5 w-12 rounded-full bg-[#F5F5F5]" />
+                        </div>
+                        
+                        <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                                <Skeleton className="h-4 w-4 bg-[#F5F5F5] shrink-0" />
+                                <Skeleton className="h-4 w-1/2 bg-[#F5F5F5]" />
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Skeleton className="h-4 w-4 bg-[#F5F5F5] shrink-0" />
+                                <Skeleton className="h-4 w-2/3 bg-[#F5F5F5]" />
+                            </div>
+                        </div>
+
+                        {/* Attendees */}
+                        <div className="flex items-center gap-2">
+                            <div className="flex -space-x-1.5">
+                                <Skeleton className="h-7 w-7 rounded-full border-2 border-white bg-[#F5F5F5]" />
+                                <Skeleton className="h-7 w-7 rounded-full border-2 border-white bg-[#F5F5F5]" />
+                                <Skeleton className="h-7 w-7 rounded-full border-2 border-white bg-[#F5F5F5]" />
+                            </div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="flex gap-4">
+                            <Skeleton className="h-[46px] w-[85%] rounded-lg bg-[#F5F5F5]" />
+                            <Skeleton className="h-[46px] w-[15%] rounded-lg bg-[#F5F5F5]" />
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
       </div>
+    )
   }
 
 
@@ -123,7 +194,7 @@ const EventsPage = () => {
     return (
       <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">
         <div>
-          <Image src={newEvent} alt="New Event Image" width={80} height={80} />
+          <Image src={newEvent} alt="New Event Image" width={80} height={80} priority />
         </div>
         <div className="flex flex-col gap-1 items-center text-center">
           <h1 className="font-bricolage font-semibold text-[18px] leading-[120%] tracking-[-0.6px] text-center">
@@ -158,7 +229,7 @@ const EventsPage = () => {
 
   // 2. If events DO exist, show the "Dashboard View" (Second code snippet)
   return (
-    <div className="relative flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
+    <div className="relative flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full md:max-w-[1200px] mx-auto">
       {/* Header and "Create event" Button */}
       <div className="flex justify-between items-center">
         <div className="space-y-1.5">
@@ -166,7 +237,8 @@ const EventsPage = () => {
           <p className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px] text-[#A3A3A3]">Stay on top of your events, all in one place</p>
         </div>
         <Link href="/dashboard/events/create" passHref className="hidden md:block">
-          <Button className="bg-[#6A59CE] hover:bg-primary/90 px-6 py-2">
+          {/* <Button className="bg-[#6A59CE] hover:bg-primary/90 px-6 py-2"> */}
+          <Button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
             <Image
               src={plus}
               alt="Plus Icon"

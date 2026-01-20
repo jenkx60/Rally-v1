@@ -316,7 +316,7 @@ const MangeEvent = () => {
     const renderContent = () => {
         switch (activeTab) {
             case 'Overview':
-                return <EventOverviewContent />;
+                return <EventOverviewContent onViewAttendees={() => setActiveTab('Attendees')} />;
             case 'Attendees':
                 return <EventAttendeesContent />;
             case 'Settings':
@@ -326,7 +326,7 @@ const MangeEvent = () => {
         }
     }
   return (
-    <div className="flex flex-col p-0 pb-10 pt-5 md:p-5">
+    <div className="flex flex-col p-0 pb-10 pt-5 md:p-5 max-w-[1200px] mx-auto">
         {/* Back Link */}
         <Link href="/dashboard/events" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
             <ArrowLeft className="w-4 h-4" />

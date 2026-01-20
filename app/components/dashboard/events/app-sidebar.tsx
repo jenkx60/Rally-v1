@@ -149,7 +149,7 @@ export function AppSidebar() {
           className="hidden group-data-[state=collapsed]:block"
         />
       </SidebarHeader>
-      <SidebarContent className="pt-4 pb-3 px-2 bg-white">
+      <SidebarContent className="pt-4 pb-3 px-2 bg-white border-r border-white">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>

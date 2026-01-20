@@ -110,6 +110,7 @@ export const EventCard: React.FC<EventCardProps> = ({
                         alt={title} 
                         layout="fill"
                         objectFit="cover"
+                        priority={true}
                     />
                 </div>
 

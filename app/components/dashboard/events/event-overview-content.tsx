@@ -307,6 +307,7 @@ import shareQuick from '@/public/Sidebar/forward-quick.svg';
 import editQuick from '@/public/Sidebar/edit-quick.svg';
 import attend from '@/public/Sidebar/attend-man.svg';
 import check from '@/public/Sidebar/check.svg';
+import ShareEventDialog from './share-event-dialog';
 
 // --- Mock Data Structure ---
 interface EventData {
@@ -346,6 +347,10 @@ const mockEventData: EventData = {
         { id: 3, text: "Event details updated", time: "8 mins ago", type: 'update' },
     ]
 };
+
+interface EventOverviewContentProps {
+    onViewAttendees: () => void;
+}
 
 
 // --- Metrics, Activity, and Attendees code stays exactly the same as your structure ---
@@ -461,7 +466,7 @@ const AttendeesStack: React.FC<{ count: number; attendees: EventData['attendees'
 
 
 // --- Main Page Component ---
-const EventOverviewContent = () => {
+const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttendees}) => {
     const event = mockEventData;
 
     return (
@@ -533,21 +538,27 @@ const EventOverviewContent = () => {
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Quick actions</h2>
                                 <div className="p-5 border border-[#F5F5F5] rounded-xl bg-white space-y-6 min-h-fit md:min-h-[186px]">
                                     {/* Share Event */}
-                                    <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
-                                        <Image src={shareQuick} alt='Share Quick' width={32} height={32} />
-                                        <span className="font-geist text-sm font-medium">Share event</span>
-                                    </div>
+                                    <ShareEventDialog 
+                                        eventLink='https://rally.com/yup2ibi6g6'
+                                        eventTitle={event.title}
+                                        trigger={
+                                            <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
+                                                <Image src={shareQuick} alt='Share Quick' width={32} height={32} />
+                                                <span className="font-geist text-[15px] font-normal text-[#333333">Share event</span>
+                                            </div>
+                                        }
+                                    />
                                     
                                     {/* Edit Event */}
                                     <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
                                         <Image src={editQuick} alt='Edit Quick' width={32} height={32} />
-                                        <span className="font-geist text-sm font-medium">Edit event</span>
+                                        <span className="font-geist text-[15px] font-normal text-[#333333">Edit event</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-12 gap-4 md:gap-6 pt-4 md:pt-0">
+                        <div className="grid grid-cols-12 gap-4 md:gap-6 pt-4 md:pt-6">
                             {/* 4. Recent Activity */}
                             <div className='col-span-12 md:col-span-8 space-y-2'>
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Recent activity</h2>
@@ -566,7 +577,7 @@ const EventOverviewContent = () => {
                                 <div className="p-5 border border-[#0000000D] rounded-xl bg-white min-h-[202px] flex flex-col justify-between">
                                     <AttendeesStack count={event.rsvps} attendees={event.attendees} />
                                     <div>
-                                        <Button className="w-full bg-white border border-[#6A59CE] text-[#6A59CE] font-geist font-semibold py-3 px-6 text-[15px] leading-[135%] tracking-[-0.2px] hover:bg-transparent ">
+                                        <Button onClick={onViewAttendees} className="w-full bg-white border border-[#6A59CE] text-[#6A59CE] font-geist font-semibold py-3 px-6 text-[15px] leading-[135%] tracking-[-0.2px] hover:bg-transparent ">
                                             View all attendees
                                         </Button>
                                     </div>

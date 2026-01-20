@@ -67,7 +67,7 @@
 //     },
 //     {
 //         id: "sunday-brunch",
-//         title: "Sunday brunch club",
+//         title: "Potluck & chill",
 //         dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
 //         location: "Lekki phase 1, Lekki",
 //         attendees: 6,
@@ -859,7 +859,7 @@ const MOCK_EVENTS = [
     },
     {
         id: "sunday-brunch",
-        title: "Sunday brunch club",
+        title: "Potluck & chill",
         dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
         location: "Lekki phase 1, Lekki",
         attendees: 6,
@@ -1194,7 +1194,7 @@ const CreateEventPage = () => {
                     value={formData.title} 
                     onChange={handleChange} 
                     placeholder="e.g. Divii's games night" 
-                    className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" 
+                    className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
                 />
             </div>
             
@@ -1224,7 +1224,7 @@ const CreateEventPage = () => {
                         <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
                     </button>
                 </div>
-                <div className=" rounded-lg border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]/50">
+                <div className=" rounded-lg border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]">
                     <RichTextControls textareaRef={descriptionTextareaRef} />
                     <Textarea 
                         ref={descriptionTextareaRef} 
@@ -1262,7 +1262,7 @@ const CreateEventPage = () => {
                                     !formData.date && "text-[#000000]"
                                 )}
                             >
-                                {formData.date ? format(formData.date, "PPP") : <span className="text-[#BFBFBF]">mm/dd/yyyy</span>}
+                                {formData.date ? format(formData.date, "PPP") : <span className="text-[#BFBFBF] font-medium">mm/dd/yyyy</span>}
                                 <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
                             </Button>
                         </PopoverTrigger>
@@ -1279,7 +1279,7 @@ const CreateEventPage = () => {
                 <div className="grid col-span-1 md:col-span-1 gap-1.5">
                     <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Start time</label>
                     <Select value={formData.startTime} onValueChange={(value) => handleSelectChange("startTime", value)}>
-                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none">
+                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium">
                             <SelectValue placeholder="10:00 AM" />
                             {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
                         </SelectTrigger>
@@ -1291,7 +1291,7 @@ const CreateEventPage = () => {
                 <div className="grid col-span-1 md:col-span-1 gap-1.5">
                     <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">End time</label>
                     <Select value={formData.endTime} onValueChange={(value) => handleSelectChange("endTime", value)}>
-                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none">
+                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium">
                             <SelectValue placeholder="10:00 PM" />
                             {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
                         </SelectTrigger>
@@ -1300,12 +1300,11 @@ const CreateEventPage = () => {
                         </SelectContent>
                     </Select>
                 </div>
-                <p className="font-geist text-xs font-medium text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Time shown in GMT +1 (Lagos)</p>
             </div>
             <div className="flex flex-col gap-3">
                 <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Location</label>
                 <LocationTypeSelector value={formData.locationType} onChange={(type) => handleSelectChange('locationType', type)} />
-                <Input name="location" value={formData.location} onChange={handleChange} placeholder={formData.locationType === 'Physical' ? "Enter location" : "Paste meeting link (Zoom, Google meet, etc.)"} className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" />
+                <Input name="location" value={formData.location} onChange={handleChange} placeholder={formData.locationType === 'Physical' ? "Enter location" : "Paste meeting link (Zoom, Google meet, etc.)"} className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium" />
             </div>
         </section>
         

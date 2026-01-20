@@ -19,7 +19,7 @@ export const notifications: NotificationItem[] = [
     id: "2",
     type: "warning",
     icon: "user",
-    title: "12 people just joined Sunday brunch club",
+    title: "12 people just joined Potluck & chill",
     timestamp: "30m ago",
     image: people,
     read: false,
