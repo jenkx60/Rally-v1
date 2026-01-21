@@ -4,7 +4,17 @@ import Link from "next/link";
 import { Calendar, Edit3, Ellipsis, Forward, MapPin } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { cn } from "@/lib/utils";
-import illustrations from "@/public/Sidebar/avatar.svg";
+import avatar from "@/public/Sidebar/avatar.svg";
+import avatar2 from "@/public/Sidebar/avatar-man.svg";
+import avatar3 from "@/public/Sidebar/avatar-glass.svg";
+import avatar4 from "@/public/Sidebar/avatar-kill.svg";
+import avatar5 from "@/public/Sidebar/avatar-3eyes.svg";
+import avatar6 from "@/public/Sidebar/avatar-full-hair.svg";
+import avatar7 from "@/public/Sidebar/avatar-grin.svg";
+import avatar8 from "@/public/Sidebar/avatar-manbun.svg";
+import avatar9 from "@/public/Sidebar/avatar-3eyes-glasses.svg";
+import avatar10 from "@/public/Sidebar/avatar-eyepatch.svg";
+import avatar11 from "@/public/Sidebar/avatar-womanbun.svg";
 import attendeeAvatar from "@/public/Sidebar/attendee_avatar.png"; 
 import { useRouter } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
@@ -21,11 +31,20 @@ interface EventCardProps {
     imageSrc: StaticImageData;
 }
 
+const getSeed = (str: string) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash);
+};
+
 // Helper component for attendee avatar stack
-const AttendeeStack: React.FC<{ count: number }> = ({ count }) => {
-    // Show up to 3 avatars + count
+const AttendeeStack: React.FC<{ count: number; eventId: string }> = ({ count, eventId }) => {
     const displayCount = Math.min(count, 4);
     const remainingCount = count - displayCount;
+
+    const seed = getSeed(eventId);
     
     // Placeholder avatars for display (in a real app, these would be user images)
     const AvatarPlaceholder = ({ index }: { index: number }) => (
@@ -39,7 +58,7 @@ const AttendeeStack: React.FC<{ count: number }> = ({ count }) => {
         >
             {/* Replace attendeeAvatar with actual small user image component if available */}
             <Image 
-                src={illustrations} 
+                src={avatar} 
                 alt={`Attendee ${index + 1}`} 
                 width={20} 
                 height={20} 
@@ -49,12 +68,42 @@ const AttendeeStack: React.FC<{ count: number }> = ({ count }) => {
         </div>
     );
 
+    const avatars = [avatar, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11];
+    const bgColors = ["bg-[#F0EEFA]", "bg-[#FFECE5]"];
+    
+    const AvatarPlaceholders = ({ index }: { index: number }) => {
+        const selectionIndex = seed + index
+        const avatarSrc = avatars[selectionIndex % avatars.length];
+        const bgColor = bgColors[selectionIndex % bgColors.length];
+        return (
+            <div 
+                key={index}
+                className={cn(
+                    "h-7 w-7 rounded-full border border-white bg-gray-300 p-0.5",
+                    bgColor,
+                    index > 0 && "-ml-2"
+                )}
+                style={{ zIndex: displayCount - index }}
+            >
+                {/* Replace attendeeAvatar with actual small user image component if available */}
+                <Image 
+                    src={avatarSrc} 
+                    alt={`Attendee ${index + 1}`} 
+                    width={20} 
+                    height={20} 
+                    className="rounded-full object-cover"
+                    priority={true}
+                />
+            </div>
+        )
+    }
+
     return (
         <div className="flex items-center text-[#707070] text-xs font-geist">
             {/* Avatar Stack */}
             <div className="flex -space-x-0.5">
                 {Array.from({ length: displayCount }).map((_, i) => (
-                    <AvatarPlaceholder key={i} index={i} />
+                    <AvatarPlaceholders key={i} index={i} />
                 ))}
             </div>
             
@@ -112,6 +161,7 @@ export const EventCard: React.FC<EventCardProps> = ({
                         layout="fill"
                         objectFit="cover"
                         priority={true}
+                        className="rounded-t-xl"
                     />
                 </div>
 
@@ -143,7 +193,7 @@ export const EventCard: React.FC<EventCardProps> = ({
                     </div>
 
                     {/* Attendees */}
-                    <AttendeeStack count={attendees} />
+                    <AttendeeStack count={attendees} eventId={id} />
 
                     {/* Manage Button */}
                     <div className="flex gap-4">

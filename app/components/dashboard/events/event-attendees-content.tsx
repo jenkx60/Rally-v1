@@ -73,7 +73,7 @@ const EventAttendeesContent = () => {
                 <div className='flex gap-3 w-full md:w-[20%]'>
                     <div className='flex-1'>
                         <Select>
-                            <SelectTrigger>
+                            <SelectTrigger className='h-11'>
                                 <SelectValue placeholder='All types' />
                             </SelectTrigger>
                             <SelectContent>

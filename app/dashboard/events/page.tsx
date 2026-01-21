@@ -238,16 +238,16 @@ const EventsPage = () => {
         </div>
         <Link href="/dashboard/events/create" passHref className="hidden md:block">
           {/* <Button className="bg-[#6A59CE] hover:bg-primary/90 px-6 py-2"> */}
-          <Button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
+          <Button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold py-3.5 pl-5 pr-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
             <Image
               src={plus}
               alt="Plus Icon"
               width={18}
               height={18}
-              className="pb-0.5"
+              className=""
               priority={true}
             />
-            <span className="font-geist font-semibold text-[15px] leading-[150%] tracking-[-0.2px]">
+            <span className="font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]">
               Create event
             </span>
           </Button>

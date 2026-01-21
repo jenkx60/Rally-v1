@@ -50,7 +50,7 @@ const HelpPage = () => {
 
       {/* Talk to Us Card */}
       {/* Check shadow */}
-      <div className="w-full border border-[#0000000D] rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow-xs shadow-[#1A1A1A0D]"> 
+      <div className="w-full border border-[#0000000D] rounded-2xl p-5 md:p-6 flex items-start gap-4 shadow shadow-[#E8E8E81A]"> 
         <div className="shrink-0 w-12 h-12 rounded-lg bg-[#F0EEFA] flex items-center justify-center">
           <Mail className="w-6 h-6 text-[#6A59CE]" />
         </div>
@@ -76,7 +76,7 @@ const HelpPage = () => {
           <AccordionItem 
             key={faq.id} 
             value={faq.id}
-            className="border border-[#0000000D] rounded-2xl px-6 bg-white overflow-hidden transition-all shadow-xs shadow-[#1A1A1A0D]"
+            className="border border-[#0000000D] rounded-2xl px-6 bg-white overflow-hidden transition-all shadow shadow-[#E8E8E81A]"
           >
             <AccordionTrigger className="hover:no-underline py-5 font-geist font-medium text-[15px] text-[#333333] text-left leading-[150%] tracking-[-0.2px] cursor-pointer">
               {faq.question}

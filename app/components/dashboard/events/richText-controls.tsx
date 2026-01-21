@@ -91,22 +91,25 @@ const RichTextControls: React.FC<RichTextControlsProps> = ({ textareaRef }) => {
     // };
 
   return (
-    <div className='flex items-center gap-5 border-b border-[#E8E8E8] bg-[#FAFAFA] rounded-tl-xl rounded-tr-xl px-3.5 py-2.5'>
+    <div className='flex items-center gap-5 border-b border-[#E8E8E8] bg-[#FAFAFA] rounded-tl-xl rounded-tr-xl  px-3.5 py-2.5'>
         <button
             type='button'
             onClick={() => applyFormat('bold')}
+            className='hover:bg-[#F5F5F5] p-1 rounded-[8px] cursor-pointer'
         >
             <Image src={bold} alt='bold' width={20} height={20} priority={true} />
         </button>
         <button
             type='button'
             onClick={() => applyFormat('italic')}
+            className='hover:bg-[#F5F5F5] p-1 rounded-[8px] cursor-pointer'
         >
             <Image src={italic} alt='bold' width={20} height={20} priority={true} />
         </button>
         <button
             type='button'
             onClick={() => applyFormat('underline')}
+            className='hover:bg-[#F5F5F5] p-1 rounded-[8px] cursor-pointer'
         >
             <Image src={underline} alt='bold' width={20} height={20} priority={true} />
         </button>
@@ -114,12 +117,14 @@ const RichTextControls: React.FC<RichTextControlsProps> = ({ textareaRef }) => {
         <button
             type='button'
             onClick={() => applyFormat('alignLeft')}
+            className='hover:bg-[#F5F5F5] p-1 rounded-[8px] cursor-pointer'
         >
             <Image src={alignLeft} alt='bold' width={20} height={20} priority={true} />
         </button>
         <button
             type='button'
             onClick={() => applyFormat('alignCenter')}
+            className='hover:bg-[#F5F5F5] p-1 rounded-[8px] cursor-pointer'
         >
             <Image src={alignCenter} alt='bold' width={20} height={20} priority={true} />
         </button>
@@ -127,6 +132,7 @@ const RichTextControls: React.FC<RichTextControlsProps> = ({ textareaRef }) => {
         <button
             type='button'
             onClick={() => applyFormat('link')}
+            className='hover:bg-[#F5F5F5] p-1 rounded-[8px] cursor-pointer'
         >
             <Image src={link} alt='bold' width={20} height={20} priority={true} />
         </button>

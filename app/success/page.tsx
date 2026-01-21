@@ -14,6 +14,8 @@ import people from "@/public/Sidebar/people-happy.svg";
 import forward from "@/public/Sidebar/share_forward_line.svg";
 import group from "@/public/Sidebar/group_3_line_o.svg";
 import ShareEventDialog from "../components/dashboard/events/share-event-dialog";
+import { Icon } from "@iconify/react";
+
 
 // Inner component to handle Search Params logic
 const SuccessContent = () => {
@@ -59,14 +61,14 @@ const SuccessContent = () => {
                     <h1 className="text-[40px] font-bricolage font-bold text-[#1A1A1A] leading-[110%] tracking-[-1px] text-center">
                         Your event is live!
                     </h1>
-                    <p className="text-[#A3A3A3] font-geist text-sm text-center">
+                    <p className="text-[#A3A3A3] font-geist font-medium text-sm text-center">
                         Time to rally your people
                     </p>
                 </div>
             </div>
 
             {/* Event Card Preview */}
-            <div className="flex flex-col gap-6 bg-white border border-[#0000000D] rounded-2xl p-6 w-full shadow-sm shadow-[#1A1A1A0D]">
+            <div className="flex flex-col gap-6 bg-white border border-[#0000000D] rounded-2xl p-6 w-full shadow shadow-[#E8E8E81A]">
                 {/* Event Image */}
                 <div className="relative w-full h-[200px] rounded-[10px] overflow-hidden">
                     <Image 
@@ -96,8 +98,8 @@ const SuccessContent = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <p className="text-[14px] text-[#767676] font-geist font-medium leading-[150%] tracking-[-0.1px]">Event link</p>
-                        <div className="flex items-center justify-between bg-[#FDFDFD] border border-[#FAFAFA] rounded-xl px-4 py-3.5">
+                        <p className="text-[13px] text-[#767676] font-geist font-medium leading-[150%] tracking-[-0.1px]">Event link</p>
+                        <div className="flex items-center justify-between bg-[#FDFDFD] border border-[#FAFAFA] rounded-[12px] px-4 py-3.5">
                             <span className="font-geist font-medium text-[14px] text-[#A3A3A3] leading-[100%] tracking-[-0.1px] truncate max-w-[150px] md:max-w-none">
                                 https://rally.com/yup2ibi6g6
                             </span>
@@ -110,7 +112,7 @@ const SuccessContent = () => {
                                 ) : (
                                     <>
                                         {/* Link Icon */}
-                                        <LinkIcon className="h-4 w-4" />
+                                        <Icon icon="mingcute:link-2-line" width="16" height="16"  style={{color: "#6A59CE"}} />
                                         <span className="">Copy link</span>
                                     </>
                                 )}
@@ -150,10 +152,10 @@ const SuccessContent = () => {
             {/* Next Steps */}
             <div className="w-full space-y-2">
                 <p className="text-[15px] text-[#767676] font-geist font-medium leading-[150%] tracking-[-0.2px]">What happens next?</p>
-                <div className="flex flex-col gap-6 border border-[#0000000D] rounded-2xl p-6 bg-white shadow-sm shadow-[#1A1A1A0D]">
+                <div className="flex flex-col gap-6 border border-[#0000000D] rounded-2xl p-6 bg-white shadow shadow-[#E8E8E81A]">
                     <div className="flex flex-col gap-6">
                         <div className="flex gap-3">
-                            <div className="h-8 w-8 bg-[#FFF5EB] rounded-lg flex items-center justify-center shrink-0">
+                            <div className="h-8 w-8 bg-[#FFF5EB] rounded-md flex items-center justify-center shrink-0">
                                 <Image
                                     src={group}
                                     alt="Group Icon"
@@ -169,7 +171,7 @@ const SuccessContent = () => {
                             </div>
                         </div>
                         <div className="flex gap-3">
-                            <div className="h-8 w-8 bg-[#F5F3FF] rounded-lg flex items-center justify-center shrink-0">
+                            <div className="h-8 w-8 bg-[#F5F3FF] rounded-md flex items-center justify-center shrink-0">
                                 <LayoutDashboard className="h-4 w-4 text-[#6A59CE]" />
                             </div>
                             <div className="flex flex-col gap-0.5">

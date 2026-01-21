@@ -227,7 +227,7 @@ const AccountTab = () => {
               <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Social links</label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-geist">
                   <div className="flex h-11 rounded-lg border border-[#DFDFDF] overflow-hidden">
-                      <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">instagram.com/</span>
+                      <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] rounded-l-md text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">instagram.com/</span>
                       <Input 
                           type="text" 
                           placeholder="username"
@@ -235,7 +235,7 @@ const AccountTab = () => {
                       />
                   </div>
                   <div className="flex h-11 rounded-lg border border-[#DFDFDF] overflow-hidden">
-                      <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">x.com/</span>
+                      <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] rounded-l-md text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">x.com/</span>
                       <Input 
                           type="text" 
                           placeholder="username"
@@ -384,7 +384,7 @@ const AccountTab = () => {
 
       {/* Delete Account Section */}
       <section className="space-y-4 mb-6 md:mb-0">
-         <div className="p-6 border border-[#0000000D] rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow shadow-[#1A1A1A0D]">
+         <div className="p-6 border border-[#0000000D] rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow shadow-[#E8E8E81A]">
             <div className="space-y-1.5">
                 <h3 className="font-bricolage font-semibold text-[18px] text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">Delete account</h3>
                 <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">This action is permanent and can&apos;t be undone</p>

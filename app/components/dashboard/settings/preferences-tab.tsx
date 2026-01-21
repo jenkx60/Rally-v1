@@ -30,7 +30,7 @@ const PreferencesTab = () => {
         {/* Activity Section */}
         <div className="space-y-2">
              <h3 className="font-geist text-sm md:text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Activity</h3>
-             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#1A1A1A0D] p-5 md:p-6 space-y-5">
+             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#E8E8E81A] p-5 md:p-6 space-y-5">
                 <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                         <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Event updates</p>
@@ -52,7 +52,7 @@ const PreferencesTab = () => {
         {/* Financial Section */}
         <div className="space-y-2">
              <h3 className="font-geist text-sm md:text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Financial</h3>
-             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#1A1A1A0D] p-5 md:p-6 space-y-5">
+             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#E8E8E81A] p-5 md:p-6 space-y-5">
                 <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                         <p className="font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px]">Payout received</p>
@@ -66,7 +66,7 @@ const PreferencesTab = () => {
         {/* News & Updates Section */}
         <div className="space-y-2">
              <h3 className="font-geist text-sm md:text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">News & updates</h3>
-             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#1A1A1A0D] p-5 md:p-6 space-y-5">
+             <div className="border border-[#0000000D] rounded-2xl bg-white shadow shadow-[#E8E8E81A] p-5 md:p-6 space-y-5">
                 
                 <div className="flex items-center justify-between">
                     <div className="space-y-0.5">

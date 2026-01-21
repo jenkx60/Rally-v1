@@ -29,7 +29,7 @@ export const notifications: NotificationItem[] = [
     type: "info",
     icon: "package",
     title: "Your shipments have been delivered",
-    timestamp: "December 16, 2024 • 9:40 PM",
+    timestamp: "January 16, 2026 • 9:40 PM",
     image: saint,
     read: false,
   },

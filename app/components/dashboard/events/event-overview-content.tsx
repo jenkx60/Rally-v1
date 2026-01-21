@@ -505,10 +505,10 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                         />
                     </div>
 
-                    <div className='pt-6 md:pt-0'>
+                    <div className='pt-6'>
                         <div className='grid grid-cols-12 gap-4 md:gap-6'>
                             {/* 2. Event Details - Full width on mobile, 8/12 on desktop */}
-                            <div className='col-span-12 md:col-span-8 space-y-2'>
+                            <div className='col-span-12 md:col-span-8 space-y-2 shadow shadow-[#E8E8E81A]'>
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Event details</h2>
                                 <div className="flex items-center text-left p-5 border border-[#F5F5F5] rounded-xl bg-white space-y-6 min-h-[184px]">
                                     <div className="space-y-6 font-geist text-base text-[#767676]">
@@ -535,7 +535,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                             </div>                       
 
                             {/* 3. Quick Actions */}
-                            <div className='col-span-12 md:col-span-4 space-y-2'>
+                            <div className='col-span-12 md:col-span-4 space-y-2 shadow shadow-[#E8E8E81A]'>
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Quick actions</h2>
                                 <div className="p-5 border border-[#F5F5F5] rounded-xl bg-white space-y-6 min-h-fit md:min-h-[186px]">
                                     {/* Share Event */}
@@ -561,7 +561,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
 
                         <div className="grid grid-cols-12 gap-4 md:gap-6 pt-4 md:pt-6">
                             {/* 4. Recent Activity */}
-                            <div className='col-span-12 md:col-span-8 space-y-2'>
+                            <div className='col-span-12 md:col-span-8 space-y-2 shadow shadow-[#E8E8E81A]'>
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Recent activity</h2>
                                 <div className="p-5 border border-[#F5F5F5] rounded-xl bg-white">
                                     <div className="space-y-2">
@@ -573,7 +573,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                             </div>
                             
                             {/* 5. Attendees Summary */}
-                            <div className='col-span-12 md:col-span-4 space-y-2'>
+                            <div className='col-span-12 md:col-span-4 space-y-2 shadow shadow-[#E8E8E81A]'>
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Attendees</h2>
                                 <div className="p-5 border border-[#0000000D] rounded-xl bg-white min-h-[202px] flex flex-col justify-between">
                                     <AttendeesStack count={event.rsvps} attendees={event.attendees} />

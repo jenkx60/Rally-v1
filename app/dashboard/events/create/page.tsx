@@ -836,6 +836,7 @@ import image1 from '@/public/Sidebar/cal-ill.svg';
 import image2 from '@/public/Sidebar/link-up.svg';
 import image3 from '@/public/Sidebar/sunday-ill.svg';
 import image4 from '@/public/Sidebar/sip-ill.svg';
+import { Icon } from "@iconify/react";
 
 // --- Mock Data matching the image ---
 const MOCK_EVENTS = [
@@ -1159,157 +1160,159 @@ const CreateEventPage = () => {
 
   // --- Render Step 1: Create Event ---
   const renderStep1 = () => (
-    <form onSubmit={handleNext} className="flex flex-col gap-8 pt-4 md:pt-8 animate-in fade-in slide-in-from-right-4 duration-300">
-        <div className="h-[200px] w-full md:w-[350px] rounded-[12px] bg-[#F8F6FD] flex items-center justify-center relative overflow-hidden">
-            <Image 
-                src={eventImageURL} 
-                alt="Event Image" 
-                layout="fill"
-                objectFit="cover"
-                className={cn("transition-opacity rounded-[12px]", typeof eventImageURL === 'string' ? "opacity-100" : "opacity-100")}
-                priority={true}
-            />
-
-            <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleImageChange}
-                accept="image/*"
-                className="hidden"
-            />
-            
-            <button 
-                type="button" 
-                onClick={handleUploadClick} 
-                className="absolute right-4 bottom-4 border-2 border-white flex h-8 w-8 items-center justify-center bg-[#F8F6FD] rounded-md shadow-md cursor-pointer hover:bg-gray-50 transition-colors z-10"
-            >
-                <Image src={camera} alt="upload" width={20} height={20} priority={true} />
-            </button>
-        </div>
-
-        <section className="flex flex-col gap-6">
-            <div className="flex flex-col gap-1.5">
-                <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">What&apos;s your event called?</label>
-                <Input 
-                    name="title" 
-                    value={formData.title} 
-                    onChange={handleChange} 
-                    placeholder="e.g. Divii's games night" 
-                    className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
+    <form onSubmit={handleNext} className="flex flex-col gap-12 pt-4 md:pt-8 animate-in fade-in slide-in-from-right-4 duration-300">
+        <div className="flex flex-col gap-8">
+            <div className="h-[200px] w-full md:w-[350px] rounded-[12px] bg-[#F8F6FD] flex items-center justify-center relative overflow-hidden">
+                <Image 
+                    src={eventImageURL} 
+                    alt="Event Image" 
+                    layout="fill"
+                    objectFit="cover"
+                    className={cn("transition-opacity rounded-[12px]", typeof eventImageURL === 'string' ? "opacity-100" : "opacity-100")}
+                    priority={true}
                 />
-            </div>
-            
-            <div className="flex flex-col gap-1.5 w-full">
-                <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Category</label>
-                <Select value={formData.category} onValueChange={(value) => handleSelectChange('category', value)}>
-                    <SelectTrigger className="py-2.5 px-3.5 rounded-lg border border-[#E8E8E8] focus:ring-[#6A59CE] font-geist text-[15px] text-[#333333] w-full shadow-none">
-                        <SelectValue placeholder="Choose a category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
-                    </SelectContent>
-                </Select>
+
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    className="hidden"
+                />
+                
+                <button 
+                    type="button" 
+                    onClick={handleUploadClick} 
+                    className="absolute right-4 bottom-4 border-2 border-white flex h-8 w-8 items-center justify-center bg-[#F8F6FD] rounded-md shadow-md cursor-pointer hover:bg-gray-50 transition-colors"
+                >
+                    <Image src={camera} alt="upload" width={20} height={20} priority={true} />
+                </button>
             </div>
 
-            <div className="flex flex-col gap-1.5">
-                <div className="flex items-center justify-between">
-                    <label className="font-geist text-[14px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Add a description <span className="text-[#A3A3A3] font-geist font-normal">(Optional)</span></label>
-                    <button 
-                        type="button" 
-                        disabled={!isAiActive} 
-                        className={cn("flex items-center gap-1 p-0 h-auto font-geist text-sm font-medium text-[#6A59CE] hover:bg-transparent cursor-pointer",
-                            isAiActive ? "text-[#6A59CE] hover:text-[#5a4cb0]" : "text-[#A3A3A3] cursor-not-allowed"
-                        )}
-                    >
-                        <Wand className="h-4 w-4" /> 
-                        <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
-                    </button>
-                </div>
-                <div className=" rounded-lg border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]">
-                    <RichTextControls textareaRef={descriptionTextareaRef} />
-                    <Textarea 
-                        ref={descriptionTextareaRef} 
-                        name="description" value={formData.description} 
+            <section className="flex flex-col gap-6">
+                <div className="flex flex-col gap-1.5">
+                    <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">What&apos;s your event called?</label>
+                    <Input 
+                        name="title" 
+                        value={formData.title} 
                         onChange={handleChange} 
-                        maxLength={300} 
-                        placeholder="What should attendees know?" 
-                        className="min-h-40 resize-none rounded-t-none border-none p-4 focus-visible:ring-0 font-geist text-[14px] text-black placeholder:text-[#BFBFBF] leading-[150%] tracking-[-0.2px] shadow-none" />
+                        placeholder="e.g. Divii's games night" 
+                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
+                    />
                 </div>
-                <div className="font-geist text-xs text-[#A3A3A3] flex justify-end">{descriptionLength}/300</div>
-            </div>
-        </section>
+                
+                <div className="flex flex-col gap-1.5 w-full">
+                    <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Category</label>
+                    <Select value={formData.category} onValueChange={(value) => handleSelectChange('category', value)}>
+                        <SelectTrigger className="py-2.5 px-3.5 rounded-lg border border-[#E8E8E8] focus:ring-[#6A59CE] font-geist text-[15px] text-[#333333] w-full shadow-none">
+                            <SelectValue placeholder="Choose a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
+                        </SelectContent>
+                    </Select>
+                </div>
 
-        <section className="flex flex-col gap-6 pt-2 md:pt-6">
-            <h3 className="font-bricolage text-[20px] font-semibold leading-[130%] tracking-[-0.7px] text-[#1A1A1A]">When and where?</h3>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-4">
-                <div className="grid col-span-1 md:col-span-2 gap-1.5">
-                    <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Date</label>
-                    {/* <div className="relative">
-                        <Input 
-                            name="date" 
-                            value={formData.date} 
+                <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center justify-between">
+                        <label className="font-geist text-[14px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Add a description <span className="text-[#A3A3A3] font-geist font-normal">(Optional)</span></label>
+                        <button 
+                            type="button" 
+                            disabled={!isAiActive} 
+                            className={cn("flex items-center gap-1 p-0 h-auto font-geist text-sm font-medium text-[#6A59CE] hover:bg-transparent cursor-pointer",
+                                isAiActive ? "text-[#6A59CE] hover:text-[#5a4cb0]" : "text-[#A3A3A3] cursor-not-allowed"
+                            )}
+                        >
+                            <Icon icon="mingcute:pencil-3-ai-line" width="16" height="16" /> 
+                            <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
+                        </button>
+                    </div>
+                    <div className=" rounded-xl border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]">
+                        <RichTextControls textareaRef={descriptionTextareaRef} />
+                        <Textarea 
+                            ref={descriptionTextareaRef} 
+                            name="description" value={formData.description} 
                             onChange={handleChange} 
-                            placeholder="mm/dd/yyyy" 
-                            className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none"  
-                        />
-                        <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
-                    </div> */}
+                            maxLength={300} 
+                            placeholder="What should attendees know?" 
+                            className="min-h-40 resize-none rounded-t-xl border-none p-4 focus-visible:ring-0 font-geist text-[14px] text-black placeholder:text-[#BFBFBF] leading-[150%] tracking-[-0.2px] shadow-none" />
+                    </div>
+                    <div className="font-geist text-xs text-[#A3A3A3] flex justify-end">{descriptionLength}/300</div>
+                </div>
+            </section>
 
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant={"outline"}
-                                className={cn("relative flex justify-start px-3.5 py-2.5 rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none",
-                                    !formData.date && "text-[#000000]"
-                                )}
-                            >
-                                {formData.date ? format(formData.date, "PPP") : <span className="text-[#BFBFBF] font-medium">mm/dd/yyyy</span>}
-                                <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="center">
-                            <CalendarComponent
-                                mode="single"
-                                selected={formData.date}
-                                onSelect={handleDateSelect}
-                                initialFocus 
+            <section className="flex flex-col gap-6 pt-2 md:pt-4">
+                <h3 className="font-bricolage text-[20px] font-semibold leading-[130%] tracking-[-0.7px] text-[#1A1A1A]">When and where?</h3>
+                <div className="grid grid-cols-1 gap-2 md:grid-cols-4">
+                    <div className="grid col-span-1 md:col-span-2 gap-1.5">
+                        <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Date</label>
+                        {/* <div className="relative">
+                            <Input 
+                                name="date" 
+                                value={formData.date} 
+                                onChange={handleChange} 
+                                placeholder="mm/dd/yyyy" 
+                                className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none"  
                             />
-                        </PopoverContent>
-                    </Popover>
+                            <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
+                        </div> */}
+
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant={"outline"}
+                                    className={cn("relative flex justify-start px-3.5 py-2.5 rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none",
+                                        !formData.date && "text-[#000000]"
+                                    )}
+                                >
+                                    {formData.date ? format(formData.date, "PPP") : <span className="text-[#BFBFBF] font-medium">mm/dd/yyyy</span>}
+                                    <Calendar className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="center">
+                                <CalendarComponent
+                                    mode="single"
+                                    selected={formData.date}
+                                    onSelect={handleDateSelect}
+                                    initialFocus 
+                                />
+                            </PopoverContent>
+                        </Popover>
+                    </div>
+                    <div className="grid col-span-1 md:col-span-1 gap-1.5">
+                        <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Start time</label>
+                        <Select value={formData.startTime} onValueChange={(value) => handleSelectChange("startTime", value)}>
+                            <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium">
+                                <SelectValue placeholder="10:00 AM" />
+                                {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
+                            </SelectTrigger>
+                            <SelectContent>
+                                {TIME_OPTIONS.map(time => <SelectItem key={time} value={time}>{time}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div className="grid col-span-1 md:col-span-1 gap-1.5">
+                        <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">End time</label>
+                        <Select value={formData.endTime} onValueChange={(value) => handleSelectChange("endTime", value)}>
+                            <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium">
+                                <SelectValue placeholder="10:00 PM" />
+                                {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
+                            </SelectTrigger>
+                            <SelectContent>
+                                {TIME_OPTIONS.map(time => <SelectItem key={time} value={time}>{time}</SelectItem>)}
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
-                <div className="grid col-span-1 md:col-span-1 gap-1.5">
-                    <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Start time</label>
-                    <Select value={formData.startTime} onValueChange={(value) => handleSelectChange("startTime", value)}>
-                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium">
-                            <SelectValue placeholder="10:00 AM" />
-                            {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
-                        </SelectTrigger>
-                        <SelectContent>
-                            {TIME_OPTIONS.map(time => <SelectItem key={time} value={time}>{time}</SelectItem>)}
-                        </SelectContent>
-                    </Select>
+                <div className="flex flex-col gap-3">
+                    <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Location</label>
+                    <LocationTypeSelector value={formData.locationType} onChange={(type) => handleSelectChange('locationType', type)} />
+                    <Input name="location" value={formData.location} onChange={handleChange} placeholder={formData.locationType === 'Physical' ? "Enter location" : "Paste meeting link (Zoom, Google meet, etc.)"} className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium" />
                 </div>
-                <div className="grid col-span-1 md:col-span-1 gap-1.5">
-                    <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">End time</label>
-                    <Select value={formData.endTime} onValueChange={(value) => handleSelectChange("endTime", value)}>
-                        <SelectTrigger className="relative rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium">
-                            <SelectValue placeholder="10:00 PM" />
-                            {/* <Clock className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-[#959595]" /> */}
-                        </SelectTrigger>
-                        <SelectContent>
-                            {TIME_OPTIONS.map(time => <SelectItem key={time} value={time}>{time}</SelectItem>)}
-                        </SelectContent>
-                    </Select>
-                </div>
-            </div>
-            <div className="flex flex-col gap-3">
-                <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Location</label>
-                <LocationTypeSelector value={formData.locationType} onChange={(type) => handleSelectChange('locationType', type)} />
-                <Input name="location" value={formData.location} onChange={handleChange} placeholder={formData.locationType === 'Physical' ? "Enter location" : "Paste meeting link (Zoom, Google meet, etc.)"} className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none font-medium" />
-            </div>
-        </section>
+            </section>
+        </div>
         
-        <footer className="flex w-full items-center justify-between gap-3 pt-6 mt-8">
+        <footer className="flex w-full items-center justify-between gap-3 pt-4 md:pt-8">
             <button type="button" className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#FAFAFA] border border-[#E8E8E8]">Cancel</button>
             <button 
                 type="submit" 
@@ -1412,7 +1415,7 @@ const CreateEventPage = () => {
             <div className="rounded-xl border border-[#E8E8E8] p-4 md:p-8 bg-white shadow-xs space-y-6">
                 <div className="flex items-center justify-between">
                     <h3 className="font-bricolage text-[20px] font-semibold text-[#1a1a1a] leading-[130%] tracking-[-0.7px]">
-                        Ticket details {tickets.length > 0 ? `(${tickets.length + 1})` : ''}
+                        Ticket details <span className="text-[#A3A3A3">{tickets.length > 0 ? `(${tickets.length + 1})` : ''}</span> 
                     </h3>
                     {tickets.length > 0 && (
                         <button onClick={() => setIsTicketFormOpen(false)} className="text-xs text-[#959595] hover:text-[#1A1A1A]">Cancel</button>
@@ -1426,7 +1429,7 @@ const CreateEventPage = () => {
                         value={currentTicket.name} 
                         onChange={handleTicketChange} 
                         placeholder="e.g. Regular" 
-                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" 
+                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] font-medium shadow-none placeholder:font-medium" 
                     />
                 </div>
 
@@ -1441,7 +1444,7 @@ const CreateEventPage = () => {
                                 value={currentTicket.price} 
                                 onChange={handleTicketChange} 
                                 placeholder="0" 
-                                className="pl-8 rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist font-normal leading-6 tracking-[-0.1px] text-[15px] text-[#1A1A1A] shadow-none" 
+                                className="pl-8 rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist font-medium leading-6 tracking-[-0.1px] text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
                             />
                         </div>
                     </div>
@@ -1455,7 +1458,7 @@ const CreateEventPage = () => {
                         value={currentTicket.spots} 
                         onChange={handleTicketChange}
                         placeholder="Leave blank for unlimited"
-                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none" 
+                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist font-medium text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
                     />
                 </div>
 
@@ -1468,7 +1471,7 @@ const CreateEventPage = () => {
                             onChange={handleTicketChange}
                             maxLength={200}
                             placeholder="e.g. Includes drinks or merch"
-                            className="min-h-[120px] resize-none rounded-lg border border-[#E8E8E8] p-4 focus-visible:ring-[#6A59CE] focus-visible:ring font-geist font-medium leading-[150%] tracking-[-0.2px] text-[15px] text-[#1a1a1a] placeholder:text-[#bfbfbf]"
+                            className="min-h-[120px] resize-none rounded-lg border border-[#E8E8E8] p-4 focus-visible:ring-[#6A59CE] focus-visible:ring font-geist font-medium leading-[150%] tracking-[-0.2px] text-[15px] text-[#333333] shadow-none placeholder:text-[#bfbfbf]"
                         />
                     </div>
                     <div className="flex justify-end font-geist text-xs text-[#A3A3A3]">{ticketDescLength}/200</div>

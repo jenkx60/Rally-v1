@@ -261,6 +261,7 @@ import sharePlane from '@/public/Sidebar/paper-plane.svg';
 import Image from 'next/image';
 import { StaticImageData } from 'next/image';
 import { Copy, Link as LinkIcon } from 'lucide-react';
+import { Icon } from "@iconify/react";
 
 // 1. Imports for Desktop (Dialog) and Mobile (Drawer)
 import { 
@@ -345,6 +346,14 @@ interface ShareEventDialogProps {
 
 const ShareEventDialog: React.FC<ShareEventDialogProps> = ({ eventLink, trigger, eventTitle }) => {
     const isMobile = useIsMobile();
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(eventLink);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+    };
+    
     
     const defaultMessage = eventTitle 
         ? `Check out the event "${eventTitle}"! RSVP here:` 
@@ -392,15 +401,30 @@ const ShareEventDialog: React.FC<ShareEventDialogProps> = ({ eventLink, trigger,
             </div>
 
             {/* Link Section */}
-            <div className="flex items-center justify-between border-[0.8px] border-[#FAFAFA] bg-[#FDFDFD] rounded-xl py-3.5 px-4">
-                <span className="font-geist font-medium leading-[100%] tracking-[-0.1px] text-sm text-[#A3A3A3] truncate max-w-[70%]">
+            <div className="flex items-center justify-between border-[0.8px] border-[#FAFAFA] bg-[#FDFDFD] rounded-[12px] py-3.5 px-4">
+                <span className="font-geist font-medium leading-[100%] tracking-[-0.1px] text-sm text-[#A3A3A3] truncate max-w-[150px] md:max-w-none">
                     {eventLink}
                 </span>
-                <button 
+                {/* <button 
                     onClick={() => handleCopyLink(eventLink)}
                     className="flex items-center gap-1.5 text-[#6A59CE] hover:text-[#5a4cb0] text-sm font-medium font-geist leading-[100%] tracking-[-0.1px] transition-colors"
                 >
-                    <LinkIcon className="h-3 w-3" /> Copy link
+                    <LinkIcon className="h-3 w-3" /> 
+                    <Icon icon="mingcute:link-2-line" width="16" height="16"  style={{color: "#6A59CE"}} /> Copy link
+                </button> */}
+                <button 
+                    onClick={handleCopy}
+                    className="flex items-center gap-1.5 text-[#6A59CE] hover:text-[#5a4cb0] text-sm font-medium font-geist leading-[100%] tracking-[-0.2px] transition-colors cursor-pointer"
+                >
+                    {isCopied ? (
+                        <span>Link copied!</span>
+                    ) : (
+                        <>
+                            {/* Link Icon */}
+                            <Icon icon="mingcute:link-2-line" width="16" height="16"  style={{color: "#6A59CE"}} />
+                            <span className="">Copy link</span>
+                        </>
+                    )}
                 </button>
             </div>
         </div>

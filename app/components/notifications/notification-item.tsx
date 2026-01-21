@@ -139,7 +139,7 @@ export function NotificationItem({
 
       <div className="flex justify-between font-geist w-full border-b border-[#0000000D] pb-5">
         <div className="w-full md:min-w-[268px]">
-          <p className="text-[14px] text-[#1A1A1A] font-medium leading-[140%] tracking-[-0.1px]">
+          <p className="text-[14px] text-[#333333] font-medium leading-[140%] tracking-[-0.1px]">
             {title}
           </p>
           <p className="text-[12px] text-[#A3A3A3] font-normal mt-0.5">
@@ -154,7 +154,7 @@ export function NotificationItem({
                 alt="Event thumbnail" 
                 width={40} 
                 height={32} 
-                className="rounded-lg object-cover h-8 w-10 border border-[#F0F0F0]" 
+                className="rounded-lg object-cover h-8 w-10" 
                 priority={true}
               />
             </div>

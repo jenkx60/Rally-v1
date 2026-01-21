@@ -190,7 +190,7 @@ const EventSettingsContent: React.FC = () => {
                     {/* 1. Notifications Column */}
                     <div className="space-y-4">
                         <h2 className="font-geist text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.2px]">Notifications</h2>
-                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] px-6 py-2 shadow shadow-[#1A1A1A0D]">
+                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] px-6 py-2 shadow shadow-[#E8E8E81A]">
                             <SettingToggle
                                 id="notifyNewRSVP"
                                 label="Notify me of new RSVPs"
@@ -207,7 +207,7 @@ const EventSettingsContent: React.FC = () => {
                     {/* 2. RSVP Options Column */}
                     <div className="space-y-4">
                         <h2 className="font-geist text-[15px] font-medium text-[#767676] leading-[150%] tracking-[-0.2px]">RSVP options</h2>
-                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] px-6 py-2 shadow shadow-[#1A1A1A0D]">
+                        <div className="space-y-2 border border-[#0000000D] rounded-[16px] px-6 py-2 shadow shadow-[#E8E8E81A]">
                             <SettingToggle
                                 id="requireGuestApproval"
                                 label="Require guest approval"
@@ -224,7 +224,7 @@ const EventSettingsContent: React.FC = () => {
                 
 
                 {/* Delete Event Section */}
-                {/* <div className="space-y-6 border border-[#0000000D] rounded-2xl p-6 shadow shadow-[#1A1A1A0D]">
+                {/* <div className="space-y-6 border border-[#0000000D] rounded-2xl p-6 shadow shadow-[#E8E8E81A]">
                     <div className='space-y-1.5'>
                         <h2 className="font-bricolage text-[20px] font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">Delete event</h2>
                         <p className="font-geist text-sm text-[#A3A3A3]">This action is permanent and can’t be undone</p>
@@ -236,7 +236,7 @@ const EventSettingsContent: React.FC = () => {
                             Delete event
                         </button>
                 </div> */}
-                <div className="p-6 border border-[#0000000D] rounded-[16px] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow shadow-[#1A1A1A0D]">
+                <div className="p-6 border border-[#0000000D] rounded-[16px] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow shadow-[#E8E8E81A]">
                     <div className="space-y-1.5">
                         <h3 className="font-bricolage font-semibold text-[18px] text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">Delete event</h3>
                         <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">This action is permanent and can&apos;t be undone</p>

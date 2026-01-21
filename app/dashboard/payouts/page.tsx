@@ -102,7 +102,7 @@ const PayoutPage = () => {
     <div className="flex flex-col gap-12 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
             {/* Page Header */}
             <div className="space-y-1">
-                <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Payouts</h1>
+                <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Payouts</h1>
                 <p className="font-geist font-medium text-sm text-[#A3A3A3]">Track payments from your events</p>
             </div>
 
