@@ -99,7 +99,7 @@ const AttendeesPage = () => {
     return (
         <div className="bg-white flex flex-col gap-12 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
             <div>
-                <h2 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
+                <h2 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
                 <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Guest list for all your events in one place</p>
             </div>
 
@@ -182,7 +182,7 @@ const AttendeesPage = () => {
                                 <TableRow key={attendee.id} className='text-[#1A1A1A] font-medium font-geist text-sm'>
                                     <TableCell className="font-medium">
                                         <div className="flex items-center gap-3">
-                                            <div className={cn("h-8 w-8 rounded-full border flex items-center justify-center overflow-hidden p-0.5", ["bg-[#F0EEFA]", "bg-[#FFECE5]"][attendee.id % 2])}>
+                                            <div className={cn("h-8 w-8 rounded-full flex items-center justify-center overflow-hidden p-0.5", ["bg-[#F0EEFA]", "bg-[#FFECE5]"][attendee.id % 2])}>
                                                 <Image
                                                     src={attendee.avatar}
                                                     alt={attendee.name}

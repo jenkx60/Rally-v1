@@ -131,7 +131,7 @@ const PayoutAccountForm = ({
 // --- Shared Header Component ---
 const CustomHeader = ({ onClose, isEditing }: { onClose: () => void, isEditing: boolean }) => (
   <div className="flex justify-between items-center mb-6">
-    <h2 className="font-bricolage text-[20px] font-bold text-[#1A1A1A]">
+    <h2 className="font-bricolage text-[20px] font-bold  leading-[130%] tracking-[-0.7px] text-[#1A1A1A]">
         {isEditing ? 'Edit payout account' : 'Add payout account'}
     </h2>
     {/* Hidden on mobile, visible on desktop */}

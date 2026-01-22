@@ -237,7 +237,7 @@ const EditPayoutForm: React.FC<EditPayoutFormProps> = ({
         </button>
         <button
           onClick={handleSave}
-          className="w-full px-5 py-4 rounded-lg bg-[#6A59CE] font-geist font-medium text-white hover:bg-[#5a4cb0] text-[15px] transition-colors cursor-pointer"
+          className="w-full px-5 py-4 rounded-lg bg-[#6A59CE] hover:bg-primary/90 font-geist font-medium text-white text-[15px] transition-colors cursor-pointer"
         >
           Add account
         </button>

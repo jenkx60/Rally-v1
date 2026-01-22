@@ -90,7 +90,7 @@ export default function ProfilePage() {
           {pastEvents.map((event) => (
             <div
               key={event.id}
-              className="group flex items-center gap-4 p-5 bg-white border border-[#0000000D] rounded-xl shadow shadow-[#1A1A1A0D] transition-colors"
+              className="group flex items-center gap-4 p-5 bg-white border border-[#0000000D] rounded-xl shadow shadow-[#E8E8E81A] transition-colors"
             >
               {/* Event Image */}
               <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-lg overflow-hidden bg-gray-100">

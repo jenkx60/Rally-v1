@@ -62,7 +62,7 @@ const MOCK_EVENTS = [
         title: "Sip & yap",
         dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
         location: "Lekki phase 1, Lekki",
-        attendees: 0,
+        attendees: 4,
         status: 'Past' as const,
         imageSrc: image4,
     },

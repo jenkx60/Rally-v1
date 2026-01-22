@@ -101,18 +101,20 @@ const EventAttendeesContent = () => {
                     {mockAttendees.map((attendee) => (
                         <TableRow key={attendee.id} className='text-[#1A1A1A] font-medium font-geist text-sm'>
                             <TableCell className="font-medium">
-                                <div className="flex items-center gap-3">
-                                    <Image
-                                        src={attendee.avatar}
-                                        alt={attendee.name}
-                                        width={32}
-                                        height={32} 
-                                        className='h-8 w-8 rounded-full border'
-                                        priority={true}
-                                    />
+                                 <div className="flex items-center gap-3">
+                                    <div className={cn("h-8 w-8 rounded-full border flex items-center justify-center overflow-hidden p-0.5", ["bg-[#F0EEFA]", "bg-[#FFECE5]"][attendee.id % 2])}>
+                                        <Image
+                                            src={attendee.avatar}
+                                            alt={attendee.name}
+                                            width={32}
+                                            height={32} 
+                                            className='h-8 w-full object-cover rounded-full'
+                                            priority={true}
+                                        />
+                                    </div>
                                     <div className='flex flex-col font-geist text-sm leading-[150%]'>
                                         <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>
-                                        <p className='font-normal text-[#959595]'>{attendee.email}</p>
+                                        <p className='font-normal text-[#A3A3A3]'>{attendee.email}</p>
                                     </div>
                                 </div>
                             </TableCell>

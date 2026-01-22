@@ -1233,7 +1233,7 @@ const CreateEventPage = () => {
                             <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
                         </button>
                     </div>
-                    <div className=" rounded-xl border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]">
+                    <div className=" rounded-md border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]">
                         <RichTextControls textareaRef={descriptionTextareaRef} />
                         <Textarea 
                             ref={descriptionTextareaRef} 
@@ -1281,6 +1281,7 @@ const CreateEventPage = () => {
                                     selected={formData.date}
                                     onSelect={handleDateSelect}
                                     initialFocus 
+                                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                                 />
                             </PopoverContent>
                         </Popover>
@@ -1423,11 +1424,11 @@ const CreateEventPage = () => {
                 <div className="flex items-center justify-between">
                     <h3 className="font-bricolage text-[20px] font-semibold text-[#1a1a1a] leading-[130%] tracking-[-0.7px]">
                         Ticket details {" "}
-                        <span className="text-[#A3A3A3] font-semibold">{tickets.length > 0 ? `(${tickets.length})` : ''}</span> 
+                        <span className="text-[#BFBFBF] font-semibold">{tickets.length > 0 ? `(${tickets.length})` : ''}</span> 
                     </h3>
                     {tickets.length > 0 && (
                         <button onClick={() => setIsTicketFormOpen(false)} className="text-xs text-[#959595] hover:text-[#1A1A1A] cursor-pointer">
-                            <X className="h-4 w-4" />
+                            <X className="h-5 w-5" />
                         </button>
                     )}
                 </div>

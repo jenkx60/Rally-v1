@@ -178,7 +178,7 @@ const PayHistoryPage = () => {
             </Link>
 
             {/* Title */}
-            <h1 className="font-bricolage text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
+            <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">
                 Payout history
             </h1>
         </div>

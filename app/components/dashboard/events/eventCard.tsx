@@ -76,23 +76,23 @@ const AttendeeStack: React.FC<{ count: number; eventId: string }> = ({ count, ev
         const selectionIndex = seed + index
         const avatarSrc = avatars[selectionIndex % avatars.length];
         const bgColor = bgColors[selectionIndex % bgColors.length];
+        
         return (
             <div 
                 key={index}
                 className={cn(
-                    "h-7 w-7 rounded-full border border-white bg-gray-300 p-0.5",
-                    bgColor,
-                    index > 0 && "-ml-2"
+                    "h-7 w-7 rounded-full border border-white overflow-hidden",
+                    index > 0 && "-ml-2",
+                    bgColor
                 )}
                 style={{ zIndex: displayCount - index }}
             >
-                {/* Replace attendeeAvatar with actual small user image component if available */}
                 <Image 
                     src={avatarSrc} 
                     alt={`Attendee ${index + 1}`} 
-                    width={24} 
+                    width={32} 
                     height={32} 
-                    className="rounded-full object-cover"
+                    className="object-cover"
                     priority={true}
                 />
             </div>
@@ -109,7 +109,7 @@ const AttendeeStack: React.FC<{ count: number; eventId: string }> = ({ count, ev
             </div>
             
             {/* Attendee Count */}
-            <span className="h-7 w-7 rounded-full border-2 border-white bg-[#F7F7F7] font-medium text-[#959595] p-1">
+            <span className="h-7 w-7 rounded-full border-2 border-white bg-[#F7F7F7] font-medium text-[#959595] p-1 -ml-1.5">
                 {count > 0 ? `+${count}` : 'No attendees'}
             </span>
         </div>

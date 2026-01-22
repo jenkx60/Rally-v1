@@ -38,7 +38,7 @@ export const notifications: NotificationItem[] = [
     type: "pending",
     icon: "coin",
     title: "You have a pending shipment",
-    timestamp: "December 16, 2024 • 9:40 PM",
+    timestamp: "January 28, 2024 • 10:55 PM",
     image: sip,
     read: false,
   },
