@@ -798,7 +798,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import illustration from "@/public/Sidebar/cal-ill.svg";
 import tag from "@/public/Sidebar/tag.svg";
-import bank from "@/public/Sidebar/bank_card_fill.svg";
+import bankFilled from "@/public/Sidebar/bank_card_fill.svg";
+import bank from "@/public/Sidebar/bank.svg";
 import party from "@/public/Sidebar/party_popper.svg";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
@@ -822,7 +823,9 @@ import {
   Share2,
   ArrowRight,
   Copy,
-  LayoutDashboard
+  LayoutDashboard,
+  X,
+  Loader2
 } from "lucide-react";
 import camera from "@/public/Sidebar/camera_2.svg";
 import people from "@/public/Sidebar/people-happy.svg";
@@ -984,6 +987,7 @@ const CreateEventPage = () => {
   const [tickets, setTickets] = useState<TicketData[]>([]);
   const [isTicketFormOpen, setIsTicketFormOpen] = useState(true);
   const [editingTicketId, setEditingTicketId] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // State for the CURRENT ticket being edited/created
   const [currentTicket, setCurrentTicket] = useState<TicketData>({
@@ -1136,6 +1140,8 @@ const CreateEventPage = () => {
   const handleFinalSubmit = () => {
     if (tickets.length === 0) return;
 
+    setIsSubmitting(true);
+
     const params = new URLSearchParams();
     params.set("title", formData.title);
     if (formData.date) {
@@ -1197,7 +1203,7 @@ const CreateEventPage = () => {
                         value={formData.title} 
                         onChange={handleChange} 
                         placeholder="e.g. Divii's games night" 
-                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
+                        className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist font-medium text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
                     />
                 </div>
                 
@@ -1205,7 +1211,7 @@ const CreateEventPage = () => {
                     <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Category</label>
                     <Select value={formData.category} onValueChange={(value) => handleSelectChange('category', value)}>
                         <SelectTrigger className="py-2.5 px-3.5 rounded-lg border border-[#E8E8E8] focus:ring-[#6A59CE] font-geist text-[15px] text-[#333333] w-full shadow-none">
-                            <SelectValue placeholder="Choose a category" />
+                            <SelectValue placeholder="Choose a category" className="placeholder:font-medium" />
                         </SelectTrigger>
                         <SelectContent>
                             {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
@@ -1235,7 +1241,7 @@ const CreateEventPage = () => {
                             onChange={handleChange} 
                             maxLength={300} 
                             placeholder="What should attendees know?" 
-                            className="min-h-40 resize-none rounded-t-xl border-none p-4 focus-visible:ring-0 font-geist text-[14px] text-black placeholder:text-[#BFBFBF] leading-[150%] tracking-[-0.2px] shadow-none" />
+                            className="min-h-40 resize-none rounded-t-md border-none p-4 focus-visible:ring-0 font-geist text-[14px] text-black placeholder:text-[#BFBFBF] leading-[150%] tracking-[-0.2px] shadow-none" />
                     </div>
                     <div className="font-geist text-xs text-[#A3A3A3] flex justify-end">{descriptionLength}/300</div>
                 </div>
@@ -1357,7 +1363,8 @@ const CreateEventPage = () => {
                                 : " bg-white text-[#959595] hover:border-[#6A59CE] hover:text-[#6A59CE]"
                         )}
                     >
-                        <Image src={bank} alt="Bank fill" width={16} height={16} priority={true} />
+                        {/* <Image src={bank} alt="Bank fill" width={16} height={16} priority={true} /> */}
+                        <Icon icon="mingcute:bank-card-line" width="16" height="16" />
                         Paid
                     </button>
                 </div>
@@ -1383,13 +1390,13 @@ const CreateEventPage = () => {
                         <div className="flex items-center gap-2">
                             <button 
                                 onClick={() => handleEditTicket(ticket)}
-                                className="p-2 text-[#959595] hover:text-[#6A59CE] hover:bg-[#F8F6FD] rounded-full transition-colors"
+                                className="p-2 text-[#959595] hover:text-[#6A59CE] rounded-full transition-colors cursor-pointer"
                             >
                                 <Pencil className="h-4 w-4" />
                             </button>
                             <button 
                                 onClick={() => handleDeleteTicket(ticket.id)}
-                                className="p-2 text-[#959595] hover:text-[#EF4444] hover:bg-[#FEF2F2] rounded-full transition-colors"
+                                className="p-2 text-[#959595] hover:text-[#EF4444] rounded-full transition-colors cursor-pointer"
                             >
                                 <Trash2 className="h-4 w-4" />
                             </button>
@@ -1403,7 +1410,7 @@ const CreateEventPage = () => {
         {!isTicketFormOpen && tickets.length > 0 && (
             <button 
                 onClick={handleAddAnotherTicket}
-                className="flex items-center gap-2 text-[#6A59CE] font-geist text-[15px] font-medium hover:underline w-fit"
+                className="flex items-center gap-2 text-[#6A59CE] font-geist text-[15px] font-medium hover:underline w-fit cursor-pointer"
             >
                 <Plus className="h-4 w-4" />
                 Add another ticket
@@ -1415,10 +1422,13 @@ const CreateEventPage = () => {
             <div className="rounded-xl border border-[#E8E8E8] p-4 md:p-8 bg-white shadow-xs space-y-6">
                 <div className="flex items-center justify-between">
                     <h3 className="font-bricolage text-[20px] font-semibold text-[#1a1a1a] leading-[130%] tracking-[-0.7px]">
-                        Ticket details <span className="text-[#A3A3A3">{tickets.length > 0 ? `(${tickets.length + 1})` : ''}</span> 
+                        Ticket details {" "}
+                        <span className="text-[#A3A3A3] font-semibold">{tickets.length > 0 ? `(${tickets.length})` : ''}</span> 
                     </h3>
                     {tickets.length > 0 && (
-                        <button onClick={() => setIsTicketFormOpen(false)} className="text-xs text-[#959595] hover:text-[#1A1A1A]">Cancel</button>
+                        <button onClick={() => setIsTicketFormOpen(false)} className="text-xs text-[#959595] hover:text-[#1A1A1A] cursor-pointer">
+                            <X className="h-4 w-4" />
+                        </button>
                     )}
                 </div>
                 
@@ -1471,7 +1481,7 @@ const CreateEventPage = () => {
                             onChange={handleTicketChange}
                             maxLength={200}
                             placeholder="e.g. Includes drinks or merch"
-                            className="min-h-[120px] resize-none rounded-lg border border-[#E8E8E8] p-4 focus-visible:ring-[#6A59CE] focus-visible:ring font-geist font-medium leading-[150%] tracking-[-0.2px] text-[15px] text-[#333333] shadow-none placeholder:text-[#bfbfbf]"
+                            className="min-h-[120px] resize-none rounded-lg border border-[#E8E8E8] p-4 focus-visible:ring-[#6A59CE] focus-visible:ring font-geist font-medium leading-[150%] tracking-[-0.2px] text-[15px] text-[#333333] shadow-none placeholder:text-[#bfbfbf] placeholder:text-[15px]"
                         />
                     </div>
                     <div className="flex justify-end font-geist text-xs text-[#A3A3A3]">{ticketDescLength}/200</div>
@@ -1502,9 +1512,9 @@ const CreateEventPage = () => {
                 onClick={handleFinalSubmit}
                 type="button" 
                 disabled={tickets.length === 0}
-                className="rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
+                className="w-full md:w-auto rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
             >
-                Let&apos;s rally!
+                {isSubmitting ? ( <Loader2 className="h-4 w-4 animate-spin" /> ) : ( "Let's rally!" )}
             </button>
         </footer>
     </div>

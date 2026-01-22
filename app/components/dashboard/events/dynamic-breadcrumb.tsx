@@ -28,7 +28,7 @@ const DynamicBreadcrumb = () => {
 
   return (
     <>
-      <Breadcrumb className="hidden md:flex">
+      <Breadcrumb className="hidden md:flex text-sm">
         <BreadcrumbList>
           {/* Breadcrumb for the Dashboard */}
           {/* <BreadcrumbItem>

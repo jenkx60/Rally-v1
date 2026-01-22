@@ -285,17 +285,17 @@ const FilterForm: React.FC<FilterFormProps> = ({
             </div>
 
             {/* Actions: Matching your Button styles */}
-            <div className="flex pt-4 border-t border-[#F5F5F5] space-x-3">
+            <div className="flex pt-4 border-t border-[#F5F5F5] space-x-3 w-full">
                 <Button 
                     variant="outline"
                     onClick={handleClear} 
-                    className="flex-1 border-[#E8E8E8] text-[#525252] hover:bg-[#F7F7F7] font-geist font-semibold h-11 text-[15px]"
+                    className="w-[50%] border-[#E8E8E8] text-[#959595] hover:bg-[#F7F7F7] font-geist font-semibold h-11 text-[15px]"
                 >
                     Clear all
                 </Button>
                 <Button 
                     onClick={handleApply}
-                    className="flex-1 bg-[#6A59CE] hover:bg-[#5a4cb0] font-geist font-semibold h-11 text-[15px] text-white"
+                    className="w-[50%] bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold h-11 text-[15px] text-white"
                 >
                     Apply filters
                 </Button>

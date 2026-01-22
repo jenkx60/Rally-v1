@@ -169,7 +169,7 @@ const PayHistoryPage = () => {
     const filteredOptions: ('All' | 'Paid' | 'Pending')[] = ['All', 'Paid', 'Pending'];
 
   return (
-    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5">
+    <div className="flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
         <div>
             {/* Back Link */}
             <Link href="/dashboard/payouts" className="flex items-center gap-2 mb-6 font-geist text-sm font-medium text-[#767676] hover:text-[#525252]">
@@ -206,7 +206,7 @@ const PayHistoryPage = () => {
             {displayedPayouts.map((payout) => (
                 <div 
                     key={payout.id} 
-                    className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#1A1A1A0D] transition-colors"
+                    className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#E8E8E81A] transition-colors"
                 >
                     {/* Event Image / Thumbnail */}
                     <div className="h-12 w-12 rounded-[6px] bg-gray-100 shrink-0 overflow-hidden relative">

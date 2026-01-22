@@ -302,11 +302,15 @@ import sharePlane from '@/public/Sidebar/paper-plane.svg';
 import revenueIcon from '@/public/Sidebar/revenue-icon.svg'; 
 import spotsIcon from '@/public/Sidebar/coupon_fill.svg'; 
 import rsvpsIcon from '@/public/Sidebar/group_3_fill.svg'; 
-import illustrationUser from '@/public/Sidebar/avatar.svg';
+import avatar from '@/public/Sidebar/avatar.svg';
 import shareQuick from '@/public/Sidebar/forward-quick.svg';
 import editQuick from '@/public/Sidebar/edit-quick.svg';
 import attend from '@/public/Sidebar/attend-man.svg';
 import check from '@/public/Sidebar/check.svg';
+import avatar2 from "@/public/Sidebar/avatar-man.svg";
+import avatar3 from "@/public/Sidebar/avatar-glass.svg";
+import avatar4 from "@/public/Sidebar/avatar-kill.svg";
+import avatar5 from "@/public/Sidebar/avatar-3eyes.svg";
 import ShareEventDialog from './share-event-dialog';
 
 // --- Mock Data Structure ---
@@ -340,7 +344,7 @@ const mockEventData: EventData = {
     spotLimit: 50,
     revenue: 240000,
     revenueChange: 40,
-    attendees: Array(8).fill(0).map((_, i) => ({ id: i, avatar: illustrationUser.src })),
+    attendees: Array(8).fill(0).map((_, i) => ({ id: i, avatar: avatar.src })),
     recentActivity: [
         { id: 1, text: "3 new attendees joined", time: "Just now", type: 'join' },
         { id: 2, text: "Divil confirmed attendance", time: "5 mins ago", type: 'confirm' },
@@ -426,10 +430,23 @@ const ActivityItem: React.FC<ActivityItemProps> = ({ text, time, type }) => {
 }
 
 // --- Component: Attendees Stack (Reused from EventCard logic) ---
+const getSeed = (str: string) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash);
+};
+
 const AttendeesStack: React.FC<{ count: number; attendees: EventData['attendees'] }> = ({ count, attendees }) => {
     const displayAttendees = attendees.slice(0, 4);
     const remainingCount = count > 4 ? `+${count - 4}` : null;
-
+    
+    const avatarImages = [avatar2, avatar3, avatar4, avatar5];
+    const bgColors = ["bg-[#F0EEFA]", "bg-[#FFECE5]"];
+    const seed = attendees.length > 0 ? getSeed(attendees[0].avatar) : 0;
+    
+    
     return (
         <div className="flex flex-col ">
             <div className="flex items-center">
@@ -438,12 +455,12 @@ const AttendeesStack: React.FC<{ count: number; attendees: EventData['attendees'
                         key={att.id}
                         className={cn(
                             "h-10 w-10 rounded-full border-2 border-white overflow-hidden",
-                            index > 0 && "-ml-2"
+                            index > 0 && "-ml-2", bgColors[(seed + index) % bgColors.length]
                         )}
                         style={{ zIndex: displayAttendees.length - index }}
                     >
                         <Image 
-                            src={illustrationUser} // Using the mock avatar for visual consistency
+                            src={avatarImages[(seed + index) % avatarImages.length]}
                             alt={`Attendee ${index + 1}`} 
                             width={40} 
                             height={40} 

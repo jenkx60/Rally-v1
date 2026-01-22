@@ -6,9 +6,12 @@ import Link from "next/link";
 import { Button } from "@/app/components/ui/button";
 import { Calendar, Clock, MapPin, ArrowUpRight } from "lucide-react";
 import rally from '@/public/Logo.svg';
-import people from "@/public/Sidebar/people-happy.svg"; // The event image
-import avatar1 from "@/public/Sidebar/avatar.svg"; // Mock avatar
-import avatar2 from "@/public/Sidebar/avatar-kill.svg"; // Mock avatar
+import people from "@/public/Sidebar/people-happy.svg";
+import avatar from "@/public/Sidebar/avatar.svg";
+import avatar1 from "@/public/Sidebar/avatar-3eyes.svg";
+import avatar2 from "@/public/Sidebar/avatar-full-hair.svg";
+import avatar3 from "@/public/Sidebar/avatar-grin.svg";
+import avatar4 from "@/public/Sidebar/avatar-manbun.svg";
 import x from "@/public/Sidebar/x-success.svg";
 import insta from "@/public/Sidebar/insta-success.svg";
 import face from "@/public/Sidebar/face-success.svg";
@@ -16,6 +19,7 @@ import { Instagram, Twitter, Facebook } from "lucide-react";
 import Notification from "@/app/components/notifications/notification";
 import { SidebarProvider, SidebarTrigger } from "@/app/components/ui/sidebar";
 import { useRouter } from "next/navigation";
+import RsvpModal from "@/app/components/dashboard/events/rsvp-modal";
 
 const EventDetailsPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter()
@@ -59,10 +63,10 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
 
         {/* Main Content */}
         <main className="grow flex justify-center py-10 px-4">
-          <div className="w-full max-w-[900px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14">
+          <div className="w-full max-w-[940px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14">
             {/* Left Column: Image */}
             <div className="w-full">
-              <div className="relative aspect-square w-full overflow-hidden rounded-[20px] bg-[#F8F6FD]">
+              <div className="relative aspect-square w-full h-[376px] overflow-hidden rounded-[20px] bg-[#F8F6FD]">
                 <Image
                   src={people}
                   alt="Event Cover"
@@ -74,7 +78,7 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
             </div>
 
             {/* Right Column: Details */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-11">
               {/* Title & Host */}
               <div className="space-y-4">
                 <h1 className="font-bricolage text-[28px] md:text-[40px] font-bold leading-[110%] tracking-[-1px] text-[#1A1A1A]">
@@ -85,7 +89,7 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                   <div className="flex items-center gap-2">
                     <div className="h-7 w-7 rounded-full bg-[#F0EEFA] overflow-hidden relative">
                       {/* Host Avatar */}
-                      <Image src={avatar1} alt="Divii" layout="fill" objectFit="cover" priority={true} /> 
+                      <Image src={avatar} alt="Divii" layout="fill" objectFit="cover" priority={true} /> 
                     </div>
                     <span className="text-[15px] text-[#A3A3A3] font-geist font-medium leading-[150%] tracking-[-0.2px]">
                       Hosted by <span className="text-[#333333]">Divii</span>
@@ -94,8 +98,8 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                   
                   {/* Socials */}
                   <div className="flex items-center gap-1.5 text-[#A3A3A3]">
-                    <button className="hover:text-[#1A1A1A] transition-colors"><Image src={x} alt="Twitter" width={28} height={28} className="cursor-pointer" priority={true} /></button>
-                    <button className="hover:text-[#1A1A1A] transition-colors"><Image src={insta} alt="Instagram" width={28} height={28} className="cursor-pointer" priority={true} /></button>
+                    <button className="hover:text-[#1A1A1A] transition-colors"><Link href="https://x.com/trillestdivii"><Image src={x} alt="Twitter" width={28} height={28} className="cursor-pointer" priority={true} /></Link></button>
+                    <button className="hover:text-[#1A1A1A] transition-colors"><Link href="https://www.instagram.com/trillestdivii?igsh=MTE1eXJqOGk0bGVuZg%3D%3D&utm_source=qr"><Image src={insta} alt="Instagram" width={28} height={28} className="cursor-pointer" priority={true} /></Link></button>
                   </div>
                 </div>
               </div>
@@ -116,7 +120,7 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                   <MapPin className="h-5 w-5 text-[#A3A3A3]" />
                   <div className="flex items-center gap-1.5">
                       <span className="text-[15px] font-medium font-geist leading-[150%] tracking-[-0.2px]">Shore mall, Osapa Lagos, Nigeria</span>
-                      <ArrowUpRight className="h-4 w-4 text-[#A3A3A3]" />
+                      <ArrowUpRight className="h-4 w-4 text-[#A3A3A3] hover:animate-bounce hover:scale-110 transition-all cursor-pointer" />
                   </div>
                 </div>
 
@@ -124,24 +128,30 @@ const EventDetailsPage = ({ params }: { params: { id: string } }) => {
                 <div className="flex items-center gap-3 pt-1">
                   <div className="flex -space-x-2">
                       {/* Mock Avatars for attendees */}
-                      <div className="h-7 w-7 rounded-full border-2 border-white bg-gray-200 overflow-hidden relative"><Image src={avatar1} alt="u1" layout="fill"/></div>
-                      <div className="h-7 w-7 rounded-full border-2 border-white bg-gray-300 overflow-hidden relative"><Image src={avatar2} alt="u2" layout="fill"/></div>
-                      <div className="h-7 w-7 rounded-full border-2 border-white bg-gray-400 overflow-hidden relative"><Image src={avatar1} alt="u3" layout="fill"/></div>
+                      <div className="h-7 w-7 rounded-full border-2 border-white bg-[#F0EEFA] overflow-hidden relative"><Image src={avatar1} alt="u1" layout="fill"/></div>
+                      <div className="h-7 w-7 rounded-full border-2 border-white bg-[#FFECE5] overflow-hidden relative"><Image src={avatar2} alt="u2" layout="fill"/></div>
+                      <div className="h-7 w-7 rounded-full border-2 border-white bg-[#F0EEFA] overflow-hidden relative"><Image src={avatar3} alt="u3" layout="fill"/></div>
+                      <div className="h-7 w-7 rounded-full border-2 border-white bg-[#FFECE5] overflow-hidden relative"><Image src={avatar4} alt="u3" layout="fill"/></div>
+
                   </div>
                   <span className="text-[14px] text-[#A3A3A3] font-medium">+5 going</span>
                 </div>
               </div>
 
               {/* RSVP Button */}
-              <Button className="w-full h-[52px] bg-[#6A59CE] hover:bg-primary/90 text-white text-[15px] font-semibold rounded-xl transition-all shadow-sm">
-                RSVP
-              </Button>
+              <RsvpModal 
+                trigger={
+                  <Button className="w-full h-[52px] bg-[#6A59CE] hover:bg-primary/90 text-white text-[15px] font-semibold rounded-md transition-all shadow-sm">
+                    RSVP
+                  </Button>
+                }
+              />
 
               {/* Description */}
               <div className="space-y-3">
                   <h3 className="text-[14px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">About event</h3>
                   <p className="text-[15px] font-normal leading-[150%] text-[#333333] tracking-[-0.2px]">
-                      Vibes & yap — an hour where divii flips the switch on small talk and cranks up playful randomness. Think loose chatter and the kind of conversations that wander into delightful nonsense.
+                    Saints Pop-Up is a space to experience the brand in real life. See the pieces up close, feel the details, and soak in the energy. Good clothes, good people, no pressure.
                   </p>
               </div>
 

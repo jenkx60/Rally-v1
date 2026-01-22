@@ -26,15 +26,15 @@ const RichTextControls: React.FC<RichTextControlsProps> = ({ textareaRef }) => {
 
         switch (type) {
             case 'bold':
-                newText = value.substring(0, start) + `**${selectedText}**` + value.substring(end);
+                newText = value.substring(0, start) + `${selectedText}` + value.substring(end);
                 newCursorPos += 4;
                 break;
             case 'italic':
-                newText = value.substring(0, start) + `*${selectedText}*` + value.substring(end);
+                newText = value.substring(0, start) + `${selectedText}` + value.substring(end);
                 newCursorPos += 2;
                 break;
             case 'underline':
-                newText = value.substring(0, start) + `__${selectedText}__` + value.substring(end);
+                newText = value.substring(0, start) + `${selectedText}` + value.substring(end);
                 newCursorPos += 4;
                 break;
             case 'link':
@@ -91,7 +91,7 @@ const RichTextControls: React.FC<RichTextControlsProps> = ({ textareaRef }) => {
     // };
 
   return (
-    <div className='flex items-center gap-5 border-b border-[#E8E8E8] bg-[#FAFAFA] rounded-tl-xl rounded-tr-xl  px-3.5 py-2.5'>
+    <div className='flex items-center gap-5 border-b border-[#E8E8E8] bg-[#FAFAFA] rounded-tl-md rounded-tr-md  px-3.5 py-2.5'>
         <button
             type='button'
             onClick={() => applyFormat('bold')}

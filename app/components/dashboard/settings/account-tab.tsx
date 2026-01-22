@@ -226,7 +226,7 @@ const AccountTab = () => {
           <div className="flex flex-col gap-1.5">
               <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">Social links</label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-geist">
-                  <div className="flex h-11 rounded-lg border border-[#DFDFDF] overflow-hidden">
+                  <div className="flex h-11 rounded-md border border-[#DFDFDF] overflow-hidden">
                       <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] rounded-l-md text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">instagram.com/</span>
                       <Input 
                           type="text" 
@@ -234,7 +234,7 @@ const AccountTab = () => {
                           className="flex-1 px-3.5 text-[#333333] text-[15px] font-geist font-medium outline-none placeholder:text-[#BFBFBF] placeholder:text-[15px] border-transparent focus:ring-none focus:ring-transparent"
                       />
                   </div>
-                  <div className="flex h-11 rounded-lg border border-[#DFDFDF] overflow-hidden">
+                  <div className="flex h-11 rounded-md border border-[#DFDFDF] overflow-hidden">
                       <span className="flex items-center px-3.5 bg-[#FCFCFC] text-[#959595] rounded-l-md text-[15px] font-normal leading-[150%] tracking-[-0.2px] border-r border-[#E8E8E8]">x.com/</span>
                       <Input 
                           type="text" 

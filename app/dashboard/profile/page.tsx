@@ -13,15 +13,15 @@ import Link from "next/link";
 const pastEvents = [
   {
     id: 1,
-    title: "Saints pop-up",
-    date: "October 12, 2025 • 12:30PM",
-    attended: 24,
-    image: image1, // Replace with your actual image path
+    title: "The link up",
+    date: "November 21, 2025 • 05:30PM",
+    attended: 30,
+    image: image1,
     status: "paid",
   },
   {
     id: 2,
-    title: "Saints pop-up",
+    title: "Potluck & chill",
     date: "October 12, 2025 • 12:30PM",
     attended: 24,
     image: image2, // Replace with your actual image path
@@ -59,7 +59,7 @@ export default function ProfilePage() {
 
         {/* Social Links */}
         <div className="flex items-center gap-2.5 text-[#1A1A1A]">
-          <Link href="#" className="hover:opacity-70 transition-opacity">
+          <Link href="https://x.com/trillestdivii" className="hover:opacity-70 transition-opacity">
             <Image
                 src={x}
                 alt="X (twitter)"
@@ -68,7 +68,7 @@ export default function ProfilePage() {
                 priority={true}
             />
           </Link>
-          <a href="#" className="hover:opacity-70 transition-opacity">
+          <a href="[https://www.instagram.com/trillestdivii?igsh=MTE1eXJqOGk0bGVuZg%3D%3D&utm_source=qr](https://www.instagram.com/trillestdivii?igsh=MTE1eXJqOGk0bGVuZg%3D%3D&utm_source=qr)" className="hover:opacity-70 transition-opacity">
             <Image 
                 src={instagram}
                 alt="Instagram"

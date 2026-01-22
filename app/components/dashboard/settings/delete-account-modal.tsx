@@ -18,6 +18,8 @@ import {
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden"; // This is to satisfy accessibility requirements without altering your UI
 import { Input } from '../../ui/input';
 import { cn } from '@/lib/utils';
+import CustomToast from '../../ui/custom-toast';
+import { toast } from 'sonner';
 
 interface DeleteAccountModalProps {
   isOpen: boolean;
@@ -139,6 +141,13 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
   const isMobile = useIsMobile();
 
   const handleDelete = () => {
+    toast.custom((t) => (
+        <CustomToast 
+          message="Event successfully deleted"
+          variant='error'
+          onDismiss={() => toast.dismiss(t)}
+        />
+    ));
     router.push('/signup');
   };
 
@@ -159,7 +168,9 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
 
           <div className="p-6">
              <CustomHeader onClose={onClose} />
-             <DeleteAccountForm onClose={onClose} handleDelete={handleDelete} />
+             <div className='overflow-y-auto max-h-[calc(100vh-200px)]'>
+              <DeleteAccountForm onClose={onClose} handleDelete={handleDelete} />
+             </div>
           </div>
         </DrawerContent>
       </Drawer>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { Calendar, Edit3, Ellipsis, Forward, MapPin } from "lucide-react";
+import { Calendar, Edit3, Ellipsis, Forward, Loader2, MapPin } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { cn } from "@/lib/utils";
 import avatar from "@/public/Sidebar/avatar.svg";
@@ -19,6 +19,7 @@ import attendeeAvatar from "@/public/Sidebar/attendee_avatar.png";
 import { useRouter } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import ShareEventDialog from "./share-event-dialog";
+import { Icon } from "@iconify/react";
 
 // Define the shape of the data the card expects
 interface EventCardProps {
@@ -126,6 +127,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 }) => {
     const router = useRouter()
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     // const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     // Determine status badge color
     const statusColor = status === 'Live' 
@@ -199,11 +201,13 @@ export const EventCard: React.FC<EventCardProps> = ({
                     <div className="flex gap-4">
                             <Button 
                                 variant="outline" 
+                                onClick={() => {
+                                    setIsLoading(true)
+                                    router.push(managePath)
+                                }}
                                 className="w-[85%] font-geist font-semibold border-[#6A59CE] text-[#6A59CE] text-[15px] leading-[135%] tracking-[-0.2px] hover:bg-[#F9F9F9] py-3 px-6"
                             >
-                                <Link href={managePath} passHref>
-                                    Manage event
-                                </Link>
+                                {isLoading ? (<Loader2 className="animate-spin text-[#6A59CE]" />) : "Manage event"}
                             </Button>
 
                         <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
@@ -217,16 +221,18 @@ export const EventCard: React.FC<EventCardProps> = ({
                             </PopoverTrigger>
                             <PopoverContent align="start" className="border border-[#0000000D] shadow shadow-[#0000000D]">
                                 <div className="flex flex-col gap-2 bg-white font-geist font-medium text-sm leading-[150%]">
-                                    <div onClick={handleEditClick} className="flex justify-between items-center hover:bg-[#F5F5F5] px-2 py-1.5 rounded-[6px] cursor-pointer">
+                                    <div onClick={handleEditClick} className="flex justify-between items-center hover:bg-[#F5F5F5] text-[#333333] px-2 py-1.5 rounded-[6px] cursor-pointer">
                                         <span>Edit</span>
-                                        <Edit3 className="w-3 h-3 text-[#333333]" />
+                                        {/* <Edit3 className="w-3 h-3 " /> */}
+                                        <Icon icon="mingcute:pencil-3-line" width="16" height="16" style={{color: "#A3A3A3"}} />
                                     </div>
                                     <ShareEventDialog
                                         eventLink={MOCK_EVENT_LINK}
                                         trigger={
-                                            <div className="flex justify-between items-center hover:bg-[#F5F5F5] px-2 py-1.5 rounded-[6px] cursor-pointer">
+                                            <div className="flex justify-between items-center hover:bg-[#F5F5F5] text-[#333333] px-2 py-1.5 rounded-[6px] cursor-pointer">
                                                 <span>Share</span>
-                                                <Forward className="w-4 h-4 text-[#333333]" />
+                                                {/* <Forward className="w-4 h-4 " /> */}
+                                                <Icon icon="mingcute:share-forward-line" width="16" height="16" style={{color: "#A3A3A3"}} />
                                             </div>
                                         }
                                     />

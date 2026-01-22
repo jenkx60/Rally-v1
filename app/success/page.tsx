@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -15,6 +15,7 @@ import forward from "@/public/Sidebar/share_forward_line.svg";
 import group from "@/public/Sidebar/group_3_line_o.svg";
 import ShareEventDialog from "../components/dashboard/events/share-event-dialog";
 import { Icon } from "@iconify/react";
+import ReactConfetti from "react-confetti";
 
 
 // Inner component to handle Search Params logic
@@ -195,9 +196,46 @@ const SuccessContent = () => {
 
 // Main Page Component Wrapper
 const EventSuccessPage = () => {
+    const [isRecycling, setIsRecycling] = useState(true);
+    const [windowSize, setWindowSize] = useState({
+        width: 0,
+        height: 0
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        const timer = setTimeout(() => {
+            setIsRecycling(false);
+        }, 10000);
+        
+        // Cleanup
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            clearTimeout(timer);
+        }
+    }, []);
+
     return (
         <main className="min-h-screen bg-white flex flex-col items-center justify-center py-10 px-4 animate-in fade-in zoom-in-95 duration-500">
             <Suspense fallback={<div>Loading...</div>}>
+                {isRecycling && windowSize.width > 0 && (
+                    <ReactConfetti
+                        numberOfPieces={400}
+                        recycle={isRecycling}
+                        width={windowSize.width}
+                        height={windowSize.height}
+                    />
+                )}
                 <SuccessContent />
             </Suspense>
         </main>
