@@ -1249,8 +1249,8 @@ const CreateEventPage = () => {
 
             <section className="flex flex-col gap-6 pt-2 md:pt-4">
                 <h3 className="font-bricolage text-[20px] font-semibold leading-[130%] tracking-[-0.7px] text-[#1A1A1A]">When and where?</h3>
-                <div className="grid grid-cols-1 gap-2 md:grid-cols-4">
-                    <div className="grid col-span-1 md:col-span-2 gap-1.5">
+                <div className="grid grid-cols-1 gap-2 lg:grid-cols-4">
+                    <div className="grid col-span-1 lg:col-span-2 gap-1.5">
                         <label className="font-geist text-sm font-medium leading-[150%] tracking-[-0.1px] text-[#767676]">Date</label>
                         {/* <div className="relative">
                             <Input 

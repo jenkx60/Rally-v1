@@ -27,7 +27,7 @@ const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-//   const [errors, setErrors] = useState<LoginErrorState>({})
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const { setError: setAuthError, setUser } = useAuthStore()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,6 +101,7 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrors({})
 
     try {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -122,18 +123,21 @@ const LoginForm = () => {
             router.push("/dashboard")
         }
     } catch (err: any) {
-        toast.custom((t) => (
-            <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center justify-center gap-3 w-full min-w-[193px] max-w-[345px] ml-0 md:ml-8 border border-[#333]">
-                <div className="bg-[#EF4444] rounded-full p-0.5 shrink-0">
-                    <X className="w-3 h-3 text-black" strokeWidth={3} />
-                </div>
-                <span className="font-medium text-sm font-geist">{err.message || 'Invalid login credentials'}</span>
-                <div className="hidden md:block w-0.5 h-6 bg-[#333333] ml-auto"></div>
-                <button onClick={() => toast.dismiss(t)} className="ml-auto text-white hover:text-white cursor-pointer">
-                    <X className="w-4 h-4" />
-                </button>
-            </div>
-        ))
+        // toast.custom((t) => (
+        //     <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-lg shadow-lg flex items-center justify-center gap-3 w-full min-w-[193px] max-w-[345px] ml-0 md:ml-8 border border-[#333]">
+        //         <div className="bg-[#EF4444] rounded-full p-0.5 shrink-0">
+        //             <X className="w-3 h-3 text-black" strokeWidth={3} />
+        //         </div>
+        //         <span className="font-medium text-sm font-geist">{err.message || 'Invalid login credentials'}</span>
+        //         <div className="hidden md:block w-0.5 h-6 bg-[#333333] ml-auto"></div>
+        //         <button onClick={() => toast.dismiss(t)} className="ml-auto text-white hover:text-white cursor-pointer">
+        //             <X className="w-4 h-4" />
+        //         </button>
+        //     </div>
+        // ))
+        setErrors({
+            form: err.message || 'Invalid login credentials'
+        });
         setAuthError('Login failed')
     } finally {
         setIsSubmitting(false)
@@ -214,11 +218,11 @@ const LoginForm = () => {
                 </div>
 
                 {/* General API Error */}
-                {/* {errors.form && (
+                {errors.form && (
                     <div className="p-3 rounded-lg bg-[#FF7C7C]/10 text-[#FF7C7C] text-sm">
                         {errors.form}
                     </div>
-                )} */}
+                )}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">

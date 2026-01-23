@@ -27,28 +27,28 @@ const mockPayouts = [
   },
   { 
     id: 2, 
-    eventName: 'Saints pop-up', 
-    date: 'October 12, 2025', 
+    eventName: 'The link up', 
+    date: 'November 21, 2025', 
     ticketSold: 24, 
-    amount: '₦140,000', 
+    amount: '₦300,000', 
     status: 'Paid' as const, 
     image: image2 
   },
   { 
     id: 3, 
-    eventName: 'Saints pop-up', 
+    eventName: 'Potluck & chill', 
     date: 'October 12, 2025', 
     ticketSold: 24, 
-    amount: '₦140,000', 
+    amount: '₦100,000', 
     status: 'Pending' as const, 
     image: image3 
   },
   { 
     id: 4, 
-    eventName: 'Saints pop-up', 
+    eventName: 'Sip & yap', 
     date: 'October 12, 2025', 
     ticketSold: 24, 
-    amount: '₦140,000', 
+    amount: '₦50,000', 
     status: 'Pending' as const, 
     image: image4 
   },

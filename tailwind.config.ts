@@ -95,6 +95,13 @@ const config: Config = {
         "landscape-md": {
           raw: "(orientation: landscape) and (max-width: 1550px)",
         },
+        // "tablet": {
+        //   raw: "(min-width: 768px)",
+        // },
+        // "custom-tablet": {
+        //   "min": "768px",
+        //   "max": "1024px"
+        // }
       },
     },
   },

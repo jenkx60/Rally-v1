@@ -75,7 +75,7 @@ export default function DashboardLayout({
           <SidebarInset>
             {/* Header with conditional fixed positioning */}
             <header
-              className={`fixed top-0 z-10 flex h-16 w-full md:w-[calc(100vw-256px)] shrink-0 items-center justify-between gap-2 border-b border-[#E8E8E8] bg-white px-4`}
+              className={`fixed top-0 z-10 flex h-16 w-full lg:w-[calc(100vw-256px)] shrink-0 items-center justify-between gap-2 border-b border-[#E8E8E8] bg-white px-4`}
             >
               <div className="flex items-center md:gap-2 md:px-2">
                 <Separator orientation="vertical" className="mr-2 h-4" />
@@ -83,7 +83,7 @@ export default function DashboardLayout({
               </div>
               <div className="flex items-center gap-5 md:gap-4 pr-0 md:pr-2">
                 <Notification />
-                <SidebarTrigger className="md:hidden text-[#1A1A1A] hover:bg-transparent" />
+                <SidebarTrigger className="lg:hidden text-[#1A1A1A] hover:bg-transparent" />
               </div>
             </header>
 
