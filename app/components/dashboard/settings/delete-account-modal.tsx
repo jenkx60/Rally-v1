@@ -159,7 +159,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
   if (isMobile) {
     return (
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
-        <DrawerContent>
+        <DrawerContent className="max-h-[calc(100vh-200px)]">
            {/* Accessibility Hidden Title for Screen Readers to avoid warnings */}
            <VisuallyHidden.Root>
              <DrawerTitle>Delete Account</DrawerTitle>
@@ -181,7 +181,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent 
-        className="max-w-[600px] max-h-[calc(100vh-200px)] md:max-h-screen p-5 rounded-2xl gap-0 block [&>button]:hidden" 
+        className="max-w-[600px] md:max-h-screen p-5 rounded-2xl gap-0 block [&>button]:hidden" 
       >
          {/* Accessibility Hidden Title */}
          <VisuallyHidden.Root>
