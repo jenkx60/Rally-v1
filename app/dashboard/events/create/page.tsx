@@ -1038,6 +1038,10 @@ const CreateEventPage = () => {
     }
   };
 
+  const handleCancelClick = () => {
+    router.push('/dashboard/events');
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -1320,7 +1324,13 @@ const CreateEventPage = () => {
         </div>
         
         <footer className="flex w-full items-center justify-between gap-3 pt-4 md:pt-8">
-            <button type="button" className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#FAFAFA] border border-[#E8E8E8]">Cancel</button>
+            <button 
+                type="button" 
+                onClick={handleCancelClick}
+                className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#FAFAFA] border border-[#E8E8E8]"
+            >
+                Cancel
+            </button>
             <button 
                 type="submit" 
                 disabled={!isStep1Valid()}
@@ -1505,7 +1515,7 @@ const CreateEventPage = () => {
             <button 
                 type="button" 
                 onClick={handleBack}
-                className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#F8F6FD] border border-[#E8E8E8]"
+                className="rounded-lg px-6 py-4 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-[#959595] hover:bg-[#FAFAFA] border border-[#E8E8E8]"
             >
                 Back
             </button>
@@ -1515,7 +1525,7 @@ const CreateEventPage = () => {
                 disabled={tickets.length === 0}
                 className="w-full md:w-auto rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
             >
-                {isSubmitting ? ( <Loader2 className="h-4 w-4 animate-spin" /> ) : ( "Let's rally!" )}
+                {isSubmitting ? ( <Loader2 className="h-4 w-4 animate-spin flex items-center justify-center" /> ) : ( "Let's rally!" )}
             </button>
         </footer>
     </div>

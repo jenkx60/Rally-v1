@@ -102,7 +102,7 @@ const EventAttendeesContent = () => {
                         <TableRow key={attendee.id} className='text-[#1A1A1A] font-medium font-geist text-sm'>
                             <TableCell className="font-medium">
                                  <div className="flex items-center gap-3">
-                                    <div className={cn("h-8 w-8 rounded-full border flex items-center justify-center overflow-hidden p-0.5", ["bg-[#F0EEFA]", "bg-[#FFECE5]"][attendee.id % 2])}>
+                                    <div className={cn("h-8 w-8 rounded-full flex items-center justify-center overflow-hidden p-0.5", ["bg-[#F0EEFA]", "bg-[#FFECE5]"][attendee.id % 2])}>
                                         <Image
                                             src={attendee.avatar}
                                             alt={attendee.name}

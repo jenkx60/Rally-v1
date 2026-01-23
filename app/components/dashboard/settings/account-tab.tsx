@@ -208,7 +208,7 @@ const AccountTab = () => {
                 type="text" 
                 value={formData.fullName}
                 onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+                className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] rounded-[10px]"
               />
             </div>
             <div className="flex flex-col gap-1.5">
@@ -217,7 +217,7 @@ const AccountTab = () => {
                 type="text" 
                 value={formData.email}
                 disabled
-                className=" bg-[#FAFAFA] text-[#A3A3A3] text-[15px] leading-6 tracking-[-0.1px] font-geist font-medium"
+                className=" bg-[#FAFAFA] text-[#A3A3A3] text-[15px] leading-6 tracking-[-0.1px] font-geist font-medium rounded-[10px]"
               />
             </div>
           </div>
@@ -231,7 +231,7 @@ const AccountTab = () => {
                       <Input 
                           type="text" 
                           placeholder="username"
-                          className="flex-1 px-3.5 text-[#333333] text-[15px] font-geist font-medium outline-none placeholder:text-[#BFBFBF] placeholder:text-[15px] border-transparent focus:ring-none focus:ring-transparent"
+                          className="flex-1 px-3.5 text-[#333333] text-[15px] font-geist font-medium outline-none placeholder:text-[#BFBFBF] placeholder:text-[15px] border-transparent focus:ring-none focus:ring-transparent rounded-[10px]"
                       />
                   </div>
                   <div className="flex h-11 rounded-md border border-[#DFDFDF] overflow-hidden">
@@ -239,7 +239,7 @@ const AccountTab = () => {
                       <Input 
                           type="text" 
                           placeholder="username"
-                          className="flex-1 px-3.5 text-[#333333] text-[15px] font-geist font-medium outline-none placeholder:text-[#BFBFBF] placeholder:text-[15px] border-transparent focus:ring-none focus:ring-transparent"
+                          className="flex-1 px-3.5 text-[#333333] text-[15px] font-geist font-medium outline-none placeholder:text-[#BFBFBF] placeholder:text-[15px] border-transparent focus:ring-none focus:ring-transparent rounded-[10px]"
                       />
                   </div>
               </div>
@@ -281,7 +281,7 @@ const AccountTab = () => {
                             if (errors.currentPassword) setErrors({...errors, currentPassword: ""});
                         }}
                         placeholder="Enter current password"
-                        className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] ${
+                        className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] rounded-[10px] ${
                             errors.currentPassword 
                                 ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
                                 : ''
@@ -317,7 +317,7 @@ const AccountTab = () => {
                                 if (errors.newPassword) setErrors({...errors, newPassword: ""});
                             }}
                             placeholder="Enter new password"
-                            className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] ${
+                            className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] rounded-[10px] ${
                                 errors.newPassword 
                                     ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
                                     : ''
@@ -351,7 +351,7 @@ const AccountTab = () => {
                                 if (errors.confirmPassword) setErrors({...errors, confirmPassword: ""});
                             }}
                             placeholder="Confirm new password"
-                            className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] ${
+                            className={`text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] rounded-[10px] ${
                                 errors.confirmPassword 
                                     ? 'border-[#FF7C7C] focus-visible:ring-[#FF7C7C] text-[#FF7C7C]' 
                                     : ''

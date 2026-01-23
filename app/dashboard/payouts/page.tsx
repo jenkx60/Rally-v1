@@ -127,7 +127,7 @@ const PayoutPage = () => {
                     <div className="bg-white p-6 rounded-2xl border border-[#0000000D] flex flex-col gap-8 justify-between md:h-[187px]">
                         <div className="flex justify-between items-center">
                             <Image src={bankHouse} alt='Earning Ill' width={48} height={48} priority={true} />
-                            <button onClick={() => setEditModalOpen(true)} className="text-[#6A59CE] text-sm font-semibold hover:text-[#5a4cb0] transition-colors cursor-pointer">
+                            <button onClick={() => setEditModalOpen(true)} className="text-[#6A59CE] text-sm font-semibold font-geist hover:text-[#5a4cb0] transition-colors cursor-pointer">
                                 Update
                             </button>
                         </div>

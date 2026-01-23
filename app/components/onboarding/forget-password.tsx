@@ -363,7 +363,7 @@ export default function ForgotPassword() {
                 />
 
                 <div className="space-y-1.5 text-center">
-                    <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Password changed!</h1>
+                    <h1 className="text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-1px] text-foreground font-bricolage">Password changed</h1>
                     <p className="text-[#A3A3A3] font-medium text-[13px] md:text-sm leading-[150%] font-geist">
                         You&apos;re all set! Log in with your new password
                     </p>

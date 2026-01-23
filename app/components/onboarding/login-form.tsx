@@ -136,7 +136,7 @@ const LoginForm = () => {
         //     </div>
         // ))
         setErrors({
-            form: err.message || 'Invalid login credentials'
+            form: 'Invalid login credentials'
         });
         setAuthError('Login failed')
     } finally {

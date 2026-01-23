@@ -44,27 +44,29 @@ const RsvpForm = ({ onSubmit }: RsvpFormProps) => {
 
     return (
         <div className="flex flex-col gap-6 pt-2">
-            <div className="space-y-4">
-                <div className="space-y-1.5">
-                    <label className="font-geist text-[14px] font-medium text-[#333333] leading-[150%] tracking-[-0.1px]">
+            <div className="space-y-4 pb-2">
+                <div className="flex flex-col gap-1.5">
+                    <label className="font-geist text-[14px] font-medium text-[#333333] leading-[150%]">
                         Name
                     </label>
                     <Input 
                         placeholder="Enter your name"
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="h-11 rounded-lg border border-[#E8E8E8] bg-white px-3 py-2 text-[15px] placeholder:text-[#BFBFBF] focus-visible:ring-[#6A59CE] shadow-none"
+                        className='w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
                     />
                 </div>
-                <div className="space-y-1.5">
-                    <label className="font-geist text-[14px] font-medium text-[#333333] leading-[150%] tracking-[-0.1px]">
+                <div className="flex flex-col gap-1.5">
+                    <label className="font-geist text-[14px] font-medium text-[#333333] leading-[150%]">
                         Email
                     </label>
                     <Input 
                         placeholder="you@email.com"
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="h-11 rounded-lg border border-[#E8E8E8] bg-white px-3 py-2 text-[15px] placeholder:text-[#BFBFBF] focus-visible:ring-[#6A59CE] shadow-none"
+                        className='w-full px-3.5 py-2.5 rounded-lg border bg-background font-geist placeholder:text-[#BFBFBF] placeholder:font-geist placeholder:font-medium placeholder:text-[15px] text-[15px] text-[#333333] font-medium transition-all
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
                     />
                 </div>
             </div>
@@ -72,7 +74,7 @@ const RsvpForm = ({ onSubmit }: RsvpFormProps) => {
             <Button 
                 onClick={handleSubmit}
                 disabled={!isValid}
-                className="w-full h-[48px] bg-[#6A59CE] hover:bg-[#5a4cb0] text-white text-[15px] font-semibold rounded-lg transition-all shadow-none disabled:bg-[#F5F5F5] disabled:text-[#A3A3A3] disabled:border disabled:border-[#E8E8E8]"
+                className="w-full h-[50px] bg-[#6A59CE] hover:bg-primary/90 text-white text-[15px] font-semibold rounded-md transition-all shadow-none disabled:bg-[#F5F5F5] disabled:text-[#A3A3A3] disabled:border disabled:border-[#E8E8E8]"
             >
                 Confirm RSVP
             </Button>
@@ -120,7 +122,7 @@ const RsvpModal: React.FC<RsvpModalProps> = ({ trigger }) => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
-            <DialogContent className="sm:max-w-[440px] p-6 gap-0 rounded-[20px] bg-white border border-[#E8E8E8] shadow-lg">
+            <DialogContent className="w-[420px] p-6 gap-0 rounded-[20px] bg-white border border-[#E8E8E8] shadow-lg">
                 <DialogHeader className="mb-4">
                     <DialogTitle className="font-bricolage text-[20px] font-bold text-[#1A1A1A] tracking-[-0.5px] text-left">
                         Enter your info

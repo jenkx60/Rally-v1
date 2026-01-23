@@ -334,7 +334,7 @@ const MangeEvent = () => {
         </Link>
 
         {/* Title */}
-        <h1 className="font-bricolage text-[32px] font-bold leading-[120%] tracking-[-0.8px] text-[#1A1A1A] mb-8">
+        <h1 className="font-bricolage text-[28px] md:text-[32px] font-bold leading-[120%] tracking-[-0.8px] text-[#1A1A1A] mb-8">
             {eventTitle}
         </h1>
 

@@ -59,7 +59,7 @@ const SuccessContent = () => {
                     priority={true}
                 /> 
                 <div className="flex flex-col gap-2">
-                    <h1 className="text-[40px] font-bricolage font-bold text-[#1A1A1A] leading-[110%] tracking-[-1px] text-center">
+                    <h1 className="text-[32px] md:text-[40px] font-bricolage font-bold text-[#1A1A1A] leading-[110%] tracking-[-1px] text-center">
                         Your event is live!
                     </h1>
                     <p className="text-[#A3A3A3] font-geist font-medium text-sm text-center">

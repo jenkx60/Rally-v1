@@ -379,7 +379,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle, icon, i
         <div className='flex flex-col gap-0.5'>
             <h3 className="font-geist text-sm font-normal text-[#A3A3A3]">{title}</h3>
             <div className='flex items-center gap-2 flex-wrap'>
-                <h1 className="font-bricolage text-2xl md:text-[28px] font-bold leading-[120%] tracking-[-0.6px] text-[#1A1A1A]">{value}</h1>
+                <h1 className="font-bricolage text-[24px] font-bold leading-[120%] tracking-[-0.6px] text-[#1A1A1A]">{value}</h1>
                 <span className={cn("border border-[#0000000D] rounded-[8px] px-2 py-0.5 font-geist text-xs font-medium text-[#00A36A] whitespace-nowrap", metricTextColor)}>
                     {subtitle}
                 </span>
@@ -495,7 +495,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                 {/* Main content wrapper */}
                 <div className="col-span-12 space-y-6">
                     {/* 1. Metric Cards - Stacks on mobile, 3 columns on tablet+ */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         <MetricCard
                             title="RSVPs"
                             value={event.rsvps}
@@ -562,7 +562,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                                         trigger={
                                             <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
                                                 <Image src={shareQuick} alt='Share Quick' width={32} height={32} priority={true} />
-                                                <span className="font-geist text-[15px] font-normal text-[#333333">Share event</span>
+                                                <span className="font-geist text-[15px] font-normal text-[#333333]">Share event</span>
                                             </div>
                                         }
                                     />
@@ -570,7 +570,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                                     {/* Edit Event */}
                                     <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">
                                         <Image src={editQuick} alt='Edit Quick' width={32} height={32} priority={true} />
-                                        <span className="font-geist text-[15px] font-normal text-[#333333">Edit event</span>
+                                        <span className="font-geist text-[15px] font-normal text-[#333333]">Edit event</span>
                                     </div>
                                 </div>
                             </div>
@@ -592,7 +592,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                             {/* 5. Attendees Summary */}
                             <div className='col-span-12 md:col-span-4 space-y-2 shadow shadow-[#E8E8E81A]'>
                                 <h2 className="font-geist font-medium text-[15px] text-[#767676] leading-[150%] tracking-[-0.2px]">Attendees</h2>
-                                <div className="p-5 border border-[#0000000D] rounded-xl bg-white min-h-[202px] flex flex-col justify-between">
+                                <div className="p-5 border border-[#0000000D] rounded-xl bg-white min-h-0 md:min-h-[202px] flex flex-col gap-6 justify-between">
                                     <AttendeesStack count={event.rsvps} attendees={event.attendees} />
                                     <div>
                                         <Button onClick={onViewAttendees} className="w-full bg-white border border-[#6A59CE] text-[#6A59CE] font-geist font-semibold py-3 px-6 text-[15px] leading-[135%] tracking-[-0.2px] hover:bg-transparent ">
