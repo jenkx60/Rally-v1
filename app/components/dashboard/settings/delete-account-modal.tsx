@@ -159,14 +159,14 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
   if (isMobile) {
     return (
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
-        <DrawerContent className="max-h-[calc(100vh-200px)]">
+        <DrawerContent>
            {/* Accessibility Hidden Title for Screen Readers to avoid warnings */}
            <VisuallyHidden.Root>
              <DrawerTitle>Delete Account</DrawerTitle>
              <DrawerDescription>Confirm deletion of account</DrawerDescription>
            </VisuallyHidden.Root>
 
-          <div className="p-6">
+          <div className="p-6 h-screen">
              <CustomHeader onClose={onClose} />
              <div className='overflow-y-auto max-h-[calc(100vh-200px)]'>
               <DeleteAccountForm onClose={onClose} handleDelete={handleDelete} />

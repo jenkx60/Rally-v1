@@ -1206,7 +1206,7 @@ const CreateEventPage = () => {
                         name="title" 
                         value={formData.title} 
                         onChange={handleChange} 
-                        placeholder="e.g. Divii's games night" 
+                        placeholder="e.g. Divii's game night" 
                         className="rounded-lg border border-[#E8E8E8] focus-visible:ring-[#6A59CE] font-geist font-medium text-[15px] text-[#333333] shadow-none placeholder:font-medium" 
                     />
                 </div>
@@ -1523,7 +1523,7 @@ const CreateEventPage = () => {
                 onClick={handleFinalSubmit}
                 type="button" 
                 disabled={tickets.length === 0}
-                className="w-full md:w-auto rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
+                className="w-auto rounded-lg px-6 py-4 bg-[#6A59CE] hover:bg-primary/90 font-geist text-[15px] font-semibold leading-[135%] tracking-[-0.2px] cursor-pointer text-white disabled:bg-[#F7F7F7] disabled:border disabled:border-[#F5F5F5] disabled:text-[#959595] disabled:cursor-not-allowed"
             >
                 {isSubmitting ? ( <Loader2 className="h-4 w-4 animate-spin flex items-center justify-center" /> ) : ( "Let's rally!" )}
             </button>

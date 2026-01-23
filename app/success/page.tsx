@@ -3,11 +3,12 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/app/components/ui/button";
 import { 
   Calendar, MapPin, Share2, ArrowRight, Copy, LayoutDashboard, 
-  LinkIcon
+  LinkIcon,
+  Loader2
 } from "lucide-react";
 import globe from "@/public/Sidebar/globe_success.svg";
 import people from "@/public/Sidebar/people-happy.svg";
@@ -22,11 +23,18 @@ import ReactConfetti from "react-confetti";
 const SuccessContent = () => {
     const searchParams = useSearchParams();
     const [isCopied, setIsCopied] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
     const handleCopy = () => {
         navigator.clipboard.writeText(MOCK_EVENT_LINK);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
+    };
+
+    const handleViewEvent = () => {
+        setIsLoading(true);
+        router.push(EVENT_PAGE_PATH);
     };
 
     // mock event link
@@ -126,7 +134,7 @@ const SuccessContent = () => {
                             <ShareEventDialog
                                 eventLink={MOCK_EVENT_LINK}
                                 trigger={
-                                    <Button className="bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-semibold text-[15px] px-6 py-4 leading-[135%] tracking-[-0.2px] w-full">
+                                    <Button className="bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-semibold text-[15px] px-6 py-4 leading-[135%] tracking-[-0.2px] w-full cursor-pointer">
                                         <Image
                                             src={forward}
                                             alt="Forward Logo"
@@ -140,10 +148,16 @@ const SuccessContent = () => {
                             />
                         </div>
                         <div className="w-full md:w-[50%]">
-                            <Button variant="outline" className="font-geist font-semibold hover:bg-[#F9F9F9] px-6 py-4 leading-[135%] tracking-[-0.2px] w-full">
-                                <Link href={EVENT_PAGE_PATH} passHref>
-                                    View event page
-                                </Link>
+                            <Button 
+                                variant="outline" 
+                                onClick={handleViewEvent}
+                                className="font-geist font-semibold hover:bg-[#F9F9F9] px-6 py-4 leading-[135%] tracking-[-0.2px] w-full cursor-pointer"
+                            >
+                                {isLoading ? (
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                ) : (
+                                    "View event page"
+                                )}
                             </Button>
                         </div>
                     </div>
