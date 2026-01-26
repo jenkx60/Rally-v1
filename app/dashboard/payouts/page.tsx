@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import payout from '@/public/Sidebar/payout.svg';
 import forward from '@/public/Sidebar/share_forward_line.svg';
-import image1 from "@/public/Sidebar/people-happy.svg";
-import image2 from "@/public/Sidebar/link-up.svg";
-import image3 from "@/public/Sidebar/sunday-ill.svg";
-import image4 from "@/public/Sidebar/sip-ill.svg";
+import image1 from "@/public/Sidebar/people-happy.webp";
+import image2 from "@/public/Sidebar/link-up.webp";
+import image3 from "@/public/Sidebar/sunday-ill.webp";
+import image4 from "@/public/Sidebar/sip-ill.webp";
 import earnings from "@/public/Sidebar/earnings.svg";
 import bankHouse from "@/public/Sidebar/banking-fill.svg";
 import Image from 'next/image';

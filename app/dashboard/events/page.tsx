@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 import { EventCard } from "@/app/components/dashboard/events/eventCard";
 import plus from "@/public/Sidebar/add_line.svg";
 import newEvent from "@/public/new-event.svg";
-import image1 from "@/public/Sidebar/people-happy.jpg";
-import image2 from "@/public/Sidebar/link-up.jpg";
-import image3 from "@/public/Sidebar/sunday-ill.jpg";
-import image4 from "@/public/Sidebar/sip-ill.jpg";
+import image1 from "@/public/Sidebar/people-happy.webp";
+import image2 from "@/public/Sidebar/link-up.webp";
+import image3 from "@/public/Sidebar/sunday-ill.webp";
+import image4 from "@/public/Sidebar/sip-ill.webp";
 import EventsFilterPopover from "@/app/components/dashboard/events/event-filter-popover";
 import { Skeleton } from "@/app/components/ui/skeleton";
 
@@ -287,8 +287,8 @@ const EventsPage = () => {
 
       {/* Events Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredEvents.map((event) => (
-          <EventCard key={event.id} {...event} />
+        {filteredEvents.map((event, index) => (
+          <EventCard key={event.id} {...event} priority={index < 2} />
         ))}
       </div>
 

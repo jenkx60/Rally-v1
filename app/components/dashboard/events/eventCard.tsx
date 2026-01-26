@@ -30,6 +30,7 @@ interface EventCardProps {
     attendees: number;
     status: 'Live' | 'Upcoming' | 'Past';
     imageSrc: StaticImageData;
+    priority?: boolean;
 }
 
 const getSeed = (str: string) => {
@@ -124,6 +125,7 @@ export const EventCard: React.FC<EventCardProps> = ({
     attendees,
     status,
     imageSrc,
+    priority = false,
 }) => {
     const router = useRouter()
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -143,12 +145,6 @@ export const EventCard: React.FC<EventCardProps> = ({
         router.push(`/dashboard/events/edit`);
     };
 
-    // const handleShareClick = () => {
-    //     setIsPopoverOpen(false);
-    //     // Open the Share Modal
-    //     setIsShareModalOpen(true);
-    // };
-
     // mock event link
     const MOCK_EVENT_LINK = "https://rally.com/yup2ibi6g6";
 
@@ -162,7 +158,7 @@ export const EventCard: React.FC<EventCardProps> = ({
                         alt={title} 
                         layout="fill"
                         objectFit="cover"
-                        priority={true}
+                        priority={priority}
                         className="rounded-t-xl"
                     />
                 </div>

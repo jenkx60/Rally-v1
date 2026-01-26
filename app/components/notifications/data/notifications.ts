@@ -1,9 +1,9 @@
 import type { NotificationItem } from "../types/notification";
-import people from "@/public/Sidebar/people-happy.svg";
+import people from "@/public/Sidebar/people-happy.webp";
 import calendar from "@/public/Sidebar/calendar-motification.svg";
 import coin from "@/public/Sidebar/coin-notification.svg";
-import saint from "@/public/Sidebar/sip-ill.svg"
-import sip from "@/public/Sidebar/sunday-ill.svg"
+import saint from "@/public/Sidebar/sip-ill.webp"
+import sip from "@/public/Sidebar/sunday-ill.webp"
 
 export const notifications: NotificationItem[] = [
   {

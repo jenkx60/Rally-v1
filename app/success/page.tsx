@@ -11,7 +11,7 @@ import {
   Loader2
 } from "lucide-react";
 import globe from "@/public/Sidebar/globe_success.svg";
-import people from "@/public/Sidebar/people-happy.svg";
+import people from "@/public/Sidebar/people-happy.webp";
 import forward from "@/public/Sidebar/share_forward_line.svg";
 import group from "@/public/Sidebar/group_3_line_o.svg";
 import ShareEventDialog from "../components/dashboard/events/share-event-dialog";

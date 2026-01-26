@@ -1,10 +1,10 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { ArrowLeft } from 'lucide-react';
-import image1 from "@/public/Sidebar/people-happy.svg";
-import image2 from "@/public/Sidebar/link-up.svg";
-import image3 from "@/public/Sidebar/sunday-ill.svg";
-import image4 from "@/public/Sidebar/sip-ill.svg";
+import image1 from "@/public/Sidebar/people-happy.webp";
+import image2 from "@/public/Sidebar/link-up.webp";
+import image3 from "@/public/Sidebar/sunday-ill.webp";
+import image4 from "@/public/Sidebar/sip-ill.webp";
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';

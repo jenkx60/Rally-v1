@@ -33,7 +33,7 @@
 //   LayoutDashboard
 // } from "lucide-react";
 // import camera from "@/public/Sidebar/camera_2.svg";
-// import people from "@/public/Sidebar/people-happy.svg";
+// import people from "@/public/Sidebar/people-happy.webp";
 // import { cn } from "@/lib/utils";
 // import StepIndicator from "@/app/components/dashboard/events/step-indicator"; 
 // import RichTextControls from "@/app/components/dashboard/events/richText-controls";
@@ -836,9 +836,9 @@ import { format } from "date-fns";
 import { Popover, PopoverContent, PopoverTrigger } from "@/app/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/app/components/ui/calendar";
 import image1 from '@/public/Sidebar/cal-ill.svg';
-import image2 from '@/public/Sidebar/link-up.svg';
-import image3 from '@/public/Sidebar/sunday-ill.svg';
-import image4 from '@/public/Sidebar/sip-ill.svg';
+import image2 from '@/public/Sidebar/link-up.webp';
+import image3 from '@/public/Sidebar/sunday-ill.webp';
+import image4 from '@/public/Sidebar/sip-ill.webp';
 import { Icon } from "@iconify/react";
 
 // --- Mock Data matching the image ---

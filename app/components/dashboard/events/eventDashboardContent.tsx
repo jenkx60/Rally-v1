@@ -8,9 +8,9 @@ import { EventCard } from "@/app/components/dashboard/events/eventCard";
 import { cn } from "@/lib/utils"; // Assuming this is imported
 import Image from "next/image";
 import image1 from '@/public/Sidebar/cal-ill.svg';
-import image2 from '@/public/Sidebar/link-up.svg';
-import image3 from '@/public/Sidebar/sunday-ill.svg';
-import image4 from '@/public/Sidebar/sip-ill.svg';
+import image2 from '@/public/Sidebar/link-up.webp';
+import image3 from '@/public/Sidebar/sunday-ill.webp';
+import image4 from '@/public/Sidebar/sip-ill.webp';
 
 // --- MOCK DATA/STATE (MUST BE DEFINED HERE) ---
 const MOCK_EVENTS = [
