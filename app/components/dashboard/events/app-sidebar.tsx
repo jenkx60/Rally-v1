@@ -304,7 +304,7 @@ export function AppSidebar() {
                       </div>
                       <hr className="border-[0.5px] border-[#0000000D]"/>
                       <div className="flex flex-col gap-1">
-                        <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] hover:text-[#333333]" onClick={handleViewProfile}>
+                        <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#333333] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] hover:text-[#333333] cursor-pointer" onClick={handleViewProfile}>
                           View profile
                           <Image
                             src={profile}
@@ -314,7 +314,7 @@ export function AppSidebar() {
                             priority={true}
                           />
                         </button>
-                        <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5]" onClick={handleLogout}>
+                        <button className="flex justify-between rounded-md py-1.5 px-2 font-geist font-medium text-[#EF4444] text-[15px] leading-[150%] tracking-[-0.2px] hover:bg-[#F5F5F5] cursor-pointer" onClick={handleLogout}>
                           Log out
                           <Image
                             src={logout}

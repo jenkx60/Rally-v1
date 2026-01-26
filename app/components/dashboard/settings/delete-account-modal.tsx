@@ -143,7 +143,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
   const handleDelete = () => {
     toast.custom((t) => (
         <CustomToast 
-          message="Event successfully deleted"
+          message="Account successfully deleted"
           variant='error'
           onDismiss={() => toast.dismiss(t)}
         />

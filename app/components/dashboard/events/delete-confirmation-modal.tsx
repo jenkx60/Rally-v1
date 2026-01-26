@@ -216,6 +216,8 @@ import {
 } from '@/app/components/ui/drawer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import alert from '@/public/Sidebar/alert-triangle.svg';
+import { toast } from 'sonner';
+import CustomToast from '../../ui/custom-toast';
 
 interface DeleteConfirmationModalProps {
     isOpen: boolean;
@@ -231,6 +233,17 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
     children
 }) => {
     const isMobile = useIsMobile();
+
+    const handleEventDelete = () => {
+        toast.custom((t) => {
+            return <CustomToast
+                message="Event successfully deleted"
+                variant='error'
+                onDismiss={() => toast.dismiss(t)} />;
+        })
+        onConfirmDelete();
+        onClose();
+    };
 
     // Use these variables to toggle between Dialog and Drawer primitives
     const Title = isMobile ? DrawerTitle : DialogTitle;
@@ -267,13 +280,13 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
             <div className="flex flex-col-reverse md:flex-row justify-end gap-3 leading-[135%] tracking-[-0.2px] pt-2">
                 <button 
                     onClick={onClose} 
-                    className="w-full md:w-auto bg-white text-[#959595] border border-[#E8E8E8] hover:bg-[#F7F7F7] font-geist font-semibold py-3 px-[18px] rounded-lg text-sm"
+                    className="w-full md:w-auto bg-white text-[#959595] border border-[#E8E8E8] hover:bg-[#F7F7F7] font-geist font-semibold py-3 px-[18px] rounded-lg text-sm cursor-pointer"
                 >
                     Cancel
                 </button>
                 <button 
-                    onClick={onConfirmDelete}
-                    className="w-full md:w-auto bg-[#EF4444] hover:bg-[#D93B3B] font-geist font-semibold py-3 px-[18px] text-sm text-white rounded-lg"
+                    onClick={handleEventDelete}
+                    className="w-full md:w-auto bg-[#EF4444] hover:bg-[#D93B3B] font-geist font-semibold py-3 px-[18px] text-sm text-white rounded-lg cursor-pointer"
                 >
                     Delete event
                 </button>
