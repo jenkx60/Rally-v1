@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 import { EventCard } from "@/app/components/dashboard/events/eventCard";
 import plus from "@/public/Sidebar/add_line.svg";
 import newEvent from "@/public/new-event.svg";
-import image1 from "@/public/Sidebar/people-happy.svg";
-import image2 from "@/public/Sidebar/link-up.svg";
-import image3 from "@/public/Sidebar/sunday-ill.svg";
-import image4 from "@/public/Sidebar/sip-ill.svg";
+import image1 from "@/public/Sidebar/people-happy.jpg";
+import image2 from "@/public/Sidebar/link-up.jpg";
+import image3 from "@/public/Sidebar/sunday-ill.jpg";
+import image4 from "@/public/Sidebar/sip-ill.jpg";
 import EventsFilterPopover from "@/app/components/dashboard/events/event-filter-popover";
 import { Skeleton } from "@/app/components/ui/skeleton";
 
