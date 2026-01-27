@@ -168,7 +168,7 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
 
           <div className="p-6 h-screen">
              <CustomHeader onClose={onClose} />
-             <div className='overflow-y-auto max-h-[85dvh]'>
+             <div className='overflow-y-auto min-h-[85dvh]'>
               <DeleteAccountForm onClose={onClose} handleDelete={handleDelete} />
              </div>
           </div>
