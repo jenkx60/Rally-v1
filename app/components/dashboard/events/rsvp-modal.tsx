@@ -106,9 +106,9 @@ const RsvpModal: React.FC<RsvpModalProps> = ({ trigger }) => {
         return (
             <Drawer open={open} onOpenChange={setOpen}>
                 <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-                <DrawerContent className="px-4 pb-8 rounded-t-[24px]">
+                <DrawerContent className="max-h-[85vh] rounded-t-[24px]">
                     {/* <div className="mx-auto w-12 h-1.5 shrink-0 rounded-full bg-[#E8E8E8] mt-3 mb-6" /> */}
-                    <div className="max-h-[85vh] overflow-y-auto px-4 pb-10 pt-4">
+                    <div className="px-4 pb-10 pt-4 overflow-y-auto">
                         <DrawerHeader className="text-left px-0 pt-0 pb-4 mt-8">
                             <DrawerTitle className="font-bricolage text-[22px] font-bold text-[#1A1A1A] tracking-[-0.5px]">
                                 Enter your info
