@@ -143,6 +143,8 @@ import {
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 import { Input } from '../../ui/input';
+import { toast } from 'sonner';
+import CustomToast from '../../ui/custom-toast';
 
 interface EditPayoutAccountProps {
   isOpen: boolean;
@@ -176,6 +178,22 @@ const EditPayoutForm: React.FC<EditPayoutFormProps> = ({
   accountName,
   setAccountName,
 }) => {
+
+  const handleSaveAccount = () => {
+    toast.custom((t) => (
+      <CustomToast 
+        message='Account updated successfully'
+        variant='success'
+        onDismiss={() => toast.dismiss(t)}
+      />
+    ))
+    onConfirmAdd({
+      bankName,
+      accountNumber,
+      accountName,
+    });
+    onClose();
+  };
   return (
     <div className="space-y-6">
       <div className="space-y-4">
@@ -236,7 +254,7 @@ const EditPayoutForm: React.FC<EditPayoutFormProps> = ({
           Cancel
         </button>
         <button
-          onClick={handleSave}
+          onClick={handleSaveAccount}
           className="w-full px-5 py-4 rounded-lg bg-[#6A59CE] hover:bg-primary/90 font-geist font-medium text-white text-[15px] transition-colors cursor-pointer"
         >
           Add account
@@ -348,3 +366,7 @@ const EditPayoutModal: React.FC<EditPayoutAccountProps> = ({
 };
 
 export default EditPayoutModal;
+
+function onConfirmAdd(arg0: { bankName: string; accountNumber: string; accountName: string; }) {
+  throw new Error('Function not implemented.');
+}

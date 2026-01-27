@@ -24,7 +24,7 @@ const pastEvents = [
     title: "Potluck & chill",
     date: "October 12, 2025 • 12:30PM",
     attended: 24,
-    image: image2, // Replace with your actual image path
+    image: image2,
     status: "pending",
   },
 ];
