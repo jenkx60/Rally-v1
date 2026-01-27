@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { supabase } from '@/lib/supabase-client';
 
 interface User {
   id: string;
@@ -19,25 +20,31 @@ export const useAuthStore = create<AuthState>((set) => ({
   isLoading: true,
   checkAuth: async () => {
     try {
-      set({ isLoading: true });
-      const res = await fetch('/api/auth/me');
-      if (res.ok) {
-        const data = await res.json();
-        set({ user: data.user });
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) {
+        throw error;
+      }
+      if (session?.user) {
+        set({
+           user: {
+             id: session.user.id,
+             email: session.user.email!,
+             name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'User',
+           },
+           isLoading: false
+        });
       } else {
-        set({ user: null });
+        set({ user: null, isLoading: false });
       }
     } catch (error) {
       console.error('Check auth error:', error);
-      set({ user: null });
-    } finally {
-      set({ isLoading: false });
+      set({ user: null, isLoading: false });
     }
   },
   login: (user) => set({ user }),
   logout: async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await supabase.auth.signOut();
       set({ user: null });
     } catch (error) {
       console.error('Logout error:', error);

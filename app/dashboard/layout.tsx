@@ -9,16 +9,10 @@ import {
 } from "@/app/components/ui/sidebar";
 import DynamicBreadcrumb from "@/app/components/dashboard/events/dynamic-breadcrumb";
 import { useRouter } from "next/navigation";
-// import QuickAction from "@/components/dashboard/quick-action";
 import Notification from "@/app/components/notifications/notification";
-// import { useOnboardingStore } from "@/store/use-onboarding-store";
 import Head from "next/head";
 import { Menu } from "lucide-react";
-// import axionsInstance from "@/lib/axios";
-// import PasscodeSet from "@/components/businessOnboarding/passcode-set";
-// import { PendingFeatureGuardProvider } from "@/components/pending-feature-guard";
-
-// import { useAuthStore } from "@/lib/auth-store";
+import { useAuthStore } from "@/store/authStore";
 
 export default function DashboardLayout({
   children,
@@ -26,16 +20,26 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  // const { checkAuth, user, isLoading } = useAuthStore();
+  const { checkAuth, user, isLoading } = useAuthStore();
 //   const { currentUser } = useOnboardingStore();
   const [open, setOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // useEffect(() => {
-  //   checkAuth();
-  // }, [checkAuth]);
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.replace("/login");
+    }
+  }, [isLoading, user, router]);
 
+  if (isLoading || !user) {
+     return null;
+  }
+
+ 
 //   useEffect(() => {
 //     const checkToken = async () => {
 //       try {

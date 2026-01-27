@@ -1,7 +1,7 @@
 'use client';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import { Plus, Search, UserPlus } from 'lucide-react';
+import { Loader2, Plus, Search, UserPlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/app/components/ui/button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/app/components/ui/table'; 
@@ -18,6 +18,7 @@ import avatarstrip from '@/public/Sidebar/avatar-strip.svg';
 import avatareyes from '@/public/Sidebar/avatar-3eyes.svg';
 import avatarmanbun from '@/public/Sidebar/avatar-manbun.svg';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
+import { useAuthStore } from '@/store/authStore';
 
 // Mock Attendee Data
 const mockAttendees = [
@@ -52,6 +53,9 @@ const EmptyAttendeesState: React.FC = () => (
 
 
 const AttendeesPage = () => {
+    const { user } = useAuthStore();
+    const [attendees, setAttendees] = useState<typeof mockAttendees>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [hasAttendees, setHasAttendees] = useState(true); 
     const [searchQuery, setSearchQuery] = useState('');
     const [eventFilter, setEventFilter] = useState('all');
@@ -60,13 +64,32 @@ const AttendeesPage = () => {
     
     const items_per_table = 2;
 
+    useEffect(() => {
+        if (!user?.id) return;
+        setIsLoading(true);
+        const timer = setTimeout(() => {
+            if (user.email?.includes('new')) {
+                setAttendees([]);
+                setHasAttendees(false);
+            } else {
+                setAttendees(mockAttendees);
+                setHasAttendees(true);
+            }
+            setIsLoading(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [user?.id]);
+
     // to  extract unique events and ticket types for dropdowns
-    const uniqueEvents = Array.from(new Set(mockAttendees.map(a => a.eventName)));
-    const uniqueTicketTypes = Array.from(new Set(mockAttendees.map(a => a.ticketType)));
+    const uniqueEvents = Array.from(new Set(attendees.map(a => a.eventName)));
+    const uniqueTicketTypes = Array.from(new Set(attendees.map(a => a.ticketType)));
+    // const uniqueEvents = Array.from(new Set(mockAttendees.map(a => a.eventName)));
+    // const uniqueTicketTypes = Array.from(new Set(mockAttendees.map(a => a.ticketType)));
 
     // Filtering Logic
     const filteredAttendees = useMemo(() => {
-        return mockAttendees.filter((attendee) => {
+        return attendees.filter((attendee) => {
+        // return mockAttendees.filter((attendee) => {
             // Search Filter (Name or Email)
             const matchesSearch = 
                 attendee.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -88,6 +111,14 @@ const AttendeesPage = () => {
         setVisibleCount((prev) => prev + items_per_table);
     }
 
+    if (isLoading) {
+        return (
+            <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-[#6A59CE]" />
+            </div>
+        )
+    }
+
     if (!hasAttendees) {
         return (
           <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
@@ -99,7 +130,8 @@ const AttendeesPage = () => {
     return (
         <div className="bg-white flex flex-col gap-12 p-0 pb-10 pt-5 md:p-5 w-full max-w-[1200px] mx-auto">
             <div>
-                <h2 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2>
+                {/* <h2 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({mockAttendees.length})</span></h2> */}
+                <h2 className="font-bricolage text-[28px] md:text-[32px] font-bold text-[#1A1A1A] leading-[120%] tracking-[-1px]">Attendees <span className='text-[#A3A3A3] font-bricolage font-bold text-[15px] tracking-[-0.6px]'>({attendees.length})</span></h2>
                 <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Guest list for all your events in one place</p>
             </div>
 

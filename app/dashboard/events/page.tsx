@@ -16,6 +16,9 @@ import image4 from "@/public/Sidebar/sip-ill.webp";
 import EventsFilterPopover from "@/app/components/dashboard/events/event-filter-popover";
 import { Skeleton } from "@/app/components/ui/skeleton";
 
+import { useAuthStore } from "@/store/authStore";
+import { supabase } from '@/lib/supabase-client';
+
 type FilterState = {
   date: 'All' | 'Today' | 'This week' | 'This month';
   locationType: 'All' | 'Physical' | 'Virtual';
@@ -28,7 +31,9 @@ const initialFilterState: FilterState = {
   freeEventsOnly: false,
 };
 
-// --- MOCK DATA ---
+// Keep MOCK_EVENTS for fallback or type reference if needed, 
+// but we will mainly use fetched data. 
+// Use MOCK_EVENTS only for static placeholders if needed.
 const MOCK_EVENTS = [
     {
         id: "saints-popup",
@@ -65,23 +70,48 @@ const MOCK_EVENTS = [
         attendees: 4,
         status: 'Past' as const,
         imageSrc: image4,
-    },
+    }
 ];
 
 const EventsPage = () => {
   const router = useRouter();
+  const { user } = useAuthStore();
   const [filter, setFilter] = useState("All");
   const [currentModalFilters, setCurrentModalFilters] = useState<FilterState>(initialFilterState);
   const [events, setEvents] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (!user?.id) {
+        return;
+    }
+
     const fetchEvents = async () => {
         try {
-            const res = await fetch('/api/events');
-            if (res.ok) {
-                const data = await res.json();
-                setEvents(data.events);
+            setIsLoading(true);
+            const { data, error } = await supabase
+                .from('events')
+                .select('*')
+                .eq('user_id', user.id);
+            
+            if (error) {
+                console.error('Failed to fetch events', error);
+                // Fallback to empty to show empty state if error, or handle otherwise.
+                setEvents([]); 
+            } else if (data) {
+                // Map DB events to UI format
+                const mappedEvents = data.map((evt: any) => ({
+                    id: evt.id,
+                    title: evt.title,
+                    // Construct dateRange or use it if available
+                    dateRange: evt.date_range || `${new Date(evt.start_time).toLocaleDateString()} • ${new Date(evt.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`,
+                    location: evt.location,
+                    attendees: evt.attendees || 0,
+                    status: evt.status || 'Upcoming',
+                    // Use a fallback image or the one from DB
+                    imageSrc: evt.image_src ? evt.image_src : [image1, image2, image3, image4][Math.floor(Math.random() * 4)],
+                }));
+                setEvents(mappedEvents); 
             }
         } catch (error) {
             console.error('Failed to fetch events', error);
@@ -90,7 +120,7 @@ const EventsPage = () => {
         }
     }
     fetchEvents();
-  }, []);
+  }, [user?.id]);
 
   const handlePopFilter = (filters : FilterState) => {
     setCurrentModalFilters(filters)
@@ -105,7 +135,7 @@ const EventsPage = () => {
   }, [currentModalFilters])
 
   // Filter logic for the dashboard view
-  const filteredEvents = MOCK_EVENTS.filter((event) =>
+  const filteredEvents = events.filter((event) =>
     filter === "All" ? true : event.status === filter
   );
 
@@ -189,7 +219,7 @@ const EventsPage = () => {
   // --- CONDITIONAL RENDER LOGIC ---
   
   // 1. If NO events exist, show the "Empty State" (First code snippet)
-  if (MOCK_EVENTS.length === 0) {
+  if (events.length === 0) {
     
     return (
       <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">

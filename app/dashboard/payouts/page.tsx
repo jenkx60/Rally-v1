@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import payout from '@/public/Sidebar/payout.svg';
 import forward from '@/public/Sidebar/share_forward_line.svg';
 import image1 from "@/public/Sidebar/people-happy.webp";
@@ -9,10 +9,11 @@ import image4 from "@/public/Sidebar/sip-ill.webp";
 import earnings from "@/public/Sidebar/earnings.svg";
 import bankHouse from "@/public/Sidebar/banking-fill.svg";
 import Image from 'next/image';
-import { ChevronRight, Plus } from 'lucide-react';
+import { ChevronRight, Plus, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import EditPayoutModal from '@/app/components/dashboard/payout/edit-payout-modal';
+import { useAuthStore } from "@/store/authStore";
 
 
 const mockPayouts = [
@@ -72,8 +73,11 @@ const EmptyPayoutState: React.FC = () => (
 
 const PayoutPage = () => {
   const router = useRouter();
+  const { user } = useAuthStore();
   const [payFilter, setPayFilter] = useState('All')
   const [hasPayout, setHasPayout] = useState(true);
+  const [payouts, setPayouts] = useState<typeof mockPayouts>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [bankDetails, setBankDetails] = useState({
     bankName: "Zenith Bank",
     accountNumber: "1234",
@@ -81,15 +85,42 @@ const PayoutPage = () => {
   });
   const [editModalOpen, setEditModalOpen] = useState(false);
 
+  useEffect(() => {
+    if (!user?.id) return;
+    setIsLoading(true);
+    // Simulate async fetch
+    const timer = setTimeout(() => {
+        // Simulate "New User" (empty) vs "Returning User" (data)
+        // If email contains "new", return empty.
+        if (user.email?.includes('new')) {
+            setPayouts([]);
+        } else {
+            setPayouts(mockPayouts);
+        }
+        setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [user?.id]);
+
   const handleViewAll = () => {
     router.push(`payouts/pay-history`)
   }
 
-  const filteredPayouts = mockPayouts.filter((event) => 
+  // const filterPayouts = mockPayouts.filter((event) =>
+  const filteredPayouts = payouts.filter((event) => 
     payFilter === 'All' ? true : event.status === payFilter
   );
 
-  if (mockPayouts.length === 0) {
+  // if (mockPayouts.length === 0) {}
+  if (isLoading) {
+    return (
+        <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-[#6A59CE]" />
+        </div>
+    )
+  }
+
+  if (payouts.length === 0) {
     return (
     <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
       <EmptyPayoutState />
@@ -150,7 +181,8 @@ const PayoutPage = () => {
 
                 {/* Payouts List */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                    {mockPayouts.map((payout) => (
+                        {/* {mockPayouts.map((payout) => ( */}
+                    {payouts.map((payout) => (
                         <div 
                             key={payout.id} 
                             className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#E8E8E81A] transition-colors"
