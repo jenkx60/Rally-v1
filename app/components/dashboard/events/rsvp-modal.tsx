@@ -113,7 +113,9 @@ const RsvpModal: React.FC<RsvpModalProps> = ({ trigger }) => {
                             Enter your info
                         </DrawerTitle>
                     </DrawerHeader>
-                    <RsvpForm onSubmit={handleSuccess} />
+                    <div className="max-h-[85vh] overflow-y-auto">
+                        <RsvpForm onSubmit={handleSuccess} />
+                    </div>
                 </DrawerContent>
             </Drawer>
         );
