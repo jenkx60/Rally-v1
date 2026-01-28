@@ -46,7 +46,7 @@ const EmptyAttendeesState: React.FC = () => (
         </div>
         <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
             <Plus className='w-5 h-5' />
-            <span className="font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]">Share event</span>
+            <span className="font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]">Create event</span>
         </button>
     </div>
 );
