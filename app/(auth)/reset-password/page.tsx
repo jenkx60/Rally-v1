@@ -1,12 +1,12 @@
 'use client'
-
-import Link from 'next/link'
-import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import React from 'react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function ResetPassword() {
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
+  // const searchParams = useSearchParams()
+  // const token = searchParams.get('token')
 
   const [formData, setFormData] = useState({
     password: '',
@@ -26,10 +26,10 @@ export default function ResetPassword() {
     e.preventDefault()
     setError('')
 
-    if (!token) {
-      setError('Invalid reset link')
-      return
-    }
+    // if (!token) {
+    //   setError('Invalid reset link')
+    //   return
+    // }
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match')
@@ -155,7 +155,7 @@ export default function ResetPassword() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 px-4 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mt-6"
+          className="w-full py-3 px-4 rounded-md bg-primary text-primary-foreground font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mt-6"
         >
           {isSubmitting ? 'Resetting...' : 'Reset password'}
         </button>

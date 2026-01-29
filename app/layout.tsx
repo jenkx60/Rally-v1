@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react'
-import localFont from 'next/font/local'
-import './globals.css'
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono, Bricolage_Grotesque } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
+import localFont from 'next/font/local';
+import './globals.css';
+import { Toaster } from './components/ui/sonner';
 // ${bricolageGrotesque.variable}
 
 const _geist = Geist({ subsets: ["latin"], variable: '--font-geist' })
@@ -12,6 +13,13 @@ const bricolageGrotesque = Bricolage_Grotesque({
   weight: ['400', '700'],
   variable: '--font-bricolage',
 })
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+}
 
 export const metadata: Metadata = {
   title: 'Rally - Turn group chats into real plans',
@@ -28,7 +36,7 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: '/Logo.svg',
         type: 'image/svg+xml',
       },
     ],
@@ -46,6 +54,7 @@ export default function RootLayout({
       <body className={`${bricolageGrotesque.variable} ${_geist.variable} ${_geistMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />
+        <Toaster position='top-center'/>
       </body>
     </html>
   )
