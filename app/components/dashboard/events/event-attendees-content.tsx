@@ -12,42 +12,27 @@ import avatarkill from '@/public/Sidebar/avatar-kill.svg';
 import avatarman from '@/public/Sidebar/avatar-man.svg';
 import avatarglass from '@/public/Sidebar/avatar-glass.svg';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
+import { useDataStore } from '@/src/store/data.store';
+import { AttendeeData } from '@/src/types';
+import AttendeesEmptyState from '@/app/components/dashboard/empty-states/attendees-empty-state';
 
-// Mock Attendee Data
-const mockAttendees = [
-    { id: 1, name: "Divii", email: "divii@example.com", ticketType: "Regular", price: "Free", joined: "Jan 8, 2026", avatar: avatard },
-    { id: 2, name: "Uchy", email: "u.kimberly@rocketmail.com", ticketType: "VIP", price: "₦15,000", joined: "Jan 4, 2026", avatar: avatarkill },
-    { id: 3, name: "Nneoms", email: "n.annette@rocketmail.com", ticketType: "VIP", price: "₦5,000", joined: "Jan 2, 2026", avatar: avatarglass },
-    { id: 4, name: "Nkem", email: "realsaints@gmail.com", ticketType: "VIP", price: "₦25,000", joined: "Jan 3, 2026", avatar: avatarman },
-];
+// Empty state logic now handles the state below using the reusable component
 
-const EmptyAttendeesState: React.FC = () => (
-    <div className="flex flex-col items-center justify-center py-12 px-[100px] mt-12 bg-white text-center space-y-4">
-        <Image src={bird} alt="No attendees" width={80} height={80} priority={true} />
-        <div className='space-y-1'>
-            <h1 className="font-bricolage text-xl font-semibold text-[#1A1A1A] leading-[130%] tracking-[-0.7px]">No RSVPs yet</h1>
-            <p className="font-geist font-medium text-[15px] text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Time to spread the word</p>
-        </div>
-        <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-[#5a4cb0] font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
-            <Image
-                src={forward}
-                alt='share'
-                width={18}
-                height={18} 
-                priority={true}
-            />
-            <span>Share event</span>
-        </button>
-    </div>
-);
 
 
 const EventAttendeesContent = () => {
-    // For prototype, toggle between empty and active state
-    const [hasAttendees, setHasAttendees] = useState(true); 
+    const { attendees, fetchData } = useDataStore();
+    const hasAttendees = attendees.length > 0; 
 
     if (!hasAttendees) {
-        return <EmptyAttendeesState />;
+        return (
+            <AttendeesEmptyState 
+                onAction={() => {}} 
+                title="No RSVPs yet" 
+                description="Time to spread the word" 
+                className="flex flex-col items-center justify-center py-12 px-[100px] mt-12 bg-white text-center space-y-4"
+            />
+        );
     }
 
     return (
@@ -98,7 +83,7 @@ const EventAttendeesContent = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {mockAttendees.map((attendee) => (
+                    {attendees.slice(0, 4).map((attendee: AttendeeData) => (
                         <TableRow key={attendee.id} className='text-[#1A1A1A] font-medium font-geist text-sm'>
                             <TableCell className="font-medium">
                                  <div className="flex items-center gap-3">
@@ -116,23 +101,11 @@ const EventAttendeesContent = () => {
                                         <h1 className='font-medium text-[#333333]'>{attendee.name}</h1>
                                         <p className='font-normal text-[#A3A3A3]'>{attendee.email}</p>
                                     </div>
-                                </div>
+                                 </div>
                             </TableCell>
-                            <TableCell>
-                                <span className={cn(
-                                    "text-sm ",
-                                )}>
-                                    {attendee.ticketType}
-                                </span>
-                            </TableCell>
-                            <TableCell>
-                                <span className={cn(
-                                    "text-sm",
-                                )}>
-                                    {attendee.price}
-                                </span>
-                            </TableCell>
-                            <TableCell className="">{attendee.joined}</TableCell>
+                            <TableCell className='text-[#333333] text-[15px] font-normal leading-[150%] tracking-[-0.1px]'>{attendee.ticketType}</TableCell>
+                            <TableCell className='text-[#333333] text-[15px] font-normal leading-[150%] tracking-[-0.1px]'>{attendee.price}</TableCell>
+                            <TableCell className='text-[#333333] text-[15px] font-normal leading-[150%] tracking-[-0.1px]'>{attendee.joined}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

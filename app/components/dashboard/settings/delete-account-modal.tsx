@@ -35,9 +35,10 @@ const DeleteAccountForm = ({
   handleDelete: () => void; 
 })=> {
   const [email, setEmail] = useState("");
-  const [confirmText, setConfirmText] = useState("");
+  // const [confirmText, setConfirmText] = useState("");
 
-  const isFormVaild = email.length > 0 && confirmText.toLowerCase() === "delete my account";
+  const isFormVaild = email.length > 0
+  //  && confirmText.toLowerCase() === "delete my account";
   return (
     <div className="space-y-8">
       {/* Support Link */}
@@ -49,7 +50,7 @@ const DeleteAccountForm = ({
       </div>
 
       {/* Form Fields */}
-      <div className="space-y-5 md:max-h-[230px] md:p-0.5 overflow-y-auto">
+      <div className="space-y-5 md:max-h-[230px] overflow-y-auto p-0.5">
         <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#484848] leading-[150%] tracking-[-0.1px]">
             Why are you leaving? <span className="text-[#AAAAAA] font-normal">(Optional)</span>
@@ -73,7 +74,7 @@ const DeleteAccountForm = ({
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        {/* <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">
             Type “delete my account” to confirm
           </label>
@@ -84,7 +85,7 @@ const DeleteAccountForm = ({
             placeholder="Type here..."
             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Actions */}
@@ -166,9 +167,9 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose
              <DrawerDescription>Confirm deletion of account</DrawerDescription>
            </VisuallyHidden.Root>
 
-          <div className="p-6 h-screen">
+          <div className="p-6">
              <CustomHeader onClose={onClose} />
-             <div className='overflow-y-auto min-h-[85dvh]'>
+             <div className='overflow-y-auto'>
               <DeleteAccountForm onClose={onClose} handleDelete={handleDelete} />
              </div>
           </div>

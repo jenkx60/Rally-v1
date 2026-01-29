@@ -15,15 +15,11 @@ import image3 from "@/public/Sidebar/sunday-ill.webp";
 import image4 from "@/public/Sidebar/sip-ill.webp";
 import EventsFilterPopover from "@/app/components/dashboard/events/event-filter-popover";
 import { Skeleton } from "@/app/components/ui/skeleton";
+import EventsEmptyState from "@/app/components/dashboard/empty-states/events-empty-state";
 
-import { useAuthStore } from "@/store/authStore";
-import { supabase } from '@/lib/supabase-client';
-
-type FilterState = {
-  date: 'All' | 'Today' | 'This week' | 'This month';
-  locationType: 'All' | 'Physical' | 'Virtual';
-  freeEventsOnly: boolean;
-};
+import { useAuthStore } from "@/src/store/auth.store";
+import { useDataStore } from "@/src/store/data.store";
+import { FilterState, EventData } from "@/src/types";
 
 const initialFilterState: FilterState = {
   date: 'All',
@@ -31,96 +27,18 @@ const initialFilterState: FilterState = {
   freeEventsOnly: false,
 };
 
-// Keep MOCK_EVENTS for fallback or type reference if needed, 
-// but we will mainly use fetched data. 
-// Use MOCK_EVENTS only for static placeholders if needed.
-const MOCK_EVENTS = [
-    {
-        id: "saints-popup",
-        title: "Saints pop-up",
-        dateRange: "Today • 6:00 PM - 11:00 PM",
-        location: "Shore mall, Osapa",
-        attendees: 5,
-        status: 'Live' as const,
-        imageSrc: image1,
-    },
-    {
-        id: "the-link-up",
-        title: "The link up",
-        dateRange: "Fri, Nov 21 • 5:30 PM - 10:30 PM",
-        location: "The Garden, Ikoyi",
-        attendees: 9,
-        status: 'Upcoming' as const,
-        imageSrc: image2,
-    },
-    {
-        id: "sunday-brunch",
-        title: "Potluck & chill",
-        dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
-        location: "Lekki phase 1, Lekki",
-        attendees: 6,
-        status: 'Upcoming' as const,
-        imageSrc: image3,
-    },
-    {
-        id: "sip-yap",
-        title: "Sip & yap",
-        dateRange: "Sat, Oct 12 • 1:30 PM - 4:30 PM",
-        location: "Lekki phase 1, Lekki",
-        attendees: 4,
-        status: 'Past' as const,
-        imageSrc: image4,
-    }
-];
-
 const EventsPage = () => {
   const router = useRouter();
-  const { user } = useAuthStore();
+  const { user, userEventCount } = useAuthStore();
+  const { events, isLoading: isDataLoading, fetchData } = useDataStore();
   const [filter, setFilter] = useState("All");
   const [currentModalFilters, setCurrentModalFilters] = useState<FilterState>(initialFilterState);
-  const [events, setEvents] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  
+  const isLoading = isDataLoading;
 
   useEffect(() => {
-    if (!user?.id) {
-        return;
-    }
-
-    const fetchEvents = async () => {
-        try {
-            setIsLoading(true);
-            const { data, error } = await supabase
-                .from('events')
-                .select('*')
-                .eq('user_id', user.id);
-            
-            if (error) {
-                console.error('Failed to fetch events', error);
-                // Fallback to empty to show empty state if error, or handle otherwise.
-                setEvents([]); 
-            } else if (data) {
-                // Map DB events to UI format
-                const mappedEvents = data.map((evt: any) => ({
-                    id: evt.id,
-                    title: evt.title,
-                    // Construct dateRange or use it if available
-                    dateRange: evt.date_range || `${new Date(evt.start_time).toLocaleDateString()} • ${new Date(evt.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`,
-                    location: evt.location,
-                    attendees: evt.attendees || 0,
-                    status: evt.status || 'Upcoming',
-                    // Use a fallback image or the one from DB
-                    imageSrc: evt.image_src ? evt.image_src : [image1, image2, image3, image4][Math.floor(Math.random() * 4)],
-                }));
-                setEvents(mappedEvents); 
-            }
-        } catch (error) {
-            console.error('Failed to fetch events', error);
-        } finally {
-            setIsLoading(false);
-        }
-    }
-    fetchEvents();
-  }, [user?.id]);
+    fetchData();
+  }, [fetchData]);
 
   const handlePopFilter = (filters : FilterState) => {
     setCurrentModalFilters(filters)
@@ -220,41 +138,7 @@ const EventsPage = () => {
   
   // 1. If NO events exist, show the "Empty State" (First code snippet)
   if (events.length === 0) {
-    
-    return (
-      <div className="flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center">
-        <div>
-          <Image src={newEvent} alt="New Event Image" width={80} height={80} priority />
-        </div>
-        <div className="flex flex-col gap-1 items-center text-center">
-          <h1 className="font-bricolage font-semibold text-[18px] leading-[120%] tracking-[-0.6px] text-center">
-            No events yet
-          </h1>
-          <p className="font-geist font-medium text-[14px] leading-[150%] tracking-[-0.1px] text-[#A3A3A3]">
-            Let&apos;s create your first event!
-          </p>
-        </div>
-          {/* <Button onClick={() => router.push("/dashboard/events/create")}>
-            <Image
-              src={plus}
-              alt="Plus Icon"
-              width={18}
-              height={18}
-              className="pb-0.5"
-            />
-            <span className="font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]">
-              Create event
-            </span>
-          </Button> */}
-          <button 
-            onClick={() => router.push("/dashboard/events/create")}
-            className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
-          >
-            <Plus className='w-5 h-5' />
-            <span className='font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]'>Create event</span>
-          </button>
-      </div>
-    );
+    return <EventsEmptyState />;
   }
 
   // 2. If events DO exist, show the "Dashboard View" (Second code snippet)

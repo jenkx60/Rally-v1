@@ -12,7 +12,8 @@ import { useRouter } from "next/navigation";
 import Notification from "@/app/components/notifications/notification";
 import Head from "next/head";
 import { Menu } from "lucide-react";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore } from "@/src/store/auth.store";
+import { USE_MOCK_DATA } from "@/src/config/featureFlags";
 
 export default function DashboardLayout({
   children,
@@ -30,11 +31,20 @@ export default function DashboardLayout({
   }, [checkAuth]);
 
   useEffect(() => {
+    // Redirect to login if no authenticated user after loading completes
     if (!isLoading && !user) {
       router.replace("/login");
     }
   }, [isLoading, user, router]);
 
+  // Additional check on mount for direct URL access
+  // No secondary Supabase check needed here as checkAuth in the store handles it based on flags
+  useEffect(() => {
+    // If NOT in mock mode, we could still do a secondary validateSession if desired,
+    // but the store's checkAuth already does this.
+  }, []);
+
+  // Prevent rendering until auth check completes
   if (isLoading || !user) {
      return null;
   }

@@ -13,70 +13,16 @@ import { ChevronRight, Plus, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import EditPayoutModal from '@/app/components/dashboard/payout/edit-payout-modal';
-import { useAuthStore } from "@/store/authStore";
-
-
-const mockPayouts = [
-  { 
-    id: 1, 
-    eventName: 'Saints pop-up', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦140,000', 
-    status: 'Paid' as const, 
-    image: image1 
-  },
-  { 
-    id: 2, 
-    eventName: 'The link up', 
-    date: 'November 21, 2025', 
-    ticketSold: 24, 
-    amount: '₦300,000', 
-    status: 'Paid' as const, 
-    image: image2 
-  },
-  { 
-    id: 3, 
-    eventName: 'Potluck & chill', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦100,000', 
-    status: 'Pending' as const, 
-    image: image3 
-  },
-  { 
-    id: 4, 
-    eventName: 'Sip & yap', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦50,000', 
-    status: 'Pending' as const, 
-    image: image4 
-  },
-];
-
-const EmptyPayoutState: React.FC = () => (
-  <div className="flex flex-col items-center justify-center py-12 bg-white text-center space-y-4">
-        <Image src={payout} alt="No attendees" width={80} height={80} priority={true} />
-        <div className='space-y-1'>
-            <h1 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No earnings yet</h1>
-            <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">Host a paid event to start earning</p>
-        </div>
-         <button 
-          className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
-        >
-          <Plus className='w-5 h-5' />
-          <span className='font-geist font-semibold text-sm leading-[135%] tracking-[-0.2px]'>Create event</span>
-        </button>
-    </div>
-)
+import PayoutsEmptyState from '@/app/components/dashboard/empty-states/payouts-empty-state';
+import { useAuthStore } from "@/src/store/auth.store";
+import { useDataStore } from "@/src/store/data.store";
+import { PayoutData } from "@/src/types";
 
 const PayoutPage = () => {
   const router = useRouter();
-  const { user } = useAuthStore();
+  const { user, userEventCount } = useAuthStore();
+  const { payouts, isLoading: isDataLoading, fetchData } = useDataStore();
   const [payFilter, setPayFilter] = useState('All')
-  const [hasPayout, setHasPayout] = useState(true);
-  const [payouts, setPayouts] = useState<typeof mockPayouts>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [bankDetails, setBankDetails] = useState({
     bankName: "Zenith Bank",
@@ -86,27 +32,18 @@ const PayoutPage = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!user?.id) return;
-    setIsLoading(true);
-    // Simulate async fetch
-    const timer = setTimeout(() => {
-        // Simulate "New User" (empty) vs "Returning User" (data)
-        // If email contains "new", return empty.
-        if (user.email?.includes('new')) {
-            setPayouts([]);
-        } else {
-            setPayouts(mockPayouts);
-        }
-        setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [user?.id]);
+    fetchData();
+  }, [fetchData]);
+
+  useEffect(() => {
+     setIsLoading(isDataLoading);
+  }, [isDataLoading]);
+
 
   const handleViewAll = () => {
-    router.push(`payouts/pay-history`)
-  }
+    router.push(`payouts/pay-history`);
+  };
 
-  // const filterPayouts = mockPayouts.filter((event) =>
   const filteredPayouts = payouts.filter((event) => 
     payFilter === 'All' ? true : event.status === payFilter
   );
@@ -123,7 +60,7 @@ const PayoutPage = () => {
   if (payouts.length === 0) {
     return (
     <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
-      <EmptyPayoutState />
+      <PayoutsEmptyState onCreateEvent={() => router.push('/dashboard/events/create')} />
     </div>
     )
   }
@@ -181,8 +118,7 @@ const PayoutPage = () => {
 
                 {/* Payouts List */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                        {/* {mockPayouts.map((payout) => ( */}
-                    {payouts.map((payout) => (
+                    {filteredPayouts.map((payout) => (
                         <div 
                             key={payout.id} 
                             className="bg-white p-5 rounded-2xl border border-[#0000000D] flex items-start gap-4 shadow shadow-[#E8E8E81A] transition-colors"
@@ -190,7 +126,6 @@ const PayoutPage = () => {
                             {/* Event Image / Thumbnail */}
                             <div className="h-12 w-12 rounded-[6px] bg-gray-100 shrink-0 overflow-hidden relative">
                                 <Image src={payout.image} alt={payout.eventName} fill className="object-cover" priority={true} />
-                                <div className={`w-full h-full ${payout.id === 1 ? 'bg-orange-100' : payout.id === 2 ? 'bg-blue-100' : 'bg-purple-100'}`}></div>
                             </div>
 
                             {/* Details */}
@@ -228,8 +163,7 @@ const PayoutPage = () => {
       initialAccountNumber={bankDetails.accountNumber} 
     />
   </>
-    
-  )
-}
+  );
+};
 
-export default PayoutPage
+export default PayoutPage;

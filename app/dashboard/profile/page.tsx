@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import x from "@/public/Sidebar/x1.svg";
 import instagram from "@/public/Sidebar/instagram1.svg";
-import image1 from "@/public/Sidebar/people-happy.webp";
+import image1 from "@/public/Sidebar/people-happy.svg";
 import image2 from "@/public/Sidebar/ice-cream.webp";
 import avatar from "@/public/Sidebar/avatar.svg";
 import Link from "next/link";

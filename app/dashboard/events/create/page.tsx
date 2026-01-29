@@ -840,6 +840,7 @@ import image2 from '@/public/Sidebar/link-up.webp';
 import image3 from '@/public/Sidebar/sunday-ill.webp';
 import image4 from '@/public/Sidebar/sip-ill.webp';
 import { Icon } from "@iconify/react";
+import { useAuthStore } from '@/src/store/auth.store';
 
 // --- Mock Data matching the image ---
 const MOCK_EVENTS = [
@@ -988,6 +989,8 @@ const CreateEventPage = () => {
   const [isTicketFormOpen, setIsTicketFormOpen] = useState(true);
   const [editingTicketId, setEditingTicketId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const { incrementEventCount } = useAuthStore();
 
   // State for the CURRENT ticket being edited/created
   const [currentTicket, setCurrentTicket] = useState<TicketData>({
@@ -1141,30 +1144,38 @@ const CreateEventPage = () => {
     setIsTicketFormOpen(true);
   };
 
-  const handleFinalSubmit = () => {
+  const handleFinalSubmit = async () => {
     if (tickets.length === 0) return;
 
     setIsSubmitting(true);
 
-    const params = new URLSearchParams();
-    params.set("title", formData.title);
-    if (formData.date) {
-        params.set("date", format(formData.date, "EEEE, MMMM d"));
+    try {
+      // Increment event count is to update dashboard state from empty to active
+      await incrementEventCount();
+
+      const params = new URLSearchParams();
+      params.set("title", formData.title);
+      if (formData.date) {
+          params.set("date", format(formData.date, "EEEE, MMMM d"));
+      }
+      params.set("startTime", formData.startTime);
+      params.set("endTime", formData.endTime);
+      params.set("location", formData.location);
+
+      const finalPayload = {
+          ...formData,
+          tickets: tickets
+      };
+      console.log("Final Submission:", finalPayload);
+
+      router.push(`/success?${params.toString()}`)
+      // Show Success Screen
+      setIsSuccess(true);
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.error('Error creating event:', error);
+      setIsSubmitting(false);
     }
-    params.set("startTime", formData.startTime);
-    params.set("endTime", formData.endTime);
-    params.set("location", formData.location);
-
-    const finalPayload = {
-        ...formData,
-        tickets: tickets
-    };
-    console.log("Final Submission:", finalPayload);
-
-    router.push(`/success?${params.toString()}`)
-    // Show Success Screen
-    setIsSuccess(true);
-    window.scrollTo(0, 0);
   };
 
 
