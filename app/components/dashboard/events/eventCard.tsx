@@ -146,7 +146,7 @@ export const EventCard: React.FC<EventCardProps> = ({
     };
 
     // mock event link
-    const MOCK_EVENT_LINK = "https://rally.com/yup2ibi6g6";
+    const MOCK_EVENT_LINK = "https://rally-v1.netlify.app/event/yup2ibi6g6";
 
     return (
         <>
