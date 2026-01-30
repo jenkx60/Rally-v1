@@ -557,7 +557,7 @@ const EventOverviewContent: React.FC<EventOverviewContentProps> = ({onViewAttend
                                 <div className="p-5 border border-[#F5F5F5] rounded-xl bg-white space-y-6 min-h-fit md:min-h-[186px]">
                                     {/* Share Event */}
                                     <ShareEventDialog 
-                                        eventLink='https://rally.com/yup2ibi6g6'
+                                        eventLink='https://rally-v1.netlify.app/event/yup2ibi6g6'
                                         eventTitle={event.title}
                                         trigger={
                                             <div className="flex items-center gap-3 px-0 md:p-2 rounded-lg hover:bg-[#F9F9F9] cursor-pointer text-[#767676]">

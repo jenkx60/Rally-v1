@@ -38,7 +38,7 @@ const SuccessContent = () => {
     };
 
     // mock event link
-    const MOCK_EVENT_LINK = "https://rally.com/yup2ibi6g6";
+    const MOCK_EVENT_LINK = "https://rally-v1.netlify.app/event/yup2ibi6g6";
 
     // Determine the public path based on the mock link
     const EVENT_SLUG = "yup2ibi6g6"; 
@@ -110,7 +110,7 @@ const SuccessContent = () => {
                         <p className="text-[13px] text-[#767676] font-geist font-medium leading-[150%] tracking-[-0.1px]">Event link</p>
                         <div className="flex items-center justify-between bg-[#FDFDFD] border border-[#FAFAFA] rounded-[12px] px-4 py-3.5">
                             <span className="font-geist font-medium text-[14px] text-[#A3A3A3] leading-[100%] tracking-[-0.1px] truncate max-w-[150px] md:max-w-none">
-                                https://rally.com/yup2ibi6g6
+                                https://rally-v1.netlify.app/event/yup2ibi6g6
                             </span>
                             <button 
                                 onClick={handleCopy}

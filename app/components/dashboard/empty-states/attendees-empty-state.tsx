@@ -27,7 +27,7 @@ const AttendeesEmptyState: React.FC<AttendeesEmptyStateProps> = ({
             </div>
              <button 
                 onClick={onAction}
-                className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-[#5a4cb0] text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 bg-[#6A59CE] hover:bg-primary/90 text-white font-geist font-medium pl-4 pr-5 py-3 rounded-lg transition-colors cursor-pointer"
             >
                 <Plus className='w-5 h-5' />
                 <span className='font-geist font-semibold text-sm leading-[135%] tracking-[-0.2px]'>{buttonText}</span>

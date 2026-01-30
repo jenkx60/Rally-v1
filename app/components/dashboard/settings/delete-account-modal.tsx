@@ -69,7 +69,7 @@ const DeleteAccountForm = ({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email address"
-            className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+            className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] rounded-md"
           />
         </div>
 
@@ -82,7 +82,7 @@ const DeleteAccountForm = ({
             value={confirmText}
             onChange={(e) => setConfirmText(e.target.value)}
             placeholder="Type here..."
-            className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
+            className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px] rounded-md"
           />
         </div>
       </div>
