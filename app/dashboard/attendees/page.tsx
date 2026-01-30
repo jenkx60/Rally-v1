@@ -3,11 +3,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { Loader2, Plus, Search, UserPlus } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/app/components/ui/button';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/app/components/ui/table'; 
 import { Input } from '@/app/components/ui/input';
 import bird from '@/public/Sidebar/envelope-bird.svg'; 
-import forward from '@/public/Sidebar/share_forward_line.svg';
+import AttendeesEmptyState from '@/app/components/dashboard/empty-states/attendees-empty-state';
 import avatard from '@/public/Sidebar/avatar.svg';
 import avatarkill from '@/public/Sidebar/avatar-kill.svg';
 import avatarman from '@/public/Sidebar/avatar-man.svg';
@@ -18,45 +19,17 @@ import avatarstrip from '@/public/Sidebar/avatar-strip.svg';
 import avatareyes from '@/public/Sidebar/avatar-3eyes.svg';
 import avatarmanbun from '@/public/Sidebar/avatar-manbun.svg';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
-import { useAuthStore } from '@/store/authStore';
-
-// Mock Attendee Data
-const mockAttendees = [
-    { id: 1, name: "Divii", email: "divii@example.com", ticketType: "Regular", price: "Free", joined: "Jan 8, 2026", avatar: avatard, eventName: "Saints pop-up" },
-    { id: 2, name: "Jessica Smith", email: "jessica@example.com", ticketType: "VIP", price: "₦16,000", joined: "Jan 4, 2026", avatar: avatarkill, eventName: "Games night" },
-    { id: 3, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦6,000", joined: "Jan 2, 2026", avatar: avatarhat, eventName: "Taco tuesdayy" },
-    { id: 4, name: "Jenkx", email: "jenkx@example.com", ticketType: "VIP", price: "₦6,000", joined: "Jan 3, 2026", avatar: avatarmanbun, eventName: "Potluck & chill" },
-    { id: 5, name: "Uchy", email: "u.kimberly@example.com", ticketType: "VIP", price: "₦16,000", joined: "Jan 3, 2026", avatar: avatarkill, eventName: "Saints pop-up" },
-    { id: 6, name: "Nneoms", email: "n.annette@rocketmail..com", ticketType: "VIP", price: "₦30,000", joined: "Dec 3, 2026", avatar: avatarwomanbun, eventName: "Games night" },
-    { id: 7, name: "Nkem", email: "realsaints@gmail.com", ticketType: "VIP", price: "₦1,000", joined: "Jan 12, 2026", avatar: avatarstrip, eventName: "Taco tuesdayy" },
-    { id: 8, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦6,000", joined: "Jan 2, 2026", avatar: avatarhat, eventName: "Taco tuesdayy" },
-    { id: 9, name: "Jessica Smith", email: "jessica@example.com", ticketType: "Regular", price: "Free", joined: "Jan 11, 2026", avatar: avatareyes, eventName: "Saints pop-up" },
-    { id: 10, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦6,000", joined: "Jan 19, 2026", avatar: avatarhat, eventName: "The link up" },
-    { id: 11, name: "Uchy", email: "u.kimberly@example.com", ticketType: "Regular", price: "Free", joined: "Jan 1, 2026", avatar: avatarglass, eventName: "Sip & yap" },
-    { id: 12, name: "Mike Johnson", email: "mike@example.com", ticketType: "VIP", price: "₦6,000", joined: "Jan 2, 2026", avatar: avatarhat, eventName: "Taco tuesdayy" },
-
-];
-
-const EmptyAttendeesState: React.FC = () => (
-    <div className="flex flex-col items-center justify-center py-12 px-[100px] bg-white text-center space-y-4">
-        <Image src={bird} alt="No attendees" width={80} height={80} priority={true} />
-        <div className='space-y-1'>
-            <h1 className="font-bricolage text-[18px] font-semibold text-[#1A1A1A] leading-[120%] tracking-[-0.6px]">No attendees yet</h1>
-            <p className="font-geist font-medium text-sm text-[#A3A3A3] leading-[150%] tracking-[-0.1px]">They&apos;ll show up here</p>
-        </div>
-        <button className="flex gap-2 justify-center bg-[#6A59CE] hover:bg-primary/90 font-geist font-semibold py-3.5 px-6 text-[15px] text-white rounded-lg leading-[135%] tracking-[-0.2px] cursor-pointer">
-            <Plus className='w-5 h-5' />
-            <span className="font-geist font-semibold text-[15px] leading-[135%] tracking-[-0.2px]">Create event</span>
-        </button>
-    </div>
-);
+import { useAuthStore } from '@/src/store/auth.store';
+import { useDataStore } from '@/src/store/data.store';
+import { AttendeeData } from '@/src/types';
 
 
 const AttendeesPage = () => {
+    const router = useRouter();
     const { user } = useAuthStore();
-    const [attendees, setAttendees] = useState<typeof mockAttendees>([]);
+    const { attendees, isLoading: isDataLoading, fetchData } = useDataStore();
     const [isLoading, setIsLoading] = useState(true);
-    const [hasAttendees, setHasAttendees] = useState(true); 
+    const hasAttendees = attendees.length > 0; 
     const [searchQuery, setSearchQuery] = useState('');
     const [eventFilter, setEventFilter] = useState('all');
     const [ticketFilter, setTicketFilter] = useState('all');
@@ -65,20 +38,16 @@ const AttendeesPage = () => {
     const items_per_table = 2;
 
     useEffect(() => {
-        if (!user?.id) return;
-        setIsLoading(true);
-        const timer = setTimeout(() => {
-            if (user.email?.includes('new')) {
-                setAttendees([]);
-                setHasAttendees(false);
-            } else {
-                setAttendees(mockAttendees);
-                setHasAttendees(true);
-            }
-            setIsLoading(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [user?.id]);
+        fetchData();
+    }, [fetchData]);
+
+    useEffect(() => {
+        setIsLoading(isDataLoading);
+    }, [isDataLoading]);
+
+    const handleCreateEvent = () => {
+        router.push('/dashboard/events/create');
+    };
 
     // to  extract unique events and ticket types for dropdowns
     const uniqueEvents = Array.from(new Set(attendees.map(a => a.eventName)));
@@ -122,7 +91,7 @@ const AttendeesPage = () => {
     if (!hasAttendees) {
         return (
           <div className='flex flex-col gap-4 h-[calc(100vh-100px)] w-full items-center justify-center'>
-            <EmptyAttendeesState />
+            <AttendeesEmptyState onAction={handleCreateEvent} />
           </div>
         )
     }

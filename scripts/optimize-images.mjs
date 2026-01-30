@@ -8,11 +8,14 @@ const TARGET_IMAGES = [
   'public/Sidebar/sunday-ill.jpg',
   'public/Sidebar/sip-ill.jpg',
   'public/Sidebar/ice-cream.svg',
+  'public/Sidebar/ice-cream.webp',
   'public/Sidebar/people-happy.svg',
   'public/Sidebar/link-up.svg',
   'public/Sidebar/sunday-ill.svg',
   'public/Sidebar/sip-ill.svg',
   'public/Sidebar/ice-cream.svg',
+  'public/Sidebar/ice-cream.webp',
+  'public/Sidebar/ice-cream.jpg'
 ];
 
 async function optimizeImages() {

@@ -7,119 +7,25 @@ import image3 from "@/public/Sidebar/sunday-ill.webp";
 import image4 from "@/public/Sidebar/sip-ill.webp";
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useDataStore } from '@/src/store/data.store';
+import { PayoutData } from '@/src/types';
 
-const mockPayouts = [
-  { 
-    id: 1, 
-    eventName: 'Saints pop-up', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦140,000', 
-    status: 'Paid' as const, 
-    image: image1 
-  },
-  { 
-    id: 2, 
-    eventName: 'The link up', 
-    date: 'November 21, 2025', 
-    ticketSold: 24, 
-    amount: '₦300,000', 
-    status: 'Paid' as const, 
-    image: image2 
-  },
-  { 
-    id: 3, 
-    eventName: 'Potluck & chill', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦100,000', 
-    status: 'Pending' as const, 
-    image: image3 
-  },
-  { 
-    id: 4, 
-    eventName: 'Sip & yap', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦50,000', 
-    status: 'Pending' as const, 
-    image: image4 
-  },
-  { 
-    id: 5, 
-    eventName: 'Saints pop-up', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦140,000', 
-    status: 'Paid' as const, 
-    image: image1 
-  },
-  { 
-    id: 6, 
-    eventName: 'The link up', 
-    date: 'November 21, 2025', 
-    ticketSold: 24, 
-    amount: '₦300,000', 
-    status: 'Paid' as const, 
-    image: image2 
-  },
-  { 
-    id: 7, 
-    eventName: 'Potluck & chill', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦100,000', 
-    status: 'Pending' as const, 
-    image: image3 
-  },
-  { 
-    id: 8, 
-    eventName: 'Sip & yap', 
-    date: 'December 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦150,000', 
-    status: 'Pending' as const, 
-    image: image4 
-  },
-  { 
-    id: 9, 
-    eventName: 'Saints pop-up', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦140,000', 
-    status: 'Paid' as const, 
-    image: image1 
-  },
-  { 
-    id: 10, 
-    eventName: 'The link up', 
-    date: 'November 21, 2025', 
-    ticketSold: 24, 
-    amount: '₦300,000', 
-    status: 'Paid' as const, 
-    image: image2 
-  },
-  { 
-    id: 11, 
-    eventName: 'Potluck & chill', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦100,000', 
-    status: 'Pending' as const, 
-    image: image3 
-  },
-  { 
-    id: 12, 
-    eventName: 'Sip & yap', 
-    date: 'October 12, 2025', 
-    ticketSold: 24, 
-    amount: '₦500,000', 
-    status: 'Pending' as const, 
-    image: image4 
-  },
-];
+// const mockPayouts: PayoutData[] = [
+//   ...MOCK_PAYOUTS,
+//   { id: 5, eventName: 'Saints pop-up', date: 'October 12, 2025', ticketSold: 24, amount: '₦140,000', status: 'Paid' as const, image: image1 },
+//   { id: 6, eventName: 'The link up', date: 'November 21, 2025', ticketSold: 24, amount: '₦300,000', status: 'Paid' as const, image: image2 },
+//   { id: 7, eventName: 'Potluck & chill', date: 'October 12, 2025', ticketSold: 24, amount: '₦100,000', status: 'Pending' as const, image: image3 },
+//   { id: 8, eventName: 'Sip & yap', date: 'December 12, 2025', ticketSold: 24, amount: '₦150,000', status: 'Pending' as const, image: image4 },
+//   { id: 9, eventName: 'Saints pop-up', date: 'October 12, 2025', ticketSold: 24, amount: '₦140,000', status: 'Paid' as const, image: image1 },
+//   { id: 10, eventName: 'The link up', date: 'November 21, 2025', ticketSold: 24, amount: '₦300,000', status: 'Paid' as const, image: image2 },
+//   { id: 11, eventName: 'Potluck & chill', date: 'October 12, 2025', ticketSold: 24, amount: '₦100,000', status: 'Pending' as const, image: image3 },
+//   { id: 12, eventName: 'Sip & yap', date: 'October 12, 2025', ticketSold: 24, amount: '₦500,000', status: 'Pending' as const, image: image4 },
+// ];
+// In mock mode, we just use the data from the store
+// If we wanted to "extend" it for history, we could do it in the store or here conditionally.
+// For now, let's just use what's in the store.
 
 const HistoryTabs: React.FC<{ activeTab: string, setActiveTab: (tab: string) => void }> = ({ activeTab, setActiveTab}) => {
     const tabs = ['All', 'Paid', 'Pending'];
@@ -146,11 +52,16 @@ const HistoryTabs: React.FC<{ activeTab: string, setActiveTab: (tab: string) => 
 
 const PayHistoryPage = () => {
     const router = useRouter();
+    const { payouts, fetchData } = useDataStore();
     const [payFilter, setPayFilter] = useState<'All' | 'Paid' | 'Pending'>('All');
     const [visibleCount, setVisibleCount] = useState(4);
     const items_per_page = 6;
 
-    const filteredPayouts = mockPayouts.filter((payout) => 
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const filteredPayouts = payouts.filter((payout) => 
         payFilter === 'All' ? true : payout.status === payFilter
     );
 

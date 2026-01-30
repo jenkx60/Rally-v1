@@ -28,7 +28,7 @@ interface EventCardProps {
     dateRange: string;
     location: string;
     attendees: number;
-    status: 'Live' | 'Upcoming' | 'Past';
+    status: 'Live' | 'Upcoming' | 'Past' | 'prototype';
     imageSrc: StaticImageData;
     priority?: boolean;
 }

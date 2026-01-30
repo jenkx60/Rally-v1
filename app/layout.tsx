@@ -24,7 +24,6 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Rally - Turn group chats into real plans',
   description: 'Collaborative planning made simple',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
