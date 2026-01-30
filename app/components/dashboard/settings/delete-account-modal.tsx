@@ -50,7 +50,7 @@ const DeleteAccountForm = ({
 
       {/* Form Fields */}
       <div className="space-y-5 md:max-h-[230px] overflow-y-auto p-0.5">
-        <div className="flex flex-col gap-1.5">
+        {/* <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#484848] leading-[150%] tracking-[-0.1px]">
             Why are you leaving? <span className="text-[#AAAAAA] font-normal">(Optional)</span>
           </label>
@@ -58,7 +58,7 @@ const DeleteAccountForm = ({
             className="w-full h-24 p-3 rounded-xl border border-[#E8E8E8] text-[#1A1A1A] font-geist focus:outline-none focus:border-[#6A59CE] placeholder:text-[15px] placeholder:text-[#BFBFBF] resize-none"
             placeholder="Help us improve Rally..."
           />
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">

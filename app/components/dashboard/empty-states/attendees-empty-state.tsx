@@ -16,7 +16,7 @@ const AttendeesEmptyState: React.FC<AttendeesEmptyStateProps> = ({
     title = "No attendees yet", 
     description = "They'll show up here",
     buttonText = "Create event",
-    className = "flex flex-col items-center justify-center py-12 px-[100px] bg-white text-center space-y-4"
+    className = "flex flex-col items-center justify-center py-12 px-auto bg-white text-center space-y-4"
 }) => {
     return (
         <div className={className}>
