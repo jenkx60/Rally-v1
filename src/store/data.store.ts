@@ -15,6 +15,7 @@ interface DataState {
   // Actions
   fetchData: () => Promise<void>;
   addEvent: (event: Partial<EventData>) => Promise<void>;
+  reset: () => void;
 }
 
 export const useDataStore = create<DataState>((set, get) => ({
@@ -29,11 +30,13 @@ export const useDataStore = create<DataState>((set, get) => ({
     if (USE_MOCK_DATA) {
       // Simulate network delay
       await new Promise(resolve => setTimeout(resolve, 500));
+
+      const count = parseInt(sessionStorage.getItem('mock_event_count') || '0');
       
       set({
-        events: EVENTS,
-        attendees: ATTENDEES,
-        payouts: PAYOUTS,
+        events: count > 0 ? EVENTS : [],
+        attendees: count > 0 ? ATTENDEES : [],
+        payouts: count > 0 ? PAYOUTS : [],
         isLoading: false,
       });
       return;
@@ -83,5 +86,9 @@ export const useDataStore = create<DataState>((set, get) => ({
       console.error(err);
     }
     */
+  },
+
+  reset: () => {
+    set({ events: [], attendees: [], payouts: [], isLoading: false });
   },
 }));

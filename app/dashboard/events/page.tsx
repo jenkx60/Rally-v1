@@ -29,20 +29,16 @@ const initialFilterState: FilterState = {
 
 const EventsPage = () => {
   const router = useRouter();
-  const { user, userEventCount } = useAuthStore();
-  const { events, isLoading: isDataLoading, fetchData } = useDataStore();
+  const { user, userEventCount, isLoading: authLoading } = useAuthStore();
+  const { events, isLoading: dataLoading, fetchData } = useDataStore();
   const [filter, setFilter] = useState("All");
   const [currentModalFilters, setCurrentModalFilters] = useState<FilterState>(initialFilterState);
   
-  const isLoading = isDataLoading;
+  const isLoading = dataLoading;
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-
-  const handlePopFilter = (filters : FilterState) => {
-    setCurrentModalFilters(filters)
-  };
 
   const activeFilterCount = useMemo(() => {
     let count = 0; 
@@ -52,17 +48,23 @@ const EventsPage = () => {
     return count;
   }, [currentModalFilters])
 
+
+  
+  
+  
   // Filter logic for the dashboard view
   const filteredEvents = events.filter((event) =>
     filter === "All" ? true : event.status === filter
-  );
+);
 
-  // if (isLoading) {
-  //     return <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center p-10">
-  //         <Loader2 className="w-10 h-10 animate-spin text-[#6A59CE]" />
-  //     </div>
-  // }
-    if (isLoading) {
+  if (authLoading || dataLoading) {
+    return <div className="flex h-[calc(100vh-100px)] w-full items-center justify-center p-10">
+          <Loader2 className="w-10 h-10 animate-spin text-[#6A59CE]" />
+      </div>        
+  }
+
+
+  if (isLoading) {
     return (
       <div className="relative flex flex-col gap-8 p-0 pb-10 pt-5 md:p-5 w-full">
         {/* Header Skeleton */}
@@ -137,9 +139,13 @@ const EventsPage = () => {
   // --- CONDITIONAL RENDER LOGIC ---
   
   // 1. If NO events exist, show the "Empty State" (First code snippet)
-  if (events.length === 0) {
+  if (userEventCount === 0) {
     return <EventsEmptyState />;
   }
+
+  const handlePopFilter = (filters : FilterState) => {
+    setCurrentModalFilters(filters)
+  };  
 
   // 2. If events DO exist, show the "Dashboard View" (Second code snippet)
   return (

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '@/lib/supabase-client';
 import { USE_MOCK_DATA } from '../config/featureFlags';
+import { useDataStore } from './data.store';
 
 interface User {
   id: string;
@@ -28,7 +29,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     if (USE_MOCK_DATA) {
       // In mock mode, we manually manage a local count if needed, 
       // but for "new user" simulation we can start with 1 or use local storage
-      const count = parseInt(localStorage.getItem('mock_event_count') || '1');
+      const count = parseInt(sessionStorage.getItem('mock_event_count') || '0');
       set({ userEventCount: count });
       return;
     }
@@ -50,7 +51,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     if (USE_MOCK_DATA) {
       const currentCount = get().userEventCount || 0;
       const newCount = currentCount + 1;
-      localStorage.setItem('mock_event_count', newCount.toString());
+      sessionStorage.setItem('mock_event_count', newCount.toString());
       set({ userEventCount: newCount });
       return;
     }
@@ -77,6 +78,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   checkAuth: async () => {
     if (USE_MOCK_DATA) {
+      const count = parseInt(sessionStorage.getItem('mock_event_count') || '0');
       // Mock authenticated user
       set({
         user: {
@@ -84,6 +86,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           email: 'hello@rally.com',
           name: 'Rally User',
         },
+        userEventCount: count,
         isLoading: false
       });
       await get().checkUserStats();
@@ -117,13 +120,16 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   logout: async () => {
     if (USE_MOCK_DATA) {
-      set({ user: null, userEventCount: null });
+      sessionStorage.removeItem('mock_event_count')
+
+      useDataStore.getState().reset();
+      set({ user: null, userEventCount: 0 });
       return;
     }
 
     try {
       await supabase.auth.signOut();
-      set({ user: null, userEventCount: null });
+      set({ user: null, userEventCount: 0 });
     } catch (error) {
       console.error('Logout error:', error);
     }
