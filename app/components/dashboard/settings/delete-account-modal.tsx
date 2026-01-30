@@ -35,10 +35,9 @@ const DeleteAccountForm = ({
   handleDelete: () => void; 
 })=> {
   const [email, setEmail] = useState("");
-  // const [confirmText, setConfirmText] = useState("");
+  const [confirmText, setConfirmText] = useState("");
 
-  const isFormVaild = email.length > 0
-  //  && confirmText.toLowerCase() === "delete my account";
+  const isFormVaild = email.length > 0 && confirmText.toLowerCase() === "delete my account";
   return (
     <div className="space-y-8">
       {/* Support Link */}
@@ -74,7 +73,7 @@ const DeleteAccountForm = ({
           />
         </div>
 
-        {/* <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5">
           <label className="font-geist font-medium text-sm text-[#767676] leading-[150%] tracking-[-0.1px]">
             Type “delete my account” to confirm
           </label>
@@ -85,7 +84,7 @@ const DeleteAccountForm = ({
             placeholder="Type here..."
             className="text-[#333333] text-[15px] font-geist font-medium transition-colors leading-6 tracking-[-0.1px]"
           />
-        </div> */}
+        </div>
       </div>
 
       {/* Actions */}
