@@ -42,7 +42,7 @@ const DeleteAccountForm = ({
     <div className="space-y-8">
       {/* Support Link */}
       <div className="bg-[#F8F6FD] p-3 rounded-lg flex justify-center text-center gap-2 border border-[#E1DEF5] leading-[150%] tracking-[-0.1px]">
-        <Mail className='w-5 h-5 text-[#6A59CE]' />
+        <Mail className='w-[18px] h-[18px] text-[#6A59CE]' />
         <span className="font-geist text-sm text-[#6A59CE] font-medium cursor-pointer">
           Need help? Contact support instead
         </span>

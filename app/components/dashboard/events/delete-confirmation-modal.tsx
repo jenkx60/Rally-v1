@@ -238,7 +238,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
         toast.custom((t) => {
             return <CustomToast
                 message="Event successfully deleted"
-                variant='error'
+                variant='success'
                 onDismiss={() => toast.dismiss(t)} />;
         })
         onConfirmDelete();
