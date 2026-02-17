@@ -49,6 +49,7 @@ import image3 from '@/public/Sidebar/sunday-ill.webp';
 import image4 from '@/public/Sidebar/sip-ill.webp';
 import { Icon } from "@iconify/react";
 import { useAuthStore } from '@/src/store/auth.store';
+import { generateEventDescription } from "@/app/actions/generate-description";
 
 // --- Mock Data matching the image ---
 const MOCK_EVENTS = [
@@ -173,6 +174,7 @@ const LocationTypeSelector: React.FC<LocationTypeSelectorProps> = ({ value, onCh
 const CreateEventPage = () => {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false); // Track if event is created successfully
+  const [isGeneratingAI, setIsGeneratingAI] = useState(false);
   const [descriptionLength, setDescriptionLength] = useState(0);
   const [ticketDescLength, setTicketDescLength] = useState(0);
   const [eventImageURL, setEventImageURL] = useState<string | StaticImageData>(people);
@@ -281,6 +283,25 @@ const CreateEventPage = () => {
 
   const handleTicketSelectChange = (name: keyof TicketData, value: string) => {
     setCurrentTicket((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAiSuggest = async () => {
+    if (!isAiActive) return;
+    
+    setIsGeneratingAI(true);
+    try {
+        const result = await generateEventDescription(formData.title, formData.category);
+        if (result.success && result.description) {
+            setFormData(prev => ({ ...prev, description: result.description }));
+            setDescriptionLength(result.description.length);
+        } else {
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error("Failed to generate description", error);
+    } finally {
+        setIsGeneratingAI(false);
+    }
   };
 
   const handleNext = (e: React.FormEvent) => {
@@ -447,13 +468,20 @@ const CreateEventPage = () => {
                         <label className="font-geist text-[14px] font-medium text-[#767676] leading-[150%] tracking-[-0.1px]">Add a description <span className="text-[#A3A3A3] font-geist font-normal">(Optional)</span></label>
                         <button 
                             type="button" 
-                            disabled={!isAiActive} 
+                            onClick={handleAiSuggest}
+                            disabled={!isAiActive || isGeneratingAI} 
                             className={cn("flex items-center gap-1 p-0 h-auto font-geist text-sm font-medium text-[#6A59CE] hover:bg-transparent cursor-pointer",
-                                isAiActive ? "text-[#6A59CE] hover:text-[#5a4cb0]" : "text-[#A3A3A3] cursor-not-allowed"
+                                (isAiActive && !isGeneratingAI) ? "text-[#6A59CE] hover:text-[#5a4cb0]" : "text-[#A3A3A3] cursor-not-allowed"
                             )}
                         >
-                            <Icon icon="mingcute:pencil-3-ai-line" width="16" height="16" /> 
-                            <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">Suggest with AI</span>
+                            {isGeneratingAI ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                                <Icon icon="mingcute:pencil-3-ai-line" width="16" height="16" /> 
+                            )}
+                            <span className="font-geist font-medium text-sm leading-[150%] tracking-[-0.1px]">
+                                {isGeneratingAI ? "Generating..." : "Suggest with AI"}
+                            </span>
                         </button>
                     </div>
                     <div className=" rounded-md border border-[#E8E8E8] transition-shadow focus-within:ring-2 focus-within:ring-[#6A59CE]">
