@@ -12,36 +12,22 @@ import { useRouter } from 'next/navigation';
 import { useDataStore } from '@/src/store/data.store';
 import { PayoutData } from '@/src/types';
 
-// const mockPayouts: PayoutData[] = [
-//   ...MOCK_PAYOUTS,
-//   { id: 5, eventName: 'Saints pop-up', date: 'October 12, 2025', ticketSold: 24, amount: '₦140,000', status: 'Paid' as const, image: image1 },
-//   { id: 6, eventName: 'The link up', date: 'November 21, 2025', ticketSold: 24, amount: '₦300,000', status: 'Paid' as const, image: image2 },
-//   { id: 7, eventName: 'Potluck & chill', date: 'October 12, 2025', ticketSold: 24, amount: '₦100,000', status: 'Pending' as const, image: image3 },
-//   { id: 8, eventName: 'Sip & yap', date: 'December 12, 2025', ticketSold: 24, amount: '₦150,000', status: 'Pending' as const, image: image4 },
-//   { id: 9, eventName: 'Saints pop-up', date: 'October 12, 2025', ticketSold: 24, amount: '₦140,000', status: 'Paid' as const, image: image1 },
-//   { id: 10, eventName: 'The link up', date: 'November 21, 2025', ticketSold: 24, amount: '₦300,000', status: 'Paid' as const, image: image2 },
-//   { id: 11, eventName: 'Potluck & chill', date: 'October 12, 2025', ticketSold: 24, amount: '₦100,000', status: 'Pending' as const, image: image3 },
-//   { id: 12, eventName: 'Sip & yap', date: 'October 12, 2025', ticketSold: 24, amount: '₦500,000', status: 'Pending' as const, image: image4 },
-// ];
-// In mock mode, we just use the data from the store
-// If we wanted to "extend" it for history, we could do it in the store or here conditionally.
-// For now, let's just use what's in the store.
 
 const HistoryTabs: React.FC<{ activeTab: string, setActiveTab: (tab: string) => void }> = ({ activeTab, setActiveTab}) => {
     const tabs = ['All', 'Paid', 'Pending'];
-
+    
     return (
         <div className="flex space-x-2.5 pb-8">
             {tabs.map((tabName) => (
                 <button
-                    key={tabName}
-                    onClick={() => setActiveTab(tabName)}
-                    className={cn(
-                        "py-2 px-3.5 rounded-lg font-geist text-[15px] font-medium leading-6 tracking-normal transition-colors cursor-pointer",
-                        activeTab === tabName
-                            ? "bg-[#6A59CE] text-white"
-                            : "bg-[#F7F7F7] text-[#767676] hover:bg-[#EAEAEA]"
-                        )}
+                key={tabName}
+                onClick={() => setActiveTab(tabName)}
+                className={cn(
+                    "py-2 px-3.5 rounded-lg font-geist text-[15px] font-medium leading-6 tracking-normal transition-colors cursor-pointer",
+                    activeTab === tabName
+                    ? "bg-[#6A59CE] text-white"
+                    : "bg-[#F7F7F7] text-[#767676] hover:bg-[#EAEAEA]"
+                )}
                 >
                     {tabName}
                 </button>
@@ -56,12 +42,24 @@ const PayHistoryPage = () => {
     const [payFilter, setPayFilter] = useState<'All' | 'Paid' | 'Pending'>('All');
     const [visibleCount, setVisibleCount] = useState(4);
     const items_per_page = 6;
-
+    
     useEffect(() => {
         fetchData();
     }, [fetchData]);
 
-    const filteredPayouts = payouts.filter((payout) => 
+    const allPayouts: PayoutData[] = [
+      ...payouts,
+      { id: 5, eventName: 'Saints pop-up', date: 'October 12, 2025', ticketSold: 24, amount: '₦140,000', status: 'Paid' as const, image: image1 },
+      { id: 6, eventName: 'The link up', date: 'November 21, 2025', ticketSold: 24, amount: '₦300,000', status: 'Paid' as const, image: image2 },
+      { id: 7, eventName: 'Potluck & chill', date: 'October 12, 2025', ticketSold: 24, amount: '₦100,000', status: 'Pending' as const, image: image3 },
+      { id: 8, eventName: 'Sip & yap', date: 'December 12, 2025', ticketSold: 24, amount: '₦150,000', status: 'Pending' as const, image: image4 },
+      { id: 9, eventName: 'Saints pop-up', date: 'October 12, 2025', ticketSold: 24, amount: '₦140,000', status: 'Paid' as const, image: image1 },
+      { id: 10, eventName: 'The link up', date: 'November 21, 2025', ticketSold: 24, amount: '₦300,000', status: 'Paid' as const, image: image2 },
+      { id: 11, eventName: 'Potluck & chill', date: 'October 12, 2025', ticketSold: 24, amount: '₦100,000', status: 'Pending' as const, image: image3 },
+      { id: 12, eventName: 'Sip & yap', date: 'October 12, 2025', ticketSold: 24, amount: '₦500,000', status: 'Pending' as const, image: image4 },
+    ];
+
+    const filteredPayouts = allPayouts.filter((payout) => 
         payFilter === 'All' ? true : payout.status === payFilter
     );
 
