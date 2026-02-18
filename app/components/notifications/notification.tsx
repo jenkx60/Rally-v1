@@ -96,8 +96,8 @@ export default function Notification() {
                <Image src={emptyBell} alt="Empty" width={64} height={64} priority={true} />
             </div>
             <div className="space-y-1">
-              <h3 className="font-bricolage text-lg font-bold text-[#1A1A1A]">You&apos;re all caught up</h3>
-              <p className="font-geist text-sm text-[#767676]">We&apos;ll notify you when it matters</p>
+              <h3 className="font-bricolage text-lg font-bold text-[#1A1A1A] tracking-[-0.6px] leading-[120%]">You&apos;re all caught up</h3>
+              <p className="font-geist text-sm text-[#A3A3A3] tracking-[-0.1px] leading-[150%]">We&apos;ll notify you when it matters</p>
             </div>
           </div>
         ) : (
