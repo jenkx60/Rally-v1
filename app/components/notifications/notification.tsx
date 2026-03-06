@@ -119,7 +119,7 @@ export default function Notification() {
     <Drawer>
       <DrawerTrigger asChild>
         <div className="relative cursor-pointer">
-          <Image src={bellIcon} alt="Bell" className="w-6 h-6" priority={true} />
+          <Image src={bellIcon} alt="Notification Bell Icon" className="w-6 h-6" priority={true} />
           {unreadCount > 0 && (
             <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#D81858] text-[10px] text-white font-bold">
               {unreadCount}
